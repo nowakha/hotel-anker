@@ -1,0 +1,12 @@
+# Python deps for AnkerPI01 (WerbeLEDbox CountDown)
+
+On the Pi, prefer Debian packages where possible:
+
+- python3-numpy
+- python3-spidev
+
+Install into the project venv (with --system-site-packages):
+
+```
+SharedArray>=3.2.0
+```
