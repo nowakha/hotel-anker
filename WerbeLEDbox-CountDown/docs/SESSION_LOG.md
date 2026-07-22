@@ -275,3 +275,7 @@ Goal: stabile 860×360 H.264-Produktion statt 4K `st24.mov` auf PI02 (Undervolta
 | Caveat | Idle nach Reboot — Sticky-Bits gehen bei Reboot auf 0; unter opencv/ffmpeg-Last erneut prüfen |
 | Empfehlung | Aktuell besser; **gutes PSU** weiter sinnvoll bis Check unter realer Last wieder `0x0` bleibt |
 
+
+## 2026-07-22 ~19:11 — Statuscheck Encode + AnkerPI02
+- **NVENC encode:** noch aktiv (fmpeg PID **8652**), schreibt `WerbeLEDbox-CountDown/media/_encode_clock_24h.partial.mp4` (~1303 MB). Progress `out_time≈04:00:10` / 24h → **~16.7%**, speed **~13.1x**, ETA wall **~1h 32min**. Nicht gestoppt. Final `clock_24h.mp4` noch nicht vorhanden.
+- **AnkerPI02:** LAN `192.168.8.106` OK (5ms); `.112` timeout; Tailscale `100.103.54.63` OK. SSH: `fb-clock.service` **masked** + **inactive** (Clock nicht gestartet).
