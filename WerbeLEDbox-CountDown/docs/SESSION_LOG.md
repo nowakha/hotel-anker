@@ -280,6 +280,16 @@ Goal: stabile 860×360 H.264-Produktion statt 4K `st24.mov` auf PI02 (Undervolta
 - **NVENC encode:** noch aktiv (ffmpeg PID **8652**), schreibt `WerbeLEDbox-CountDown/media/_encode_clock_24h.partial.mp4` (~1303 MB). Progress `out_time≈04:00:10` / 24h → **~16.7%**, speed **~13.1x**, ETA wall **~1h 32min**. Nicht gestoppt. Final `clock_24h.mp4` noch nicht vorhanden.
 - **AnkerPI02:** LAN `192.168.8.106` OK (5ms); `.112` timeout; Tailscale `100.103.54.63` OK. SSH: `fb-clock.service` **masked** + **inactive** (Clock nicht gestartet).
 
+## 2026-07-22 ~19:22 — Research: Pi Clock Playback (Forum/Web)
+
+| Item | Ergebnis |
+|------|----------|
+| Doc | `docs/RESEARCH_PI_CLOCK_PLAYBACK.md` |
+| Kernbefund | Pi 4 **H.264 HW ≤1080p**; 4K nur **HEVC** — erklärt `h264_v4l2m2m` FAIL auf `st24.mov` |
+| Community-Pfad | Pre-transcode down + continuous play (mpv DRM / GStreamer→fbdev); nicht Frame-Extract |
+| Anthias PR #2972 | `v4l2h264dec`→`v4l2convert`→`fbdevsink` RGB565; ffmpeg→fbdev verworfen (~6 fps CSC) |
+| Top-Empfehlung | `clock_24h.mp4` deploy → continuous `--start=wall` + Resync; PSU 5.1V/3A |
+
 ## 2026-07-22 ~19:14–19:28 — Loadtest + Pipeline-Bench + Max-FPS
 
 ### Loadtest sichtbar (vorher)

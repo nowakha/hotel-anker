@@ -1,11 +1,25 @@
 # Hotel Anker — Learnings & Handoff
 
-Stand: **2026-07-22 ~19:28 CEST** (Workstation **MLT-NITRO5-HN** + TABLETHI10MAX).
+Stand: **2026-07-22 ~19:22 CEST** (Workstation **MLT-NITRO5-HN** + TABLETHI10MAX).
 Ziel: eine andere Cursor-Instanz auf einem anderen Rechner kann ohne mündlichen Kontext weiterarbeiten.
 
 **Workflow (verbindlich):** `.cursor/rules/hotel-anker-workflow.mdc` — jeden Schritt dokumentieren (Erfolg+Misserfolg), Credentials/Learnings mitziehen, commit + `git push origin HEAD`.
 
 Detaillierte Chronik: [`WerbeLEDbox-CountDown/docs/SESSION_LOG.md`](./WerbeLEDbox-CountDown/docs/SESSION_LOG.md).
+
+## Research Pi Clock Playback (2026-07-22 ~19:22)
+
+Vollständig: [`WerbeLEDbox-CountDown/docs/RESEARCH_PI_CLOCK_PLAYBACK.md`](./WerbeLEDbox-CountDown/docs/RESEARCH_PI_CLOCK_PLAYBACK.md).
+
+| Finding | Implication |
+|---------|-------------|
+| Pi 4 H.264 HW **max ~1080p**; 4K nur HEVC | `st24.mov` 4K H.264 = **immer Soft-Decode**; `v4l2m2m` FAIL erwartet |
+| Seek-jedes-Frame ist Anti-Pattern | Continuous play + periodischer Wall-Clock-Resync |
+| Signage-Best-Practice | Pre-transcode (unser `860×360`) vor dem Pi |
+| fb0 RGB565 ohne X | GStreamer `v4l2convert`→`fbdevsink` (Anthias) oder mpv `--vo=drm` |
+| PSU | 5.1 V / ≥3 A offiziell; `0x50000` = UV history |
+
+**Nächstes Experiment:** `clock_24h.mp4` auf PI02 → continuous mpv/gstreamer mit `--start=HH:MM:SS` (Europe/Zurich), nicht ffmpeg-Einzelbild.
 
 ## AnkerPI02 Pipeline-Bench + Max-FPS (2026-07-22 ~19:28)
 
