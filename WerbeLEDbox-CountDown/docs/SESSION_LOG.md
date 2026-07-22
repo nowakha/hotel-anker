@@ -179,6 +179,17 @@ Not done: fb-clock/ffprobe verify (unreachable). Do not unmask.
 | Tailscale joined? | **NEIN** |
 | Nächster Schritt | Deb per LAN-SCP → `dpkg -i` → `tailscale up --hostname=AnkerPI01 --accept-dns=false` |
 
+## 2026-07-22 ~18:05 — AnkerPI01 Tailscale via LAN-SCP
+
+| Punkt | Stand |
+|-------|--------|
+| Deb-Download (Windows) | **OK** — `tailscale_1.98.9_arm64.deb` 34257430 B von `pkgs.tailscale.com/stable/debian/pool/` (SHA256 `66E0CBC0…9136`) |
+| SCP → `/tmp/` | **OK** (Bytes match; erstes `scp` hing nach Transfer — WiFi-flaky, Retry SSH zeigte Datei komplett) |
+| `dpkg -i` + `systemctl enable --now tailscaled` | **OK** — `active`, version `1.98.9` (Debian trixie / aarch64) |
+| `tailscale up --hostname=AnkerPI01 --accept-dns=false` | **NeedsLogin** — Auth-URL: https://login.tailscale.com/a/144cabd401ab72 |
+| Tailscale IP | **pending** (kein Auth-Key in env/secrets) |
+| Auth-Key | nicht vorhanden |
+
 ## 2026-07-22 ~17:53–18:00 — AnkerPI02 LAN up + WiFi Fix
 
 User: Ethernet gesteckt. Discovery: **nicht** `.106` zuerst — mDNS → **`192.168.8.112`** (eth0). Tailscale `ankerpi02` / `100.103.54.63` wieder online.

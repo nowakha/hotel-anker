@@ -1,6 +1,6 @@
 # Hotel Anker — Learnings & Handoff
 
-Stand: **2026-07-22 ~18:00 CEST** (Workstation **MLT-NITRO5-HN** + TABLETHI10MAX).
+Stand: **2026-07-22 ~18:05 CEST** (Workstation **MLT-NITRO5-HN** + TABLETHI10MAX).
 Ziel: eine andere Cursor-Instanz auf einem anderen Rechner kann ohne mündlichen Kontext weiterarbeiten.
 
 **Workflow (verbindlich):** `.cursor/rules/hotel-anker-workflow.mdc` — jeden Schritt dokumentieren (Erfolg+Misserfolg), Credentials/Learnings mitziehen, commit + `git push origin HEAD`.
@@ -46,7 +46,7 @@ Nach LAN-Kabel: SSH auf **`.112`** (eth) / mDNS `AnkerPI02.local`. Verify: **fb-
 
 ## Hardware-Wahrheit
 
-1. **AnkerPI01** — Pi Zero 2 W: SPI0 `ws2812put` + Producer **`countdown_pi01`** → `shm://ws2812` `(1179,3)`. DHCP oft **`192.168.8.102`** (auch `.108` gesehen) — mDNS bevorzugen. **DNS pinned 1.1.1.1/8.8.8.8** (NM). **Tailscale noch nicht installiert.** WiFi war flaky (powersave + CDN).
+1. **AnkerPI01** — Pi Zero 2 W: SPI0 `ws2812put` + Producer **`countdown_pi01`** → `shm://ws2812` `(1179,3)`. DHCP oft **`192.168.8.102`** (auch `.108` gesehen) — mDNS bevorzugen. **DNS pinned 1.1.1.1/8.8.8.8** (NM). **Tailscale 1.98.9 installiert** (`tailscaled` active); **Join NeedsLogin** — Auth: https://login.tailscale.com/a/144cabd401ab72 · Hostname `AnkerPI01` · `--accept-dns=false`. WiFi flaky (powersave + CDN).
 2. **AnkerPI02** — Pi 4: HDMI **3440×1440@50**. **Default-Clock neu: `fb_clock_live.py`** (kein MP4/MOV-Decode). Optional designed `clock_24h.mp4` / provisional `st24.mov` nur mit gepatchtem `fb_clock_play` (ffprobe). **wlan0** oft **`192.168.8.106`** (HotelAnker_5G); **eth0** **`192.168.8.112`**. Tailscale: **`ankerpi02` / `100.103.54.63`**. fb-clock derzeit **masked**.
 3. **SD-Karte PI02 schwer entnehmbar** → Boot-Schutz; SD-Rescue Docs: `docs/PI02_SD_RESCUE.md`.
 4. **Teensy** am PI02 USB: Hex gebaut + offline validiert (`teensy/hex/`, `validate_teensy_build.py` PASS). Flash: `teensy/scripts/flash_from_pi02.ps1`. Pico = Lab.
@@ -86,12 +86,12 @@ Direkt-Ethernet + Watcher (`PI02_DIRECT_ETH_RESCUE.md`) oder SD-Rescue (SUCCESS 
 2. **DNS fragil** — nur Router `192.168.8.254` → **FIX:** NM `ipv4.dns=1.1.1.1 8.8.8.8`, `ignore-auto-dns=yes` (verifiziert in `/etc/resolv.conf`).
 3. **Tailscale-Deb-Fetch** — Small HTTPS zu `pkgs.tailscale.com` OK; IPv6 CloudFront tot; große IPv4-Downloads (~34 MB) timeout / „No route to host“ / ~KB/s. **Workaround:** Deb per LAN-SCP von Workstation, `dpkg -i`; `apt` mit `Acquire::ForceIPv4 true`.
 
-Status ~17:45: SSH OK, DNS pinned, powersave off (re-asserted), Tailscale **nicht** installiert/joined.
+Status ~18:05: SSH OK, DNS pinned, powersave off, Tailscale **1.98.9 installiert** via LAN-SCP Deb; **Join wartet auf Browser-Auth** (kein Auth-Key). Nach Login: `tailscale ip -4` → Secrets `tailscale_ip` setzen.
 
 ## Offene Arbeit (Priorität)
 
 1. PI02 nach SD-Rescue booten → SSH → **`install_fb_clock_live_service.sh`** (oder patched play verifizieren) → unmask nur Live/safe path.
-2. **PI01 Tailscale:** LAN-SCP `tailscale_*_arm64.deb` → `dpkg -i` → `tailscale up --hostname=AnkerPI01 --accept-dns=false`.
+2. **PI01 Tailscale Auth:** https://login.tailscale.com/a/144cabd401ab72 öffnen → danach IP in `secrets/ankerpi01.credentials.yml` eintragen.
 3. PI01: `install_ws2812put_service.sh` + `install_countdown_pi01_service.sh`.
 4. Teensy flash (Program-Taste) wenn PI02 USB ok.
 5. Original-Rahmen-JPGs nachlegen; optional NVENC `clock_24h.mp4`.
