@@ -1,6 +1,6 @@
 # Hotel Anker — Learnings & Handoff
 
-Stand: **2026-07-22 ~17:00 CEST** (Workstation **MLT-NITRO5-HN**).  
+Stand: **2026-07-22 ~16:55 CEST** (Workstation **MLT-NITRO5-HN**).
 Ziel: eine andere Cursor-Instanz auf einem anderen Rechner kann ohne mündlichen Kontext weiterarbeiten.
 
 **Workflow (verbindlich):** `.cursor/rules/hotel-anker-workflow.mdc` — jeden Schritt dokumentieren (Erfolg+Misserfolg), Credentials/Learnings mitziehen, commit + `git push origin HEAD`.
@@ -46,18 +46,23 @@ Auch `fb_play.py` hatte denselben Bug → im Repo ebenfalls auf ffprobe umgestel
 3. Alter Player → `probe_size()` Full-Decode `st24.mov` → Hang → Netz tot.
 4. Repo-Fix **noch nicht** auf dem Pi.
 
-### Rescue-Watcher FAIL trotz ~3 Power-Cycles (2026-07-22 ~16:50)
+### Rescue-Watcher FAIL trotz Power-Cycles (2026-07-22 ~16:50–16:55)
 
 **Ursache:** PI02 auf **WiFi only**. Association/DHCP/SSH/Tailscale oft **erst nach** dem Hang → **kein SSH-Fenster** für den Watcher.  
-Zusätzlich pollt der Watcher nur `192.168.8.106` (LAN-DHCP) + Tailscale `100.103.54.63` — WiFi kann andere IPv4 haben.  
-Log: `docs/_pi02_rescue.log` nur Startzeile, **kein** `SUCCESS`.
+Re-Check nach weiterem User-Power-Cycle (~16:43–16:55): Watcher PID **16964** alive; aggressiv ~7 min kein Ping/TCP22; ARP `.106` fehlt; TS offline ~50+ min; DHCP `.100–.115` ohne `.106`; Log ohne `SUCCESS`. SSH/fb-clock-Verify **BLOCKED**.  
+Alter Watcher pollte nur `192.168.8.106` + Tailscale `100.103.54.63`.
 
 | Option | Realistisch? | Bemerkung |
 |--------|--------------|-----------|
-| **Temp. Ethernet** | **Ja — Prefer** | Schnellstes Remote-Rescue; bekannte `.106`; Watcher greift im NTP-Wait |
+| **Direkt-Ethernet PC↔Pi** | **Ja — Prefer** | Kein DHCP nötig; auto-MDIX; APIPA `169.254.*`; Link in Sekunden → NTP-Fenster; Doc `PI02_DIRECT_ETH_RESCUE.md` |
+| Ethernet via Switch/Router | Ja | Bekannte `.106` wenn DHCP; Watcher pollt weiter `.106`+TS |
 | Serial `serial0,115200` | Nur mit UART@GPIO | In cmdline dokumentiert; physisch oft schwerer als SD |
 | Weitere WiFi-Power-Cycles | **Nein** | Timing gegen Watcher |
-| **SD-Rescue** | **Ja wenn kein Ethernet** | User bereit; Anleitung `docs/PI02_SD_RESCUE.md` + `scripts/pi02_sd_rescue_wsl.sh` |
+| **SD-Rescue** | **Ja wenn kein Eth-Fenster** | User bereit; `docs/PI02_SD_RESCUE.md` + `scripts/pi02_sd_rescue_wsl.sh` |
+
+**Direct-Eth Grenzen:** Ohne DHCP beide `169.254.x.x` — SSH OK solange sshd noch läuft. Wenn ffmpeg Full-Decode die CPU schon friert, hilft kein Interface → Power-Cycle + frühes Fenster erneut. Static nur auf PC ohne Pi-Matching nutzlos; APIPA-Scan ist der praktische Weg.
+
+Tooling: `scripts/pi02_rescue_direct_eth.ps1` → `pi02_rescue_watch.ps1` (`.106` + Tailscale + mDNS + `Get-NetNeighbor`/`arp` für `169.254.*`).
 
 **Nicht** `cmdline.txt` experimentieren. Recovery-Zeile: `media/cmdline.recovery.txt`.
 
@@ -74,7 +79,7 @@ Unverändert: `Richnerstutz-Bespannung-Paket/`, Rahmen 2100 mm, Textil→LED 45 
 
 ## Offene Arbeit (Priorität)
 
-1. **PI02 Rescue:** Parent/User klären **Ethernet möglich?** → Ja: Kabel + Watcher + Power-Cycle. Nein: **SD-Rescue** (`docs/PI02_SD_RESCUE.md`). Danach Patch verifizieren, erst dann `fb-clock` unmask/enable.
+1. **PI02 Rescue:** **Direkt-Ethernet** PC↔Pi + `pi02_rescue_direct_eth.ps1` + Power-Cycle (Doc `PI02_DIRECT_ETH_RESCUE.md`). Wenn Port unerreichbar / kein SSH-Fenster → **SD-Rescue**. Danach Patch verifizieren, erst dann `fb-clock` unmask/enable.
 2. DNS pin (1.1.1.1/8.8.8.8) + Tailscale auf PI01.
 3. Produktion `clock_24h.mp4` NVENC encode + Upload.
 4. Teensy flash/validate; Countdown-Producer PI01.

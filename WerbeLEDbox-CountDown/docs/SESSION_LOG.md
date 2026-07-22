@@ -44,17 +44,40 @@ Chronik fÃ¼r Cross-Machine-Handoff. Erfolg **und** Misserfolg.
 | SD-Entnahme empfohlen? (16:30) | Damals Nein â€” **revidiert 17:00** wegen WiFi-late (siehe unten) |
 | Cursor zeigt zwei Repo-Namen Â«Hotel AnkerÂ» + Â«hotel-ankerÂ» | **Kein Doppel-Clone** â€” nur Ordner `Hotel Anker`; Remote-Slug `hotel-anker`. Kein `.code-workspace`. Kanonisch: `â€¦\Cursor Projects\Hotel Anker` |
 
-### Rescue-Watcher vs WiFi (~16:50â€“17:00)
+### Power-Cycle Rescue-Poll (~16:43–16:55)
+
+| Ereignis | Ergebnis |
+|----------|----------|
+| Watcher PID **16964** (Parent 26468, seit 16:27) | **ALIVE** — nicht neu gestartet bis Doc-Ende; danach Restart auf Link-Local-Skript |
+| Aggressiv-Poll ~7 min (`.106` + TS `.63`, TCP/22) | **FAIL** — kein Ping, kein TCP22, kein `SUCCESS` |
+| ARP `.106` | **fehlt** |
+| Tailscale `ankerpi02` | **offline**, last seen ~50–54 min |
+| mDNS `AnkerPI02.local` | unresolved |
+| DHCP-Scan `.100–.115` | `.101–.105` + Workstation `.111` alive; **kein** `.106` |
+| SSH Verify (fb-clock mask / ffprobe Player) | **BLOCKED** — Pi nie erreichbar |
+| SD-Entnahme nötig? | **Noch nicht bewiesen** — WiFi-late Hang bleibt Hauptverdacht; Prefer Direkt-Ethernet |
+
+### Rescue-Watcher vs WiFi (~16:50–17:00)
 
 | Ereignis | Ergebnis |
 |----------|----------|
 | User: ~3 Power-Cycles, PI02 **WiFi only** | Watcher greift nicht |
-| `docs/_pi02_rescue.log` | Nur Start `16:27:06` â€” **kein** `SUCCESS` / kein RESCUE |
-| Theorie NTP-Wait â‰¤120s vs WiFi-late | **bestÃ¤tigt** â€” Hang vor nutzbarem SSH; Watcher pollt nur `.106`+TS `.63` |
-| Temp. Ethernet | **Bevorzugt** wenn Port erreichbar â€” Remote-Rescue im NTP-Fenster |
-| Serial `serial0,115200` | In cmdline; braucht UART@GPIO â€” oft unpraktisch |
+| `docs/_pi02_rescue.log` | Nur Start `16:27:06` — **kein** `SUCCESS` / kein RESCUE |
+| Theorie NTP-Wait ≤120s vs WiFi-late | **bestätigt** — Hang vor nutzbarem SSH; alter Watcher pollte nur `.106`+TS `.63` |
+| Temp. Ethernet / Link-Local `169.254.*` | **Bevorzugt** — Doc `PI02_DIRECT_ETH_RESCUE.md` + Watcher-Update |
+| Serial `serial0,115200` | In cmdline; braucht UART@GPIO — oft unpraktisch |
 | SD-Rescue | **Ja wenn kein Ethernet** â€” User bereit; `docs/PI02_SD_RESCUE.md` + `scripts/pi02_sd_rescue_wsl.sh` |
 | Entscheidung | Parent: Ethernet-MÃ¶glichkeit bestÃ¤tigen; sonst SD |
+
+### Direct-Ethernet Rescue (~16:55)
+
+| Ereignis | Ergebnis |
+|----------|----------|
+| User: Kabel **direkt** PC (MLT-NITRO5-HN) â†” PI02 ohne DHCP? | **Ja hilfreich** â€” auto-MDIX, APIPA `169.254.*`, Link frÃ¼h vs WiFi-late |
+| Doc `docs/PI02_DIRECT_ETH_RESCUE.md` | OK â€” DE-Schritte + Grenzen (Hang = kein Interface hilft) |
+| `scripts/pi02_rescue_watch.ps1` | Erweitert: `.106` + TS + mDNS + `169.254.*` (Get-NetNeighbor/arp) |
+| `scripts/pi02_rescue_direct_eth.ps1` | Wrapper mit Adapter/APIPA-Hinweis |
+| SD weiterhin | Nur wenn Eth unmÃ¶glich oder kein SSH-Fenster trotz Power-Cycle |
 
 ### Boot-Constraint
 
@@ -69,7 +92,7 @@ User: **SD-Karte aus AnkerPI02 normalerweise schwer entnehmbar** (Decken-Screen)
 
 ### Offene Punkte
 
-- [ ] Parent/User: **Ethernet am PI02 mÃ¶glich?** â†’ sonst SD-Rescue (`PI02_SD_RESCUE.md`)
+- [ ] User: Direct-Eth laut `PI02_DIRECT_ETH_RESCUE.md` â†’ Watcher + Power-Cycle; sonst SD
 - [ ] PI02 wieder online + Clock laufen (nach Mask + gepatchtem Player)
 - [ ] Tailscale + DNS-Fix auf PI01 (und PI02 DNS pin 1.1.1.1/8.8.8.8)
 - [ ] Produktion `clock_24h.mp4` encode

@@ -1,6 +1,13 @@
 # PI02 rescue watcher (Windows PowerShell 5) — TCP:22 then mask fb-clock + deploy player.
+# Probes: LAN .106, Tailscale, mDNS, and IPv4 link-local 169.254.* (direct PC↔Pi, no DHCP).
+param(
+  [switch]$IncludeLinkLocal = $true,
+  [switch]$SkipFixedHosts
+)
+
 $ErrorActionPreference = 'Continue'
-$HostsToTry = @('192.168.8.106', '100.103.54.63')
+$FixedHosts = @('192.168.8.106', '100.103.54.63')
+$MdnsName = 'AnkerPI02.local'
 $SshUser = 'user'
 $SshPass = '12345678'
 $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
@@ -11,6 +18,7 @@ $RemotePlayer = '/home/user/WerbeLEDbox-CountDown/fb_clock_play.py'
 
 function Test-SshPort {
   param([string]$Ip, [int]$TimeoutMs = 1200)
+  if ([string]::IsNullOrWhiteSpace($Ip)) { return $false }
   try {
     $client = New-Object System.Net.Sockets.TcpClient
     $async = $client.BeginConnect($Ip, 22, $null, $null)
@@ -31,10 +39,77 @@ function Test-SshPort {
   }
 }
 
+function Get-LinkLocalCandidates {
+  $found = New-Object System.Collections.Generic.List[string]
+
+  try {
+    $neighbors = Get-NetNeighbor -AddressFamily IPv4 -ErrorAction SilentlyContinue |
+      Where-Object {
+        $_.IPAddress -like '169.254.*' -and
+        $_.State -notin @('Unreachable', 'Incomplete', 'Permanent') -and
+        $_.IPAddress -notlike '*.255' -and
+        $_.IPAddress -ne '169.254.255.255'
+      }
+    foreach ($n in $neighbors) {
+      if (-not $found.Contains($n.IPAddress)) { $found.Add($n.IPAddress) }
+    }
+  } catch {}
+
+  try {
+    $arpOut = & arp -a 2>$null | Out-String
+    foreach ($m in [regex]::Matches($arpOut, '169\.254\.\d{1,3}\.\d{1,3}')) {
+      $ip = $m.Value
+      if ($ip -like '*.255') { continue }
+      if (-not $found.Contains($ip)) { $found.Add($ip) }
+    }
+  } catch {}
+
+  try {
+    $llLocal = Get-NetIPAddress -AddressFamily IPv4 -ErrorAction SilentlyContinue |
+      Where-Object { $_.IPAddress -like '169.254.*' -and $_.PrefixOrigin -eq 'WellKnown' }
+    if ($llLocal) {
+      $ping = New-Object System.Net.NetworkInformation.Ping
+      try { $null = $ping.Send('169.254.255.255', 200) } catch {}
+      $ping.Dispose()
+    }
+  } catch {}
+
+  return $found
+}
+
+function Get-MdnsCandidate {
+  try {
+    $entries = Resolve-DnsName -Name $MdnsName -Type A -ErrorAction SilentlyContinue |
+      Where-Object { $_.IPAddress -and $_.IPAddress -notlike 'fe80:*' }
+    foreach ($e in $entries) {
+      return [string]$e.IPAddress
+    }
+  } catch {}
+  return $null
+}
+
+function Get-HostsToProbe {
+  $list = New-Object System.Collections.Generic.List[string]
+  if (-not $SkipFixedHosts) {
+    foreach ($h in $FixedHosts) {
+      if (-not $list.Contains($h)) { $list.Add($h) }
+    }
+  }
+  $mdns = Get-MdnsCandidate
+  if ($mdns -and -not $list.Contains($mdns)) { $list.Add($mdns) }
+  if ($IncludeLinkLocal) {
+    foreach ($ll in (Get-LinkLocalCandidates)) {
+      if (-not $list.Contains($ll)) { $list.Add($ll) }
+    }
+  }
+  return $list
+}
+
 function Invoke-SshKey {
   param([string]$Ip, [string]$RemoteCmd)
   $args = @(
     '-o', 'StrictHostKeyChecking=no',
+    '-o', 'UserKnownHostsFile=NUL',
     '-o', 'ConnectTimeout=5',
     '-o', 'ServerAliveInterval=2',
     '-o', 'ServerAliveCountMax=2',
@@ -77,7 +152,8 @@ echo MASK_DONE
 
   if (Test-Path $PlayerLocal) {
     Write-Host 'Deploying patched fb_clock_play.py'
-    & scp -o StrictHostKeyChecking=no -o ConnectTimeout=5 -o BatchMode=yes $PlayerLocal ($SshUser + '@' + $Ip + ':' + $RemotePlayer) 2>&1 |
+    $dest = ($SshUser + '@' + $Ip + ':' + $RemotePlayer)
+    & scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=NUL -o ConnectTimeout=5 -o BatchMode=yes $PlayerLocal $dest 2>&1 |
       ForEach-Object { $_ | Tee-Object -FilePath $LogPath -Append }
     $verifyCmd = 'grep -n "Never decode\|ffprobe\|-f null" ' + $RemotePlayer + ' | head -20; echo VERIFY_DONE'
     $verify = Invoke-SshKey -Ip $Ip -RemoteCmd $verifyCmd
@@ -98,13 +174,15 @@ echo MASK_DONE
   return $false
 }
 
-$startMsg = '=== rescue start ' + (Get-Date -Format o) + ' player=' + $PlayerLocal + ' ==='
+$startMsg = '=== rescue start ' + (Get-Date -Format o) + ' player=' + $PlayerLocal + ' linklocal=' + $IncludeLinkLocal + ' ==='
 $startMsg | Tee-Object -FilePath $LogPath
-Write-Host ('Watching ' + ($HostsToTry -join ', ') + ' for TCP/22 ...')
+Write-Host 'Watching fixed (.106 + Tailscale), mDNS, and 169.254.* neighbors for TCP/22 ...'
+Write-Host 'Direct PC↔Pi Ethernet (no DHCP): both ends APIPA 169.254.x.x — link in seconds beats late WiFi.'
 $round = 0
 while ($true) {
   $round++
-  foreach ($ip in $HostsToTry) {
+  $hosts = Get-HostsToProbe
+  foreach ($ip in $hosts) {
     if (Test-SshPort -Ip $ip) {
       if (Invoke-Rescue -Ip $ip) {
         exit 0
@@ -113,8 +191,9 @@ while ($true) {
     }
   }
   if (($round % 15) -eq 1) {
-    $msg = '[' + (Get-Date -Format 'HH:mm:ss') + '] still offline round=' + $round
+    $msg = '[' + (Get-Date -Format 'HH:mm:ss') + '] still offline round=' + $round + ' probing=' + ($hosts -join ', ')
     Write-Host $msg
+    Add-Content -Path $LogPath -Value $msg
   }
   Start-Sleep -Seconds 2
 }

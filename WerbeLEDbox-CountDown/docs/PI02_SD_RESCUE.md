@@ -14,8 +14,10 @@ Log-Beweis: `docs/_pi02_rescue.log` nur Startzeile, **kein** `SUCCESS`.
 
 ## Vor SD: Ethernet prüfen (bevorzugt)
 
-1. Kurzes Ethernet-Kabel Pi ↔ Router/Switch (Port am Pi erreichbar?).
-2. Watcher laufen lassen: `scripts/pi02_rescue_watch.ps1` (pollt `.106` + Tailscale `.63`).
+**Direkt PC↔Pi ohne Switch geht** (Pi 4 auto-MDIX, APIPA `169.254.*`). Anleitung: [`PI02_DIRECT_ETH_RESCUE.md`](./PI02_DIRECT_ETH_RESCUE.md).
+
+1. Ethernet-Kabel Pi ↔ PC (oder Router/Switch, Port am Pi erreichbar?).
+2. Watcher: `scripts/pi02_rescue_direct_eth.ps1` (oder `pi02_rescue_watch.ps1` — pollt `.106` + Tailscale + **`169.254.*`**).
 3. Power-Cycle → SSH-Fenster während NTP-Wait → Mask + Deploy.
 
 **Serial:** `cmdline` hat `console=serial0,115200` (HDMI-Console aus). Realistisch nur mit UART-Adapter an GPIO — oft schwerer als SD am Decken-Screen. Kein Boot-Experiment nötig.
