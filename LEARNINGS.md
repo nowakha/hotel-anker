@@ -1,11 +1,31 @@
 # Hotel Anker — Learnings & Handoff
 
-Stand: **2026-07-22 ~19:08 CEST** (Workstation **MLT-NITRO5-HN** + TABLETHI10MAX).
+Stand: **2026-07-22 ~19:28 CEST** (Workstation **MLT-NITRO5-HN** + TABLETHI10MAX).
 Ziel: eine andere Cursor-Instanz auf einem anderen Rechner kann ohne mündlichen Kontext weiterarbeiten.
 
 **Workflow (verbindlich):** `.cursor/rules/hotel-anker-workflow.mdc` — jeden Schritt dokumentieren (Erfolg+Misserfolg), Credentials/Learnings mitziehen, commit + `git push origin HEAD`.
 
 Detaillierte Chronik: [`WerbeLEDbox-CountDown/docs/SESSION_LOG.md`](./WerbeLEDbox-CountDown/docs/SESSION_LOG.md).
+
+## AnkerPI02 Pipeline-Bench + Max-FPS (2026-07-22 ~19:28)
+
+**Frage:** Unterscheidet sich 860×360 vs 3440×1440? Was ist schneller?
+
+**Antwort (gemessen, 3 Runs, `st24.mov` 4K, crop T386/B127):** Bottleneck ist **ffmpeg Seek+Decode** (~12–13 s), nicht Resize. 860 vs 3440 Host-Resize spart nur ~0.2 s. OpenCV **fehlt** (`cv2` nicht installiert / zuvor SIGBUS).
+
+| Pipeline | MEAN total | ~fps | Bemerkung |
+|----------|------------|------|-----------|
+| A legacy PNG+PIL 3440 | **13905 ms** | 0.07 | Baseline |
+| B1/B2 Host 860 (+blit/NN-up) | ~136–13700 ms | 0.07 | kaum besser |
+| C1 vf→3440 raw | 12341 ms | 0.08 | ffmpeg crop/scale |
+| **C2 vf→860 + NN-up** | **12155 ms** | **0.08** | volles Bild, Gewinner UX/Speed |
+| C3 vf→860 center-blit | 12119 ms | 0.08 | winzig auf 3440 — nicht brauchbar |
+| D `-hwaccel drm` +860 | **12081 ms** | 0.08 | knapp schnellster; v4l2m2m **FAIL** |
+| Stages (C2) | extract≈12045 / resize≈33 / rgb565≈72 / fb≈4 ms | | |
+
+**Live max-fps** (`--pipeline vf860 --hwaccel drm --min-interval 0`, 150 s): **15 Frames** auf fb0, `eff_fps≈0.10–0.13`, extract 3.7–15 s, **`throttled=0x0` durchgängig**. drm fiel 1× aus → Soft-Fallback. **fb-clock bleibt masked**, `fb_clock_opencv` disabled.
+
+**Default im Player:** `--pipeline vf860` (ffmpeg `crop+scale=860:360+hflip/vflip` → raw → NEAREST→3440 → RGB565). Für Autostart weiter `min-interval 15` in Unit.
 
 ## Production encode `clock_24h.mp4` (2026-07-22 ~18:53 RUNNING)
 

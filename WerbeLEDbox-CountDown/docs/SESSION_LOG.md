@@ -277,5 +277,32 @@ Goal: stabile 860×360 H.264-Produktion statt 4K `st24.mov` auf PI02 (Undervolta
 
 
 ## 2026-07-22 ~19:11 — Statuscheck Encode + AnkerPI02
-- **NVENC encode:** noch aktiv (fmpeg PID **8652**), schreibt `WerbeLEDbox-CountDown/media/_encode_clock_24h.partial.mp4` (~1303 MB). Progress `out_time≈04:00:10` / 24h → **~16.7%**, speed **~13.1x**, ETA wall **~1h 32min**. Nicht gestoppt. Final `clock_24h.mp4` noch nicht vorhanden.
+- **NVENC encode:** noch aktiv (ffmpeg PID **8652**), schreibt `WerbeLEDbox-CountDown/media/_encode_clock_24h.partial.mp4` (~1303 MB). Progress `out_time≈04:00:10` / 24h → **~16.7%**, speed **~13.1x**, ETA wall **~1h 32min**. Nicht gestoppt. Final `clock_24h.mp4` noch nicht vorhanden.
 - **AnkerPI02:** LAN `192.168.8.106` OK (5ms); `.112` timeout; Tailscale `100.103.54.63` OK. SSH: `fb-clock.service` **masked** + **inactive** (Clock nicht gestartet).
+
+## 2026-07-22 ~19:14–19:28 — Loadtest + Pipeline-Bench + Max-FPS
+
+### Loadtest sichtbar (vorher)
+- `st24.mov` only (kein `clock_24h.mp4` auf Pi); Player bereits aktuell.
+- Foreground `min-interval=10`, ~16 Frames auf **/dev/fb0**, extract ~7.2–14 s, **throttled=0x0**.
+- Danach `fb-clock` **masked**, `fb_clock_opencv` **disabled**.
+
+### Bench A/B/C/D (`scripts/bench_fb_pipelines.py`, 3 Runs)
+| Name | MEAN ms | Ergebnis |
+|------|---------|----------|
+| A_full_pil | 13905 | Baseline PNG+PIL 3440 |
+| B1/B2 860 host | ~13612–13749 | kaum schneller; OpenCV N/A |
+| C1 vf 3440 raw | 12341 | ffmpeg vf hilft ~1.5 s |
+| C2 vf 860 + NN-up | 12155 | **Gewinner volles Bild** |
+| C3 860 center | 12119 | optisch winzig |
+| D drm +860 | **12081** | knapp #1; `h264_v4l2m2m` FAIL |
+| Stages C2 | extract 12045 / resize 33 / rgb565 72 / fb 4 | Decode = Bottleneck |
+
+### Implementierung
+- `fb_clock_opencv.py`: Default `--pipeline vf860 --hwaccel drm --min-interval 0`; Fallback soft wenn drm failt; `--pipeline vf3440|legacy` bleibt.
+- Unit: weiter `min-interval 15` + vf860 (Autostart nicht enabled).
+
+### Live Max-FPS 150 s
+- 15 Frames, seek = wall clock, `eff_fps≈0.10–0.13`, best cycle ~3.8 s.
+- **throttled=0x0** vor/während/nach. systemd unverändert masked/disabled.
+- Letztes Frame bleibt auf fb0.

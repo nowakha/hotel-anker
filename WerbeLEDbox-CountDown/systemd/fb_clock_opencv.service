@@ -14,15 +14,15 @@ WorkingDirectory=/home/user/WerbeLEDbox-CountDown
 Environment=TZ=Europe/Zurich
 Environment=VIDEO=/home/user/WerbeLEDbox-CountDown/media/st24.mov
 ExecStartPre=/bin/bash -c 'for i in $(seq 1 120); do timedatectl show -p NTPSynchronized --value | grep -qx yes && exit 0; sleep 1; done; echo "warn: starting without NTP sync" >&2; exit 0'
-# OpenCV seek loop: crop Premiere L0 T386 R0 B127 → 3440×1440 → RGB565 fb0 (rotate 180)
+# Hybrid: ffmpeg 1-frame seek + vf crop/scale + PIL NN upsample → RGB565 fb0
+# OpenCV VideoCapture SIGBUS on st24 — do not use. Pipeline vf860 (bench winner).
 # Stutter OK — always jump to wall-clock time (Europe/Zurich)
-# Hybrid: ffmpeg 1-frame seek + OpenCV crop/scale/RGB565 (OpenCV VideoCapture SIGBUS on st24)
-# nice+single-core: this Pi logs undervoltage under heavy decode
+# nice+single-core: this Pi logs undervoltage under heavy 4K decode
 Nice=10
 CPUAffinity=0
-# System python3 + python3-pil + python3-numpy (OpenCV wheel SIGBUS on this Pi)
-# min-interval 15s: 4K single-frame extract ~5–14s; shorter intervals brownout this PSU (throttled=0x50000)
-ExecStart=/usr/bin/python3 /home/user/WerbeLEDbox-CountDown/fb_clock_opencv.py --video ${VIDEO} --tz Europe/Zurich --crop-top 386 --crop-bottom 127 --crop-left 0 --crop-right 0 --log-every 1 --min-interval 15.0
+# System python3 + python3-pil + python3-numpy
+# min-interval 15s safer for weak PSU; player default is 0 (max fps) for foreground tests
+ExecStart=/usr/bin/python3 /home/user/WerbeLEDbox-CountDown/fb_clock_opencv.py --video ${VIDEO} --tz Europe/Zurich --crop-top 386 --crop-bottom 127 --crop-left 0 --crop-right 0 --pipeline vf860 --hwaccel drm --log-every 1 --min-interval 15.0
 Restart=on-failure
 RestartSec=10
 KillSignal=SIGTERM
