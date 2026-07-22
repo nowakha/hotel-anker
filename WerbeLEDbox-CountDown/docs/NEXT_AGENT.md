@@ -1,6 +1,8 @@
 # NEXT AGENT — Sofortmaßnahmen
 
-Stand: 2026-07-22. Lies zuerst `LEARNINGS.md` + `docs/SESSION_LOG.md`.
+Stand: 2026-07-22 ~16:20. Lies zuerst `LEARNINGS.md` + `docs/SESSION_LOG.md`.
+
+**Blocker:** AnkerPI02 ist offline (LAN + Tailscale). Ohne User-Eingriff (Strom/Boot) kein Deploy möglich. Sobald online: Schritt 2 **vor** `fb-clock`-Start.
 
 ## 1) AnkerPI02 online?
 

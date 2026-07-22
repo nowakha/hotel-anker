@@ -31,6 +31,9 @@ Chronik für Cross-Machine-Handoff. Erfolg **und** Misserfolg.
 | `fb-clock` auf `st24.mov` + Crop + resync 60s | Unit geschrieben |
 | `probe_size()` mit `ffmpeg -f null -` | **CRITICAL FAIL** — dekodiert 24h 4K → Pi unresponsive; Power-Cycle nötig |
 | PI02 nach User-Reboot (Stand ~16:08) | **noch offline** (kein Ping/SSH/Tailscale) |
+| Re-Check ~16:17–16:20 LAN `.106` + TS `100.103.54.63` + mDNS | **FAIL** — ping timeout / Destination host unreachable; SSH timeout; mDNS unresolved |
+| Handoff-Commit `8044f9a` → `origin/main` | OK — Docs, Secrets, probe_size-Fix, Workflow-Regel |
+| Deploy patched Player + Clock-Start | **BLOCKED** — PI02 offline; wartet auf physischen Strom/Boot-Check |
 
 ### Boot-Constraint
 

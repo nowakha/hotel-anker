@@ -1,7 +1,9 @@
 # Hotel Anker — Learnings & Handoff
 
-Stand: **2026-07-22 ~16:10 CEST** (Workstation **MLT-NITRO5-HN**).  
+Stand: **2026-07-22 ~16:20 CEST** (Workstation **MLT-NITRO5-HN**).  
 Ziel: eine andere Cursor-Instanz auf einem anderen Rechner kann ohne mündlichen Kontext weiterarbeiten.
+
+**Workflow (verbindlich):** `.cursor/rules/hotel-anker-workflow.mdc` — jeden Schritt dokumentieren (Erfolg+Misserfolg), Credentials/Learnings mitziehen, commit + `git push origin HEAD`.
 
 Detaillierte Chronik: [`WerbeLEDbox-CountDown/docs/SESSION_LOG.md`](./WerbeLEDbox-CountDown/docs/SESSION_LOG.md).
 
@@ -42,7 +44,7 @@ Unverändert: `Richnerstutz-Bespannung-Paket/`, Rahmen 2100 mm, Textil→LED 45 
 
 ## Offene Arbeit (Priorität)
 
-1. **PI02 wieder online** (Stand 16:08 offline nach Reboot) → patched `fb_clock_play.py` + Unit deployen → Uhr starten.
+1. **PI02 wieder online** (Stand ~16:20: LAN `.106` unreachable, Tailscale `100.103.54.63` tot, mDNS unresolved) → User Strom/Boot prüfen → patched `fb_clock_play.py` + Unit deployen → Uhr starten. **Nicht** fb-clock mit altem Player starten.
 2. DNS pin (1.1.1.1/8.8.8.8) + Tailscale auf PI01.
 3. Produktion `clock_24h.mp4` NVENC encode + Upload.
 4. Teensy flash/validate; Countdown-Producer PI01.
