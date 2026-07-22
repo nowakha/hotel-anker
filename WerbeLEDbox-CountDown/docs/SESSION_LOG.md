@@ -48,14 +48,15 @@ Chronik fÃ¼r Cross-Machine-Handoff. Erfolg **und** Misserfolg.
 
 | Ereignis | Ergebnis |
 |----------|----------|
-| Watcher PID **16964** (Parent 26468, seit 16:27) | **ALIVE** — nicht neu gestartet bis Doc-Ende; danach Restart auf Link-Local-Skript |
+| Watcher PID **16964** (Parent 26468, seit 16:27) | **ALIVE** damals; später **Restart** auf Link-Local-Skript (Parse-Fix) → PID **7560** (~16:57) |
 | Aggressiv-Poll ~7 min (`.106` + TS `.63`, TCP/22) | **FAIL** — kein Ping, kein TCP22, kein `SUCCESS` |
 | ARP `.106` | **fehlt** |
-| Tailscale `ankerpi02` | **offline**, last seen ~50–54 min |
+| Tailscale `ankerpi02` | **offline**, last seen ~50–59 min |
 | mDNS `AnkerPI02.local` | unresolved |
 | DHCP-Scan `.100–.115` | `.101–.105` + Workstation `.111` alive; **kein** `.106` |
+| Re-Poll ~16:57–17:01 inkl. `169.254.*` | **FAIL** — weiterhin offline (Kabel ggf. gesteckt, aber kein SSH ohne frischen Power-Cycle im NTP-Fenster) |
 | SSH Verify (fb-clock mask / ffprobe Player) | **BLOCKED** — Pi nie erreichbar |
-| SD-Entnahme nötig? | **Noch nicht bewiesen** — WiFi-late Hang bleibt Hauptverdacht; Prefer Direkt-Ethernet |
+| SD-Entnahme nötig? | **Noch nicht bewiesen** — Prefer Direkt-Ethernet + Power-Cycle mit laufendem Watcher |
 
 ### Rescue-Watcher vs WiFi (~16:50–17:00)
 
