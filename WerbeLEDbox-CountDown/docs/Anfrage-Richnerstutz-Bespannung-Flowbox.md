@@ -4,7 +4,7 @@
 **Empfänger:** Richnerstutz AG, Nordstrasse 7, 5612 Villmergen  
 **Kontakt Empfänger:** info@richnerstutz.ch · +41 56 616 67 67  
 **Auftraggeber:** Realia AG (Gottlieb Kündig), Industriestrasse 40b, 9400 Rorschach  
-**Technische Ansprechperson:** Harald Nowak, Modernlight — Projektleitung | Videoengineering · harald.nowak@modernlight.ch · Wangenstrasse 57, 3018 Bern
+**Technische Ansprechperson:** Harald Nowak, Modernlight — Projektleitung | Videoengineering · Harald.Nowak@modernlight.ch · +41 76 579 84 54 · Wangenstrasse 57, 3018 Bern
 
 ---
 
@@ -18,7 +18,7 @@ Sehr geehrte Damen und Herren
 
 im Namen der **Realia AG, Rorschach** (Bauherrschaft / Eigentümerschaft Hotel Anker, Gottlieb Kündig) erlauben wir uns, Sie um eine Offerte und kurze technische Beratung für die **Anfertigung und den Digitaldruck einer Textilbespannung mit Kederschienenlippe (SEG / Flachkeder)** zu bitten.
 
-Die technische Konzeption und Realisierung der dynamischen LED-Hinterleuchtung erfolgt durch **Harald Nowak** (Modernlight, Projektleitung | Videoengineering). Vertragspartner und Rechnungsempfänger für die Bespannung ist die **Realia AG**; die technische Abstimmung (Massblatt, Druckdaten, Material) läuft über Harald Nowak (`harald.nowak@modernlight.ch`).
+Die technische Konzeption und Realisierung der dynamischen LED-Hinterleuchtung erfolgt durch **Harald Nowak** (Modernlight, Projektleitung | Videoengineering). Vertragspartner und Rechnungsempfänger für die Bespannung ist die **Realia AG**; die technische Abstimmung (Massblatt, Druckdaten, Material) läuft über Harald Nowak (`Harald.Nowak@modernlight.ch`, Mobil +41 76 579 84 54).
 
 ### 1. Einsatz / Produktkontext
 
@@ -84,8 +84,8 @@ Für Rückfragen zur Technik und zu den Druckdaten:
 **Harald Nowak**  
 Projektleitung | Videoengineering  
 Modernlight · Wangenstrasse 57 · 3018 Bern  
-harald.nowak@modernlight.ch  
-Zentrale Projects: +41 31 980 20 30  
+Harald.Nowak@modernlight.ch  
+Mobil: +41 76 579 84 54  
 
 Auftraggeber / Rechnung:
 
@@ -103,7 +103,7 @@ Mit freundlichen Grüssen
 
 Realia AG  
 i. A. Harald Nowak  
-harald.nowak@modernlight.ch  
+Harald.Nowak@modernlight.ch · +41 76 579 84 54  
 
 ---
 

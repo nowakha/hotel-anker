@@ -6,8 +6,9 @@ Alles für die Anfrage an **Richnerstutz AG** (Druck + Konfektion mit Kederschie
 |--|--|
 | **Auftraggeber** | Realia AG (Gottlieb Kündig), Industriestrasse 40b, 9400 Rorschach, UID CHE-113.325.481 |
 | **Technische Ansprechperson** | Harald Nowak, Modernlight — Projektleitung \| Videoengineering |
-| **E-Mail Technik** | harald.nowak@modernlight.ch |
-| **Modernlight** | Wangenstrasse 57, 3018 Bern · Projects +41 31 980 20 30 |
+| **E-Mail Technik** | Harald.Nowak@modernlight.ch |
+| **Mobil** | +41 76 579 84 54 |
+| **Modernlight** | Wangenstrasse 57, 3018 Bern |
 
 ## Ordnerstruktur
 

@@ -3,7 +3,7 @@
 **Status:** Versandfertig (Fotos vom Rahmen folgen in `06-fotos-vom-rahmen/`)  
 **Empfänger:** Richnerstutz AG, Nordstrasse 7, 5612 Villmergen · info@richnerstutz.ch · +41 56 616 67 67  
 **Auftraggeber:** Realia AG (Gottlieb Kündig), Industriestrasse 40b, 9400 Rorschach · UID CHE-113.325.481  
-**Technische Ansprechperson:** Harald Nowak, Modernlight — Projektleitung | Videoengineering · harald.nowak@modernlight.ch
+**Technische Ansprechperson:** Harald Nowak, Modernlight — Projektleitung | Videoengineering · Harald.Nowak@modernlight.ch · +41 76 579 84 54
 
 ---
 
@@ -86,8 +86,8 @@ Bitte prüfen Sie, welches Verfahren bei Ihnen geeignet ist (z. B. transluzentes
 Harald Nowak  
 Projektleitung | Videoengineering  
 Modernlight · Wangenstrasse 57 · 3018 Bern  
-harald.nowak@modernlight.ch  
-Zentrale Projects: +41 31 980 20 30  
+Harald.Nowak@modernlight.ch  
+Mobil: +41 76 579 84 54  
 
 **Auftraggeber / Rechnung**
 
@@ -103,4 +103,4 @@ Mit freundlichen Grüssen
 
 Realia AG  
 i. A. Harald Nowak  
-harald.nowak@modernlight.ch
+Harald.Nowak@modernlight.ch · +41 76 579 84 54

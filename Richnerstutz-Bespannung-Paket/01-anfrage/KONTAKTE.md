@@ -27,9 +27,7 @@ Modernlight Projects AG / Modernlight Production AG
 Wangenstrasse 57  
 3018 Bern  
 
-E-Mail: harald.nowak@modernlight.ch  
-Zentrale Projects: +41 31 980 20 30  
-Zentrale Production: +41 31 381 47 37  
-Allgemein: info@modernlight.ch  
+E-Mail: Harald.Nowak@modernlight.ch  
+Mobil: +41 76 579 84 54  
 
-Quellen: https://modernlight.ch/team/ · https://modernlight.ch/kontakt/
+Quellen: modernlight.ch/kontakt (Adresse) · vom Nutzer bestätigt (E-Mail, Mobil)
