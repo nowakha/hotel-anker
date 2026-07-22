@@ -1,0 +1,123 @@
+{
+  "canvas": {
+    "width": 4096,
+    "height": 4096
+  },
+  "digit_cells": {
+    "DW": 8,
+    "DH": 12,
+    "ST": 2
+  },
+  "stack_bottom_to_top": [
+    "01-facade-blueprint.png",
+    "02-logo-anker.png",
+    "03-bar-title-liquid-glass.png",
+    "04-bar-tage-liquid-glass.png",
+    "05-bar-hms-liquid-glass.png",
+    "06-title-text-3lines.png",
+    "07a-digits-days-888.png",
+    "07b-digits-hms-888.png",
+    "08a-label-tage.png",
+    "08b-labels-hms.png",
+    "09-totzone-8of64-solid.png",
+    "10-reference-ghost-composite.png"
+  ],
+  "layers": [
+    {
+      "file": "01-facade-blueprint.png",
+      "left": 0,
+      "top": 0,
+      "width": 4096,
+      "height": 4096,
+      "full_canvas": true
+    },
+    {
+      "file": "02-logo-anker.png",
+      "full_canvas": false,
+      "left": 1807,
+      "top": 0,
+      "width": 482,
+      "height": 775
+    },
+    {
+      "file": "03-bar-title-liquid-glass.png",
+      "full_canvas": false,
+      "left": 0,
+      "top": 608,
+      "width": 4096,
+      "height": 576
+    },
+    {
+      "file": "04-bar-tage-liquid-glass.png",
+      "full_canvas": false,
+      "left": 0,
+      "top": 2016,
+      "width": 4096,
+      "height": 192
+    },
+    {
+      "file": "05-bar-hms-liquid-glass.png",
+      "full_canvas": false,
+      "left": 0,
+      "top": 3168,
+      "width": 4096,
+      "height": 192
+    },
+    {
+      "file": "06-title-text-3lines.png",
+      "full_canvas": false,
+      "left": 1065,
+      "top": 693,
+      "width": 1969,
+      "height": 406
+    },
+    {
+      "file": "07a-digits-days-888.png",
+      "full_canvas": false,
+      "left": 1526,
+      "top": 1200,
+      "width": 1811,
+      "height": 800
+    },
+    {
+      "file": "07b-digits-hms-888.png",
+      "full_canvas": false,
+      "left": 118,
+      "top": 2352,
+      "width": 3795,
+      "height": 800
+    },
+    {
+      "file": "08a-label-tage.png",
+      "full_canvas": false,
+      "left": 2276,
+      "top": 2030,
+      "width": 312,
+      "height": 166
+    },
+    {
+      "file": "08b-labels-hms.png",
+      "full_canvas": false,
+      "left": 427,
+      "top": 3192,
+      "width": 3218,
+      "height": 146
+    },
+    {
+      "file": "09-totzone-8of64-solid.png",
+      "full_canvas": false,
+      "left": 0,
+      "top": 3552,
+      "width": 4096,
+      "height": 544
+    },
+    {
+      "file": "10-reference-ghost-composite.png",
+      "left": 0,
+      "top": 0,
+      "width": 4096,
+      "height": 4096,
+      "full_canvas": true
+    }
+  ]
+}

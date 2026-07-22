@@ -4,7 +4,7 @@
 **Empfänger:** Richnerstutz AG, Nordstrasse 7, 5612 Villmergen  
 **Kontakt Empfänger:** info@richnerstutz.ch · +41 56 616 67 67  
 **Auftraggeber:** Realia AG (Gottlieb Kündig), Industriestrasse 40b, 9400 Rorschach  
-**Technische Begleitung:** Harald Nowak (im Auftrag / in Zusammenarbeit mit Modernlight)
+**Technische Ansprechperson:** Harald Nowak, Modernlight — Projektleitung | Videoengineering · harald.nowak@modernlight.ch · Wangenstrasse 57, 3018 Bern
 
 ---
 
@@ -18,7 +18,7 @@ Sehr geehrte Damen und Herren
 
 im Namen der **Realia AG, Rorschach** (Bauherrschaft / Eigentümerschaft Hotel Anker, Gottlieb Kündig) erlauben wir uns, Sie um eine Offerte und kurze technische Beratung für die **Anfertigung und den Digitaldruck einer Textilbespannung mit Kederschienenlippe (SEG / Flachkeder)** zu bitten.
 
-Die technische Konzeption und Realisierung der dynamischen LED-Hinterleuchtung erfolgt in Abstimmung mit **Modernlight** bzw. durch Harald Nowak in diesem Umfeld. Vertragspartner und Rechnungsempfänger für die Bespannung soll die **Realia AG** sein; die technische Abstimmung (Massblatt, Druckdaten, Material) kann über die unten genannte Ansprechperson laufen.
+Die technische Konzeption und Realisierung der dynamischen LED-Hinterleuchtung erfolgt durch **Harald Nowak** (Modernlight, Projektleitung | Videoengineering). Vertragspartner und Rechnungsempfänger für die Bespannung ist die **Realia AG**; die technische Abstimmung (Massblatt, Druckdaten, Material) läuft über Harald Nowak (`harald.nowak@modernlight.ch`).
 
 ### 1. Einsatz / Produktkontext
 
@@ -82,8 +82,10 @@ Gerne erhalten wir:
 Für Rückfragen zur Technik und zu den Druckdaten:
 
 **Harald Nowak**  
-Technische Begleitung (Modernlight-Kontext)  
-Projekt: Hotel Anker — Werbe-LED-Box / Countdown  
+Projektleitung | Videoengineering  
+Modernlight · Wangenstrasse 57 · 3018 Bern  
+harald.nowak@modernlight.ch  
+Zentrale Projects: +41 31 980 20 30  
 
 Auftraggeber / Rechnung:
 
@@ -93,12 +95,15 @@ Industriestrasse 40b
 UID CHE-113.325.481  
 z. Hd. Gottlieb Kündig  
 
+Vollständiges Versandpaket: `Richnerstutz-Bespannung-Paket/`
+
 Wir freuen uns auf Ihre Rückmeldung und danken Ihnen für die Prüfung.
 
 Mit freundlichen Grüssen  
 
 Realia AG  
 i. A. Harald Nowak  
+harald.nowak@modernlight.ch  
 
 ---
 

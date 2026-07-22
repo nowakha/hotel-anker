@@ -1,0 +1,106 @@
+# Anfrage an Richnerstutz AG — Textilbespannung LightBox Hotel Anker
+
+**Status:** Versandfertig (Fotos vom Rahmen folgen in `06-fotos-vom-rahmen/`)  
+**Empfänger:** Richnerstutz AG, Nordstrasse 7, 5612 Villmergen · info@richnerstutz.ch · +41 56 616 67 67  
+**Auftraggeber:** Realia AG (Gottlieb Kündig), Industriestrasse 40b, 9400 Rorschach · UID CHE-113.325.481  
+**Technische Ansprechperson:** Harald Nowak, Modernlight — Projektleitung | Videoengineering · harald.nowak@modernlight.ch
+
+---
+
+## E-Mail / Anschreiben (kopierfertig)
+
+**An:** info@richnerstutz.ch  
+**Betreff:** Anfrage Offerte — SEG-/Keder-Bespannung LightBox 2 × 2 m, Hotel Anker Rorschach (teilweise transluzent / teilweise lichtundurchlässig)
+
+---
+
+Sehr geehrte Damen und Herren
+
+im Namen der **Realia AG, Rorschach** (Bauherrschaft / Eigentümerschaft Hotel Anker, Gottlieb Kündig) erlauben wir uns, Sie um eine Offerte und kurze technische Beratung für die **Anfertigung und den Digitaldruck einer Textilbespannung mit Kederschienenlippe (SEG / Flachkeder)** zu bitten.
+
+Die technische Konzeption und Realisierung der dynamischen LED-Hinterleuchtung erfolgt durch **Harald Nowak** (Modernlight, Projektleitung | Videoengineering). Vertragspartner und Rechnungsempfänger für die Bespannung ist die **Realia AG**; die technische Abstimmung (Massblatt, Druckdaten, Material, Opazität) läuft über Harald Nowak.
+
+### 1. Einsatz / Produktkontext
+
+Am Standort **Hotel Anker, Rorschach** (Countdown-Bar / Sichtfenster zum Sanierungsprojekt) ist eine **quadratische LightBox / Flowbox-Klasse** im Einsatz bzw. in der Fertigstellung:
+
+| Angabe | Wert | Bemerkung |
+|--------|------|-----------|
+| Systemfamilie | Kendu **Flowbox** / Smartframe-SEG | Aluminium-Spannrahmen mit umlaufender Kederschiene |
+| Nennfläche (Sicht-/Leuchtfläche) | **2000 × 2000 mm** | Standard Square |
+| Profilbreite | **100 mm** | gemäss Hersteller-FAQ |
+| Konfektion | **Umlaufende Kederschienenlippe** (Silikon-/Flachkeder) | Einschub in die Profilnut, werkzeugloser Sujetwechsel |
+| Hinterleuchtung | Individuelle **LED-Matrix 64 × 64** hinter dem Textil | Custom-Retrofit, Zellpitch **31,25 mm** |
+| Totzone unten | **250 mm** (8/64 Zellen) | muss **vollständig lichtundurchlässig** gedruckt/gedeckt sein |
+| Einsatzort | Innen, dauerhaft sichtbar | Countdown bis geplantem Baubeginn 1. Oktober 2026 |
+
+Die Bespannung muss **passgenau** in die vorhandene Kederschiene des Rahmens einsetzbar sein. Den exakten Keder-Querschnitt möchten wir gerne mit Ihnen anhand der beigelegten Fotos / eines Massblattes abstimmen.
+
+### 2. Gewünschte Leistung
+
+1. **Materialberatung** für hinterleuchtetes SEG-Textil (Transluzenz vs. Blockout / Lichtsperre)  
+2. **Digitaldruck** des Countdown-Sujets (Druckdaten beigelegt: 4096 × 4096 px / ca. 2 px/mm)  
+3. **Konfektion** mit umlaufender **Kederschienenlippe**, massgenau für den vorhandenen Rahmen  
+4. Optional: **Musterstreifen / Druckmuster** zur Prüfung von Opazität und Farbwirkung bei LED-Hinterleuchtung  
+5. Offerte inkl. Lieferfrist und Versand nach **Rorschach** (Hotel Anker)
+
+### 3. Kernthema: gemischte Opazität (transluzent + lichtundurchlässig)
+
+Das Sujet ist **kein klassischer Vollflächen-Hinterleuchtungsdruck**. Es muss auf **einer** Bespannung zwei optische Welten vereinen. Beigelegt ist eine **Opazitätsplatte** (`print-opacity-mask-hires.png`):
+
+- **Schwarz** = lichtdurchlässig / transluzent  
+- **Rot** = lichtundurchlässig / Blockout  
+
+**A — lichtdurchlässig / transluzent** (LED-Licht muss klar und konturscharf durchscheinen)
+
+- Füllungen der **7-Segment-Ziffern** und der **Doppelpunkt-Kerne**
+- **Liquid-Glass-Balken** (durchscheinende Label-/Titelbänder)
+- dunkler **Navy-Hintergrund** in den Durchscheinflächen der LED-Matrix
+
+**B — lichtundurchlässig / Blockout** (kein sichtbares LED-Störlicht)
+
+- **Totzone** unten (250 mm über die volle Breite)
+- **Logo** (historischer Kronen-Anker / Fassadenmarke Hotel Anker)
+- **Beschriftungen** («Zeit bis Baubeginn:», «Tage», «Stunden», «Minuten», «Sekunden»)
+- **Fassadenlinien** / grafische Konturen (auch über den Glass-Balken)
+- **Konturen** der 7-Segment-Ziffern und **Ringe** der Doppelpunkte
+
+Bitte prüfen Sie, welches Verfahren bei Ihnen geeignet ist (z. B. transluzentes Backlit-Textil mit selektivem Blockout-/Lichtsperre-Druck, Mehrschicht-/Doppeldruck oder ein anderes empfohlenes Verfahren). Die undurchlässigen Partien dürfen **kein Streulicht** durchlassen; die transluzenten Partien sollen die LED-Farben **brillant und ohne Grauschleier** wiedergeben.
+
+### 4. Beilagen in diesem Versandpaket
+
+- Drucksujet: `print-ghost-hires.png` (4096×4096)
+- Opazitätsplatte: `print-opacity-mask-hires.png` + Legende
+- Massblatt-/Keder-Overlays und PRINT_SPEC
+- Fotos der Kederschiene / des Rahmens (sobald vorhanden)
+
+### 5. Bitte um Rückmeldung
+
+1. Kurze Einschätzung der Machbarkeit (Material + Druckverfahren)  
+2. Offerte für **1 Stück** fertig konfektionierte Bespannung (ggf. Variante mit Muster)  
+3. Benötigte Angaben / Zugaben / Druckdatenformat (CMYK/RGB)  
+4. Lieferzeit ab freigegebenen Druckdaten  
+
+**Technische Rückfragen**
+
+Harald Nowak  
+Projektleitung | Videoengineering  
+Modernlight · Wangenstrasse 57 · 3018 Bern  
+harald.nowak@modernlight.ch  
+Zentrale Projects: +41 31 980 20 30  
+
+**Auftraggeber / Rechnung**
+
+Realia AG  
+Industriestrasse 40b  
+9400 Rorschach  
+UID CHE-113.325.481  
+z. Hd. Gottlieb Kündig  
+
+Wir freuen uns auf Ihre Rückmeldung und danken Ihnen für die Prüfung.
+
+Mit freundlichen Grüssen  
+
+Realia AG  
+i. A. Harald Nowak  
+harald.nowak@modernlight.ch
