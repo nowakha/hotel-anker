@@ -41,12 +41,24 @@ Chronik fÃ¼r Cross-Machine-Handoff. Erfolg **und** Misserfolg.
 | Diagnose ~16:24â€“16:30: LAN `.106` + TS `100.103.54.63` TCP/22 | **FAIL** â€” dauerhaft offline (Splash-on-screen + dead net = classic probe hang) |
 | `scripts/pi02_rescue_watch.ps1` | OK gestartet â€” mask+deploy sobald SSH:22 antwortet |
 | Commits `f5ec3c1` + this (track `pi02_rescue_watch.ps1`, ignore `_pi02_rescue.log`) | **landed** |
-| SD-Entnahme empfohlen? | **Nein** â€” Power-Cycle + SSH-Fenster (NTP Pre-Wait â‰¤120s) reicht |
+| SD-Entnahme empfohlen? (16:30) | Damals Nein â€” **revidiert 17:00** wegen WiFi-late (siehe unten) |
 | Cursor zeigt zwei Repo-Namen Â«Hotel AnkerÂ» + Â«hotel-ankerÂ» | **Kein Doppel-Clone** â€” nur Ordner `Hotel Anker`; Remote-Slug `hotel-anker`. Kein `.code-workspace`. Kanonisch: `â€¦\Cursor Projects\Hotel Anker` |
+
+### Rescue-Watcher vs WiFi (~16:50â€“17:00)
+
+| Ereignis | Ergebnis |
+|----------|----------|
+| User: ~3 Power-Cycles, PI02 **WiFi only** | Watcher greift nicht |
+| `docs/_pi02_rescue.log` | Nur Start `16:27:06` â€” **kein** `SUCCESS` / kein RESCUE |
+| Theorie NTP-Wait â‰¤120s vs WiFi-late | **bestÃ¤tigt** â€” Hang vor nutzbarem SSH; Watcher pollt nur `.106`+TS `.63` |
+| Temp. Ethernet | **Bevorzugt** wenn Port erreichbar â€” Remote-Rescue im NTP-Fenster |
+| Serial `serial0,115200` | In cmdline; braucht UART@GPIO â€” oft unpraktisch |
+| SD-Rescue | **Ja wenn kein Ethernet** â€” User bereit; `docs/PI02_SD_RESCUE.md` + `scripts/pi02_sd_rescue_wsl.sh` |
+| Entscheidung | Parent: Ethernet-MÃ¶glichkeit bestÃ¤tigen; sonst SD |
 
 ### Boot-Constraint
 
-User: **SD-Karte aus AnkerPI02 nicht mehr entnehmbar.** Keine riskanten `cmdline.txt`-Ã„nderungen. Recovery: `media/cmdline.recovery.txt`.
+User: **SD-Karte aus AnkerPI02 normalerweise schwer entnehmbar** (Decken-Screen). User **bereit zur SD-Rescue**, wenn Ethernet unmÃ¶glich. Keine riskanten `cmdline.txt`-Ã„nderungen. Recovery: `media/cmdline.recovery.txt`. Anleitung: `docs/PI02_SD_RESCUE.md`.
 
 ### Provisorisches Playback (sobald PI02 wieder da)
 
@@ -57,7 +69,8 @@ User: **SD-Karte aus AnkerPI02 nicht mehr entnehmbar.** Keine riskanten `cmdline
 
 ### Offene Punkte
 
-- [ ] PI02 wieder online + Clock laufen
+- [ ] Parent/User: **Ethernet am PI02 mÃ¶glich?** â†’ sonst SD-Rescue (`PI02_SD_RESCUE.md`)
+- [ ] PI02 wieder online + Clock laufen (nach Mask + gepatchtem Player)
 - [ ] Tailscale + DNS-Fix auf PI01 (und PI02 DNS pin 1.1.1.1/8.8.8.8)
 - [ ] Produktion `clock_24h.mp4` encode
 - [ ] Teensy flash/validate

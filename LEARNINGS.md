@@ -1,6 +1,6 @@
 # Hotel Anker — Learnings & Handoff
 
-Stand: **2026-07-22 ~16:30 CEST** (Workstation **MLT-NITRO5-HN**).  
+Stand: **2026-07-22 ~17:00 CEST** (Workstation **MLT-NITRO5-HN**).  
 Ziel: eine andere Cursor-Instanz auf einem anderen Rechner kann ohne mündlichen Kontext weiterarbeiten.
 
 **Workflow (verbindlich):** `.cursor/rules/hotel-anker-workflow.mdc` — jeden Schritt dokumentieren (Erfolg+Misserfolg), Credentials/Learnings mitziehen, commit + `git push origin HEAD`.
@@ -29,7 +29,7 @@ Detaillierte Chronik: [`WerbeLEDbox-CountDown/docs/SESSION_LOG.md`](./WerbeLEDbo
 
 1. **AnkerPI01** — Pi Zero 2 W: SPI0 LED putter. mDNS `AnkerPI01.local`. DHCP zuletzt oft **`192.168.8.102`** (Docs nannten auch `.108` — immer mDNS bevorzugen). Tailscale: **noch nicht** zuverlässig installiert.
 2. **AnkerPI02** — Pi 4: HDMI **3440×1440@50**, `fb-clock.service`, Splash `media/boot_splash_3440x1440.*`. LAN **`192.168.8.106`**. Tailscale: **`ankerpi02` / `100.103.54.63`** (war gejoint; nach Hang/Reboot ggf. erneut prüfen).
-3. **SD-Karte PI02 nicht mehr entnehmbar** → Boot-Schutz oberste Priorität (siehe Workflow-Regel).
+3. **SD-Karte PI02 schwer entnehmbar** (Decke) → Boot-Schutz oberste Priorität; SD-Rescue nur wenn Ethernet unmöglich (`docs/PI02_SD_RESCUE.md`).
 4. **Teensy** am PI02 USB: Live-Pfad für 8×512; Pico = Lab.
 5. Provisorisches Clock-Video auf PI02: `media/st24.mov` (4K, 24h, t=0 = 00:00). Produktion bleibt `clock_24h.mp4` 860×360 `-g 25`.
 
@@ -42,13 +42,24 @@ Auch `fb_play.py` hatte denselben Bug → im Repo ebenfalls auf ffprobe umgestel
 ### Failure mode (sehr hohe Sicherheit)
 
 1. Boot → `fb-splash` malt Anker-Logo auf `/dev/fb0` → **Splash sichtbar**.
-2. Netzwerk/SSH kommen hoch.
-3. `fb-clock.service` startet: `ExecStartPre` wartet bis **120 s** auf NTP.
-4. Danach startet **alter** Player auf dem Pi → `probe_size()` Full-Decode von `st24.mov` → CPU/IO tot → **kein Ping/SSH/Tailscale**.
-5. Repo-Fix ist **noch nicht** auf dem Pi (Deploy war blocked weil offline).
+2. `fb-clock.service`: `ExecStartPre` wartet bis **120 s** auf NTP, startet **danach trotzdem**.
+3. Alter Player → `probe_size()` Full-Decode `st24.mov` → Hang → Netz tot.
+4. Repo-Fix **noch nicht** auf dem Pi.
 
-**SD-Entnahme nicht nötig.** Rescue: Power-Cycle + SSH-Fenster (NTP-Wait) → sofort `systemctl mask fb-clock` + gepatchtes `fb_clock_play.py` deployen.  
-Watcher bereit: `WerbeLEDbox-CountDown/scripts/pi02_rescue_watch.ps1` (LAN `.106` + Tailscale `.63`).
+### Rescue-Watcher FAIL trotz ~3 Power-Cycles (2026-07-22 ~16:50)
+
+**Ursache:** PI02 auf **WiFi only**. Association/DHCP/SSH/Tailscale oft **erst nach** dem Hang → **kein SSH-Fenster** für den Watcher.  
+Zusätzlich pollt der Watcher nur `192.168.8.106` (LAN-DHCP) + Tailscale `100.103.54.63` — WiFi kann andere IPv4 haben.  
+Log: `docs/_pi02_rescue.log` nur Startzeile, **kein** `SUCCESS`.
+
+| Option | Realistisch? | Bemerkung |
+|--------|--------------|-----------|
+| **Temp. Ethernet** | **Ja — Prefer** | Schnellstes Remote-Rescue; bekannte `.106`; Watcher greift im NTP-Wait |
+| Serial `serial0,115200` | Nur mit UART@GPIO | In cmdline dokumentiert; physisch oft schwerer als SD |
+| Weitere WiFi-Power-Cycles | **Nein** | Timing gegen Watcher |
+| **SD-Rescue** | **Ja wenn kein Ethernet** | User bereit; Anleitung `docs/PI02_SD_RESCUE.md` + `scripts/pi02_sd_rescue_wsl.sh` |
+
+**Nicht** `cmdline.txt` experimentieren. Recovery-Zeile: `media/cmdline.recovery.txt`.
 
 ## Encode / Transfer
 
@@ -63,7 +74,7 @@ Unverändert: `Richnerstutz-Bespannung-Paket/`, Rahmen 2100 mm, Textil→LED 45 
 
 ## Offene Arbeit (Priorität)
 
-1. **PI02 wieder online** (Stand ~16:30: LAN+TS weiter tot; Rescue-Watcher läuft auf MLT-NITRO5-HN) → User **Power-Cycle**, nicht SD ziehen → Watcher maskiert `fb-clock` + deployed Patch. Erst danach Service wieder enablen.
+1. **PI02 Rescue:** Parent/User klären **Ethernet möglich?** → Ja: Kabel + Watcher + Power-Cycle. Nein: **SD-Rescue** (`docs/PI02_SD_RESCUE.md`). Danach Patch verifizieren, erst dann `fb-clock` unmask/enable.
 2. DNS pin (1.1.1.1/8.8.8.8) + Tailscale auf PI01.
 3. Produktion `clock_24h.mp4` NVENC encode + Upload.
 4. Teensy flash/validate; Countdown-Producer PI01.
