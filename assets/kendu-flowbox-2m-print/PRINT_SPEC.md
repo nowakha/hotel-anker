@@ -1,14 +1,14 @@
 # Print-Spezifikation — Hotel Anker Countdown
 
-## Physik (gemessen + Foto-3D)
+## Physik (gemessen)
 - Druck-/LED-Fläche: **2000 × 2000 mm** (8×8 Panels à **250 × 250 mm**)
 - Profil-Stirnbreite (XY): **50 mm**
 - Außenmaß Rahmen: **2100 × 2100 mm** (= 2000 + 2×50)
-- Profil-Tiefe (Z): **≈ 100 mm** (Kendu spessore; Backlit-Stack laut Fotos)
+- Innen Textil→LED (Z): **45 mm** (Zollstock)
 - Content-Grid: **64 × 64** → Zellpitch **31.25 mm**
 - Totzone: untere **8/64** Zellen (= **250 mm**)
 
-Stack vorne→hinten: SEG-Textil in Kedernut → Diffusion → LED-Panels → Rückwand/Controller  
+Stack vorne→hinten: SEG-Textil in Kedernut → Diffusion **45 mm** → LED-Panels → Rückwand/Controller  
 Details: `Richnerstutz-Bespannung-Paket/06-fotos-vom-rahmen/GEOMETRIE-3D.md`
 
 ## Format

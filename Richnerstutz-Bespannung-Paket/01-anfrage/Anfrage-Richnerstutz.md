@@ -30,13 +30,13 @@ Am Standort **Hotel Anker, Rorschach** (Countdown-Bar / Sichtfenster zum Sanieru
 | Nennfläche (Sicht-/Leuchtfläche) | **2000 × 2000 mm** | 8×8 LED-Panels à 250×250 mm |
 | Außenmaß Rahmen | **2100 × 2100 mm** | gemessen |
 | Profil-Stirnbreite (XY) | **50 mm** | (2100−2000)/2 · Rahmen +5 cm |
-| Profil-Tiefe (Z) | **≈ 100 mm** | Kendu «spessore»; Backlit-Stack laut Fotos |
+| Innen Textil→LED (Z) | **45 mm** | Zollstock gemessen |
 | Konfektion | **Umlaufende Kederschienenlippe** (Silikon-/Flachkeder) | Einschub in die Profilnut, werkzeugloser Sujetwechsel |
 | Hinterleuchtung | Individuelle **LED-Matrix 64 × 64** hinter dem Textil | Custom-Retrofit, Zellpitch **31,25 mm** |
 | Totzone unten | **250 mm** (8/64 Zellen) | muss **vollständig lichtundurchlässig** gedruckt/gedeckt sein |
 | Einsatzort | Innen, dauerhaft sichtbar | Countdown bis geplantem Baubeginn 1. Oktober 2026 |
 
-Die Bespannung muss **passgenau** in die vorhandene Kederschiene des Rahmens einsetzbar sein. Anhand der Fotos ist der **3D-Aufbau** klar: Kendu-Rahmen mit Kedernut an der **vorderen Innenlippe**, flächigen LED-Modulen auf der **Rückwand** (Backlit) und Controllern (DC 24V / DMX). Stirnbreite gemessen **50 mm**, Profil-Tiefe typisch **≈ 100 mm** (Kendu spessore). Den exakten Keder-Querschnitt stimmen wir gerne anhand der Fotos bzw. einer Musterlippe ab.
+Die Bespannung muss **passgenau** in die vorhandene Kederschiene des Rahmens einsetzbar sein. Anhand der Fotos ist der **3D-Aufbau** klar: Kendu-Rahmen mit Kedernut an der **vorderen Innenlippe**, flächigen LED-Modulen auf der **Rückwand** (Backlit) und Controllern (DC 24V / DMX). Stirnbreite **50 mm**, Diffusionsstrecke innen **45 mm** (Textil-Ebene → LED, Zollstock). Den exakten Keder-Querschnitt stimmen wir gerne anhand der Fotos bzw. einer Musterlippe ab.
 
 ### 2. Gewünschte Leistung
 

@@ -5,11 +5,11 @@ Measured XY (2026-07-22):
 - Outer frame: **2100 × 2100 mm**
 - Face rim / Profil-Stirnbreite: **50 mm** → print/LED face **2000 × 2000 mm**
 
-Photo + Kendu geometry (Z / depth):
+Photo + measured Z / depth:
 - True **backlit** stack (LEDs on rear plane, not edge-lit)
 - SEG keder groove on the **front inner lip** of the aluminium profile
-- Kendu FAQ «profile width/spessore» = **~100 mm depth** (Z), distinct from our
-  measured 50 mm face rim — see GEOMETRIE-3D.md
+- **Innen 45 mm** measured (Zollstock): front lip / textile plane → LED panel face
+- Face rim 50 mm (XY) remains distinct from this Z cavity — see GEOMETRIE-3D.md
 
 Logical content grid (AnkerPI02 custom WS2812 retrofit):
 
@@ -27,14 +27,17 @@ PROFILE_W_MM = PROFILE_FACE_W_MM  # back-compat: generators mean face rim
 OUTER_MM = 2100.0
 MODULE_PITCH_MM_CONFIRMED = 250.0
 
-# --- Z / depth (photo + Kendu FAQ; confirm with side measurement) ---
-# Italian FAQ: «Che spessore ha il profilo?» → 100 mm (= box depth, not face rim)
-PROFILE_DEPTH_MM = 100.0  # front textile plane → back of profile (typical Flowbox)
-PROFILE_DEPTH_SOURCE = "kendu-faq-spessore + photo backlit stack"
+# --- Z / depth (measured 2026-07-22, Zollstock photos «Innen 4.5 cm») ---
+# Optically relevant cavity: front inner lip (≈ textile / keder plane) → LED face
+INNER_DEPTH_MM = 45.0  # measured
+LED_RECESS_MM = INNER_DEPTH_MM  # alias
+# Full outer profile depth may be slightly larger behind the LED plane; cavity is 45 mm.
+PROFILE_DEPTH_MM = INNER_DEPTH_MM  # use measured cavity for schematics / light path
+PROFILE_DEPTH_SOURCE = "measured-innen-45mm-zollstock"
 
-# Optical stack (front → back), qualitative from photos 01–03
+# Optical stack (front → back), from photos + measurement
 # 1) SEG textile in keder groove (front lip)
-# 2) air / diffusion gap
+# 2) air / diffusion gap ≈ 45 mm
 # 3) LED panel plane (8×8 × 250 mm) on white reflector
 # 4) back braces / controllers (Kendu CH1–4, DC 24V, DMX)
 

@@ -17,7 +17,7 @@ Vertiefung 3D: siehe **`GEOMETRIE-3D.md`** und Schemata `schema-*.png`
 2. **Aufbau:** Quadratischer Aluminium-Spannrahmen, silber/hell, freistehend auf Metallfuss.
 3. **Kederschiene:** Umlaufende Nut an der **vorderen Profil-Innenlippe** (SEG); Ecke auf Gehrung 45°.
 4. **Hinterleuchtung:** Flächige LED-Module auf der **Rückwand** (Backlit, nicht Edge-Lit); Module stoßen aneinander.
-5. **3D-Stack:** Textil vorne in der Nut → Luft/Diffusion → LED-Ebene → Reflexionsrückwand/Controller.
+5. **3D-Stack:** Textil vorne in der Nut → Luft/Diffusion **45 mm innen** → LED-Ebene → Reflexionsrückwand/Controller.
 6. **Diffusor-Hinweis:** LED-Punktraster scheint durch transluzentes Material → Blockout muss dicht sein.
 7. **Elektronik:** Kendu-Treiber am Rahmen (unterer Bereich / Querprofil).
 
@@ -29,7 +29,7 @@ Vertiefung 3D: siehe **`GEOMETRIE-3D.md`** und Schemata `schema-*.png`
 | Druck-/LED-Fläche | **2000 × 2000 mm** | XY |
 | Außenmaß Rahmen | **2100 × 2100 mm** | XY |
 | Profil-Stirnbreite | **50 mm** | XY (Rahmen +5 cm) |
-| Profil-Tiefe | **≈ 100 mm** | Z (Kendu «spessore», Foto-konsistent) |
+| Innen (Textil → LED) | **45 mm** | Z, Zollstock gemessen |
 | Content-Pitch | **31.25 mm** | XY (64×64) |
 
 ## Relevanz für Richnerstutz
