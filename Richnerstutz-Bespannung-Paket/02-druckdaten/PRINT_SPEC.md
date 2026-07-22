@@ -1,10 +1,11 @@
-# Print-Spezifikation — Hotel Anker Countdown (Kendu Flowbox 2 × 2 m)
+# Print-Spezifikation — Hotel Anker Countdown
 
-## Kendu / Physik
-- Nennmaß Fläche: **2000 × 2000 mm** (Flowbox Standard Square)
-- Profilbreite: **100 mm** (Kendu FAQ)
+## Physik (gemessen 2026-07-22)
+- Druck-/LED-Fläche: **2000 × 2000 mm** (8×8 Panels à **250 × 250 mm**)
+- Profilbreite: **50 mm**
+- Außenmaß Rahmen: **2100 × 2100 mm** (= 2000 + 2×50)
 - Content-Grid: **64 × 64** → Zellpitch **31.25 mm**
-- Totzone: untere **8/64** Zellen (= 250 mm)
+- Totzone: untere **8/64** Zellen (= **250 mm**)
 
 ## Format
 - `print-ghost-hires.png` · **4096×4096 px** · 2.048 px/mm · **64 px/Zelle** (exakt)

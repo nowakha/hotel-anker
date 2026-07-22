@@ -27,8 +27,9 @@ Am Standort **Hotel Anker, Rorschach** (Countdown-Bar / Sichtfenster zum Sanieru
 | Angabe | Wert | Bemerkung |
 |--------|------|-----------|
 | Systemfamilie | Kendu **Flowbox** / Smartframe-SEG | Aluminium-Spannrahmen mit umlaufender Kederschiene |
-| Nennfläche (Sicht-/Leuchtfläche) | **2000 × 2000 mm** | Standard Square |
-| Profilbreite | **100 mm** | gemäss Hersteller-FAQ |
+| Nennfläche (Sicht-/Leuchtfläche) | **2000 × 2000 mm** | 8×8 LED-Panels à 250×250 mm |
+| Außenmaß Rahmen | **2100 × 2100 mm** | gemessen |
+| Profilbreite | **50 mm** | (2100−2000)/2 · Rahmen trägt +5 cm |
 | Konfektion | **Umlaufende Kederschienenlippe** (Silikon-/Flachkeder) | Einschub in die Profilnut, werkzeugloser Sujetwechsel |
 | Hinterleuchtung | Individuelle **LED-Matrix 64 × 64** hinter dem Textil | Custom-Retrofit (nicht Standard-Kendu-Animation), Zellpitch **31,25 mm** |
 | Totzone unten | **250 mm** (8/64 Zellen) | muss **vollständig lichtundurchlässig** gedruckt/gedeckt sein |
@@ -118,9 +119,9 @@ Harald.Nowak@modernlight.ch · +41 76 579 84 54
 
 - `assets/kendu-flowbox-2m-print/PRINT_SPEC.md`  
 - `WerbeLEDbox-CountDown/kendu_flowbox_spec.py`  
-- Hersteller: [Kendu Flowbox FAQ](https://www.kendu.com/flowbox-dynamic-lightbox/faq/) (Profil 100 mm, SEG/Silikonkeder)  
-- Produzent Anfrage: [Richnerstutz](https://richnerstutz.ch/) — Textilspannrahmen mit Flachkeder, transluzente und Lichtsperre-Textilien  
-- Auftraggeber: [Realia AG, Rorschach](https://www.help.ch/firma/CHE-113.325.481/realia-ag-rorschach) · Gottlieb Kündig  
+- Hersteller: Kendu (Controller foto-bestätigt); SEG/Silikonkeder  
+- Maße gemessen: Fläche 2000×2000 mm · Außen 2100×2100 mm · Panel 250×250 mm · Profil 50 mm  
+- Vollständiges Versandpaket: `Richnerstutz-Bespannung-Paket/`  
 
 ## Hinweis Versandkanal
 

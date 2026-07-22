@@ -19,7 +19,8 @@ Alles für die Anfrage an **Richnerstutz AG** (Druck + Konfektion mit Kederschie
 | `03-opazitaet/` | Opazitätsplatte + Detailprüfungen (Blockout vs. transluzent) |
 | `04-vorlagen-massblatt/` | Keder-/Rahmen-Overlays und Layer-Manifest |
 | `05-vorschauen/` | Kleine Previews zum schnellen Anschauen |
-| `06-fotos-vom-rahmen/` | **Hier deine Fotos ablegen** (siehe Checkliste dort) |
+| `06-fotos-vom-rahmen/` | Fotos / Auswertung |
+| `07-lichtvideo/` | Neu berechnetes LED-Lichtvideo (GIF + Stills) |
 
 ## Was Richnerstutz braucht (Priorität)
 
