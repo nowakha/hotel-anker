@@ -1,7 +1,7 @@
 # PI02 rescue watcher (Windows PowerShell 5) — TCP:22 then mask fb-clock + deploy player.
 # Probes: LAN .106, Tailscale, mDNS, and IPv4 link-local 169.254.* (direct PC↔Pi, no DHCP).
 param(
-  [switch]$IncludeLinkLocal = $true,
+  [switch]$SkipLinkLocal,
   [switch]$SkipFixedHosts
 )
 
@@ -97,7 +97,7 @@ function Get-HostsToProbe {
   }
   $mdns = Get-MdnsCandidate
   if ($mdns -and -not $list.Contains($mdns)) { $list.Add($mdns) }
-  if ($IncludeLinkLocal) {
+  if (-not $SkipLinkLocal) {
     foreach ($ll in (Get-LinkLocalCandidates)) {
       if (-not $list.Contains($ll)) { $list.Add($ll) }
     }
@@ -174,7 +174,7 @@ echo MASK_DONE
   return $false
 }
 
-$startMsg = '=== rescue start ' + (Get-Date -Format o) + ' player=' + $PlayerLocal + ' linklocal=' + $IncludeLinkLocal + ' ==='
+$startMsg = '=== rescue start ' + (Get-Date -Format o) + ' player=' + $PlayerLocal + ' linklocal=' + (-not $SkipLinkLocal) + ' ==='
 $startMsg | Tee-Object -FilePath $LogPath
 Write-Host 'Watching fixed (.106 + Tailscale), mDNS, and 169.254.* neighbors for TCP/22 ...'
 Write-Host 'Direct PC↔Pi Ethernet (no DHCP): both ends APIPA 169.254.x.x — link in seconds beats late WiFi.'

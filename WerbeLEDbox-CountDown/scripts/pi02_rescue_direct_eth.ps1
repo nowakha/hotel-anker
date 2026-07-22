@@ -35,4 +35,4 @@ try {
 
 Write-Host ''
 Write-Host 'Starting watcher (LAN .106 + Tailscale + mDNS + 169.254.*) ...'
-& $Watcher -IncludeLinkLocal
+& $Watcher
