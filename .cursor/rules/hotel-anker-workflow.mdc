@@ -1,16 +1,33 @@
 ---
-description: Hotel Anker — jeden Arbeitsschritt dokumentieren und zu git pushen
+description: Hotel Anker — jeden Schritt dokumentieren (Erfolg+Misserfolg) und zu git pushen
 alwaysApply: true
 ---
 
-# Hotel Anker — Workflow
+# Hotel Anker — Workflow (verbindlich)
 
-Nach jedem abgeschlossenen Arbeitsschritt:
+## Nach jedem Arbeitsschritt
 
-1. Kurz in `LEARNINGS.md` und/oder der relevanten Doc unter `WerbeLEDbox-CountDown/docs/` oder `Richnerstutz-Bespannung-Paket/` nachziehen.
-2. Commit mit klarer Message (warum, nicht nur was).
-3. Sofort `git push` zum Remote (`origin`), damit andere Cursor-Instanzen weiterarbeiten können.
+1. **Dokumentieren** — Erfolg **und** Misserfolg in `LEARNINGS.md` und/oder `WerbeLEDbox-CountDown/docs/SESSION_LOG.md` (kurz, datiert, reproduzierbar).
+2. **Credentials/Learnings** mitziehen, wenn sich Zugang, IPs, Tailscale, Services oder Fallen ändern.
+3. **Commit** mit klarer Message (warum).
+4. Sofort **`git push origin HEAD`** — andere Cursor-Instanzen sollen jederzeit weiterkönnen.
 
-Secrets unter `WerbeLEDbox-CountDown/secrets/*.yml` sind **absichtlich getrackt** (privates Repo). Keine absoluten Maschinenpfade hardcoden — repo-relativ arbeiten.
+## Secrets & Zugang
 
-Aktuelle Architektur und Offenes: Root-`LEARNINGS.md` und `AGENTS.md`.
+- Secrets unter `WerbeLEDbox-CountDown/secrets/*.yml` sind **absichtlich getrackt** (privates Repo, Handoff).
+- Keine absoluten Maschinenpfade hardcoden — repo-relativ.
+- SSH-Passwort und Tailscale-Stand immer in Docs/Secrets aktuell halten.
+
+## AnkerPI02 — Boot-Sicherheit (kritisch)
+
+- **SD-Karte kann physisch nicht mehr entnommen werden** → Boot darf nicht zerschossen werden.
+- **Niemals** riskante `cmdline.txt`-Experimente (`rotate=` etc.) ohne Recovery-Plan.
+- Recovery-Zeile liegt unter `WerbeLEDbox-CountDown/media/cmdline.recovery.txt`.
+- `config.txt`-Änderungen: vorher Backup auf dem Pi, `sync`, und wenn möglich **ohne Reboot** testen (Runtime cpufreq).
+- Große 4K/24h-Videos: **nie** mit `ffmpeg … -f null -` proben (dekodiert die ganze Datei → Pi hängt). Immer `ffprobe` / `ffmpeg -i` ohne Output.
+
+## Continuity-Quellen
+
+- Root: `LEARNINGS.md`, `AGENTS.md`, `docs/SESSION_LOG.md` (falls vorhanden) / `WerbeLEDbox-CountDown/docs/SESSION_LOG.md`
+- Regeln: `.cursor/rules/*.mdc`
+- Kontakt Harald: `.cursor/rules/harald-nowak-modernlight.mdc`

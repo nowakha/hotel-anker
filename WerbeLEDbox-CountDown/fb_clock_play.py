@@ -4,6 +4,8 @@
 Video must be exactly 86400 s, content starting at 00:00:00 local time.
 Monitor is mounted 180° — frames are rotated in the ffmpeg filter graph
 (no KMS rotate= flag).
+
+Optional --crop-* args apply before scale (Premiere-style margins in source pixels).
 """
 
 from __future__ import annotations
@@ -33,8 +35,32 @@ def ffmpeg_bin() -> str:
 
 
 def probe_size(ffmpeg: str, video: Path) -> tuple[int, int] | None:
+    # Never decode the whole file — 24h 4K would hang the Pi.
+    ffprobe = shutil.which("ffprobe")
+    if ffprobe:
+        proc = subprocess.run(
+            [
+                ffprobe,
+                "-v",
+                "error",
+                "-select_streams",
+                "v:0",
+                "-show_entries",
+                "stream=width,height",
+                "-of",
+                "csv=p=0:s=x",
+                str(video),
+            ],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        m = re.search(r"(\d{2,5})x(\d{2,5})", proc.stdout.strip())
+        if m:
+            return int(m.group(1)), int(m.group(2))
+    # Fallback: ffmpeg -i prints stream info on stderr and exits quickly
     proc = subprocess.run(
-        [ffmpeg, "-hide_banner", "-i", str(video), "-f", "null", "-"],
+        [ffmpeg, "-hide_banner", "-i", str(video)],
         capture_output=True,
         text=True,
         check=False,
@@ -51,13 +77,29 @@ def fb_size() -> tuple[int, int]:
     return int(w_s), int(h_s)
 
 
-def build_vf(src: tuple[int, int] | None, dst_w: int, dst_h: int) -> str:
+def build_vf(
+    src: tuple[int, int] | None,
+    dst_w: int,
+    dst_h: int,
+    crop_top: int = 0,
+    crop_bottom: int = 0,
+    crop_left: int = 0,
+    crop_right: int = 0,
+) -> str:
+    parts: list[str] = []
+    cropped: tuple[int, int] | None = src
+    if src and (crop_top or crop_bottom or crop_left or crop_right):
+        cw = max(1, src[0] - crop_left - crop_right)
+        ch = max(1, src[1] - crop_top - crop_bottom)
+        parts.append(f"crop={cw}:{ch}:{crop_left}:{crop_top}")
+        cropped = (cw, ch)
+
     # scale then rotate 180° for upside-down mount
     if (
-        src
-        and dst_w % src[0] == 0
-        and dst_h % src[1] == 0
-        and (dst_w // src[0]) == (dst_h // src[1])
+        cropped
+        and dst_w % cropped[0] == 0
+        and dst_h % cropped[1] == 0
+        and (dst_w // cropped[0]) == (dst_h // cropped[1])
     ):
         scale = f"scale={dst_w}:{dst_h}:flags=neighbor"
     else:
@@ -65,7 +107,10 @@ def build_vf(src: tuple[int, int] | None, dst_w: int, dst_h: int) -> str:
             f"scale={dst_w}:{dst_h}:force_original_aspect_ratio=increase:flags=fast_bilinear,"
             f"crop={dst_w}:{dst_h}"
         )
-    return f"{scale},rotate=PI:ow={dst_w}:oh={dst_h},format=rgb565le"
+    parts.append(scale)
+    parts.append(f"rotate=PI:ow={dst_w}:oh={dst_h}")
+    parts.append("format=rgb565le")
+    return ",".join(parts)
 
 
 def seconds_since_midnight(tz_name: str) -> float:
@@ -127,6 +172,10 @@ def main() -> int:
     p.add_argument("--tz", default=DEFAULT_TZ)
     p.add_argument("--resync-every", type=int, default=DEFAULT_RESYNC_S)
     p.add_argument("--no-hw", action="store_true")
+    p.add_argument("--crop-top", type=int, default=0)
+    p.add_argument("--crop-bottom", type=int, default=0)
+    p.add_argument("--crop-left", type=int, default=0)
+    p.add_argument("--crop-right", type=int, default=0)
     args = p.parse_args()
 
     if not os.access(args.fb, os.W_OK):
@@ -148,10 +197,12 @@ def main() -> int:
 
     dst_w, dst_h = fb_size()
     src = probe_size(ff, args.video)
-    vf = build_vf(src, dst_w, dst_h)
+    crop = (args.crop_top, args.crop_bottom, args.crop_left, args.crop_right)
+    vf = build_vf(src, dst_w, dst_h, *crop)
     src_s = f"{src[0]}x{src[1]}" if src else "?"
     print(
         f"fb_clock: video={args.video} ({src_s}) fb={args.fb} {dst_w}x{dst_h} "
+        f"crop=T{args.crop_top},B{args.crop_bottom},L{args.crop_left},R{args.crop_right} "
         f"tz={args.tz} resync={args.resync_every}s hw={not args.no_hw} rotate=180",
         flush=True,
     )
@@ -162,7 +213,7 @@ def main() -> int:
             if stop:
                 break
             src = probe_size(ff, args.video)
-            vf = build_vf(src, dst_w, dst_h)
+            vf = build_vf(src, dst_w, dst_h, *crop)
 
         seek = seconds_since_midnight(args.tz)
         cmd = build_cmd(ff, args.video, args.fb, seek, vf, hw=not args.no_hw)

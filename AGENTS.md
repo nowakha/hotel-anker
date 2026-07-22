@@ -25,13 +25,15 @@ Hotel Anker/
 
 ## Agent-Workflow (verbindlich)
 
-1. Jeden abgeschlossenen Arbeitsschritt in Docs/`LEARNINGS.md` kurz festhalten.
-2. Danach **commit + push** (Secrets sind absichtlich im Repo für privaten Handoff).
+1. Jeden abgeschlossenen Schritt dokumentieren — **Erfolg und Misserfolg** — in `LEARNINGS.md` und/oder `WerbeLEDbox-CountDown/docs/SESSION_LOG.md`.
+2. Danach **commit + push** (Secrets absichtlich im Repo für privaten Handoff).
 3. Keine absoluten Windows-Pfade hardcoden — immer repo-relativ.
 4. Harald-Kontakt nur aus `.cursor/rules/harald-nowak-modernlight.mdc`.
+5. **AnkerPI02:** SD nicht entnehmbar → Boot nicht riskieren; nie volle 24h-4K mit `ffmpeg -f null` proben.
 
 ## Canonical Docs
 
 - Root: [`README.md`](./README.md), [`LEARNINGS.md`](./LEARNINGS.md)
+- Session: [`WerbeLEDbox-CountDown/docs/SESSION_LOG.md`](./WerbeLEDbox-CountDown/docs/SESSION_LOG.md)
 - LED/Pi: [`WerbeLEDbox-CountDown/README.md`](./WerbeLEDbox-CountDown/README.md)
 - Print: [`Richnerstutz-Bespannung-Paket/README.md`](./Richnerstutz-Bespannung-Paket/README.md)
