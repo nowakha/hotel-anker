@@ -214,10 +214,10 @@ def main() -> None:
         font=f_small,
     )
 
+    repo = Path(__file__).resolve().parents[2]
     out_dirs = [
-        Path(r"C:\Users\Harald Nowak\Documents\Cursor Projects\Hotel Anker\assets"),
-        Path(r"C:\Users\Harald Nowak\Documents\Cursor Projects\Hotel Anker\WerbeLEDbox-CountDown\pico"),
-        Path(r"C:\Users\Harald Nowak\.cursor\projects\c-Users-Harald-Nowak-Documents-Cursor-Projects-Hotel-Anker\assets"),
+        repo / "assets",
+        repo / "WerbeLEDbox-CountDown" / "pico",
     ]
     for folder in out_dirs:
         folder.mkdir(parents=True, exist_ok=True)

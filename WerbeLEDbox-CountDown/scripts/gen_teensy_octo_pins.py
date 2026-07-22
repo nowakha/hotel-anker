@@ -96,9 +96,10 @@ def main() -> None:
         font=fs,
     )
 
+    repo = Path(__file__).resolve().parents[2]
     outs = [
-        Path(r"C:\Users\Harald Nowak\Documents\Cursor Projects\Hotel Anker\assets\teensy-octows2811-pins.png"),
-        Path(r"C:\Users\Harald Nowak\Documents\Cursor Projects\Hotel Anker\WerbeLEDbox-CountDown\docs\teensy-octows2811-pins.png"),
+        repo / "assets" / "teensy-octows2811-pins.png",
+        repo / "WerbeLEDbox-CountDown" / "docs" / "teensy-octows2811-pins.png",
     ]
     for p in outs:
         p.parent.mkdir(parents=True, exist_ok=True)

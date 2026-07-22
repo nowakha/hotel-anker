@@ -1,0 +1,16 @@
+---
+description: Hotel Anker — jeden Arbeitsschritt dokumentieren und zu git pushen
+alwaysApply: true
+---
+
+# Hotel Anker — Workflow
+
+Nach jedem abgeschlossenen Arbeitsschritt:
+
+1. Kurz in `LEARNINGS.md` und/oder der relevanten Doc unter `WerbeLEDbox-CountDown/docs/` oder `Richnerstutz-Bespannung-Paket/` nachziehen.
+2. Commit mit klarer Message (warum, nicht nur was).
+3. Sofort `git push` zum Remote (`origin`), damit andere Cursor-Instanzen weiterarbeiten können.
+
+Secrets unter `WerbeLEDbox-CountDown/secrets/*.yml` sind **absichtlich getrackt** (privates Repo). Keine absoluten Maschinenpfade hardcoden — repo-relativ arbeiten.
+
+Aktuelle Architektur und Offenes: Root-`LEARNINGS.md` und `AGENTS.md`.

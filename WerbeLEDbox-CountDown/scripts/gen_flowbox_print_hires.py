@@ -20,9 +20,6 @@ ROOT = Path(__file__).resolve().parents[2]
 PROJ = ROOT / "WerbeLEDbox-CountDown"
 OUT = ROOT / "assets" / "kendu-flowbox-2m-print"
 ASSETS = ROOT / "assets"
-CURSOR_ASSETS = Path(
-    r"C:\Users\Harald Nowak\.cursor\projects\c-Users-Harald-Nowak-Documents-Cursor-Projects-Hotel-Anker\assets"
-)
 
 if str(PROJ) not in sys.path:
     sys.path.insert(0, str(PROJ))
@@ -271,11 +268,11 @@ def load_blueprint() -> Image.Image:
     """Full-bleed facade via shared placement (888 in sign↔Erker gap)."""
     from facade_place import find_blueprint_path, load_facade_content_mask, place_facade_mask
 
-    path = find_blueprint_path(ASSETS, CURSOR_ASSETS, PROJ / "assets")
+    path = find_blueprint_path(ASSETS, PROJ / "assets")
     if path is None:
         for p in (
             ASSETS / "hotel-anker-blueprint-historic-tower.png",
-            CURSOR_ASSETS / "hotel-anker-blueprint-historic-tower.png",
+            ASSETS / "hotel-anker-blueprint-simplified.png",
         ):
             if p.exists():
                 path = p
@@ -310,7 +307,6 @@ def extract_anchor_mark() -> Image.Image:
     """Historic Grand Hotel Anker Rorschach mark: crown + admiralty anchor."""
     dedicated = [
         ASSETS / "hotel-anker-historic-anchor.png",
-        CURSOR_ASSETS / "hotel-anker-historic-anchor-mark.png",
     ]
     for p in dedicated:
         if p.exists():
@@ -320,7 +316,6 @@ def extract_anchor_mark() -> Image.Image:
 
     for p in (
         ASSETS / "hotel-anker-countdown-logo-dark.png",
-        CURSOR_ASSETS / "hotel-anker-countdown-logo-dark.png",
     ):
         if p.exists():
             logo = Image.open(p).convert("RGBA")
@@ -723,15 +718,6 @@ def generate_led_preview() -> None:
 
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
-    # Prefer project assets; do not overwrite with stale Cursor cache copies
-    if not (ASSETS / "hotel-anker-blueprint-simplified.png").exists():
-        for src in (
-            CURSOR_ASSETS / "hotel-anker-blueprint-erker3.png",
-            CURSOR_ASSETS / "hotel-anker-blueprint-simplified.png",
-        ):
-            if src.exists():
-                (ASSETS / "hotel-anker-blueprint-simplified.png").write_bytes(src.read_bytes())
-                break
 
     ghost = compose(lit=False)
     lit = compose(lit=True)

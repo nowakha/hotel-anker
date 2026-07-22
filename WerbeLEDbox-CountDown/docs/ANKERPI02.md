@@ -3,6 +3,10 @@
 Headless **HDMI0** host: 24‑hour clock video seek‑synced to local time.  
 Silent boot with **Hotel Anker** logo splash. Monitor mounted **180°**.
 
+Zugang: [`../secrets/ankerpi02.credentials.yml`](../secrets/ankerpi02.credentials.yml) · SSH-Fragment: [`../ssh/config.fragment`](../ssh/config.fragment)
+
+**Zusätzlich am USB:** Teensy 8×512 WS2812 — siehe [`ANKERPI02-TEENSY.md`](ANKERPI02-TEENSY.md) und [`../teensy/`](../teensy/).
+
 ## Display / boot
 
 | Field | Value |

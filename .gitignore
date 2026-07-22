@@ -10,7 +10,7 @@ Desktop.ini
 *.swo
 *~
 
-# Env / secrets
+# Local env overrides (credentials live under WerbeLEDbox-CountDown/secrets/ by project request)
 .env
 .env.*
 !.env.example
@@ -35,17 +35,8 @@ venv/
 *.tmp
 *.temp
 
-# PlatformIO
+# PlatformIO build cache (source + platformio.ini stay tracked)
 **/.pio/
 
-
-# Device credentials (keep local only)
-**/secrets/*.credentials.yml
-**/secrets/*.yml
-!**/secrets/*.example.yml
-!**/secrets/*.example
-**/pico/src/secrets.py
-
-# Font extract cache (keep only curated TTFs in fonts/)
+# Font extract cache (keep curated TTFs + zip in fonts/)
 WerbeLEDbox-CountDown/fonts/_extract/
-
