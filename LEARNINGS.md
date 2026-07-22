@@ -1,15 +1,27 @@
 # Hotel Anker — Learnings & Handoff
 
-Stand: **2026-07-22 ~18:45 CEST** (Workstation **MLT-NITRO5-HN** + TABLETHI10MAX).
+Stand: **2026-07-22 ~18:55 CEST** (Workstation **MLT-NITRO5-HN** + TABLETHI10MAX).
 Ziel: eine andere Cursor-Instanz auf einem anderen Rechner kann ohne mündlichen Kontext weiterarbeiten.
 
 **Workflow (verbindlich):** `.cursor/rules/hotel-anker-workflow.mdc` — jeden Schritt dokumentieren (Erfolg+Misserfolg), Credentials/Learnings mitziehen, commit + `git push origin HEAD`.
 
 Detaillierte Chronik: [`WerbeLEDbox-CountDown/docs/SESSION_LOG.md`](./WerbeLEDbox-CountDown/docs/SESSION_LOG.md).
 
+## Production encode `clock_24h.mp4` (2026-07-22 ~18:53 RUNNING)
+
+Workstation **MLT-NITRO5-HN**, RTX 3080 Laptop, Driver **610.62**, FFmpeg **8.1.2** (WinGet Gyan; PATH oft leer → Full path unter `…\WinGet\Packages\Gyan.FFmpeg_…\ffmpeg-8.1.2-full_build\bin\`).
+
+| Item | Detail |
+|------|--------|
+| Quelle | `C:\Users\User\Videos\st24.mov` (ffprobe only; **nie** `-f null` Full-Decode) |
+| Filter | `crop=3840:1647:0:386,scale=860:360:flags=lanczos` · `-r 25` · `h264_nvenc` · `-g 25` |
+| Output | `WerbeLEDbox-CountDown/media/clock_24h.mp4` (via `.partial` + Watcher) |
+| Status | **encoding** ffmpeg PID **8652** (~11×) ETA ~**21:00 CEST**; Logs `media/_encode_clock_24h.*` |
+| Git | große Media **gitignored** (`media/*.mp4`, `_encode*`) |
+
 ## AnkerPI02 OpenCV / Video-Clock (2026-07-22 ~18:45)
 
-**Clock running? NEIN** — `fb-clock` wieder **masked** (Undervoltage-Reboots).
+**Clock running? NEIN** — `fb-clock` soll **masked** bleiben. Netz-Ping ~18:51 (`.106`/`.112`/TS) **FAIL** — Mask-State remote nicht bestätigt.
 
 | Befund | Detail |
 |--------|--------|

@@ -244,3 +244,19 @@ Goal: mirror PI02 HotelAnker NM setup on PI01 without breaking SSH.
 | DNS | `/etc/resolv.conf` → 1.1.1.1 + 8.8.8.8 (link-local fe80 also present from IPv6 RA) |
 | Misserfolg | Windows SCP initially wrote **CRLF** → fixed to LF on Pi; long SSH during `nmcli up` can timeout — use nohup remote script |
 
+## 2026-07-22 ~18:50–19:00 — Production `clock_24h.mp4` NVENC (MLT-NITRO5-HN)
+
+Goal: stabile 860×360 H.264-Produktion statt 4K `st24.mov` auf PI02 (Undervoltage).
+
+| Schritt | Ergebnis |
+|---------|----------|
+| Driver | **610.62** (RTX 3080 Laptop) — OK für FFmpeg 8.x NVENC |
+| FFmpeg PATH | fehlte in Shell — Binary: WinGet `Gyan.FFmpeg` **8.1.2** `…\ffmpeg-8.1.2-full_build\bin\ffmpeg.exe` |
+| Quelle ffprobe (kein `-f null`) | `C:\Users\User\Videos\st24.mov` 3840×2160 H.264 25 fps **86400.08 s** |
+| 10 s NVENC-Test | **OK** — crop `3840:1647:0:386` → scale `860×360`, `-g 25`, 250 frames, ~3.2 s wall (~3.8×) → `media/_encode_nvenc_10s_test.mp4` |
+| Full 24h Encode | **RUNNING** — PID **8652**, Start ~18:52:50; Out `media/_encode_clock_24h.partial.mp4` → nach Exit → `media/clock_24h.mp4` |
+| Speed / ETA (früh) | ~**11×** → ETA ~**2.1 h** (fertig ca. **~21:00 CEST**) |
+| Logs | `media/_encode_clock_24h.log`, `.progress`, `.ffmpeg.err`; Watcher PID **27852** (Rename + ffprobe) |
+| `.gitignore` | bereits `media/*.mp4` + `clock_24h.mp4` + `_encode*` — großes MP4 **nicht** committen |
+| PI02 ping/SSH | `.106` / `.112` / TS `.63` / mDNS — **alle FAIL** (timeout); fb-clock-Mask **nicht verifizierbar** aus Netz |
+
