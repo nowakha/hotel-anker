@@ -28,7 +28,9 @@ Alles für die Anfrage an **Richnerstutz AG** (Druck + Konfektion mit Kederschie
 3. Opazitätsplatte: `03-opazitaet/print-opacity-mask-hires.png`  
    - **schwarz** = lichtdurchlässig  
    - **rot** = lichtundurchlässig / Blockout
-4. Fotos der Kederschiene / des Rahmens aus `06-fotos-vom-rahmen/`
+4. Fotos der Kederschiene / des Rahmens aus `06-fotos-vom-rahmen/`  
+   → Auswertung: `06-fotos-vom-rahmen/FOTO-AUSWERTUNG.md` (Kendu bestätigt, Kedernut, dichtes LED-Raster)  
+   → Original-JPGs bitte noch in denselben Ordner legen für den Mail-Anhang
 
 Optional: Massblatt-Overlays in `04-vorlagen-massblatt/`, Vorschauen in `05-vorschauen/`.
 

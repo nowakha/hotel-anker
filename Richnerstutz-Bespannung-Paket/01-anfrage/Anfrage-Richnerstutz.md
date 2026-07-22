@@ -26,7 +26,7 @@ Am Standort **Hotel Anker, Rorschach** (Countdown-Bar / Sichtfenster zum Sanieru
 
 | Angabe | Wert | Bemerkung |
 |--------|------|-----------|
-| Systemfamilie | Kendu **Flowbox** / Smartframe-SEG | Aluminium-Spannrahmen mit umlaufender Kederschiene |
+| Systemfamilie | **Kendu Flowbox / Smartframe-SEG** (foto-bestätigt) | Aluminiumrahmen, Kedernut, Kendu-Controller DC 24V/DMX |
 | Nennfläche (Sicht-/Leuchtfläche) | **2000 × 2000 mm** | Standard Square |
 | Profilbreite | **100 mm** | gemäss Hersteller-FAQ |
 | Konfektion | **Umlaufende Kederschienenlippe** (Silikon-/Flachkeder) | Einschub in die Profilnut, werkzeugloser Sujetwechsel |
@@ -34,7 +34,7 @@ Am Standort **Hotel Anker, Rorschach** (Countdown-Bar / Sichtfenster zum Sanieru
 | Totzone unten | **250 mm** (8/64 Zellen) | muss **vollständig lichtundurchlässig** gedruckt/gedeckt sein |
 | Einsatzort | Innen, dauerhaft sichtbar | Countdown bis geplantem Baubeginn 1. Oktober 2026 |
 
-Die Bespannung muss **passgenau** in die vorhandene Kederschiene des Rahmens einsetzbar sein. Den exakten Keder-Querschnitt möchten wir gerne mit Ihnen anhand der beigelegten Fotos / eines Massblattes abstimmen.
+Die Bespannung muss **passgenau** in die vorhandene Kederschiene des Rahmens einsetzbar sein. Anhand der Fotos ist bestätigt: **Kendu-Rahmen** mit umlaufender SEG-/Kedernut, flächigen LED-Modulen (dichtes Raster) und Kendu-Controllern (DC 24V / DMX). Den exakten Keder-Querschnitt möchten wir gerne mit Ihnen anhand der Fotos bzw. einer Musterlippe abstimmen.
 
 ### 2. Gewünschte Leistung
 
@@ -72,7 +72,9 @@ Bitte prüfen Sie, welches Verfahren bei Ihnen geeignet ist (z. B. transluzentes
 - Drucksujet: `print-ghost-hires.png` (4096×4096)
 - Opazitätsplatte: `print-opacity-mask-hires.png` + Legende
 - Massblatt-/Keder-Overlays und PRINT_SPEC
-- Fotos der Kederschiene / des Rahmens (sobald vorhanden)
+- **Fotos des vorhandenen Kendu-Rahmens** (Gesamtansicht, Kedernut/Ecke, Controller/Diffusor mit sichtbarem LED-Raster)
+
+Hinweis aus den Fotos: Hinter transluzentem Material zeichnet sich das LED-Punktraster ab — die Blockout-Zonen (rot in der Opazitätsplatte) müssen streulichtfrei ausgeführt werden.
 
 ### 5. Bitte um Rückmeldung
 

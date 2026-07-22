@@ -34,7 +34,7 @@ Am Standort **Hotel Anker, Rorschach** (Countdown-Bar / Sichtfenster zum Sanieru
 | Totzone unten | **250 mm** (8/64 Zellen) | muss **vollständig lichtundurchlässig** gedruckt/gedeckt sein |
 | Einsatzort | Innen, dauerhaft sichtbar | Countdown bis geplantem Baubeginn 1. Oktober 2026 |
 
-Die Bespannung muss **passgenau** in die vorhandene Kederschiene des Rahmens einsetzbar sein. Den exakten Keder-Querschnitt (Industrie-SEG typisch ca. 4 × 14 mm) möchten wir gerne mit Ihnen anhand eines Massblattes bzw. einer Musterlippe abstimmen — gerne vor Ort oder nach Zusendung eines Profilquerschnitts / vorhandenen Keders.
+Die Bespannung muss **passgenau** in die vorhandene Kederschiene des Rahmens einsetzbar sein. Fotos bestätigen: **Kendu-Rahmen** mit SEG-/Kedernut, flächigen LED-Modulen und Kendu-Controllern (DC 24V / DMX). Den exakten Keder-Querschnitt möchten wir gerne mit Ihnen anhand der Fotos bzw. einer Musterlippe abstimmen.
 
 ### 2. Gewünschte Leistung
 
