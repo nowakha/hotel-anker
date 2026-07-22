@@ -47,3 +47,6 @@ WerbeLEDbox-CountDown/media/_scp*
 
 # Font extract cache (keep curated TTFs + zip in fonts/)
 WerbeLEDbox-CountDown/fonts/_extract/
+
+# Local PI02 rescue watcher log (do not track)
+WerbeLEDbox-CountDown/docs/_pi02_rescue.log

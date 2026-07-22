@@ -1,42 +1,47 @@
 # NEXT AGENT — Sofortmaßnahmen
 
-Stand: 2026-07-22 ~16:20. Lies zuerst `LEARNINGS.md` + `docs/SESSION_LOG.md`.
+Stand: 2026-07-22 ~16:30. Lies zuerst `LEARNINGS.md` + `docs/SESSION_LOG.md`.
 
-**Blocker:** AnkerPI02 ist offline (LAN + Tailscale). Ohne User-Eingriff (Strom/Boot) kein Deploy möglich. Sobald online: Schritt 2 **vor** `fb-clock`-Start.
+## Root cause (high confidence)
 
-## 1) AnkerPI02 online?
+Splash sichtbar + kein Netz = **`fb-clock` mit altem `probe_size()`** (`ffmpeg … -f null -` auf `st24.mov` 24h 4K). Fix liegt im Repo, **nicht** auf dem Pi. **SD nicht ziehen.**
+
+## 1) User: Power-Cycle jetzt
+
+Während auf Workstation läuft (falls nicht schon):
 
 ```powershell
-ping 192.168.8.106
+powershell -NoProfile -ExecutionPolicy Bypass -File WerbeLEDbox-CountDown\scripts\pi02_rescue_watch.ps1
+```
+
+Dann PI02 Strom aus/an. SSH-Fenster: nach Netz-up, **bevor** NTP-Wait endet und der alte Player startet (bis ~120 s). Der Watcher maskiert `fb-clock` und deployed `fb_clock_play.py`.
+
+Manuell falls nötig:
+
+```powershell
 ssh user@192.168.8.106
-# oder: ssh user@100.103.54.63
+# sofort:
+echo 12345678 | sudo -S systemctl stop fb-clock
+echo 12345678 | sudo -S systemctl disable fb-clock
+echo 12345678 | sudo -S systemctl mask fb-clock
 ```
 
-Passwort: siehe `secrets/ankerpi02.credentials.yml`.
-
-Wenn offline: User muss Strom/Boot prüfen (SD nicht entnehmbar). Optional Rescue-Watcher (maskiert `fb-clock` + deployt Patch sobald SSH geht):
-
-```powershell
-py WerbeLEDbox-CountDown/scripts/pi02_rescue_mask_fbclock.py
-```
-
-## 2) Vor fb-clock: patched Player deployen
-
-Repo hat den Fix bereits. Auf den Pi:
+## 2) Danach: Patch verifizieren, erst dann Clock
 
 ```powershell
 scp WerbeLEDbox-CountDown/fb_clock_play.py user@192.168.8.106:~/WerbeLEDbox-CountDown/
+ssh user@192.168.8.106 "grep -n 'ffprobe\|Never decode\|-f null' ~/WerbeLEDbox-CountDown/fb_clock_play.py | head"
+# Erwartung: ffprobe + Never decode; KEIN -f null
 scp WerbeLEDbox-CountDown/systemd/fb_clock.service user@192.168.8.106:/tmp/fb-clock.service
-ssh user@192.168.8.106 "sudo mv /tmp/fb-clock.service /etc/systemd/system/fb-clock.service && sudo systemctl daemon-reload && sudo systemctl restart fb-clock && journalctl -u fb-clock -n 40 -f"
+ssh user@192.168.8.106 "echo 12345678 | sudo -S mv /tmp/fb-clock.service /etc/systemd/system/fb-clock.service; echo 12345678 | sudo -S systemctl unmask fb-clock; echo 12345678 | sudo -S systemctl daemon-reload; echo 12345678 | sudo -S systemctl enable --now fb-clock; journalctl -u fb-clock -n 40 -f"
 ```
-
-Erwartung im Log: `crop=T386,B127,...` und bald `ffmpeg` mit `-ss HH:MM:SS` → fbdev — **kein** `ffmpeg … -f null -` Full-Decode.
 
 ## 3) Nicht tun
 
-- Kein `cmdline.txt` rotate-Gefummel
-- Kein Underclock-Reboot nötig (Block bereits entfernt)
+- Kein `cmdline.txt` rotate-Gefummel / SD-Entnahme außer wirklich letzter Ausweg
+- Kein Underclock-Reboot nötig
 - Keine 13GB MOV ins Git
+- **Nie** alten Player mit `st24.mov` starten
 
 ## 4) Danach
 

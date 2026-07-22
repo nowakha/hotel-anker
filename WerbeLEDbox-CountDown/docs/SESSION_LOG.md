@@ -1,6 +1,6 @@
-# SESSION_LOG — Hotel Anker / WerbeLEDbox
+﻿# SESSION_LOG â€” Hotel Anker / WerbeLEDbox
 
-Chronik für Cross-Machine-Handoff. Erfolg **und** Misserfolg.
+Chronik fÃ¼r Cross-Machine-Handoff. Erfolg **und** Misserfolg.
 
 ## 2026-07-22 (Workstation MLT-NITRO5-HN)
 
@@ -8,48 +8,52 @@ Chronik für Cross-Machine-Handoff. Erfolg **und** Misserfolg.
 
 | Ereignis | Ergebnis |
 |----------|----------|
-| Git installiert (fehlte) + GitHub CLI | OK — Account `nowakha` |
+| Git installiert (fehlte) + GitHub CLI | OK â€” Account `nowakha` |
 | Repo geklont `nowakha/hotel-anker` | OK |
 | SSH-Key neu `hotel-anker-dev@MLT-NITRO5-HN` auf PI01+PI02 | OK (Passwort `12345678`) |
-| Tailscale auf PI02 installiert + joined | OK — `ankerpi02` = `100.103.54.63` |
-| Tailscale auf PI01 | **FAIL** — apt Download `pkgs.tailscale.com` Timeout/DNS; Deb-Install unterbrochen |
+| Tailscale auf PI02 installiert + joined | OK â€” `ankerpi02` = `100.103.54.63` |
+| Tailscale auf PI01 | **FAIL** â€” apt Download `pkgs.tailscale.com` Timeout/DNS; Deb-Install unterbrochen |
 | DNS nur Router `192.168.8.254` | Fragil; Fix-Skript vorbereitet, auf PI02 wegen USB-Copy **abgebrochen** (User: nicht kicken) |
 
 ### Clock-Video / AnkerPI02
 
 | Ereignis | Ergebnis |
 |----------|----------|
-| Quelle `C:\Users\User\Videos\st24.mov` | 3840×2160 H.264, 25 fps, **86400.08 s**, ~12.7 GB |
-| Crop (Premiere): L0 T386 R0 B127 → ~3840×1647 (~21:9) | Spec |
-| Ziel-Spec Produktion | `media/clock_24h.mp4` 860×360 25fps H.264 `-g 25` |
-| NVENC zuerst | **FAIL** — Driver 596 vs FFmpeg 8.1 braucht NVENC API 13.1; nach Driver-Update 610.62 OK |
-| Full NVENC-Encode 24h | **nicht gestartet** (ETA ~6 h); User: später remote |
+| Quelle `C:\Users\User\Videos\st24.mov` | 3840Ã—2160 H.264, 25 fps, **86400.08 s**, ~12.7 GB |
+| Crop (Premiere): L0 T386 R0 B127 â†’ ~3840Ã—1647 (~21:9) | Spec |
+| Ziel-Spec Produktion | `media/clock_24h.mp4` 860Ã—360 25fps H.264 `-g 25` |
+| NVENC zuerst | **FAIL** â€” Driver 596 vs FFmpeg 8.1 braucht NVENC API 13.1; nach Driver-Update 610.62 OK |
+| Full NVENC-Encode 24h | **nicht gestartet** (ETA ~6 h); User: spÃ¤ter remote |
 | LAN-scp st24.mov | **FAIL/abgebrochen** bei ~2.3 GB; PI02 ging offline |
-| USB `st24.mov` → `/mnt/usb` → rsync nach `~/…/media/st24.mov` | **OK** — 774 s, ~16.9 MB/s, Bytes match `13687155613` |
+| USB `st24.mov` â†’ `/mnt/usb` â†’ rsync nach `~/â€¦/media/st24.mov` | **OK** â€” 774 s, ~16.9 MB/s, Bytes match `13687155613` |
 | Runtime Underclock CPU 1000 MHz + config.txt-Block | OK (Transfer) |
 | Underclock aus config entfernt + CPU 1.8 GHz | OK (nach USB-Remove) |
 | `fb-clock` auf `st24.mov` + Crop + resync 60s | Unit geschrieben |
-| `probe_size()` mit `ffmpeg -f null -` | **CRITICAL FAIL** — dekodiert 24h 4K → Pi unresponsive; Power-Cycle nötig |
+| `probe_size()` mit `ffmpeg -f null -` | **CRITICAL FAIL** â€” dekodiert 24h 4K â†’ Pi unresponsive; Power-Cycle nÃ¶tig |
 | PI02 nach User-Reboot (Stand ~16:08) | **noch offline** (kein Ping/SSH/Tailscale) |
-| Re-Check ~16:17–16:20 LAN `.106` + TS `100.103.54.63` + mDNS | **FAIL** — ping timeout / Destination host unreachable; SSH timeout; mDNS unresolved |
-| Handoff-Commit `8044f9a` → `origin/main` | OK — Docs, Secrets, probe_size-Fix, Workflow-Regel |
-| Offline-Doc-Commit `2f67b57` → `origin/main` | OK |
+| Re-Check ~16:17â€“16:20 LAN `.106` + TS `100.103.54.63` + mDNS | **FAIL** â€” ping timeout / Destination host unreachable; SSH timeout; mDNS unresolved |
+| Handoff-Commit `8044f9a` â†’ `origin/main` | OK â€” Docs, Secrets, probe_size-Fix, Workflow-Regel |
+| Offline-Doc-Commit `2f67b57` â†’ `origin/main` | OK |
 | Continuity User-Rule + SESSION `09e5571` | OK |
-| Deploy patched Player + Clock-Start | **BLOCKED** — PI02 offline; wartet auf physischen Strom/Boot-Check |
-| User-Rule «Hotel Anker — Continuity / Git / Secrets» in Cursor Settings | OK — zusätzlich zu `.cursor/rules/hotel-anker-workflow.mdc` |
-| Rescue: `scripts/pi02_rescue_mask_fbclock.py` + `fb_play.py` probe_size-Parity | lokal bereit → commit/push |
-| Cursor zeigt zwei Repo-Namen «Hotel Anker» + «hotel-anker» | **Kein Doppel-Clone** — nur Ordner `Hotel Anker`; Remote-Slug `hotel-anker`. Kein `.code-workspace`. Kanonisch: `…\Cursor Projects\Hotel Anker` |
+| Deploy patched Player + Clock-Start | **BLOCKED** â€” PI02 offline; wartet auf physischen Strom/Boot-Check |
+| User-Rule Â«Hotel Anker â€” Continuity / Git / SecretsÂ» in Cursor Settings | OK â€” zusÃ¤tzlich zu `.cursor/rules/hotel-anker-workflow.mdc` |
+| Rescue: `scripts/pi02_rescue_mask_fbclock.py` + `fb_play.py` probe_size-Parity | lokal bereit â†’ commit/push |
+| Diagnose ~16:24â€“16:30: LAN `.106` + TS `100.103.54.63` TCP/22 | **FAIL** â€” dauerhaft offline (Splash-on-screen + dead net = classic probe hang) |
+| `scripts/pi02_rescue_watch.ps1` | OK gestartet â€” mask+deploy sobald SSH:22 antwortet |
+| Commits `f5ec3c1` + this (track `pi02_rescue_watch.ps1`, ignore `_pi02_rescue.log`) | **landed** |
+| SD-Entnahme empfohlen? | **Nein** â€” Power-Cycle + SSH-Fenster (NTP Pre-Wait â‰¤120s) reicht |
+| Cursor zeigt zwei Repo-Namen Â«Hotel AnkerÂ» + Â«hotel-ankerÂ» | **Kein Doppel-Clone** â€” nur Ordner `Hotel Anker`; Remote-Slug `hotel-anker`. Kein `.code-workspace`. Kanonisch: `â€¦\Cursor Projects\Hotel Anker` |
 
 ### Boot-Constraint
 
-User: **SD-Karte aus AnkerPI02 nicht mehr entnehmbar.** Keine riskanten `cmdline.txt`-Änderungen. Recovery: `media/cmdline.recovery.txt`.
+User: **SD-Karte aus AnkerPI02 nicht mehr entnehmbar.** Keine riskanten `cmdline.txt`-Ã„nderungen. Recovery: `media/cmdline.recovery.txt`.
 
 ### Provisorisches Playback (sobald PI02 wieder da)
 
 1. **Sofort** gepatchtes `fb_clock_play.py` deployen (`ffprobe` + `--crop-*`).
-2. Service: `VIDEO=…/media/st24.mov`, `--crop-top 386 --crop-bottom 127`, `--resync-every 60`.
+2. Service: `VIDEO=â€¦/media/st24.mov`, `--crop-top 386 --crop-bottom 127`, `--resync-every 60`.
 3. Nicht rebooten nur wegen Underclock (bereits aus config entfernt).
-4. Später: echtes `clock_24h.mp4` 860×360 NVENC encode + Upload.
+4. SpÃ¤ter: echtes `clock_24h.mp4` 860Ã—360 NVENC encode + Upload.
 
 ### Offene Punkte
 
