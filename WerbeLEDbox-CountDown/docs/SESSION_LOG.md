@@ -106,7 +106,10 @@ User: **SD-Karte aus AnkerPI02 normalerweise schwer entnehmbar** (Decken-Screen)
 - [x] SD-Rescue Mask + Player-Deploy (2026-07-22 ~17:18)
 - [ ] User: SD auswerfen → PI02 → Power-On → SSH
 - [ ] PI02 online: Verify mask + ffprobe-Player → dann unmask/enable Clock
-- [ ] Tailscale + DNS-Fix auf PI01 (und PI02 DNS pin 1.1.1.1/8.8.8.8)
+- [x] DNS-Fix PI01 (1.1.1.1/8.8.8.8 + ignore-auto-dns) — OK ~17:45
+- [x] WiFi powersave-off PI01 (NM + systemd) — OK, Runtime ggf. re-assert
+- [ ] Tailscale Install/Join PI01 (Deb via LAN-SCP; `--accept-dns=false`)
+- [ ] PI02 DNS pin 1.1.1.1/8.8.8.8
 - [ ] Produktion `clock_24h.mp4` encode
 - [ ] Teensy flash/validate
 
@@ -161,3 +164,18 @@ User: **SD-Karte aus AnkerPI02 normalerweise schwer entnehmbar** (Decken-Screen)
 Likely causes: WiFi not up after rescue; different subnet; still booting; eth cable only to PC but PC eth unplugged; Tailscale not started.
 
 Not done: fb-clock/ffprobe verify (unreachable). Do not unmask.
+
+## 2026-07-22 ~17:45 — AnkerPI01 Status (Netz/DNS/Tailscale)
+
+| Punkt | Stand |
+|-------|--------|
+| Erreichbar | **JA** — Ping + SSH `192.168.8.102` / `AnkerPI01.local` |
+| DNS vorher | nur Router `192.168.8.254` (fragil) |
+| DNS jetzt | **1.1.1.1 + 8.8.8.8**, NM `ignore-auto-dns=yes` — in `/etc/resolv.conf` verifiziert |
+| WiFi | Link war stark intermittent; Root: powersave + Zero-2-W. Fix: NM powersave=disable + `wlan-powersave-off.service`; Runtime ~17:45 **Power Management:off** (re-asserted) |
+| apt IPv4 | `/etc/apt/apt.conf.d/99force-ipv4` gesetzt |
+| Tailscale apt/curl Deb | **FAIL** — kleine HTTPS OK; große CloudFront-Downloads timeout/starve (nicht primär DNS) |
+| Tailscale installiert? | **NEIN** (`dpkg` unknown; `tailscaled` inactive/not-found) |
+| Tailscale joined? | **NEIN** |
+| Nächster Schritt | Deb per LAN-SCP → `dpkg -i` → `tailscale up --hostname=AnkerPI01 --accept-dns=false` |
+
