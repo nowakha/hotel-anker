@@ -7,6 +7,13 @@ Ziel: eine andere Cursor-Instanz auf einem anderen Rechner kann ohne mündlichen
 
 Detaillierte Chronik: [`WerbeLEDbox-CountDown/docs/SESSION_LOG.md`](./WerbeLEDbox-CountDown/docs/SESSION_LOG.md).
 
+## Cursor Workspace (kanonisch)
+
+- **Einziger Arbeitsordner:** `C:\Users\User\Documents\Cursor Projects\Hotel Anker` (Name mit Leerzeichen).
+- Auf Disk gibt es **kein** zweites Clone `hotel-anker` unter `Cursor Projects\` — geprüft 2026-07-22.
+- Cursor-Linke «Repositories»-Anzeige mit zwei Namen (**Hotel Anker** + **hotel-anker**) = derselbe Git-Stand: Ordnername vs. GitHub-Slug `nowakha/hotel-anker`. Kein Multi-Root-`.code-workspace`, nur ein `workspaceStorage`-Eintrag auf den Hotel-Anker-Pfad.
+- Agent-Root muss auf den Hotel-Anker-Pfad zeigen (`move_agent_to_root`). Ghost-Eintrag «hotel-anker» in der Projektliste ggf. schließen/entfernen — **nicht** von Disk löschen (existiert dort nicht).
+
 ## Repo & Secrets
 
 - Remote: `https://github.com/nowakha/hotel-anker.git` (**privat halten** — enthält SSH-Passwörter).

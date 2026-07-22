@@ -38,6 +38,7 @@ Chronik für Cross-Machine-Handoff. Erfolg **und** Misserfolg.
 | Deploy patched Player + Clock-Start | **BLOCKED** — PI02 offline; wartet auf physischen Strom/Boot-Check |
 | User-Rule «Hotel Anker — Continuity / Git / Secrets» in Cursor Settings | OK — zusätzlich zu `.cursor/rules/hotel-anker-workflow.mdc` |
 | Rescue: `scripts/pi02_rescue_mask_fbclock.py` + `fb_play.py` probe_size-Parity | lokal bereit → commit/push |
+| Cursor zeigt zwei Repo-Namen «Hotel Anker» + «hotel-anker» | **Kein Doppel-Clone** — nur Ordner `Hotel Anker`; Remote-Slug `hotel-anker`. Kein `.code-workspace`. Kanonisch: `…\Cursor Projects\Hotel Anker` |
 
 ### Boot-Constraint
 
