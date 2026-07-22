@@ -14,7 +14,11 @@ ssh user@192.168.8.106
 
 Passwort: siehe `secrets/ankerpi02.credentials.yml`.
 
-Wenn offline: User muss Strom/Boot prüfen (SD nicht entnehmbar).
+Wenn offline: User muss Strom/Boot prüfen (SD nicht entnehmbar). Optional Rescue-Watcher (maskiert `fb-clock` + deployt Patch sobald SSH geht):
+
+```powershell
+py WerbeLEDbox-CountDown/scripts/pi02_rescue_mask_fbclock.py
+```
 
 ## 2) Vor fb-clock: patched Player deployen
 

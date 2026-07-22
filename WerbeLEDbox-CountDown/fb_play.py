@@ -29,8 +29,31 @@ def ffmpeg_bin() -> str:
 
 
 def probe_size(ffmpeg: str, video: Path) -> tuple[int, int] | None:
+    # Never decode the whole file — 24h 4K would hang the Pi.
+    ffprobe = shutil.which("ffprobe")
+    if ffprobe:
+        proc = subprocess.run(
+            [
+                ffprobe,
+                "-v",
+                "error",
+                "-select_streams",
+                "v:0",
+                "-show_entries",
+                "stream=width,height",
+                "-of",
+                "csv=p=0:s=x",
+                str(video),
+            ],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        m = re.search(r"(\d{2,5})x(\d{2,5})", proc.stdout.strip())
+        if m:
+            return int(m.group(1)), int(m.group(2))
     proc = subprocess.run(
-        [ffmpeg, "-hide_banner", "-i", str(video), "-f", "null", "-"],
+        [ffmpeg, "-hide_banner", "-i", str(video)],
         capture_output=True,
         text=True,
         check=False,
