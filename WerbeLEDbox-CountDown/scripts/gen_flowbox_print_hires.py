@@ -676,12 +676,11 @@ def add_caption(img: Image.Image, title: str, sub: str) -> Image.Image:
 
 def write_print_spec() -> None:
     (OUT / "PRINT_SPEC.md").write_text(
-        f"""# Print-Spezifikation — Hotel Anker Countdown
+        f"""# Print-Spezifikation — Hotel Anker Countdown (Kendu Flowbox 2 × 2 m)
 
-## Physik (gemessen)
-- Druck-/LED-Fläche: **{PHYSICAL_MM:.0f} × {PHYSICAL_MM:.0f} mm** (8×8 Panels à 250 mm)
-- Profilbreite: **{PROFILE_W_MM:.0f} mm** (Außenmaß 2100×2100 mm)
-- Außenmaß Rahmen: **2100 × 2100 mm**
+## Kendu / Physik
+- Nennmaß Fläche: **{PHYSICAL_MM:.0f} × {PHYSICAL_MM:.0f} mm** (Flowbox Standard Square)
+- Profilbreite: **{PROFILE_W_MM:.0f} mm** (Kendu FAQ)
 - Content-Grid: **{GRID} × {GRID}** → Zellpitch **{CELL_PITCH_MM:.2f} mm**
 - Totzone: untere **{DEAD_ROWS}/64** Zellen (= {DEAD_ROWS * CELL_PITCH_MM:.0f} mm)
 

@@ -1,5 +1,5 @@
 Host AnkerPI01
-    HostName 192.168.8.102
+    HostName AnkerPI01.local
     User user
     IdentityFile ~/.ssh/id_ed25519
     IdentitiesOnly yes
@@ -8,6 +8,22 @@ Host AnkerPI01
 
 Host AnkerPI01.local
     HostName AnkerPI01.local
+    User user
+    IdentityFile ~/.ssh/id_ed25519
+    IdentitiesOnly yes
+    ServerAliveInterval 30
+    ServerAliveCountMax 3
+
+Host AnkerPI02
+    HostName 192.168.8.106
+    User user
+    IdentityFile ~/.ssh/id_ed25519
+    IdentitiesOnly yes
+    ServerAliveInterval 30
+    ServerAliveCountMax 3
+
+Host AnkerPI02.local
+    HostName AnkerPI02.local
     User user
     IdentityFile ~/.ssh/id_ed25519
     IdentitiesOnly yes

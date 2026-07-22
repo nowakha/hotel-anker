@@ -1,0 +1,24 @@
+[Unit]
+Description=WS2812 LED putter (shm://ws2812 → SPI0)
+After=local-fs.target
+Wants=local-fs.target
+
+[Service]
+Type=simple
+User=user
+Group=user
+SupplementaryGroups=spi
+WorkingDirectory=/home/user/WerbeLEDbox-CountDown
+Environment=N_LED=1179
+Environment=FPS=25
+Environment=SPI_BUS=0
+Environment=SPI_DEV=0
+ExecStart=/home/user/WerbeLEDbox-CountDown/.venv/bin/python /home/user/WerbeLEDbox-CountDown/ws2812put.py
+Restart=on-failure
+RestartSec=2
+# Clean stop: SIGTERM → black frame + SPI close
+KillSignal=SIGTERM
+TimeoutStopSec=10
+
+[Install]
+WantedBy=multi-user.target

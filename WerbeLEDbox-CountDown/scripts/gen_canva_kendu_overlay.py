@@ -1,18 +1,18 @@
 #!/usr/bin/env python3
-"""Canva-ready Kendu Flowbox overlay layers (2×2 m face / 64×64 content grid).
+"""Canva-ready Kendu Flowbox overlay layers (2×2 m / 64×64 content grid).
 
-MEASURED (Hotel Anker unit, 2026-07-22):
-  - LED panels: 250 × 250 mm
-  - Print / backlight face: 2000 × 2000 mm
-  - Outer frame: 2100 × 2100 mm → profile 50 mm per side
-  - SEG textile with silicone edge (Kederschiene visible on photos)
+CONFIRMED (Kendu public FAQ / product pages):
+  - Standard square visual size includes 2 × 2 m
+  - Aluminium profile width/depth: 100 mm
+  - SEG textile with silicone edge (Smartframe-based Kederschiene)
 
-ASSUMED (not measured):
+NOT published by Kendu (marked ASSUMED in legend):
+  - Exact LED plate PCB size — proprietary; spare "RGB LED plates" only
   - Exact Keder groove cross-section — industry SEG often 4 × 14 mm
 
-Hotel Anker content mapping:
+Hotel Anker content mapping (project):
   - Logical LED/print grid 64 × 64 → pitch 31.25 mm
-  - 8 × 8 panels of 8 × 8 cells → 250 × 250 mm (confirmed)
+  - 8 × 8 modules of 8 × 8 cells → 250 × 250 mm tiles (tiling assumption)
   - Dead band: bottom 8/64 rows (field 7 after 90° CW mount)
 """
 
@@ -46,9 +46,10 @@ from kendu_flowbox_spec import (  # noqa: E402
 SIZE = PRINT_SIZE_PX  # 4096
 PX_PER_MM = PRINT_PX_PER_MM  # 2.048
 
-# Face = 2000 mm content; frame rim drawn on face as measured 50 mm profile
-# Outer envelope = 2100 mm (= face + 2×50 mm)
-PROFILE_PX = int(round(PROFILE_W_MM * PX_PER_MM))  # ~102 px
+# Face = nominal 2000 mm content; frame drawn OUTSIDE as extension band
+# Canva artboard = face only; frame overlay drawn inset as 100 mm rim on face
+# (outer envelope would be face + profile — shown as rim annotation)
+PROFILE_PX = int(round(PROFILE_W_MM * PX_PER_MM))  # ~205 px
 
 # Industry-typical SEG keder groove (ASSUMED — not in Kendu public docs)
 KEDER_GROOVE_W_MM = 4.0
@@ -81,7 +82,7 @@ def blank() -> Image.Image:
 
 
 def layer_frame() -> Image.Image:
-    """Outer aluminium profile rim (50 mm measured) drawn on face perimeter."""
+    """Outer aluminium profile rim (100 mm) drawn on face perimeter."""
     im = blank()
     d = ImageDraw.Draw(im)
     # Outer rectangle = full face; inner = face minus profile rim
@@ -110,7 +111,7 @@ def layer_frame() -> Image.Image:
     d = ImageDraw.Draw(im)
     d.text(
         (inset + 12, inset // 2 - 10),
-        f"RAHMEN Profil {PROFILE_W_MM:.0f} mm (gemessen · Außen 2100 mm)",
+        f"RAHMEN Profil {PROFILE_W_MM:.0f} mm (Kendu FAQ · confirmed)",
         fill=(220, 220, 230, 255),
         font=font(28, bold=True),
     )
@@ -222,14 +223,13 @@ def layer_legend() -> Image.Image:
     box = [24, SIZE // 2 - 220, 980, SIZE // 2 + 220]
     d.rounded_rectangle(box, radius=20, fill=(12, 14, 20, 210), outline=(180, 180, 190, 255), width=2)
     lines = [
-        "HOTEL ANKER LIGHTBOX — OVERLAY LEGENDE",
+        "KENDU FLOWBOX 2×2 m — OVERLAY LEGENDE",
         "",
-        f"GEMESSEN: Fläche {PHYSICAL_MM:.0f}×{PHYSICAL_MM:.0f} mm · Profil {PROFILE_W_MM:.0f} mm",
-        "GEMESSEN: Außenmaß 2100×2100 mm · LED-Panel 250×250 mm",
-        "BESTÄTIGT: SEG/Kederschiene (Fotos) · Kendu-Controller",
+        f"CONFIRMED: Fläche {PHYSICAL_MM:.0f}×{PHYSICAL_MM:.0f} mm · Profil {PROFILE_W_MM:.0f} mm",
+        "CONFIRMED: SEG/Silicone-Edge (Smartframe) · Kederschiene vorhanden",
         "",
         f"PROJECT: Content-Grid {GRID}×{GRID} · Pitch {CELL_PITCH_MM:.2f} mm",
-        f"BESTÄTIGT: Module 8×8 Zellen = {MODULE_MM:.0f} mm (= Panelmaß)",
+        f"ASSUMED: Module 8×8 Zellen = {MODULE_MM:.0f} mm (Kendu-Plattenmaß nicht public)",
         f"ASSUMED: Keder-Schlitz {KEDER_GROOVE_W_MM:.0f}×{KEDER_GROOVE_D_MM:.0f} mm (Industrie-SEG)",
         "",
         "Print: 4096 px = 64 px/Zelle · Canva: diese Layer importieren",
@@ -257,7 +257,7 @@ def main() -> None:
         "02-overlay-modules-8x8.png": layer_modules(),
         "03-overlay-pixels-64.png": layer_pixels(),
         "04-overlay-keder-rail.png": layer_keder(),
-        "05-overlay-frame-50mm.png": layer_frame(),
+        "05-overlay-frame-100mm.png": layer_frame(),
         "06-overlay-legend.png": layer_legend(),
     }
     for name, im in layers.items():
@@ -266,7 +266,7 @@ def main() -> None:
         im.resize((2048, 2048), Image.Resampling.LANCZOS).save(OUT / name.replace(".png", "@2048.png"))
 
     (OUT / "README_CANVA.md").write_text(
-        f"""# Canva Layer-Kit — Hotel Anker LightBox Overlay
+        f"""# Canva Layer-Kit — Kendu Flowbox 2×2 m Overlay
 
 ## Canva-Account / Cursor
 Cursor hat **kein Canva-MCP**. Eine OAuth-Verbindung zu deinem Canva-Account
@@ -282,24 +282,25 @@ ist von hier aus **nicht möglich**. Workflow:
 |-------|--------|
 | `00-overlay-combined.png` | Alles zusammen (Referenz) |
 | `01-overlay-deadzone.png` | Totzone 8/64 (= 250 mm) |
-| `02-overlay-modules-8x8.png` | 8×8 Panels à 250×250 mm |
+| `02-overlay-modules-8x8.png` | 8×8 Module à 250×250 mm |
 | `03-overlay-pixels-64.png` | 64×64 Pixelmitten als Kreise |
 | `04-overlay-keder-rail.png` | Kederschiene / SEG-Schlitz |
-| `05-overlay-frame-50mm.png` | Aluminiumrahmen 50 mm (gemessen) |
-| `06-overlay-legend.png` | Legende gemessen vs assumed |
+| `05-overlay-frame-100mm.png` | Aluminiumrahmen 100 mm |
+| `06-overlay-legend.png` | Legende confirmed vs assumed |
 
-## Masse — gemessen 2026-07-22
+## Masse — was ist sicher?
 | Maß | Wert | Quelle |
 |-----|------|--------|
-| Druck-/LED-Fläche | {PHYSICAL_MM:.0f}×{PHYSICAL_MM:.0f} mm | 8×8 Panels |
-| Außenmaß Rahmen | 2100×2100 mm | gemessen |
-| Profilbreite | {PROFILE_W_MM:.0f} mm | (2100−2000)/2 |
-| Content-Pitch | {CELL_PITCH_MM:.2f} mm | 64×64 auf 2 m |
+| Nennfläche | {PHYSICAL_MM:.0f}×{PHYSICAL_MM:.0f} mm | Kendu Standard Square |
+| Profilbreite | {PROFILE_W_MM:.0f} mm | Kendu FAQ „profile width“ |
+| Content-Pitch | {CELL_PITCH_MM:.2f} mm | Projekt 64×64 auf 2 m |
 | Totzone | {DEAD_ROWS}/64 = {DEAD_ROWS * CELL_PITCH_MM:.0f} mm | AnkerPI02 Field 7 |
-| LED-Panel | {MODULE_MM:.0f}×{MODULE_MM:.0f} mm | **gemessen** |
+| Modul 8×8 | {MODULE_MM:.0f}×{MODULE_MM:.0f} mm | **ASSUMED** (kein Kendu-Datenblatt) |
 | Keder-Schlitz | {KEDER_GROOVE_W_MM:.0f}×{KEDER_GROOVE_D_MM:.0f} mm | **ASSUMED** Industrie-SEG |
 
-Drucksujet bleibt auf der **2000×2000 mm** Sichtfläche; Kederlippe greift in die 50-mm-Profilnut.
+Kendu veröffentlicht die exakten LED-Platten-PCB-Maße und den exakten
+Keder-Querschnitt **nicht** öffentlich. Für Produktion: Maßblatt von
+flowbox@kendu.com / eurem CSM anfordern und hier nachziehen.
 """,
         encoding="utf-8",
     )

@@ -582,11 +582,8 @@ def save_previews(path_dir: Path) -> None:
         raise SystemExit(f"Pillow required for preview: {e}") from e
 
     frames = []
-    # ~4 s Lichtvideo @ 12.5 fps (50 frames) for GIF + stills
-    n_frames = 50
-    dt = 0.08
-    for i in range(n_frames):
-        fr = render_frame(i * dt, now=datetime.now(TZ) + timedelta(seconds=i * dt))
+    for i in range(24):
+        fr = render_frame(i * 0.2, now=datetime.now(TZ) + timedelta(seconds=i))
         frames.append(fr)
         if i == 0:
             Image.fromarray(fr, "RGB").resize((640, 640), Image.NEAREST).save(
@@ -594,27 +591,13 @@ def save_previews(path_dir: Path) -> None:
             )
             Image.fromarray(fr, "RGB").save(path_dir / "countdown-waves-gold-1x.png")
 
-    strip = np.concatenate(frames[::5], axis=1)
+    strip = np.concatenate(frames[::4], axis=1)
     Image.fromarray(strip, "RGB").resize(
         (strip.shape[1] * 6, strip.shape[0] * 6), Image.NEAREST
     ).save(path_dir / "countdown-waves-gold-strip.png")
 
-    # Animated Lichtvideo preview (GIF) — layout matches print face 2000×2000 mm
-    gif_frames = [
-        Image.fromarray(fr, "RGB").resize((512, 512), Image.NEAREST) for fr in frames
-    ]
-    gif_frames[0].save(
-        path_dir / "countdown-waves-gold.gif",
-        save_all=True,
-        append_images=gif_frames[1:],
-        duration=int(dt * 1000),
-        loop=0,
-        optimize=False,
-    )
-
     d, h, m, s = remaining()
     print(f"preview -> {path_dir}")
-    print(f"lichtvideo gif -> {path_dir / 'countdown-waves-gold.gif'} ({n_frames} frames)")
     print(f"remaining -> {d}d {h:02d}:{m:02d}:{s:02d} until {TARGET.date()}")
 
 

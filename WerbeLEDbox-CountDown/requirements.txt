@@ -1,12 +1,14 @@
-# Python deps for AnkerPI01 (WerbeLEDbox CountDown)
+# Python deps for AnkerPI01/02 (WerbeLEDbox CountDown)
 
 On the Pi, prefer Debian packages where possible:
 
 - python3-numpy
 - python3-spidev
+- python3-pil   # blueprint/logo masks in countdown_waves_64.py
 
 Install into the project venv (with --system-site-packages):
 
 ```
 SharedArray>=3.2.0
+Pillow>=10.0.0
 ```

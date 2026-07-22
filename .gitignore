@@ -38,3 +38,14 @@ venv/
 # PlatformIO
 **/.pio/
 
+
+# Device credentials (keep local only)
+**/secrets/*.credentials.yml
+**/secrets/*.yml
+!**/secrets/*.example.yml
+!**/secrets/*.example
+**/pico/src/secrets.py
+
+# Font extract cache (keep only curated TTFs in fonts/)
+WerbeLEDbox-CountDown/fonts/_extract/
+

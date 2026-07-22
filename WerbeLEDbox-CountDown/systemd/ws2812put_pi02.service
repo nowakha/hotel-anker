@@ -1,0 +1,24 @@
+[Unit]
+Description=AnkerPI02 WS2812 putter (shm://ws2812 64x64 → Teensy 8x512 USB)
+After=local-fs.target
+# Wait for ACM if present; still start (and retry) if Teensy plugs in later
+Wants=dev-ttyACM0.device
+After=dev-ttyACM0.device
+
+[Service]
+Type=simple
+User=user
+Group=user
+SupplementaryGroups=dialout
+WorkingDirectory=/home/user/WerbeLEDbox-CountDown
+Environment=FPS=25
+Environment=PICO_PORT=/dev/ttyACM0
+ExecStartPre=/bin/bash -c 'for i in $(seq 1 45); do [ -e /dev/ttyACM0 ] && exit 0; sleep 1; done; echo "warn: no /dev/ttyACM0 yet" >&2; exit 0'
+ExecStart=/home/user/WerbeLEDbox-CountDown/.venv/bin/python /home/user/WerbeLEDbox-CountDown/ws2812put_pi02.py
+Restart=always
+RestartSec=3
+KillSignal=SIGTERM
+TimeoutStopSec=10
+
+[Install]
+WantedBy=multi-user.target
