@@ -33,7 +33,9 @@ Chronik für Cross-Machine-Handoff. Erfolg **und** Misserfolg.
 | PI02 nach User-Reboot (Stand ~16:08) | **noch offline** (kein Ping/SSH/Tailscale) |
 | Re-Check ~16:17–16:20 LAN `.106` + TS `100.103.54.63` + mDNS | **FAIL** — ping timeout / Destination host unreachable; SSH timeout; mDNS unresolved |
 | Handoff-Commit `8044f9a` → `origin/main` | OK — Docs, Secrets, probe_size-Fix, Workflow-Regel |
+| Offline-Doc-Commit `2f67b57` → `origin/main` | OK |
 | Deploy patched Player + Clock-Start | **BLOCKED** — PI02 offline; wartet auf physischen Strom/Boot-Check |
+| User-Rule «Hotel Anker — Continuity / Git / Secrets» in Cursor Settings | OK — zusätzlich zu `.cursor/rules/hotel-anker-workflow.mdc` |
 
 ### Boot-Constraint
 
