@@ -1,6 +1,6 @@
 # Hotel Anker — Learnings & Handoff
 
-Stand: **2026-07-22 ~16:20 CEST** (Workstation **MLT-NITRO5-HN**).  
+Stand: **2026-07-22 ~16:30 CEST** (Workstation **MLT-NITRO5-HN**).  
 Ziel: eine andere Cursor-Instanz auf einem anderen Rechner kann ohne mündlichen Kontext weiterarbeiten.
 
 **Workflow (verbindlich):** `.cursor/rules/hotel-anker-workflow.mdc` — jeden Schritt dokumentieren (Erfolg+Misserfolg), Credentials/Learnings mitziehen, commit + `git push origin HEAD`.
@@ -36,7 +36,19 @@ Detaillierte Chronik: [`WerbeLEDbox-CountDown/docs/SESSION_LOG.md`](./WerbeLEDbo
 ## Kritische Falle (2026-07-22)
 
 `fb_clock_play.probe_size()` mit `ffmpeg -i FILE -f null -` dekodiert **die gesamte Datei**. Bei 24h 4K → Pi tot.  
-**Fix im Repo:** `ffprobe` / `ffmpeg -i` ohne Output. **Vor dem nächsten `fb-clock`-Start auf den Pi deployen.**
+**Fix im Repo:** `ffprobe` / `ffmpeg -i` ohne Output. **Vor dem nächsten `fb-clock`-Start auf den Pi deployen.**  
+Auch `fb_play.py` hatte denselben Bug → im Repo ebenfalls auf ffprobe umgestellt (Lab-Helper; Live-Service nutzt `fb_clock_play.py`).
+
+### Failure mode (sehr hohe Sicherheit)
+
+1. Boot → `fb-splash` malt Anker-Logo auf `/dev/fb0` → **Splash sichtbar**.
+2. Netzwerk/SSH kommen hoch.
+3. `fb-clock.service` startet: `ExecStartPre` wartet bis **120 s** auf NTP.
+4. Danach startet **alter** Player auf dem Pi → `probe_size()` Full-Decode von `st24.mov` → CPU/IO tot → **kein Ping/SSH/Tailscale**.
+5. Repo-Fix ist **noch nicht** auf dem Pi (Deploy war blocked weil offline).
+
+**SD-Entnahme nicht nötig.** Rescue: Power-Cycle + SSH-Fenster (NTP-Wait) → sofort `systemctl mask fb-clock` + gepatchtes `fb_clock_play.py` deployen.  
+Watcher bereit: `WerbeLEDbox-CountDown/scripts/pi02_rescue_watch.ps1` (LAN `.106` + Tailscale `.63`).
 
 ## Encode / Transfer
 
@@ -51,7 +63,7 @@ Unverändert: `Richnerstutz-Bespannung-Paket/`, Rahmen 2100 mm, Textil→LED 45 
 
 ## Offene Arbeit (Priorität)
 
-1. **PI02 wieder online** (Stand ~16:20: LAN `.106` unreachable, Tailscale `100.103.54.63` tot, mDNS unresolved) → User Strom/Boot prüfen → patched `fb_clock_play.py` + Unit deployen → Uhr starten. **Nicht** fb-clock mit altem Player starten.
+1. **PI02 wieder online** (Stand ~16:30: LAN+TS weiter tot; Rescue-Watcher läuft auf MLT-NITRO5-HN) → User **Power-Cycle**, nicht SD ziehen → Watcher maskiert `fb-clock` + deployed Patch. Erst danach Service wieder enablen.
 2. DNS pin (1.1.1.1/8.8.8.8) + Tailscale auf PI01.
 3. Produktion `clock_24h.mp4` NVENC encode + Upload.
 4. Teensy flash/validate; Countdown-Producer PI01.
