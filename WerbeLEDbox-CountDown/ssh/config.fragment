@@ -1,5 +1,5 @@
 Host AnkerPI01
-    HostName AnkerPI01.local
+    HostName 192.168.8.102
     User user
     IdentityFile ~/.ssh/id_ed25519
     IdentitiesOnly yes

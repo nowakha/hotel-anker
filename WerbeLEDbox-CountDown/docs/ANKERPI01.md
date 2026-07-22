@@ -7,7 +7,7 @@ Target machine for **WerbeLEDbox CountDown**.
 | Field | Value |
 |--------|--------|
 | Hostname | `AnkerPI01` / `AnkerPI01.local` |
-| IP (LAN) | DHCP (currently `192.168.8.108`); prefer `AnkerPI01.local` |
+| IP (LAN) | DHCP (observed `192.168.8.102`; earlier `.108`) — prefer `AnkerPI01.local` |
 | Board | Raspberry Pi Zero 2 W Rev 1.0 |
 | OS | Debian 13 (trixie), aarch64 |
 | Kernel (at setup) | `6.18.34+rpt-rpi-v8` |
@@ -192,8 +192,22 @@ PY
 | [`../scripts/ankerpi01_fix_spi_bufsiz.sh`](../scripts/ankerpi01_fix_spi_bufsiz.sh) | Persist bufsiz via cmdline + reload |
 | [`../scripts/ankerpi01_setup_phase2.sh`](../scripts/ankerpi01_setup_phase2.sh) | apt upgrade, Python deps, venv, smoke test |
 | [`../scripts/install_ws2812put_service.sh`](../scripts/install_ws2812put_service.sh) | Install + enable `ws2812put.service` |
+| [`../scripts/install_countdown_pi01_service.sh`](../scripts/install_countdown_pi01_service.sh) | Install + enable countdown producer |
+| [`../scripts/countdown_pi01.py`](../scripts/countdown_pi01.py) | Amber progress bar → `shm://ws2812` until Baubeginn |
 | [`../scripts/smoke_ws2812put.py`](../scripts/smoke_ws2812put.py) | Write test pattern to `shm://ws2812` |
 | [`../scripts/test_pixel0_blink.py`](../scripts/test_pixel0_blink.py) | Cycle pixel 0 R/G/B/C/M/Y/W with black between |
+
+### Countdown producer
+
+After `ws2812put` is running:
+
+```bash
+bash ~/WerbeLEDbox-CountDown/scripts/install_countdown_pi01_service.sh
+sudo systemctl status countdown_pi01
+```
+
+Target: **2026-10-01 13:00 Europe/Zurich**. Preview on PC:  
+`python scripts/countdown_pi01.py --preview /tmp/strip.png`
 
 Run on the Pi with sudo after copying to `/tmp` (setup phases).
 

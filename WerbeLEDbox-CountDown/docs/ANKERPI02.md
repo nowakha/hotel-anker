@@ -1,37 +1,30 @@
-# AnkerPI02 — Pi 4 HDMI 24h clock player
-
-Headless **HDMI0** host: 24‑hour clock video seek‑synced to local time.  
-Silent boot with **Hotel Anker** logo splash. Monitor mounted **180°**.
+# AnkerPI02 — Pi 4 HDMI clock + USB Teensy
 
 Zugang: [`../secrets/ankerpi02.credentials.yml`](../secrets/ankerpi02.credentials.yml) · SSH-Fragment: [`../ssh/config.fragment`](../ssh/config.fragment)
 
-**Zusätzlich am USB:** Teensy 8×512 WS2812 — siehe [`ANKERPI02-TEENSY.md`](ANKERPI02-TEENSY.md) und [`../teensy/`](../teensy/).
+**USB Teensy** 8×512 WS2812 — [`ANKERPI02-TEENSY.md`](ANKERPI02-TEENSY.md) · Firmware: [`../teensy/`](../teensy/) · Hex: [`../teensy/hex/`](../teensy/hex/)
 
-## Display / boot
+## HDMI clock (default: live)
+
+Headless **HDMI0** host. Monitor mounted **180°** (rotation in software).
 
 | Field | Value |
 |--------|--------|
-| Mode | **3440×1440 @ 50 Hz** (no KMS rotate — content rotated in software) |
+| Mode | **3440×1440 @ 50 Hz** |
 | Framebuffer | `/dev/fb0` RGB565 |
-| Rainbow splash | off (`disable_splash=1`) |
-| Console on HDMI | off (serial only, `getty@tty1` masked) |
-| Boot logo | Anker+Krone, height **4/5** screen, 180° baked in, until `fb-clock` |
+| Default player | **`fb_clock_live.py`** (digital clock, NTP-synced) |
+| Optional | `fb_clock_play.py` + `media/clock_24h.mp4` (designed animation) |
 
 ```bash
-python3 scripts/gen_fb_splash.py   # if regenerating on a machine with Pillow
-bash scripts/ankerpi02_setup_silent_boot.sh
-sudo reboot
+# on AnkerPI02
+bash scripts/install_fb_clock_live_service.sh
+# unit installed as fb-clock.service
 ```
 
 Splash assets: `media/boot_splash_3440x1440.{png,rgb565}`  
+Generate optional MP4: `scripts/gen_clock_24h.py` (see `media/README.md`).
 
 **If Pi won't boot after a bad `rotate=` cmdline:** mount the SD boot partition on a PC and replace `cmdline.txt` with the single line from [`../media/cmdline.recovery.txt`](../media/cmdline.recovery.txt).
-
-## Clock video
-
-Path: `media/clock_24h.mp4` — exactly **86400 s**, t=0 = 00:00:00, H.264, 860×360, 25 fps, `-g 25`.
-
-Service: `fb-clock.service` (after NTP + splash).
 
 ## Underclock
 

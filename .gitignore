@@ -37,6 +37,7 @@ venv/
 
 # Large clock / scratch media (keep README + splash + recovery cmdline)
 WerbeLEDbox-CountDown/media/*.mov
+WerbeLEDbox-CountDown/media/*.mp4
 WerbeLEDbox-CountDown/media/clock_24h.mp4
 WerbeLEDbox-CountDown/media/st24.mov
 WerbeLEDbox-CountDown/media/_encode*

@@ -1,0 +1,20 @@
+[Unit]
+Description=Hotel Anker countdown producer (linear strip → shm://ws2812)
+After=ws2812put.service
+Requires=ws2812put.service
+
+[Service]
+Type=simple
+User=user
+Group=user
+WorkingDirectory=/home/user/WerbeLEDbox-CountDown
+Environment=N_LED=1179
+Environment=FPS=25
+ExecStart=/home/user/WerbeLEDbox-CountDown/.venv/bin/python /home/user/WerbeLEDbox-CountDown/scripts/countdown_pi01.py --n-led 1179 --fps 25
+Restart=always
+RestartSec=2
+KillSignal=SIGTERM
+TimeoutStopSec=5
+
+[Install]
+WantedBy=multi-user.target

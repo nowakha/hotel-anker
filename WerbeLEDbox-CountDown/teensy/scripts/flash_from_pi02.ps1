@@ -32,10 +32,20 @@ if (-not $SkipBuild) {
   } finally {
     Pop-Location
   }
+  New-Item -ItemType Directory -Force -Path (Join-Path $repoRoot "WerbeLEDbox-CountDown\teensy\hex") | Out-Null
+  Copy-Item (Join-Path $proj ".pio\build\teensy32\firmware.hex") (Join-Path $repoRoot "WerbeLEDbox-CountDown\teensy\hex\firmware_teensy32.hex") -Force
+  Copy-Item (Join-Path $proj ".pio\build\teensy40\firmware.hex") (Join-Path $repoRoot "WerbeLEDbox-CountDown\teensy\hex\firmware_teensy40.hex") -Force
 }
 
-$hex32 = Join-Path $proj ".pio\build\teensy32\firmware.hex"
-$hex40 = Join-Path $proj ".pio\build\teensy40\firmware.hex"
+$hexDir = Join-Path $repoRoot "WerbeLEDbox-CountDown\teensy\hex"
+$hex32 = Join-Path $hexDir "firmware_teensy32.hex"
+$hex40 = Join-Path $hexDir "firmware_teensy40.hex"
+if (-not (Test-Path $hex32)) {
+  $hex32 = Join-Path $proj ".pio\build\teensy32\firmware.hex"
+}
+if (-not (Test-Path $hex40)) {
+  $hex40 = Join-Path $proj ".pio\build\teensy40\firmware.hex"
+}
 if (-not (Test-Path $hex32)) { throw "missing $hex32" }
 if (-not (Test-Path $hex40)) { throw "missing $hex40" }
 

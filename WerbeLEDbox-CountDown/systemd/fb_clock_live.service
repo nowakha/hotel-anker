@@ -1,0 +1,23 @@
+[Unit]
+Description=AnkerPI02 live digital clock → /dev/fb0
+Documentation=file:/home/user/WerbeLEDbox-CountDown/docs/ANKERPI02.md
+After=network-online.target time-sync.target systemd-timesyncd.service
+Wants=network-online.target time-sync.target
+After=local-fs.target
+
+[Service]
+Type=simple
+User=user
+Group=user
+SupplementaryGroups=video render
+WorkingDirectory=/home/user/WerbeLEDbox-CountDown
+Environment=TZ=Europe/Zurich
+ExecStartPre=/bin/bash -c 'for i in $(seq 1 120); do timedatectl show -p NTPSynchronized --value | grep -qx yes && exit 0; sleep 1; done; echo "warn: starting without NTP sync" >&2; exit 0'
+ExecStart=/usr/bin/python3 /home/user/WerbeLEDbox-CountDown/fb_clock_live.py --tz Europe/Zurich
+Restart=always
+RestartSec=2
+KillSignal=SIGTERM
+TimeoutStopSec=10
+
+[Install]
+WantedBy=multi-user.target

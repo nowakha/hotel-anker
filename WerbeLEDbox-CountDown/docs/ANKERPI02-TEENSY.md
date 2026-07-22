@@ -42,6 +42,9 @@ Diagramm: [`teensy-octows2811-pins.png`](teensy-octows2811-pins.png)
 
 ## Offen
 
-1. Teensy 3.2 vs 4.0/4.1 (USB-ID allein reicht nicht).
+1. Teensy 3.2 vs 4.0/4.1 (USB-ID allein reicht nicht) — **beide Hex gebaut** unter [`../teensy/hex/`](../teensy/hex/).
 2. Ob custom pins im Flash stehen.
-3. Welches USB-Framebuffer-Protokoll die Firmware erwartet (nicht unser Pico-`ANKR`).
+3. Welches USB-Framebuffer-Protokoll die Stock-Firmware erwartet (nicht unser Pico-`ANKR`) — nach Flash von `anker_pixel_pusher` gilt `ANKR`.
+
+Offline-Validierung: `python scripts/validate_teensy_build.py`  
+Flash: `pwsh -File teensy/scripts/flash_from_pi02.ps1` (Pi online + Program-Taste).
