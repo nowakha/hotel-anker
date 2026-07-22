@@ -143,3 +143,21 @@ User: **SD-Karte aus AnkerPI02 normalerweise schwer entnehmbar** (Decken-Screen)
 | Unmask/Start | **nicht** versucht |
 
 **Nächster Schritt:** Netz prüfen (WiFi SSID/Passwort? Ethernet stecken?). Sobald SSH da: mask + ffprobe-Player bestätigen, Clock nur nach Freigabe unmasken.
+
+## 2026-07-22 17:44 — AnkerPI02 calm LAN discovery (post-SD-rescue)
+
+**Result: not on LAN** (no SSH target found)
+
+| Check | Result |
+|-------|--------|
+| PC net | Wi-Fi 192.168.8.111/24 gw .254; Ethernet Media disconnected |
+| 192.168.8.106 | ping unreachable |
+| Common IPs (.100/.106-.110/.112/.120/.2/.10/.20/.50/.80/.90) | no ping |
+| ARP live | .101 (TTL128/Win), .103-.105 (TTL64, no :22), .254 gw; stale .102 (2c-cf-67 Pi OUI, no ping) |
+| AnkerPI02.local / ankerpi02.local | name not found |
+| Tailscale ankerpi02 100.103.54.63 | offline, last seen ~1h; ping timeout |
+| 169.254 | eth down; 169.254.0.1 Stale/no MAC; :22 no |
+
+Likely causes: WiFi not up after rescue; different subnet; still booting; eth cable only to PC but PC eth unplugged; Tailscale not started.
+
+Not done: fb-clock/ffprobe verify (unreachable). Do not unmask.
