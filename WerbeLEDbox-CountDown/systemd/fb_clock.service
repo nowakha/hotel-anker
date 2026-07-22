@@ -13,18 +13,17 @@ Group=user
 SupplementaryGroups=video render
 WorkingDirectory=/home/user/WerbeLEDbox-CountDown
 Environment=TZ=Europe/Zurich
-# Provisional: raw 4K st24.mov until clock_24h.mp4 (860x360) is encoded.
-# Production target remains media/clock_24h.mp4 — see docs/ANKERPI02.md
-Environment=VIDEO=/home/user/WerbeLEDbox-CountDown/media/st24.mov
+# Production: pre-cropped/scaled 860x360 H.264 (-g 25). Crop already baked into encode.
+Environment=VIDEO=/home/user/WerbeLEDbox-CountDown/media/clock_24h.mp4
 # Wait until NTP has set the clock (timesyncd)
 ExecStartPre=/bin/bash -c 'for i in $(seq 1 120); do timedatectl show -p NTPSynchronized --value | grep -qx yes && exit 0; sleep 1; done; echo "warn: starting without NTP sync" >&2; exit 0'
-# Crop: Premiere L0 T386 R0 B127; resync 60s helps long-GOP 4K seek drift
-# --no-hw: st24.mov is 3840x2160 H.264; Pi V4L2 h264_v4l2m2m is ~1080p-max and fails open
-ExecStart=/usr/bin/python3 /home/user/WerbeLEDbox-CountDown/fb_clock_play.py --video ${VIDEO} --tz Europe/Zurich --resync-every 60 --crop-top 386 --crop-bottom 127 --crop-left 0 --crop-right 0 --no-hw
+# Continuous play + periodic wall-clock resync. 860x360 fits Pi4 H.264 HW (≤1080p).
+# Neighbor upscale 860x360→3440x1440 + rotate 180 in vf. Fallback: add --no-hw if v4l2m2m fails.
+ExecStart=/usr/bin/python3 /home/user/WerbeLEDbox-CountDown/fb_clock_play.py --video ${VIDEO} --tz Europe/Zurich --resync-every 120
 Restart=always
-RestartSec=2
+RestartSec=5
 KillSignal=SIGTERM
-TimeoutStopSec=10
+TimeoutStopSec=15
 
 [Install]
 WantedBy=multi-user.target

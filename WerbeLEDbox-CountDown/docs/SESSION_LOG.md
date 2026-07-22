@@ -340,3 +340,15 @@ Goal: stabile 860×360 H.264-Produktion statt 4K `st24.mov` auf PI02 (Undervolta
 | systemd | `Restart=always`, `RestartSec=30` (storm-safe) |
 | Verify ~36s | **active/enabled**, NRestarts=**0**, frames **#1–#3** on `/dev/fb0`, `throttled=0x0` |
 | Note | User accepted stutter; UV not seen in verify window — leave running |
+
+## 2026-07-22 ~23:03 — Encode resume (daheim) + Deploy-Plan
+
+| Item | Ergebnis |
+|------|----------|
+| Altes Partial MP4 | **unbrauchbar** (`moov atom not found`) — nicht fortsetzbar |
+| Re-Encode | gestartet als **MKV** nach `C:\Users\User\Videos\_encode_clock_24h.partial.mkv` (Pfad ohne Spaces) |
+| Settings | crop 3840:1647:0:386 → 860×360, NVENC, `-g 25`, 25 fps |
+| Speed | ~**11.2×** (Stand ~00:13 / 24h nach 1 min) → ETA wall ~**2 h** |
+| PI02 | Tailscale/LAN **offline** (last seen ~1h) — Deploy-Watcher wartet |
+| Unit vorbereitet | `systemd/fb_clock.service` → `clock_24h.mp4` + `fb_clock_play.py` continuous, Autostart |
+| Deploy-Skript | `scripts/deploy_clock_24h_when_ready.ps1` (SCP via TS/LAN, FPS-Messung, enable) |
