@@ -1,35 +1,39 @@
 # Foto-Auswertung — LightBox / Kendu-Rahmen
 
-Stand: 22.07.2026 · drei Fotos aus dem Chat ausgewertet  
-**Bitte Originaldateien zusätzlich in diesen Ordner speichern** (Chat-Anhänge liegen hier nicht als Binärdateien vor), z. B.:
+Stand: 22.07.2026 · drei Chat-Fotos + gemessene XY-Maße  
+Vertiefung 3D: siehe **`GEOMETRIE-3D.md`** und Schemata `schema-*.png`
+
+**Bitte Originaldateien zusätzlich hier speichern** (für Mail-Anhang):
 
 | Dateiname | Motiv |
 |-----------|--------|
 | `01-gesamtansicht.jpg` | Rahmen frontal, volle LED-Matrix, Ständer |
 | `02-ecke-keder-nah.jpg` | Gehrungsecke + Kedernut + LED-Platten |
-| `03-kendu-controller-diffuser.jpg` | Kendu-Controller + Diffusor mit sichtbarem LED-Raster |
+| `03-kendu-controller-diffuser.jpg` | Kendu-Controller + Diffusor mit LED-Raster |
 
 ## Bestätigt aus den Fotos
 
-1. **Hersteller / System:** Kendu (Controller-Gehäuse mit KENDU-Logo; CH1–CH4, DC 24V, DMX).
+1. **Hersteller / System:** Kendu (Controller mit KENDU-Logo; CH1–CH4, DC 24V, DMX).
 2. **Aufbau:** Quadratischer Aluminium-Spannrahmen, silber/hell, freistehend auf Metallfuss.
-3. **Kederschiene:** Umlaufende Nut an der Profilinnenseite klar sichtbar (SEG / Flachkeder-Einschub); Ecke auf Gehrung.
-4. **Hinterleuchtung:** Flächige LED-Module (Backlit, nicht nur Edge-Lit), dichtes Raster auf weisser Reflexionsfläche; Module stossen aneinander.
-5. **Diffusor-Hinweis:** Hinter transluzentem Material zeichnet sich das LED-Punktraster ab → Blockout-Zonen müssen wirklich lichtundurchlässig sein, sonst Streulicht/Hotspots.
-6. **Elektronik unten:** Treiber/Controller am unteren Querprofil (passend zu Custom-Ansteuerung / Countdown).
+3. **Kederschiene:** Umlaufende Nut an der **vorderen Profil-Innenlippe** (SEG); Ecke auf Gehrung 45°.
+4. **Hinterleuchtung:** Flächige LED-Module auf der **Rückwand** (Backlit, nicht Edge-Lit); Module stoßen aneinander.
+5. **3D-Stack:** Textil vorne in der Nut → Luft/Diffusion → LED-Ebene → Reflexionsrückwand/Controller.
+6. **Diffusor-Hinweis:** LED-Punktraster scheint durch transluzentes Material → Blockout muss dicht sein.
+7. **Elektronik:** Kendu-Treiber am Rahmen (unterer Bereich / Querprofil).
 
-## Maße (Update 2026-07-22)
+## Maße
 
-| Maß | Wert |
-|-----|------|
-| LED-Panel | **250 × 250 mm** |
-| Druck-/LED-Fläche | **2000 × 2000 mm** (8×8 Panels) |
-| Außenmaß Rahmen | **2100 × 2100 mm** |
-| Profilbreite | **50 mm** (Rahmen trägt +5 cm) |
-| Content-Pitch | **31.25 mm** (64×64 auf 2 m) |
+| Maß | Wert | Achse |
+|-----|------|--------|
+| LED-Panel | **250 × 250 mm** | XY |
+| Druck-/LED-Fläche | **2000 × 2000 mm** | XY |
+| Außenmaß Rahmen | **2100 × 2100 mm** | XY |
+| Profil-Stirnbreite | **50 mm** | XY (Rahmen +5 cm) |
+| Profil-Tiefe | **≈ 100 mm** | Z (Kendu «spessore», Foto-konsistent) |
+| Content-Pitch | **31.25 mm** | XY (64×64) |
 
 ## Relevanz für Richnerstutz
 
-- Konfektion: **SEG-/Kederschienenlippe** passend zur vorhandenen Nut (Mass nach Foto 02 + ggf. Musterkeder).
-- Material: Backlit-Textil mit **selektivem Blockout** (siehe Opazitätsplatte) — reine Diffusionsfolie ohne Opazitätssteuerung reicht nicht.
-- Referenz: bestehende Kendu-SEG-Logik; Druck darf Drittanbieter sein (Custom-Retrofit / Hotel Anker).
+- Konfektion: SEG-/Kederschienenlippe in die **vordere Nut** (Foto 02).
+- Druckformat: **2000×2000 mm** Sichtfläche (nicht Außen 2100).
+- Material: Backlit-Textil + **selektiver Blockout** (Opazitätsplatte) — nötig wegen sichtbarem LED-Raster (Foto 03).

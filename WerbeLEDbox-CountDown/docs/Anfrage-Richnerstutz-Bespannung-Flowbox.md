@@ -29,7 +29,8 @@ Am Standort **Hotel Anker, Rorschach** (Countdown-Bar / Sichtfenster zum Sanieru
 | Systemfamilie | Kendu **Flowbox** / Smartframe-SEG | Aluminium-Spannrahmen mit umlaufender Kederschiene |
 | Nennfläche (Sicht-/Leuchtfläche) | **2000 × 2000 mm** | 8×8 LED-Panels à 250×250 mm |
 | Außenmaß Rahmen | **2100 × 2100 mm** | gemessen |
-| Profilbreite | **50 mm** | (2100−2000)/2 · Rahmen trägt +5 cm |
+| Profil-Stirnbreite (XY) | **50 mm** | (2100−2000)/2 · Rahmen +5 cm |
+| Profil-Tiefe (Z) | **≈ 100 mm** | Kendu «spessore»; Backlit-Stack laut Fotos |
 | Konfektion | **Umlaufende Kederschienenlippe** (Silikon-/Flachkeder) | Einschub in die Profilnut, werkzeugloser Sujetwechsel |
 | Hinterleuchtung | Individuelle **LED-Matrix 64 × 64** hinter dem Textil | Custom-Retrofit (nicht Standard-Kendu-Animation), Zellpitch **31,25 mm** |
 | Totzone unten | **250 mm** (8/64 Zellen) | muss **vollständig lichtundurchlässig** gedruckt/gedeckt sein |
