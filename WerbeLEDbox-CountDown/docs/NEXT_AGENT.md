@@ -1,24 +1,26 @@
-# NEXT AGENT — Sofortmaßnahmen
+﻿# NEXT AGENT — Sofortmaßnahmen
 
-Stand: 2026-07-22 ~19:22. Lies zuerst `LEARNINGS.md` + `docs/SESSION_LOG.md` + `docs/RESEARCH_PI_CLOCK_PLAYBACK.md`.
+Stand: 2026-07-22 ~19:41. Lies zuerst `LEARNINGS.md` + `docs/SESSION_LOG.md`.
 
-## Status Clock
+## Status Clock (LIVE)
 
-- **fb-clock: MASKED**; `fb_clock_opencv.service` **disabled** (Soll-Zustand).
-- Player: `fb_clock_opencv.py` Default **`--pipeline vf860`** (ffmpeg crop+scale 860×360 + hflip/vflip → raw → NEAREST 3440×1440 → RGB565). Optional `--hwaccel drm` (Fallback soft).
-- Bench: 4K-Decode ~12 s = Bottleneck; 860 vs 3440 Host-Resize fast egal (~0.2 s). Max nachhaltig ~**0.10–0.13 fps** auf `st24.mov`.
-- Research: Pi 4 H.264 HW **≤1080p** → 4K H.264 nie HW; Community = pre-transcode + **continuous** play.
-- **Nicht** OpenCV `VideoCapture(st24)` (SIGBUS / cv2 fehlt). **Nicht** `ffmpeg -f null` Full-Decode.
-- Live Max-FPS Test: **throttled=0x0** (gut); Autostart trotzdem nicht ohne PSU-Freigabe.
+- **fb-clock: ENABLED + ACTIVE** (dauerhaft) — unit = opencv/hybrid player.
+- Pipeline: `--pipeline vf860 --hwaccel drm --min-interval 0`; Video `media/st24.mov`.
+- TZ Europe/Zurich + NTP yes. `Restart=always` / `RestartSec=30`.
+- Bei UV-Reboot-Storm: `min-interval 5` setzen oder masken (`scripts/_pi02_emergency_mask.sh`).
 
-## Jetzt tun (Priorität)
+## Status Encode (PAUSED)
 
-1. Encode fertig? Prüfe `media/clock_24h.mp4` auf MLT-NITRO5-HN → auf PI02 kopieren, `VIDEO=` auf 860×360 MP4.
-2. **Experiment (Research R2):** continuous `mpv --vo=drm --hwdec=v4l2m2m-copy --start=$(wall Zürich)` **oder** GStreamer→fbdev — nicht Frame-Extract.
-3. Erst dann unmask/enable mit `min-interval` ≥5–15 s; SSH beobachten; bei UV sofort masken.
+- ffmpeg gestoppt. Partial: `media/_encode_clock_24h.partial.mp4` @ **~37.6%** (`out_time≈09:01:50`).
+- **Nicht löschen.** Resume/Finish auf MLT-NITRO5-HN → dann `clock_24h.mp4` auf PI02, `VIDEO=` umstellen.
+
+## Jetzt tun
+
+1. Encode fertigmachen → deploy `clock_24h.mp4` → continuous play Experiment (Research).
+2. Unter Dauerlast `vcgencmd get_throttled` beobachten; bei sticky UV PSU prüfen.
 
 ## Nicht tun
 
 - Kein `cmdline.txt`-Experiment
-- Kein apt `python3-opencv` auf diesem 2 GB Pi
-- Kein Autostart solange PSU/UV unklar oder nur 4K `st24.mov` als Quelle
+- Kein apt `python3-opencv`
+- Partial encode nicht löschen

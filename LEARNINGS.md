@@ -1,78 +1,84 @@
-# Hotel Anker — Learnings & Handoff
+# Hotel Anker â€” Learnings & Handoff
 
-Stand: **2026-07-22 ~19:22 CEST** (Workstation **MLT-NITRO5-HN** + TABLETHI10MAX).
-Ziel: eine andere Cursor-Instanz auf einem anderen Rechner kann ohne mündlichen Kontext weiterarbeiten.
+Stand: **2026-07-22 ~19:41 CEST** (Abfahrt: encode paused, clock dauerhaft).
+Ziel: eine andere Cursor-Instanz auf einem anderen Rechner kann ohne mÃ¼ndlichen Kontext weiterarbeiten.
 
-**Workflow (verbindlich):** `.cursor/rules/hotel-anker-workflow.mdc` — jeden Schritt dokumentieren (Erfolg+Misserfolg), Credentials/Learnings mitziehen, commit + `git push origin HEAD`.
+**Workflow (verbindlich):** `.cursor/rules/hotel-anker-workflow.mdc` â€” jeden Schritt dokumentieren (Erfolg+Misserfolg), Credentials/Learnings mitziehen, commit + `git push origin HEAD`.
 
 Detaillierte Chronik: [`WerbeLEDbox-CountDown/docs/SESSION_LOG.md`](./WerbeLEDbox-CountDown/docs/SESSION_LOG.md).
 
+## Abfahrt 2026-07-22 ~19:41 — Encode pause + Clock live
+
+- **NVENC pause:** ffmpeg PID 8652 gestoppt; Partial `WerbeLEDbox-CountDown/media/_encode_clock_24h.partial.mp4` behalten @ **~37.6%** (`out_time=09:01:50` / 24h). Nicht löschen.
+- **Clock dauerhaft:** AnkerPI02 `fb-clock.service` = `fb_clock_opencv.py` **vf860 + drm**, `min-interval 0`, `Restart=always`/`RestartSec=30`, Video `st24.mov`, TZ Europe/Zurich. Verify: frames on fb0, `throttled=0x0`, NRestarts=0.
+- Resume encode später auf MLT-NITRO5-HN; danach `clock_24h.mp4` auf Pi.
+
 ## Research Pi Clock Playback (2026-07-22 ~19:22)
 
-Vollständig: [`WerbeLEDbox-CountDown/docs/RESEARCH_PI_CLOCK_PLAYBACK.md`](./WerbeLEDbox-CountDown/docs/RESEARCH_PI_CLOCK_PLAYBACK.md).
+VollstÃ¤ndig: [`WerbeLEDbox-CountDown/docs/RESEARCH_PI_CLOCK_PLAYBACK.md`](./WerbeLEDbox-CountDown/docs/RESEARCH_PI_CLOCK_PLAYBACK.md).
 
 | Finding | Implication |
 |---------|-------------|
 | Pi 4 H.264 HW **max ~1080p**; 4K nur HEVC | `st24.mov` 4K H.264 = **immer Soft-Decode**; `v4l2m2m` FAIL erwartet |
 | Seek-jedes-Frame ist Anti-Pattern | Continuous play + periodischer Wall-Clock-Resync |
-| Signage-Best-Practice | Pre-transcode (unser `860×360`) vor dem Pi |
-| fb0 RGB565 ohne X | GStreamer `v4l2convert`→`fbdevsink` (Anthias) oder mpv `--vo=drm` |
-| PSU | 5.1 V / ≥3 A offiziell; `0x50000` = UV history |
+| Signage-Best-Practice | Pre-transcode (unser `860Ã—360`) vor dem Pi |
+| fb0 RGB565 ohne X | GStreamer `v4l2convert`â†’`fbdevsink` (Anthias) oder mpv `--vo=drm` |
+| PSU | 5.1â€¯V / â‰¥3â€¯A offiziell; `0x50000` = UV history |
 
-**Nächstes Experiment:** `clock_24h.mp4` auf PI02 → continuous mpv/gstreamer mit `--start=HH:MM:SS` (Europe/Zurich), nicht ffmpeg-Einzelbild.
+**NÃ¤chstes Experiment:** `clock_24h.mp4` auf PI02 â†’ continuous mpv/gstreamer mit `--start=HH:MM:SS` (Europe/Zurich), nicht ffmpeg-Einzelbild.
 
 ## AnkerPI02 Pipeline-Bench + Max-FPS (2026-07-22 ~19:28)
 
-**Frage:** Unterscheidet sich 860×360 vs 3440×1440? Was ist schneller?
+**Frage:** Unterscheidet sich 860Ã—360 vs 3440Ã—1440? Was ist schneller?
 
-**Antwort (gemessen, 3 Runs, `st24.mov` 4K, crop T386/B127):** Bottleneck ist **ffmpeg Seek+Decode** (~12–13 s), nicht Resize. 860 vs 3440 Host-Resize spart nur ~0.2 s. OpenCV **fehlt** (`cv2` nicht installiert / zuvor SIGBUS).
+**Antwort (gemessen, 3 Runs, `st24.mov` 4K, crop T386/B127):** Bottleneck ist **ffmpeg Seek+Decode** (~12â€“13â€¯s), nicht Resize. 860 vs 3440 Host-Resize spart nur ~0.2â€¯s. OpenCV **fehlt** (`cv2` nicht installiert / zuvor SIGBUS).
 
 | Pipeline | MEAN total | ~fps | Bemerkung |
 |----------|------------|------|-----------|
-| A legacy PNG+PIL 3440 | **13905 ms** | 0.07 | Baseline |
-| B1/B2 Host 860 (+blit/NN-up) | ~136–13700 ms | 0.07 | kaum besser |
-| C1 vf→3440 raw | 12341 ms | 0.08 | ffmpeg crop/scale |
-| **C2 vf→860 + NN-up** | **12155 ms** | **0.08** | volles Bild, Gewinner UX/Speed |
-| C3 vf→860 center-blit | 12119 ms | 0.08 | winzig auf 3440 — nicht brauchbar |
-| D `-hwaccel drm` +860 | **12081 ms** | 0.08 | knapp schnellster; v4l2m2m **FAIL** |
-| Stages (C2) | extract≈12045 / resize≈33 / rgb565≈72 / fb≈4 ms | | |
+| A legacy PNG+PIL 3440 | **13905â€¯ms** | 0.07 | Baseline |
+| B1/B2 Host 860 (+blit/NN-up) | ~136â€“13700â€¯ms | 0.07 | kaum besser |
+| C1 vfâ†’3440 raw | 12341â€¯ms | 0.08 | ffmpeg crop/scale |
+| **C2 vfâ†’860 + NN-up** | **12155â€¯ms** | **0.08** | volles Bild, Gewinner UX/Speed |
+| C3 vfâ†’860 center-blit | 12119â€¯ms | 0.08 | winzig auf 3440 â€” nicht brauchbar |
+| D `-hwaccel drm` +860 | **12081â€¯ms** | 0.08 | knapp schnellster; v4l2m2m **FAIL** |
+| Stages (C2) | extractâ‰ˆ12045 / resizeâ‰ˆ33 / rgb565â‰ˆ72 / fbâ‰ˆ4â€¯ms | | |
 
-**Live max-fps** (`--pipeline vf860 --hwaccel drm --min-interval 0`, 150 s): **15 Frames** auf fb0, `eff_fps≈0.10–0.13`, extract 3.7–15 s, **`throttled=0x0` durchgängig**. drm fiel 1× aus → Soft-Fallback. **fb-clock bleibt masked**, `fb_clock_opencv` disabled.
+**Live max-fps** (`--pipeline vf860 --hwaccel drm --min-interval 0`, 150â€¯s): **15 Frames** auf fb0, `eff_fpsâ‰ˆ0.10â€“0.13`, extract 3.7â€“15â€¯s, **`throttled=0x0` durchgÃ¤ngig**. drm fiel 1Ã— aus â†’ Soft-Fallback. **fb-clock bleibt masked**, `fb_clock_opencv` disabled.
 
-**Default im Player:** `--pipeline vf860` (ffmpeg `crop+scale=860:360+hflip/vflip` → raw → NEAREST→3440 → RGB565). Für Autostart weiter `min-interval 15` in Unit.
+**Default im Player:** `--pipeline vf860` (ffmpeg `crop+scale=860:360+hflip/vflip` â†’ raw â†’ NEARESTâ†’3440 â†’ RGB565). FÃ¼r Autostart weiter `min-interval 15` in Unit.
 
 ## Production encode `clock_24h.mp4` (2026-07-22 ~18:53 RUNNING)
 
-Workstation **MLT-NITRO5-HN**, RTX 3080 Laptop, Driver **610.62**, FFmpeg **8.1.2** (WinGet Gyan; PATH oft leer → Full path unter `…\WinGet\Packages\Gyan.FFmpeg_…\ffmpeg-8.1.2-full_build\bin\`).
+Workstation **MLT-NITRO5-HN**, RTX 3080 Laptop, Driver **610.62**, FFmpeg **8.1.2** (WinGet Gyan; PATH oft leer â†’ Full path unter `â€¦\WinGet\Packages\Gyan.FFmpeg_â€¦\ffmpeg-8.1.2-full_build\bin\`).
 
 | Item | Detail |
 |------|--------|
 | Quelle | `C:\Users\User\Videos\st24.mov` (ffprobe only; **nie** `-f null` Full-Decode) |
-| Filter | `crop=3840:1647:0:386,scale=860:360:flags=lanczos` · `-r 25` · `h264_nvenc` · `-g 25` |
+| Filter | `crop=3840:1647:0:386,scale=860:360:flags=lanczos` Â· `-r 25` Â· `h264_nvenc` Â· `-g 25` |
 | Output | `WerbeLEDbox-CountDown/media/clock_24h.mp4` (via `.partial` + Watcher) |
-| Status | **encoding** ffmpeg PID **8652** (~11×) ETA ~**21:00 CEST**; Logs `media/_encode_clock_24h.*` |
-| Git | große Media **gitignored** (`media/*.mp4`, `_encode*`) |
+| Status | **encoding** ffmpeg PID **8652** (~11Ã—) ETA ~**21:00 CEST**; Logs `media/_encode_clock_24h.*` |
+| Git | groÃŸe Media **gitignored** (`media/*.mp4`, `_encode*`) |
 
 ## AnkerPI02 Undervoltage idle-Check (2026-07-22 ~19:08)
 
-SSH `192.168.8.106`: `get_throttled=0x0` (vorher unter Last `0x50000`). Volts 0.966 V, temp 47.7°C, load leicht, uptime ~1 min nach Reboot. **fb-clock** weiter **masked/inactive**. Keine UV-Meldungen in dmesg/journal seit Boot. Caveat: Sticky-Bits clearen bei Reboot; unter Last erneut messen. Gutes 5V/≥3A-PSU weiter empfohlen.
+SSH `192.168.8.106`: `get_throttled=0x0` (vorher unter Last `0x50000`). Volts 0.966 V, temp 47.7Â°C, load leicht, uptime ~1 min nach Reboot. **fb-clock** weiter **masked/inactive**. Keine UV-Meldungen in dmesg/journal seit Boot. Caveat: Sticky-Bits clearen bei Reboot; unter Last erneut messen. Gutes 5V/â‰¥3A-PSU weiter empfohlen.
 ## AnkerPI02 Undervoltage idle-Check (2026-07-22 ~19:08)
 
-SSH `192.168.8.106`: `get_throttled=0x0` (vorher unter Last `0x50000`). Volts 0.966 V, temp 47.7°C, load leicht, uptime ~1 min nach Reboot. **fb-clock** weiter **masked/inactive**. Keine UV-Meldungen in dmesg/journal seit Boot. Caveat: Sticky-Bits clearen bei Reboot; unter Last erneut messen. Gutes 5V/≥3A-PSU weiter empfohlen.
+SSH `192.168.8.106`: `get_throttled=0x0` (vorher unter Last `0x50000`). Volts 0.966 V, temp 47.7Â°C, load leicht, uptime ~1 min nach Reboot. **fb-clock** weiter **masked/inactive**. Keine UV-Meldungen in dmesg/journal seit Boot. Caveat: Sticky-Bits clearen bei Reboot; unter Last erneut messen. Gutes 5V/â‰¥3A-PSU weiter empfohlen.
 ## AnkerPI02 OpenCV / Video-Clock (2026-07-22 ~18:45)
 
-**Clock running? NEIN** — `fb-clock` soll **masked** bleiben. Netz-Ping ~18:51 (`.106`/`.112`/TS) **FAIL** — Mask-State remote nicht bestätigt.
+**Clock running? NEIN** â€” `fb-clock` soll **masked** bleiben. Netz-Ping ~18:51 (`.106`/`.112`/TS) **FAIL** â€” Mask-State remote nicht bestÃ¤tigt.
 
 | Befund | Detail |
 |--------|--------|
-| PSU | `vcgencmd get_throttled=0x50000` — **Under-voltage has occurred**; Reboots unter 4K-Decode/apt |
-| apt `python3-opencv` | **FAIL** — ~645 MB Deps → OOM/Reboot mid-install auf 2 GB Pi |
-| pip `opencv-python-headless` in venv | Install OK kurzzeitig; danach **`import cv2` / VideoCapture(st24) → SIGBUS** |
-| Pure OpenCV decode-loop | **nicht tragbar** für st24 4K |
-| Hybrid **OK kurz** | `fb_clock_opencv.py`: `ffmpeg -ss -frames:v 1` → PIL crop/scale/rotate180 → RGB565 fb0 |
-| Gemessen | ~0.1–0.15 fps; extract 5–14 s/Frame; crop T386/B127; seek = wall clock Europe/Zurich |
-| systemd enable | 2–3 Frames im Journal, dann **Reboot** → sofort wieder maskiert |
-| Empfehlung | Offizielles **5 V/≥3 A** PSU; Produktion **`clock_24h.mp4` 860×360**; dann Unit `systemd/fb_clock_opencv.service` unmasken (`min-interval` 15 s) |
+| PSU | `vcgencmd get_throttled=0x50000` â€” **Under-voltage has occurred**; Reboots unter 4K-Decode/apt |
+| apt `python3-opencv` | **FAIL** â€” ~645â€¯MB Deps â†’ OOM/Reboot mid-install auf 2â€¯GB Pi |
+| pip `opencv-python-headless` in venv | Install OK kurzzeitig; danach **`import cv2` / VideoCapture(st24) â†’ SIGBUS** |
+| Pure OpenCV decode-loop | **nicht tragbar** fÃ¼r st24 4K |
+| Hybrid **OK kurz** | `fb_clock_opencv.py`: `ffmpeg -ss -frames:v 1` â†’ PIL crop/scale/rotate180 â†’ RGB565 fb0 |
+| Gemessen | ~0.1â€“0.15â€¯fps; extract 5â€“14â€¯s/Frame; crop T386/B127; seek = wall clock Europe/Zurich |
+| systemd enable | 2â€“3 Frames im Journal, dann **Reboot** â†’ sofort wieder maskiert |
+| Empfehlung | Offizielles **5â€¯V/â‰¥3â€¯A** PSU; Produktion **`clock_24h.mp4` 860Ã—360**; dann Unit `systemd/fb_clock_opencv.service` unmasken (`min-interval` 15â€¯s) |
 
 Enable (nur nach stabilem PSU / kleinerem Video):
 
@@ -83,66 +89,66 @@ sudo systemctl enable --now fb-clock
 # Stop/Mask: sudo systemctl disable --now fb-clock; sudo systemctl mask fb-clock
 ```
 
-## AnkerPI01 WiFi — persistent /etc keyfile (2026-07-22 ~18:12)
+## AnkerPI01 WiFi â€” persistent /etc keyfile (2026-07-22 ~18:12)
 
-Same lesson as PI02: active profile was only under `/run/NetworkManager/system-connections/` (`netplan-wlan0-HotelAnker`). Now: `/etc/.../HotelAnker.nmconnection` (prio 20, powersave=2, DNS pinned). **Live:** wlan0 **HotelAnker** → `192.168.8.102`; Power Management **off**.
+Same lesson as PI02: active profile was only under `/run/NetworkManager/system-connections/` (`netplan-wlan0-HotelAnker`). Now: `/etc/.../HotelAnker.nmconnection` (prio 20, powersave=2, DNS pinned). **Live:** wlan0 **HotelAnker** â†’ `192.168.8.102`; Power Management **off**.
 
-**5 GHz:** Pi Zero 2 W = **Band 1 only** → `HotelAnker_5G` not visible / not created (N/A on this hardware). PI02 keeps dual 5G+2.4 profiles.
+**5 GHz:** Pi Zero 2 W = **Band 1 only** â†’ `HotelAnker_5G` not visible / not created (N/A on this hardware). PI02 keeps dual 5G+2.4 profiles.
 
-## AnkerPI02 WiFi — Root Cause + Fix (2026-07-22 ~18:00)
+## AnkerPI02 WiFi â€” Root Cause + Fix (2026-07-22 ~18:00)
 
 **Nicht** rfkill, **nicht** `config.txt`/`dtoverlay` WiFi-Disable, **nicht** Underclock.
 
 1. Stack: **NetworkManager** (dhcpcd absent; systemd-networkd inactive).
-2. `/etc/NetworkManager/system-connections/` war **leer** → wlan0 `disconnected` / NO-CARRIER trotz Scan (HotelAnker @ 100%).
-3. `nmcli connection add` landete nur unter `/run/NetworkManager/system-connections/` (tmpfs) → Profile nach Kill/Reload weg. **Fix:** Keyfiles direkt nach `/etc/...` schreiben, `chmod 600`, `nmcli connection reload`.
+2. `/etc/NetworkManager/system-connections/` war **leer** â†’ wlan0 `disconnected` / NO-CARRIER trotz Scan (HotelAnker @ 100%).
+3. `nmcli connection add` landete nur unter `/run/NetworkManager/system-connections/` (tmpfs) â†’ Profile nach Kill/Reload weg. **Fix:** Keyfiles direkt nach `/etc/...` schreiben, `chmod 600`, `nmcli connection reload`.
 4. Profiles: `HotelAnker_5G` priority **20**, `HotelAnker` priority **10**; powersave=2; DNS 1.1.1.1/8.8.8.8. PSK in `secrets/wifi.hotelanker.yml`.
-5. **Live:** wlan0 **HotelAnker_5G** → `192.168.8.106`; eth0 → `192.168.8.112`; Tailscale `100.103.54.63`. **fb-clock bleibt masked.**
+5. **Live:** wlan0 **HotelAnker_5G** â†’ `192.168.8.106`; eth0 â†’ `192.168.8.112`; Tailscale `100.103.54.63`. **fb-clock bleibt masked.**
 
-## SD-Rescue AnkerPI02 — SUCCESS (2026-07-22 ~17:18)
+## SD-Rescue AnkerPI02 â€” SUCCESS (2026-07-22 ~17:18)
 
 SD im USB-Reader an MLT-NITRO5-HN (Disk 2, 119.4 GB, `bootfs`=`E:`):
 
-- **fb-clock masked** (`→ /dev/null`); Wants entfernt; alte Unit `.DISABLED`.
+- **fb-clock masked** (`â†’ /dev/null`); Wants entfernt; alte Unit `.DISABLED`.
 - Gepatchtes `fb_clock_play.py` (ffprobe / Never decode) auf Pi-rootfs deployt.
-- Repo-Unit als `fb-clock.service.REPO` (nicht enabled). **cmdline.txt unberührt.**
-- `wsl --mount` scheiterte hier (`0x8007000f`); **usbipd** bind+attach → WSL `/dev/sde` OK.
+- Repo-Unit als `fb-clock.service.REPO` (nicht enabled). **cmdline.txt unberÃ¼hrt.**
+- `wsl --mount` scheiterte hier (`0x8007000f`); **usbipd** bind+attach â†’ WSL `/dev/sde` OK.
 - Helper `scripts/pi02_sd_rescue_wsl.sh` unter WSL ggf. CRLF strippen (`sed -i 's/\r$//'`) .
 
-### Post-boot Verify — erledigt via Ethernet (~17:53–18:00)
+### Post-boot Verify â€” erledigt via Ethernet (~17:53â€“18:00)
 
 Nach LAN-Kabel: SSH auf **`.112`** (eth) / mDNS `AnkerPI02.local`. Verify: **fb-clock masked**, `fb_clock_play.py` hat **ffprobe**. WiFi restored (siehe oben). Unmask weiter nur nach Freigabe.
 
 ## Cursor Workspace (kanonisch)
 
 - **Einziger Arbeitsordner:** `C:\Users\User\Documents\Cursor Projects\Hotel Anker` (Name mit Leerzeichen) bzw. Harald-Pfad `C:\Users\Harald Nowak\Documents\Cursor Projects\Hotel Anker`.
-- Cursor-Linke «Repositories»-Anzeige mit zwei Namen (**Hotel Anker** + **hotel-anker**) = derselbe Git-Stand: Ordnername vs. GitHub-Slug `nowakha/hotel-anker`.
+- Cursor-Linke Â«RepositoriesÂ»-Anzeige mit zwei Namen (**Hotel Anker** + **hotel-anker**) = derselbe Git-Stand: Ordnername vs. GitHub-Slug `nowakha/hotel-anker`.
 
 ## Repo & Secrets
 
-- Remote: `https://github.com/nowakha/hotel-anker.git` (**privat halten** — enthält SSH-Passwörter).
-- Credentials: `WerbeLEDbox-CountDown/secrets/ankerpi0{1,2}.credentials.yml` + `wifi.hotelanker.yml` — **bewusst getrackt**.
+- Remote: `https://github.com/nowakha/hotel-anker.git` (**privat halten** â€” enthÃ¤lt SSH-PasswÃ¶rter).
+- Credentials: `WerbeLEDbox-CountDown/secrets/ankerpi0{1,2}.credentials.yml` + `wifi.hotelanker.yml` â€” **bewusst getrackt**.
 - SSH-User/Passwort beider Pis: `user` / `12345678` (PasswordAuthentication an).
 - SSH-Keys: `hotel-anker-dev@TABLETHI10MAX` (legacy) + `hotel-anker-dev@MLT-NITRO5-HN` (2026-07-22).
 - Private Keys **nicht** im Repo. Fragment: `WerbeLEDbox-CountDown/ssh/config.fragment`.
 
 ## Hardware-Wahrheit
 
-1. **AnkerPI01** — Pi Zero 2 W: SPI0 `ws2812put` + Producer **`countdown_pi01`** → `shm://ws2812` `(1179,3)`. DHCP oft **`192.168.8.102`** (auch `.108` gesehen) — mDNS bevorzugen. **DNS pinned 1.1.1.1/8.8.8.8** (NM). WiFi: persistent `/etc/.../HotelAnker.nmconnection` (2.4 only; **kein 5 GHz**). **Tailscale 1.98.9 installiert** (`tailscaled` active); **Join NeedsLogin** — Auth: https://login.tailscale.com/a/144cabd401ab72 · Hostname `AnkerPI01` · `--accept-dns=false`.
-2. **AnkerPI02** — Pi 4: HDMI **3440×1440@50**. **Default-Clock neu: `fb_clock_live.py`** (kein MP4/MOV-Decode). Optional designed `clock_24h.mp4` / provisional `st24.mov` nur mit gepatchtem `fb_clock_play` (ffprobe). **wlan0** oft **`192.168.8.106`** (HotelAnker_5G); **eth0** **`192.168.8.112`**. Tailscale: **`ankerpi02` / `100.103.54.63`**. fb-clock derzeit **masked**.
-3. **SD-Karte PI02 schwer entnehmbar** → Boot-Schutz; SD-Rescue Docs: `docs/PI02_SD_RESCUE.md`.
+1. **AnkerPI01** â€” Pi Zero 2 W: SPI0 `ws2812put` + Producer **`countdown_pi01`** â†’ `shm://ws2812` `(1179,3)`. DHCP oft **`192.168.8.102`** (auch `.108` gesehen) â€” mDNS bevorzugen. **DNS pinned 1.1.1.1/8.8.8.8** (NM). WiFi: persistent `/etc/.../HotelAnker.nmconnection` (2.4 only; **kein 5 GHz**). **Tailscale 1.98.9 installiert** (`tailscaled` active); **Join NeedsLogin** â€” Auth: https://login.tailscale.com/a/144cabd401ab72 Â· Hostname `AnkerPI01` Â· `--accept-dns=false`.
+2. **AnkerPI02** â€” Pi 4: HDMI **3440Ã—1440@50**. **Default-Clock neu: `fb_clock_live.py`** (kein MP4/MOV-Decode). Optional designed `clock_24h.mp4` / provisional `st24.mov` nur mit gepatchtem `fb_clock_play` (ffprobe). **wlan0** oft **`192.168.8.106`** (HotelAnker_5G); **eth0** **`192.168.8.112`**. Tailscale: **`ankerpi02` / `100.103.54.63`**. fb-clock derzeit **masked**.
+3. **SD-Karte PI02 schwer entnehmbar** â†’ Boot-Schutz; SD-Rescue Docs: `docs/PI02_SD_RESCUE.md`.
 4. **Teensy** am PI02 USB: Hex gebaut + offline validiert (`teensy/hex/`, `validate_teensy_build.py` PASS). Flash: `teensy/scripts/flash_from_pi02.ps1`. Pico = Lab.
 
 ## Kritische Falle (2026-07-22)
 
-`fb_clock_play.probe_size()` mit `ffmpeg -i FILE -f null -` dekodierte **die gesamte Datei**. Bei 24h 4K → Pi tot.  
-**Fix:** ffprobe / kein Full-Decode. **Noch besser für Betrieb:** Live-Clock ohne Video.
+`fb_clock_play.probe_size()` mit `ffmpeg -i FILE -f null -` dekodierte **die gesamte Datei**. Bei 24h 4K â†’ Pi tot.  
+**Fix:** ffprobe / kein Full-Decode. **Noch besser fÃ¼r Betrieb:** Live-Clock ohne Video.
 
 ### Failure mode
 
-1. Boot → Splash sichtbar.
+1. Boot â†’ Splash sichtbar.
 2. `fb-clock` startet nach NTP-Wartezeit.
-3. Alter Player → Full-Decode `st24.mov` → Hang → Netz tot.
+3. Alter Player â†’ Full-Decode `st24.mov` â†’ Hang â†’ Netz tot.
 
 ### Rescue
 
@@ -150,40 +156,40 @@ Direkt-Ethernet + Watcher (`PI02_DIRECT_ETH_RESCUE.md`) oder SD-Rescue (SUCCESS 
 
 ## Print / Bespannung
 
-- `Richnerstutz-Bespannung-Paket/`, Rahmen 2100 mm, Textil→LED 45 mm.
+- `Richnerstutz-Bespannung-Paket/`, Rahmen 2100 mm, Textilâ†’LED 45 mm.
 - Interim-Schemas `06-fotos-vom-rahmen/01-schema-*.png`. Original-JPGs: `import_rahmen_fotos.ps1`.
 
-## Erledigt 2026-07-22 (Lücken geschlossen)
+## Erledigt 2026-07-22 (LÃ¼cken geschlossen)
 
 - Live-Clock + Install-Skript; optional `gen_clock_24h.py`.
 - PI01 Countdown-Producer + systemd.
 - Teensy hex tracked + validate script PASS.
 - Richnerstutz Schema-Beilagen + Import-Skript.
 
-## AnkerPI01 Netz — Root Cause (2026-07-22 ~17:45)
+## AnkerPI01 Netz â€” Root Cause (2026-07-22 ~17:45)
 
 **Nicht nur DNS.** Drei Schichten:
 
-1. **WiFi-Link instabil (Pi Zero 2 W)** — intermittierend 100% Ping-Loss / SSH-Timeouts trotz ARP; Power-Management war `on` → Service `wlan-powersave-off` + NM `powersave=disable`; Runtime ggf. wieder `on` nach Reconnect → `/sbin/iwconfig wlan0 power off` erneut.
-2. **DNS fragil** — nur Router `192.168.8.254` → **FIX:** NM `ipv4.dns=1.1.1.1 8.8.8.8`, `ignore-auto-dns=yes` (verifiziert in `/etc/resolv.conf`).
-3. **Tailscale-Deb-Fetch** — Small HTTPS zu `pkgs.tailscale.com` OK; IPv6 CloudFront tot; große IPv4-Downloads (~34 MB) timeout / „No route to host“ / ~KB/s. **Workaround:** Deb per LAN-SCP von Workstation, `dpkg -i`; `apt` mit `Acquire::ForceIPv4 true`.
+1. **WiFi-Link instabil (Pi Zero 2 W)** â€” intermittierend 100% Ping-Loss / SSH-Timeouts trotz ARP; Power-Management war `on` â†’ Service `wlan-powersave-off` + NM `powersave=disable`; Runtime ggf. wieder `on` nach Reconnect â†’ `/sbin/iwconfig wlan0 power off` erneut.
+2. **DNS fragil** â€” nur Router `192.168.8.254` â†’ **FIX:** NM `ipv4.dns=1.1.1.1 8.8.8.8`, `ignore-auto-dns=yes` (verifiziert in `/etc/resolv.conf`).
+3. **Tailscale-Deb-Fetch** â€” Small HTTPS zu `pkgs.tailscale.com` OK; IPv6 CloudFront tot; groÃŸe IPv4-Downloads (~34â€¯MB) timeout / â€žNo route to hostâ€œ / ~KB/s. **Workaround:** Deb per LAN-SCP von Workstation, `dpkg -i`; `apt` mit `Acquire::ForceIPv4 true`.
 
-Status ~18:12: SSH OK, persistent HotelAnker keyfile under `/etc`, DNS pinned, powersave off, Tailscale **1.98.9 installiert** via LAN-SCP Deb; **Join wartet auf Browser-Auth** (kein Auth-Key). Nach Login: `tailscale ip -4` → Secrets `tailscale_ip` setzen.
+Status ~18:12: SSH OK, persistent HotelAnker keyfile under `/etc`, DNS pinned, powersave off, Tailscale **1.98.9 installiert** via LAN-SCP Deb; **Join wartet auf Browser-Auth** (kein Auth-Key). Nach Login: `tailscale ip -4` â†’ Secrets `tailscale_ip` setzen.
 
-## Offene Arbeit (Priorität)
+## Offene Arbeit (PrioritÃ¤t)
 
-1. PI02 nach SD-Rescue booten → SSH → **`install_fb_clock_live_service.sh`** (oder patched play verifizieren) → unmask nur Live/safe path.
-2. **PI01 Tailscale Auth:** https://login.tailscale.com/a/144cabd401ab72 öffnen → danach IP in `secrets/ankerpi01.credentials.yml` eintragen.
+1. PI02 nach SD-Rescue booten â†’ SSH â†’ **`install_fb_clock_live_service.sh`** (oder patched play verifizieren) â†’ unmask nur Live/safe path.
+2. **PI01 Tailscale Auth:** https://login.tailscale.com/a/144cabd401ab72 Ã¶ffnen â†’ danach IP in `secrets/ankerpi01.credentials.yml` eintragen.
 3. PI01: `install_ws2812put_service.sh` + `install_countdown_pi01_service.sh`.
 4. Teensy flash (Program-Taste) wenn PI02 USB ok.
 5. Original-Rahmen-JPGs nachlegen; optional NVENC `clock_24h.mp4`.
 
 ## Kontakt (Technik)
 
-Harald Nowak · Modernlight · Harald.Nowak@modernlight.ch · +41 76 579 84 54 · Wangenstrasse 57, 3018 Bern  
+Harald Nowak Â· Modernlight Â· Harald.Nowak@modernlight.ch Â· +41 76 579 84 54 Â· Wangenstrasse 57, 3018 Bern  
 Regel: `.cursor/rules/harald-nowak-modernlight.mdc`
 
-## 2026-07-22 17:44 — AnkerPI02 calm LAN discovery (post-SD-rescue)
+## 2026-07-22 17:44 â€” AnkerPI02 calm LAN discovery (post-SD-rescue)
 
 **Result: not on LAN** (no SSH target found)
 

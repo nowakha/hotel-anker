@@ -21,10 +21,10 @@ ExecStartPre=/bin/bash -c 'for i in $(seq 1 120); do timedatectl show -p NTPSync
 Nice=10
 CPUAffinity=0
 # System python3 + python3-pil + python3-numpy
-# min-interval 15s safer for weak PSU; player default is 0 (max fps) for foreground tests
-ExecStart=/usr/bin/python3 /home/user/WerbeLEDbox-CountDown/fb_clock_opencv.py --video ${VIDEO} --tz Europe/Zurich --crop-top 386 --crop-bottom 127 --crop-left 0 --crop-right 0 --pipeline vf860 --hwaccel drm --log-every 1 --min-interval 15.0
-Restart=on-failure
-RestartSec=10
+# Dauerhaft (user 2026-07-22): max fps on st24; stutter OK. RestartSec high avoids UV reboot storm.
+ExecStart=/usr/bin/python3 /home/user/WerbeLEDbox-CountDown/fb_clock_opencv.py --video ${VIDEO} --tz Europe/Zurich --crop-top 386 --crop-bottom 127 --crop-left 0 --crop-right 0 --pipeline vf860 --hwaccel drm --log-every 1 --min-interval 0
+Restart=always
+RestartSec=30
 KillSignal=SIGTERM
 TimeoutStopSec=20
 

@@ -316,3 +316,27 @@ Goal: stabile 860×360 H.264-Produktion statt 4K `st24.mov` auf PI02 (Undervolta
 - 15 Frames, seek = wall clock, `eff_fps≈0.10–0.13`, best cycle ~3.8 s.
 - **throttled=0x0** vor/während/nach. systemd unverändert masked/disabled.
 - Letztes Frame bleibt auf fb0.
+
+## 2026-07-22 ~19:38–19:41 — Abfahrt: Encode pause + Clock dauerhaft
+
+### 1) NVENC encode PAUSED (Windows MLT-NITRO5-HN)
+| Item | Wert |
+|------|------|
+| Action | Graceful stop ffmpeg PID **8652** (Stop-Process) |
+| Confirm | **FFMPEG_STOPPED_OK** — kein ffmpeg mehr |
+| Partial **KEPT** | `WerbeLEDbox-CountDown/media/_encode_clock_24h.partial.mp4` (~**3931635760** B / ~3.66 GiB) |
+| Progress | `out_time=09:01:50` / 86400 s → **~37.6%** (speed ~11.8× before stop) |
+| Resume later | Finish encode on MLT-NITRO5-HN; final target `media/clock_24h.mp4` |
+| DO NOT DELETE | `_encode_clock_24h.partial.mp4`, `.progress`, `.log`, `.ffmpeg.err` |
+
+### 2) AnkerPI02 Clock DAUERHAFT
+| Item | Wert |
+|------|------|
+| Host | SSH `user@192.168.8.106` (TS `100.103.54.63` ok) |
+| Deploy | latest `fb_clock_opencv.py` + unit as **`fb-clock.service`** (unmasked, enabled) |
+| Pipeline | **vf860** + `--hwaccel drm` + `--min-interval 0` + NN upscale |
+| Video | `media/st24.mov` (clock_24h.mp4 not ready) |
+| TZ | **Europe/Zurich**, NTPSynchronized=**yes** |
+| systemd | `Restart=always`, `RestartSec=30` (storm-safe) |
+| Verify ~36s | **active/enabled**, NRestarts=**0**, frames **#1–#3** on `/dev/fb0`, `throttled=0x0` |
+| Note | User accepted stutter; UV not seen in verify window — leave running |
