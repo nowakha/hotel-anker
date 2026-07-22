@@ -1,6 +1,6 @@
 # NEXT AGENT — Sofortmaßnahmen
 
-Stand: 2026-07-22 ~17:00. Lies zuerst `LEARNINGS.md` + `docs/SESSION_LOG.md`.
+Stand: 2026-07-22 ~17:18. Lies zuerst `LEARNINGS.md` + `docs/SESSION_LOG.md`.
 
 ## Root cause (bestätigt)
 
@@ -19,11 +19,12 @@ Beweis: `docs/_pi02_rescue.log` nur Startzeile (`16:27`), **kein** `SUCCESS`.
 
 ## Entscheidung JETZT
 
-1. **Direkt-Ethernet PC↔Pi (bevorzugt)** — kein DHCP nötig. Doc: [`PI02_DIRECT_ETH_RESCUE.md`](./PI02_DIRECT_ETH_RESCUE.md).
-2. Ethernet unmöglich → **SD-Rescue** [`PI02_SD_RESCUE.md`](./PI02_SD_RESCUE.md).
-3. Serial nur mit UART@GPIO — meist nicht leichter als SD.
+**SD-Rescue am PC ist erledigt (2026-07-22 ~17:18):** fb-clock **masked**, gepatchter Player auf rootfs, cmdline unberührt.
 
-**Nicht** weiter blind nur per WiFi Power-Cyclen.
+1. **User:** SD sicher auswerfen → in PI02 → Power-On.
+2. **SSH erwarten** (WiFi/Ethernet) — ohne Sofort-Hang, weil Clock masked.
+3. Dann Abschnitt **C)** unten: Verify → unmask/enable.
+4. Fallback Docs: [`PI02_SD_RESCUE.md`](./PI02_SD_RESCUE.md), [`PI02_DIRECT_ETH_RESCUE.md`](./PI02_DIRECT_ETH_RESCUE.md).
 
 ## A) Direct-Ethernet (bevorzugt)
 
@@ -61,4 +62,4 @@ ssh user@192.168.8.106 "echo 12345678 | sudo -S mv /tmp/fb-clock.service /etc/sy
 ## Danach
 
 Dokumentieren → commit → push (Workflow-Regel).
-
+

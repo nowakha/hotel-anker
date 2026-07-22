@@ -1,11 +1,23 @@
 # Hotel Anker — Learnings & Handoff
 
-Stand: **2026-07-22 ~17:04 CEST** (Workstation **MLT-NITRO5-HN**).
+Stand: **2026-07-22 ~17:18 CEST** (Workstation **MLT-NITRO5-HN**).
 Ziel: eine andere Cursor-Instanz auf einem anderen Rechner kann ohne mündlichen Kontext weiterarbeiten.
 
 **Workflow (verbindlich):** `.cursor/rules/hotel-anker-workflow.mdc` — jeden Schritt dokumentieren (Erfolg+Misserfolg), Credentials/Learnings mitziehen, commit + `git push origin HEAD`.
 
 Detaillierte Chronik: [`WerbeLEDbox-CountDown/docs/SESSION_LOG.md`](./WerbeLEDbox-CountDown/docs/SESSION_LOG.md).
+
+## SD-Rescue AnkerPI02 — SUCCESS (2026-07-22 ~17:18)
+
+SD im USB-Reader an MLT-NITRO5-HN (Disk 2, 119.4 GB, `bootfs`=`E:`):
+
+- **fb-clock masked** (`→ /dev/null`); Wants entfernt; alte Unit `.DISABLED`.
+- Gepatchtes `fb_clock_play.py` (ffprobe / Never decode) auf Pi-rootfs deployt.
+- Repo-Unit als `fb-clock.service.REPO` (nicht enabled). **cmdline.txt unberührt.**
+- `wsl --mount` scheiterte hier (`0x8007000f`); **usbipd** bind+attach → WSL `/dev/sde` OK.
+- Helper `scripts/pi02_sd_rescue_wsl.sh` unter WSL ggf. CRLF strippen (`sed -i 's/\r$//'`).
+
+**Nächster Schritt:** SD auswerfen → PI02 → Power-On → SSH → Verify → dann unmask (siehe `docs/NEXT_AGENT.md`).
 
 ## Cursor Workspace (kanonisch)
 

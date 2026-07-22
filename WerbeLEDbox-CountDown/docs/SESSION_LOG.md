@@ -103,8 +103,28 @@ User: **SD-Karte aus AnkerPI02 normalerweise schwer entnehmbar** (Decken-Screen)
 
 ### Offene Punkte
 
-- [ ] User: **Power-Cycle JETZT** (Direct-Eth Watcher läuft, Link up, noch kein SSH); sonst erneuter Cycle / SD
-- [ ] PI02 wieder online + Clock laufen (nach Mask + gepatchtem Player)
+- [x] SD-Rescue Mask + Player-Deploy (2026-07-22 ~17:18)
+- [ ] User: SD auswerfen → PI02 → Power-On → SSH
+- [ ] PI02 online: Verify mask + ffprobe-Player → dann unmask/enable Clock
 - [ ] Tailscale + DNS-Fix auf PI01 (und PI02 DNS pin 1.1.1.1/8.8.8.8)
 - [ ] Produktion `clock_24h.mp4` encode
 - [ ] Teensy flash/validate
+
+## 2026-07-22 — PI02 watcher abort
+- User: STOP aggressive PI02 polling; SD rescue in progress — do not interfere.
+- Killed `pi02_rescue_watch.ps1` PID **9916**. No `pi02_rescue_direct_eth` / ping polls running.
+- Left active rescue SSH sessions untouched.
+
+### SD-Rescue SUCCESS (~17:09–17:18, MLT-NITRO5-HN)
+
+| Schritt | Ergebnis |
+|---------|----------|
+| Disk-ID | USB **Disk 2** „Mass Storage Device“ **119.4 GB** — `E:\` = **bootfs** (vfat); Part2 = **rootfs** (ext4, kein Windows-Buchstabe) |
+| Mount-Weg | `wsl --mount` scheiterte (`0x8007000f`); **usbipd** bind `2-2` + `attach --wsl` → WSL `/dev/sde1`+`sde2` |
+| Identity | `hostname=AnkerPI02`; Labels `bootfs`/`rootfs` |
+| Mask | `fb-clock.service` → `/dev/null`; Unit → `.DISABLED`; `multi-user.target.wants/fb-clock.service` **entfernt** |
+| Player | Repo `fb_clock_play.py` → `/home/user/WerbeLEDbox-CountDown/` — Marker `ffprobe` + `Never decode` **OK** |
+| Unit (optional) | Repo-Unit als `fb-clock.service.REPO` abgelegt — **Service bleibt masked** (nicht enable) |
+| cmdline.txt | **unberührt** (read-only geprüft) |
+| Sync/Umount | `sync` + umount boot+root; usbipd detach; `E:\` wieder sichtbar |
+| Nächster User-Schritt | SD sicher auswerfen → in PI02 → Strom an → SSH erwarten → **erst dann** unmask/enable nach ffprobe-Verify |
