@@ -179,3 +179,25 @@ Not done: fb-clock/ffprobe verify (unreachable). Do not unmask.
 | Tailscale joined? | **NEIN** |
 | Nächster Schritt | Deb per LAN-SCP → `dpkg -i` → `tailscale up --hostname=AnkerPI01 --accept-dns=false` |
 
+## 2026-07-22 ~17:53–18:00 — AnkerPI02 LAN up + WiFi Fix
+
+User: Ethernet gesteckt. Discovery: **nicht** `.106` zuerst — mDNS → **`192.168.8.112`** (eth0). Tailscale `ankerpi02` / `100.103.54.63` wieder online.
+
+| Check | Ergebnis |
+|-------|----------|
+| SSH `.112` / `AnkerPI02.local` / TS | **OK** (Key `hotel-anker-dev@MLT-NITRO5-HN`) |
+| Hostname / Modell | AnkerPI02 / Pi 4 Model B Rev 1.5 |
+| Load / Mem / Disk / Temp | niedrig / ~1.6 GiB avail / 19% / ~56 °C; throttled=0x0 |
+| fb-clock | **masked** + inactive (unverändert, kein Unmask) |
+| `fb_clock_play.py` | gepatcht (ffprobe); mtime 17:17 SD-Rescue |
+| Network stack | **NetworkManager** active; dhcpcd not-found; networkd inactive |
+| config.txt WiFi | kein disable; `arm_boost=1`; cmdline unberührt (`cfg80211.ieee80211_regdom=CH`) |
+| rfkill phy0 | Soft/Hard **unblocked** |
+| WiFi Root Cause | `/etc/NetworkManager/system-connections/` **leer** — keine SSIDs; Radio OK, Scan sieht HotelAnker |
+| Fix | Persistente Keyfiles `HotelAnker_5G` (prio 20) + `HotelAnker` (prio 10); `nmcli connection up HotelAnker_5G` |
+| wlan0 | **connected HotelAnker_5G** → **`192.168.8.106`** |
+| eth0 | connected → **`192.168.8.112`** |
+| Secrets | `secrets/wifi.hotelanker.yml` + `ankerpi02.credentials.yml` (dual IP) |
+
+**Misserfolg zwischendurch:** `nmcli connection add` nur nach `/run/...` (tmpfs) → Profile verschwanden; sudo-heredoc schrieb 9-Byte-Mülldateien. **Workaround:** base64 → `/etc/NetworkManager/system-connections/*.nmconnection`, chmod 600, reload.
+

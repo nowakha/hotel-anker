@@ -1,11 +1,21 @@
 # Hotel Anker — Learnings & Handoff
 
-Stand: **2026-07-22 ~17:45 CEST** (Workstation **MLT-NITRO5-HN** + TABLETHI10MAX).
+Stand: **2026-07-22 ~18:00 CEST** (Workstation **MLT-NITRO5-HN** + TABLETHI10MAX).
 Ziel: eine andere Cursor-Instanz auf einem anderen Rechner kann ohne mündlichen Kontext weiterarbeiten.
 
 **Workflow (verbindlich):** `.cursor/rules/hotel-anker-workflow.mdc` — jeden Schritt dokumentieren (Erfolg+Misserfolg), Credentials/Learnings mitziehen, commit + `git push origin HEAD`.
 
 Detaillierte Chronik: [`WerbeLEDbox-CountDown/docs/SESSION_LOG.md`](./WerbeLEDbox-CountDown/docs/SESSION_LOG.md).
+
+## AnkerPI02 WiFi — Root Cause + Fix (2026-07-22 ~18:00)
+
+**Nicht** rfkill, **nicht** `config.txt`/`dtoverlay` WiFi-Disable, **nicht** Underclock.
+
+1. Stack: **NetworkManager** (dhcpcd absent; systemd-networkd inactive).
+2. `/etc/NetworkManager/system-connections/` war **leer** → wlan0 `disconnected` / NO-CARRIER trotz Scan (HotelAnker @ 100%).
+3. `nmcli connection add` landete nur unter `/run/NetworkManager/system-connections/` (tmpfs) → Profile nach Kill/Reload weg. **Fix:** Keyfiles direkt nach `/etc/...` schreiben, `chmod 600`, `nmcli connection reload`.
+4. Profiles: `HotelAnker_5G` priority **20**, `HotelAnker` priority **10**; powersave=2; DNS 1.1.1.1/8.8.8.8. PSK in `secrets/wifi.hotelanker.yml`.
+5. **Live:** wlan0 **HotelAnker_5G** → `192.168.8.106`; eth0 → `192.168.8.112`; Tailscale `100.103.54.63`. **fb-clock bleibt masked.**
 
 ## SD-Rescue AnkerPI02 — SUCCESS (2026-07-22 ~17:18)
 
@@ -17,11 +27,9 @@ SD im USB-Reader an MLT-NITRO5-HN (Disk 2, 119.4 GB, `bootfs`=`E:`):
 - `wsl --mount` scheiterte hier (`0x8007000f`); **usbipd** bind+attach → WSL `/dev/sde` OK.
 - Helper `scripts/pi02_sd_rescue_wsl.sh` unter WSL ggf. CRLF strippen (`sed -i 's/\r$//'`) .
 
-### Post-boot Verify (~17:34) — noch kein Netz
+### Post-boot Verify — erledigt via Ethernet (~17:53–18:00)
 
-User meldete Boot nach SD-Rescue. Calm Check (~2 min, keine Spam-Polls): **kein** Ping/TCP22 auf `.106`, mDNS oder Tailscale (`ankerpi02` offline ~1h). ARP `.106` Incomplete. Remote-Verify von mask/Player **BLOCKED**.
-
-**Nächster Schritt:** Netz am Pi (WiFi/Ethernet) herstellen → SSH → Verify mask + ffprobe → dann **`fb_clock_live`** enable (kein `st24.mov`-Decode) bzw. gepatchtes `fb_clock_play` nur mit sicherem Probe — Unmask nur nach Freigabe. Siehe `docs/NEXT_AGENT.md`.
+Nach LAN-Kabel: SSH auf **`.112`** (eth) / mDNS `AnkerPI02.local`. Verify: **fb-clock masked**, `fb_clock_play.py` hat **ffprobe**. WiFi restored (siehe oben). Unmask weiter nur nach Freigabe.
 
 ## Cursor Workspace (kanonisch)
 
@@ -31,7 +39,7 @@ User meldete Boot nach SD-Rescue. Calm Check (~2 min, keine Spam-Polls): **kein*
 ## Repo & Secrets
 
 - Remote: `https://github.com/nowakha/hotel-anker.git` (**privat halten** — enthält SSH-Passwörter).
-- Credentials: `WerbeLEDbox-CountDown/secrets/ankerpi0{1,2}.credentials.yml` — **bewusst getrackt**.
+- Credentials: `WerbeLEDbox-CountDown/secrets/ankerpi0{1,2}.credentials.yml` + `wifi.hotelanker.yml` — **bewusst getrackt**.
 - SSH-User/Passwort beider Pis: `user` / `12345678` (PasswordAuthentication an).
 - SSH-Keys: `hotel-anker-dev@TABLETHI10MAX` (legacy) + `hotel-anker-dev@MLT-NITRO5-HN` (2026-07-22).
 - Private Keys **nicht** im Repo. Fragment: `WerbeLEDbox-CountDown/ssh/config.fragment`.
@@ -39,7 +47,7 @@ User meldete Boot nach SD-Rescue. Calm Check (~2 min, keine Spam-Polls): **kein*
 ## Hardware-Wahrheit
 
 1. **AnkerPI01** — Pi Zero 2 W: SPI0 `ws2812put` + Producer **`countdown_pi01`** → `shm://ws2812` `(1179,3)`. DHCP oft **`192.168.8.102`** (auch `.108` gesehen) — mDNS bevorzugen. **DNS pinned 1.1.1.1/8.8.8.8** (NM). **Tailscale noch nicht installiert.** WiFi war flaky (powersave + CDN).
-2. **AnkerPI02** — Pi 4: HDMI **3440×1440@50**. **Default-Clock neu: `fb_clock_live.py`** (kein MP4/MOV-Decode). Optional designed `clock_24h.mp4` / provisional `st24.mov` nur mit gepatchtem `fb_clock_play` (ffprobe). LAN **`192.168.8.106`**. Tailscale: **`ankerpi02` / `100.103.54.63`**.
+2. **AnkerPI02** — Pi 4: HDMI **3440×1440@50**. **Default-Clock neu: `fb_clock_live.py`** (kein MP4/MOV-Decode). Optional designed `clock_24h.mp4` / provisional `st24.mov` nur mit gepatchtem `fb_clock_play` (ffprobe). **wlan0** oft **`192.168.8.106`** (HotelAnker_5G); **eth0** **`192.168.8.112`**. Tailscale: **`ankerpi02` / `100.103.54.63`**. fb-clock derzeit **masked**.
 3. **SD-Karte PI02 schwer entnehmbar** → Boot-Schutz; SD-Rescue Docs: `docs/PI02_SD_RESCUE.md`.
 4. **Teensy** am PI02 USB: Hex gebaut + offline validiert (`teensy/hex/`, `validate_teensy_build.py` PASS). Flash: `teensy/scripts/flash_from_pi02.ps1`. Pico = Lab.
 
