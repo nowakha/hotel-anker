@@ -1,11 +1,35 @@
 # Hotel Anker — Learnings & Handoff
 
-Stand: **2026-07-22 ~18:12 CEST** (Workstation **MLT-NITRO5-HN** + TABLETHI10MAX).
+Stand: **2026-07-22 ~18:45 CEST** (Workstation **MLT-NITRO5-HN** + TABLETHI10MAX).
 Ziel: eine andere Cursor-Instanz auf einem anderen Rechner kann ohne mündlichen Kontext weiterarbeiten.
 
 **Workflow (verbindlich):** `.cursor/rules/hotel-anker-workflow.mdc` — jeden Schritt dokumentieren (Erfolg+Misserfolg), Credentials/Learnings mitziehen, commit + `git push origin HEAD`.
 
 Detaillierte Chronik: [`WerbeLEDbox-CountDown/docs/SESSION_LOG.md`](./WerbeLEDbox-CountDown/docs/SESSION_LOG.md).
+
+## AnkerPI02 OpenCV / Video-Clock (2026-07-22 ~18:45)
+
+**Clock running? NEIN** — `fb-clock` wieder **masked** (Undervoltage-Reboots).
+
+| Befund | Detail |
+|--------|--------|
+| PSU | `vcgencmd get_throttled=0x50000` — **Under-voltage has occurred**; Reboots unter 4K-Decode/apt |
+| apt `python3-opencv` | **FAIL** — ~645 MB Deps → OOM/Reboot mid-install auf 2 GB Pi |
+| pip `opencv-python-headless` in venv | Install OK kurzzeitig; danach **`import cv2` / VideoCapture(st24) → SIGBUS** |
+| Pure OpenCV decode-loop | **nicht tragbar** für st24 4K |
+| Hybrid **OK kurz** | `fb_clock_opencv.py`: `ffmpeg -ss -frames:v 1` → PIL crop/scale/rotate180 → RGB565 fb0 |
+| Gemessen | ~0.1–0.15 fps; extract 5–14 s/Frame; crop T386/B127; seek = wall clock Europe/Zurich |
+| systemd enable | 2–3 Frames im Journal, dann **Reboot** → sofort wieder maskiert |
+| Empfehlung | Offizielles **5 V/≥3 A** PSU; Produktion **`clock_24h.mp4` 860×360**; dann Unit `systemd/fb_clock_opencv.service` unmasken (`min-interval` 15 s) |
+
+Enable (nur nach stabilem PSU / kleinerem Video):
+
+```bash
+sudo cp ~/WerbeLEDbox-CountDown/systemd/fb_clock_opencv.service /etc/systemd/system/fb-clock.service
+sudo systemctl daemon-reload && sudo systemctl unmask fb-clock
+sudo systemctl enable --now fb-clock
+# Stop/Mask: sudo systemctl disable --now fb-clock; sudo systemctl mask fb-clock
+```
 
 ## AnkerPI01 WiFi — persistent /etc keyfile (2026-07-22 ~18:12)
 

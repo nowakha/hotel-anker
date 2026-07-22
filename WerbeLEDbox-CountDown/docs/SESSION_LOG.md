@@ -212,6 +212,23 @@ User: Ethernet gesteckt. Discovery: **nicht** `.106` zuerst — mDNS → **`192.
 
 **Misserfolg zwischendurch:** `nmcli connection add` nur nach `/run/...` (tmpfs) → Profile verschwanden; sudo-heredoc schrieb 9-Byte-Mülldateien. **Workaround:** base64 → `/etc/NetworkManager/system-connections/*.nmconnection`, chmod 600, reload.
 
+## 2026-07-22 ~18:20–18:45 — OpenCV / Hybrid Video-Clock PI02
+
+Goal: User-Video-Clock `st24.mov` mit Seek/Crop/Scale → fb0; Ruckeln OK.
+
+| Schritt | Ergebnis |
+|---------|----------|
+| fb-clock mask vor Experiment | OK |
+| apt `python3-opencv` | **FAIL** — riesige Deps, Reboot mid-dpkg (2 GB RAM) |
+| venv `opencv-python-headless` | Install OK; später **`import cv2` SIGBUS**; `VideoCapture(st24)` SIGBUS |
+| dmesg | **`Undervoltage detected!`** / `throttled=0x50000` |
+| Hybrid `ffmpeg -frames:v 1` + PIL | **OK kurz** — Frames auf fb0; ~0.1 fps; extract 5–14 s |
+| Timed Test ~65 s | frame#1…#7, SSH OK, kein Reboot |
+| systemd enable (`min-interval 3`) | frame#1–#3 im Journal, dann **Reboot** → **sofort remasked** |
+| Dauerbetrieb | **NEIN** — bleibt masked bis PSU / kleineres MP4 |
+
+Code: `fb_clock_opencv.py`, `systemd/fb_clock_opencv.service` (default `min-interval` 15 s).
+
 ## 2026-07-22 ~18:12 — AnkerPI01 WiFi same-as-PI02 (persistent /etc keyfile)
 
 Goal: mirror PI02 HotelAnker NM setup on PI01 without breaking SSH.

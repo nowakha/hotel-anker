@@ -30,6 +30,8 @@ __pycache__/
 *.py[cod]
 .venv/
 venv/
+WerbeLEDbox-CountDown/.venv-opencv/
+WerbeLEDbox-CountDown/logs/
 
 # Misc
 *.tmp

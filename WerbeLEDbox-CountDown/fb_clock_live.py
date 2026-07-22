@@ -38,15 +38,24 @@ def fb_geom(fb: str) -> tuple[int, int, int]:
 
 
 def rgb888_to_rgb565(rgb: bytes) -> bytes:
-    out = bytearray(len(rgb) // 3 * 2)
-    j = 0
-    for i in range(0, len(rgb), 3):
-        r, g, b = rgb[i], rgb[i + 1], rgb[i + 2]
+    # Full 3440×1440 in pure Python pegs a core (~1s+/frame). Prefer numpy.
+    try:
+        import numpy as np
+
+        arr = np.frombuffer(rgb, dtype=np.uint8).reshape(-1, 3).astype(np.uint16)
+        r, g, b = arr[:, 0], arr[:, 1], arr[:, 2]
         pix = ((r & 0xF8) << 8) | ((g & 0xFC) << 3) | (b >> 3)
-        out[j] = pix & 0xFF
-        out[j + 1] = (pix >> 8) & 0xFF
-        j += 2
-    return bytes(out)
+        return pix.astype("<u2").tobytes()
+    except Exception:
+        out = bytearray(len(rgb) // 3 * 2)
+        j = 0
+        for i in range(0, len(rgb), 3):
+            r, g, b = rgb[i], rgb[i + 1], rgb[i + 2]
+            pix = ((r & 0xF8) << 8) | ((g & 0xFC) << 3) | (b >> 3)
+            out[j] = pix & 0xFF
+            out[j + 1] = (pix >> 8) & 0xFF
+            j += 2
+        return bytes(out)
 
 
 def load_font(size: int) -> ImageFont.ImageFont:
