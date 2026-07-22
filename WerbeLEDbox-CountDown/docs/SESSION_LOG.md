@@ -212,3 +212,18 @@ User: Ethernet gesteckt. Discovery: **nicht** `.106` zuerst — mDNS → **`192.
 
 **Misserfolg zwischendurch:** `nmcli connection add` nur nach `/run/...` (tmpfs) → Profile verschwanden; sudo-heredoc schrieb 9-Byte-Mülldateien. **Workaround:** base64 → `/etc/NetworkManager/system-connections/*.nmconnection`, chmod 600, reload.
 
+## 2026-07-22 ~18:12 — AnkerPI01 WiFi same-as-PI02 (persistent /etc keyfile)
+
+Goal: mirror PI02 HotelAnker NM setup on PI01 without breaking SSH.
+
+| Check | Ergebnis |
+|-------|----------|
+| Pre: active profile | `netplan-wlan0-HotelAnker` only under **`/run/...`** (tmpfs) — `/etc/NetworkManager/system-connections/` empty |
+| Radio | **Band 1 only** (Pi Zero 2 W) — scan shows `HotelAnker` @ **2432 MHz**; **no** `HotelAnker_5G` |
+| Fix | Persist `/etc/NetworkManager/system-connections/HotelAnker.nmconnection` (prio **20**, powersave=2, DNS 1.1.1.1/8.8.8.8, ignore-auto-dns); `nmcli reload` + `connection up HotelAnker` |
+| HotelAnker_5G profile | **not created** (hardware N/A) |
+| Active | wlan0 **HotelAnker** → **`192.168.8.102`** |
+| Powersave | NM `disable` + runtime `Power Management:off` (+ existing `wlan-powersave-off.service`) |
+| DNS | `/etc/resolv.conf` → 1.1.1.1 + 8.8.8.8 (link-local fe80 also present from IPv6 RA) |
+| Misserfolg | Windows SCP initially wrote **CRLF** → fixed to LF on Pi; long SSH during `nmcli up` can timeout — use nohup remote script |
+

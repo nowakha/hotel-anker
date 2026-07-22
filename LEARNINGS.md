@@ -1,11 +1,17 @@
 # Hotel Anker — Learnings & Handoff
 
-Stand: **2026-07-22 ~18:05 CEST** (Workstation **MLT-NITRO5-HN** + TABLETHI10MAX).
+Stand: **2026-07-22 ~18:12 CEST** (Workstation **MLT-NITRO5-HN** + TABLETHI10MAX).
 Ziel: eine andere Cursor-Instanz auf einem anderen Rechner kann ohne mündlichen Kontext weiterarbeiten.
 
 **Workflow (verbindlich):** `.cursor/rules/hotel-anker-workflow.mdc` — jeden Schritt dokumentieren (Erfolg+Misserfolg), Credentials/Learnings mitziehen, commit + `git push origin HEAD`.
 
 Detaillierte Chronik: [`WerbeLEDbox-CountDown/docs/SESSION_LOG.md`](./WerbeLEDbox-CountDown/docs/SESSION_LOG.md).
+
+## AnkerPI01 WiFi — persistent /etc keyfile (2026-07-22 ~18:12)
+
+Same lesson as PI02: active profile was only under `/run/NetworkManager/system-connections/` (`netplan-wlan0-HotelAnker`). Now: `/etc/.../HotelAnker.nmconnection` (prio 20, powersave=2, DNS pinned). **Live:** wlan0 **HotelAnker** → `192.168.8.102`; Power Management **off**.
+
+**5 GHz:** Pi Zero 2 W = **Band 1 only** → `HotelAnker_5G` not visible / not created (N/A on this hardware). PI02 keeps dual 5G+2.4 profiles.
 
 ## AnkerPI02 WiFi — Root Cause + Fix (2026-07-22 ~18:00)
 
@@ -46,7 +52,7 @@ Nach LAN-Kabel: SSH auf **`.112`** (eth) / mDNS `AnkerPI02.local`. Verify: **fb-
 
 ## Hardware-Wahrheit
 
-1. **AnkerPI01** — Pi Zero 2 W: SPI0 `ws2812put` + Producer **`countdown_pi01`** → `shm://ws2812` `(1179,3)`. DHCP oft **`192.168.8.102`** (auch `.108` gesehen) — mDNS bevorzugen. **DNS pinned 1.1.1.1/8.8.8.8** (NM). **Tailscale 1.98.9 installiert** (`tailscaled` active); **Join NeedsLogin** — Auth: https://login.tailscale.com/a/144cabd401ab72 · Hostname `AnkerPI01` · `--accept-dns=false`. WiFi flaky (powersave + CDN).
+1. **AnkerPI01** — Pi Zero 2 W: SPI0 `ws2812put` + Producer **`countdown_pi01`** → `shm://ws2812` `(1179,3)`. DHCP oft **`192.168.8.102`** (auch `.108` gesehen) — mDNS bevorzugen. **DNS pinned 1.1.1.1/8.8.8.8** (NM). WiFi: persistent `/etc/.../HotelAnker.nmconnection` (2.4 only; **kein 5 GHz**). **Tailscale 1.98.9 installiert** (`tailscaled` active); **Join NeedsLogin** — Auth: https://login.tailscale.com/a/144cabd401ab72 · Hostname `AnkerPI01` · `--accept-dns=false`.
 2. **AnkerPI02** — Pi 4: HDMI **3440×1440@50**. **Default-Clock neu: `fb_clock_live.py`** (kein MP4/MOV-Decode). Optional designed `clock_24h.mp4` / provisional `st24.mov` nur mit gepatchtem `fb_clock_play` (ffprobe). **wlan0** oft **`192.168.8.106`** (HotelAnker_5G); **eth0** **`192.168.8.112`**. Tailscale: **`ankerpi02` / `100.103.54.63`**. fb-clock derzeit **masked**.
 3. **SD-Karte PI02 schwer entnehmbar** → Boot-Schutz; SD-Rescue Docs: `docs/PI02_SD_RESCUE.md`.
 4. **Teensy** am PI02 USB: Hex gebaut + offline validiert (`teensy/hex/`, `validate_teensy_build.py` PASS). Flash: `teensy/scripts/flash_from_pi02.ps1`. Pico = Lab.
@@ -86,7 +92,7 @@ Direkt-Ethernet + Watcher (`PI02_DIRECT_ETH_RESCUE.md`) oder SD-Rescue (SUCCESS 
 2. **DNS fragil** — nur Router `192.168.8.254` → **FIX:** NM `ipv4.dns=1.1.1.1 8.8.8.8`, `ignore-auto-dns=yes` (verifiziert in `/etc/resolv.conf`).
 3. **Tailscale-Deb-Fetch** — Small HTTPS zu `pkgs.tailscale.com` OK; IPv6 CloudFront tot; große IPv4-Downloads (~34 MB) timeout / „No route to host“ / ~KB/s. **Workaround:** Deb per LAN-SCP von Workstation, `dpkg -i`; `apt` mit `Acquire::ForceIPv4 true`.
 
-Status ~18:05: SSH OK, DNS pinned, powersave off, Tailscale **1.98.9 installiert** via LAN-SCP Deb; **Join wartet auf Browser-Auth** (kein Auth-Key). Nach Login: `tailscale ip -4` → Secrets `tailscale_ip` setzen.
+Status ~18:12: SSH OK, persistent HotelAnker keyfile under `/etc`, DNS pinned, powersave off, Tailscale **1.98.9 installiert** via LAN-SCP Deb; **Join wartet auf Browser-Auth** (kein Auth-Key). Nach Login: `tailscale ip -4` → Secrets `tailscale_ip` setzen.
 
 ## Offene Arbeit (Priorität)
 
