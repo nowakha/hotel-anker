@@ -34,3 +34,7 @@ venv/
 # Misc
 *.tmp
 *.temp
+
+# PlatformIO
+**/.pio/
+
