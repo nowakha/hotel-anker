@@ -128,3 +128,18 @@ User: **SD-Karte aus AnkerPI02 normalerweise schwer entnehmbar** (Decken-Screen)
 | cmdline.txt | **unberührt** (read-only geprüft) |
 | Sync/Umount | `sync` + umount boot+root; usbipd detach; `E:\` wieder sichtbar |
 | Nächster User-Schritt | SD sicher auswerfen → in PI02 → Strom an → SSH erwarten → **erst dann** unmask/enable nach ffprobe-Verify |
+
+### Post-boot Verify (~17:30–17:34, calm)
+
+| Check | Ergebnis |
+|-------|----------|
+| User: PI02 nach SD-Rescue gebootet | behauptet |
+| TCP/22 `.106` / `AnkerPI02.local` / TS `100.103.54.63` | **FAIL** — 4 Runden ~2 min, kein Hit |
+| Ping `.106` + TS | **FAIL** |
+| ARP `.106` | **Incomplete** (kein MAC) |
+| Tailscale `ankerpi02` | **offline**, last seen ~1h |
+| Leichter Glance `.100–.115` TCP/22 | kein neuer SSH-Host |
+| fb-clock / Player remote Verify | **BLOCKED** — kein SSH |
+| Unmask/Start | **nicht** versucht |
+
+**Nächster Schritt:** Netz prüfen (WiFi SSID/Passwort? Ethernet stecken?). Sobald SSH da: mask + ffprobe-Player bestätigen, Clock nur nach Freigabe unmasken.

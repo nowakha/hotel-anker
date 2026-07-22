@@ -1,6 +1,6 @@
 # Hotel Anker — Learnings & Handoff
 
-Stand: **2026-07-22 Abend** (Workstation **MLT-NITRO5-HN** + TABLETHI10MAX).  
+Stand: **2026-07-22 ~17:34 CEST** (Workstation **MLT-NITRO5-HN** + TABLETHI10MAX).
 Ziel: eine andere Cursor-Instanz auf einem anderen Rechner kann ohne mündlichen Kontext weiterarbeiten.
 
 **Workflow (verbindlich):** `.cursor/rules/hotel-anker-workflow.mdc` — jeden Schritt dokumentieren (Erfolg+Misserfolg), Credentials/Learnings mitziehen, commit + `git push origin HEAD`.
@@ -17,7 +17,11 @@ SD im USB-Reader an MLT-NITRO5-HN (Disk 2, 119.4 GB, `bootfs`=`E:`):
 - `wsl --mount` scheiterte hier (`0x8007000f`); **usbipd** bind+attach → WSL `/dev/sde` OK.
 - Helper `scripts/pi02_sd_rescue_wsl.sh` unter WSL ggf. CRLF strippen (`sed -i 's/\r$//'`) .
 
-**Nächster Schritt:** SD auswerfen → PI02 → Power-On → SSH → Verify → dann **`fb_clock_live`** enable (kein `st24.mov`-Decode) bzw. gepatchtes `fb_clock_play` nur mit sicherem Probe. Siehe `docs/NEXT_AGENT.md`.
+### Post-boot Verify (~17:34) — noch kein Netz
+
+User meldete Boot nach SD-Rescue. Calm Check (~2 min, keine Spam-Polls): **kein** Ping/TCP22 auf `.106`, mDNS oder Tailscale (`ankerpi02` offline ~1h). ARP `.106` Incomplete. Remote-Verify von mask/Player **BLOCKED**.
+
+**Nächster Schritt:** Netz am Pi (WiFi/Ethernet) herstellen → SSH → Verify mask + ffprobe → dann **`fb_clock_live`** enable (kein `st24.mov`-Decode) bzw. gepatchtes `fb_clock_play` nur mit sicherem Probe — Unmask nur nach Freigabe. Siehe `docs/NEXT_AGENT.md`.
 
 ## Cursor Workspace (kanonisch)
 

@@ -1,30 +1,18 @@
 # NEXT AGENT — Sofortmaßnahmen
 
-Stand: 2026-07-22 ~17:18. Lies zuerst `LEARNINGS.md` + `docs/SESSION_LOG.md`.
+Stand: 2026-07-22 ~17:34. Lies zuerst `LEARNINGS.md` + `docs/SESSION_LOG.md`.
 
 ## Root cause (bestätigt)
 
-Splash sichtbar + kein Netz = **`fb-clock` mit altem `probe_size()`** (`ffmpeg … -f null -` auf `st24.mov` 24h 4K). Fix im Repo, **nicht** auf dem Pi.
-
-### Warum Power-Cycle + Watcher ~3× scheiterte
-
-PI02 lief **nur WiFi**. Netz/SSH/Tailscale oft **erst nach** dem Hang:
-
-1. Boot → Splash
-2. `ExecStartPre` NTP-Wait ≤**120 s** (ohne Netz: Timeout → Start trotzdem)
-3. Alter Player hängt auf Full-Decode
-4. WiFi/DHCP/SSH danach → **kein nutzbares SSH-Fenster**
-
-Beweis: `docs/_pi02_rescue.log` nur Startzeile (`16:27`), **kein** `SUCCESS`.
+Splash sichtbar + kein Netz = **`fb-clock` mit altem `probe_size()`** (`ffmpeg … -f null -` auf `st24.mov` 24h 4K). Fix im Repo, **auf SD-rootfs deployt + masked**.
 
 ## Entscheidung JETZT
 
-**SD-Rescue am PC ist erledigt (2026-07-22 ~17:18):** fb-clock **masked**, gepatchter Player auf rootfs, cmdline unberührt.
+**SD-Rescue OK (~17:18).** Post-boot Verify (~17:34): **noch kein SSH** (`.106` / mDNS / TS offline).
 
-1. **User:** SD sicher auswerfen → in PI02 → Power-On.
-2. **SSH erwarten** (WiFi/Ethernet) — ohne Sofort-Hang, weil Clock masked.
-3. Dann Abschnitt **C)** unten: Verify → unmask/enable.
-4. Fallback Docs: [`PI02_SD_RESCUE.md`](./PI02_SD_RESCUE.md), [`PI02_DIRECT_ETH_RESCUE.md`](./PI02_DIRECT_ETH_RESCUE.md).
+1. **Netz herstellen** — WiFi-Assoc prüfen oder Ethernet stecken (Direct-Eth Doc ok).
+2. Sobald SSH: Abschnitt **C)** — mask + ffprobe Verify; **Unmask nur nach User-Freigabe**.
+3. Kein aggressives Polling.
 
 ## A) Direct-Ethernet (bevorzugt)
 
