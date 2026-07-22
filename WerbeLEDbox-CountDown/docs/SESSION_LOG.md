@@ -80,6 +80,16 @@ Chronik fÃ¼r Cross-Machine-Handoff. Erfolg **und** Misserfolg.
 | `scripts/pi02_rescue_direct_eth.ps1` | Wrapper mit Adapter/APIPA-Hinweis |
 | SD weiterhin | Nur wenn Eth unmÃ¶glich oder kein SSH-Fenster trotz Power-Cycle |
 
+### Direct-Eth Lauf (~16:58–17:04, Kabel gesteckt)
+
+| Ereignis | Ergebnis |
+|----------|----------|
+| PC Ethernet | **Up 1 Gbps**, APIPA `169.254.217.255` (WiFi unberührt `192.168.8.111`) |
+| Script | `pi02_rescue_direct_eth.ps1` gestartet → Watcher `linklocal=True` (PID zuletzt **9916**) |
+| Scan | `.106` + TS `100.103.54.63` + `169.254.*` Nachbarn |
+| Pi ARP / SSH | **FAIL** — kein echter `169.254.*`-Host-Nachbar; TCP/22 überall zu; Log ohne `SUCCESS` |
+| Aggressiv-Poll ~5 min | **rescued=no** |
+| Schluss | Link allein reicht nicht bei Hang → **Power-Cycle jetzt** bei laufendem Watcher; sonst erneuter Cycle / SD |
 ### Boot-Constraint
 
 User: **SD-Karte aus AnkerPI02 normalerweise schwer entnehmbar** (Decken-Screen). User **bereit zur SD-Rescue**, wenn Ethernet unmÃ¶glich. Keine riskanten `cmdline.txt`-Ã„nderungen. Recovery: `media/cmdline.recovery.txt`. Anleitung: `docs/PI02_SD_RESCUE.md`.
@@ -93,7 +103,7 @@ User: **SD-Karte aus AnkerPI02 normalerweise schwer entnehmbar** (Decken-Screen)
 
 ### Offene Punkte
 
-- [ ] User: Direct-Eth laut `PI02_DIRECT_ETH_RESCUE.md` â†’ Watcher + Power-Cycle; sonst SD
+- [ ] User: **Power-Cycle JETZT** (Direct-Eth Watcher läuft, Link up, noch kein SSH); sonst erneuter Cycle / SD
 - [ ] PI02 wieder online + Clock laufen (nach Mask + gepatchtem Player)
 - [ ] Tailscale + DNS-Fix auf PI01 (und PI02 DNS pin 1.1.1.1/8.8.8.8)
 - [ ] Produktion `clock_24h.mp4` encode

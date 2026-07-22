@@ -1,6 +1,6 @@
 # Hotel Anker — Learnings & Handoff
 
-Stand: **2026-07-22 ~16:55 CEST** (Workstation **MLT-NITRO5-HN**).
+Stand: **2026-07-22 ~17:04 CEST** (Workstation **MLT-NITRO5-HN**).
 Ziel: eine andere Cursor-Instanz auf einem anderen Rechner kann ohne mündlichen Kontext weiterarbeiten.
 
 **Workflow (verbindlich):** `.cursor/rules/hotel-anker-workflow.mdc` — jeden Schritt dokumentieren (Erfolg+Misserfolg), Credentials/Learnings mitziehen, commit + `git push origin HEAD`.
@@ -61,6 +61,8 @@ Alter Watcher pollte nur `192.168.8.106` + Tailscale `100.103.54.63`.
 | **SD-Rescue** | **Ja wenn kein Eth-Fenster** | User bereit; `docs/PI02_SD_RESCUE.md` + `scripts/pi02_sd_rescue_wsl.sh` |
 
 **Direct-Eth Grenzen:** Ohne DHCP beide `169.254.x.x` — SSH OK solange sshd noch läuft. Wenn ffmpeg Full-Decode die CPU schon friert, hilft kein Interface → Power-Cycle + frühes Fenster erneut. Static nur auf PC ohne Pi-Matching nutzlos; APIPA-Scan ist der praktische Weg.
+
+**Lauf 2026-07-22 ~16:58–17:04:** Kabel gesteckt, PC Ethernet **Up 1 Gbps** + APIPA, `pi02_rescue_direct_eth.ps1` / Watcher `linklocal=True` alive — **kein** Pi-ARP, **kein** TCP/22, **kein** `SUCCESS`. → **rescued=no**; User muss **jetzt power-cyclen** (Kabel allein bei Hang nutzlos).
 
 Tooling: `scripts/pi02_rescue_direct_eth.ps1` → `pi02_rescue_watch.ps1` (`.106` + Tailscale + mDNS + `Get-NetNeighbor`/`arp` für `169.254.*`).
 
