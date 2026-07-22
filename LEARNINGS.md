@@ -1,6 +1,6 @@
 # Hotel Anker — Learnings & Handoff
 
-Stand: **2026-07-22 ~18:55 CEST** (Workstation **MLT-NITRO5-HN** + TABLETHI10MAX).
+Stand: **2026-07-22 ~19:08 CEST** (Workstation **MLT-NITRO5-HN** + TABLETHI10MAX).
 Ziel: eine andere Cursor-Instanz auf einem anderen Rechner kann ohne mündlichen Kontext weiterarbeiten.
 
 **Workflow (verbindlich):** `.cursor/rules/hotel-anker-workflow.mdc` — jeden Schritt dokumentieren (Erfolg+Misserfolg), Credentials/Learnings mitziehen, commit + `git push origin HEAD`.
@@ -19,6 +19,12 @@ Workstation **MLT-NITRO5-HN**, RTX 3080 Laptop, Driver **610.62**, FFmpeg **8.1.
 | Status | **encoding** ffmpeg PID **8652** (~11×) ETA ~**21:00 CEST**; Logs `media/_encode_clock_24h.*` |
 | Git | große Media **gitignored** (`media/*.mp4`, `_encode*`) |
 
+## AnkerPI02 Undervoltage idle-Check (2026-07-22 ~19:08)
+
+SSH `192.168.8.106`: `get_throttled=0x0` (vorher unter Last `0x50000`). Volts 0.966 V, temp 47.7°C, load leicht, uptime ~1 min nach Reboot. **fb-clock** weiter **masked/inactive**. Keine UV-Meldungen in dmesg/journal seit Boot. Caveat: Sticky-Bits clearen bei Reboot; unter Last erneut messen. Gutes 5V/≥3A-PSU weiter empfohlen.
+## AnkerPI02 Undervoltage idle-Check (2026-07-22 ~19:08)
+
+SSH `192.168.8.106`: `get_throttled=0x0` (vorher unter Last `0x50000`). Volts 0.966 V, temp 47.7°C, load leicht, uptime ~1 min nach Reboot. **fb-clock** weiter **masked/inactive**. Keine UV-Meldungen in dmesg/journal seit Boot. Caveat: Sticky-Bits clearen bei Reboot; unter Last erneut messen. Gutes 5V/≥3A-PSU weiter empfohlen.
 ## AnkerPI02 OpenCV / Video-Clock (2026-07-22 ~18:45)
 
 **Clock running? NEIN** — `fb-clock` soll **masked** bleiben. Netz-Ping ~18:51 (`.106`/`.112`/TS) **FAIL** — Mask-State remote nicht bestätigt.

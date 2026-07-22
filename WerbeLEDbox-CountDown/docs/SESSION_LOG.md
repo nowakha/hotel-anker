@@ -260,3 +260,18 @@ Goal: stabile 860×360 H.264-Produktion statt 4K `st24.mov` auf PI02 (Undervolta
 | `.gitignore` | bereits `media/*.mp4` + `clock_24h.mp4` + `_encode*` — großes MP4 **nicht** committen |
 | PI02 ping/SSH | `.106` / `.112` / TS `.63` / mDNS — **alle FAIL** (timeout); fb-clock-Mask **nicht verifizierbar** aus Netz |
 
+
+## 2026-07-22 ~19:08 - AnkerPI02 Undervoltage-Check (idle, frischer Boot)
+
+| Check | Ergebnis |
+|-------|----------|
+| Host | SSH `user@192.168.8.106` OK (uptime **1 min**) |
+| `vcgencmd get_throttled` | **`0x0`** (vorher unter Last oft `0x50000` = sticky UV + throttle seit Boot) |
+| Bedeutung jetzt | **kein** Under-voltage aktuell, **keine** History-Bits seit diesem Boot |
+| Volts / Temp / Load | `0.9660V`, **47.7°C**, loadavg **0.78 0.35 0.13** |
+| Config | `arm_freq=1800`, `over_voltage_avs=20000` |
+| dmesg/journal UV | **keine** Undervoltage-/Throttle-Meldungen seit Boot |
+| fb-clock | **masked** / **inactive** (nicht gestartet) |
+| Caveat | Idle nach Reboot — Sticky-Bits gehen bei Reboot auf 0; unter opencv/ffmpeg-Last erneut prüfen |
+| Empfehlung | Aktuell besser; **gutes PSU** weiter sinnvoll bis Check unter realer Last wieder `0x0` bleibt |
+
