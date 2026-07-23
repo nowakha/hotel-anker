@@ -221,3 +221,7 @@ Regel: `.cursor/rules/harald-nowak-modernlight.mdc`
 Likely causes: WiFi not up after rescue; different subnet; still booting; eth cable only to PC but PC eth unplugged; Tailscale not started.
 
 Not done: fb-clock/ffprobe verify (unreachable). Do not unmask.
+
+## Richnerstutz Anfrage (2026-07-23 ~17:27)
+- Mail Offerte SEG-Bespannung Hotel Anker Flowbox an info@richnerstutz.ch **gesendet** (Workspace Web).
+- OAuth/`gog` für Workspace-Send aktuell unbrauchbar (fremdes GCP-Projekt / Testing).

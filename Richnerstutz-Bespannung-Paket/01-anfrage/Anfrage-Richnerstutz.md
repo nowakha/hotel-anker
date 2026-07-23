@@ -1,6 +1,7 @@
 # Anfrage an Richnerstutz AG — Textilbespannung LightBox Hotel Anker
 
-**Status:** Versandfertig (Fotos vom Rahmen folgen in `06-fotos-vom-rahmen/`)  
+**Status:** **Gesendet** 2026-07-23 ~17:27 CEST — von `harald.nowak@modernlight.ch` an `info@richnerstutz.ch` (Gmail Web UI), Anhang `Hotel-Anker-Richnerstutz-Bespannung.zip`.  
+
 **Empfänger:** Richnerstutz AG, Nordstrasse 7, 5612 Villmergen · info@richnerstutz.ch · +41 56 616 67 67  
 **Auftraggeber:** Realia AG (Gottlieb Kündig), Industriestrasse 40b, 9400 Rorschach · UID CHE-113.325.481  
 **Technische Ansprechperson:** Harald Nowak, Modernlight — Projektleitung | Videoengineering · Harald.Nowak@modernlight.ch · +41 76 579 84 54

@@ -377,3 +377,15 @@ Goal: stabile 860×360 H.264-Produktion statt 4K `st24.mov` auf PI02 (Undervolta
 | Throughput-Messung | siehe `_deploy_clock_24h_remote.txt` |
 | `throttled` | **0x0** |
 | Journal | `start seek=13:49:15` matching wall time |
+
+## 2026-07-23 ~17:27 CEST — Richnerstutz Anfrage gesendet
+
+| Ereignis | Ergebnis |
+|----------|----------|
+| Kontext-Korrektur | **Hotel Anker Flowbox** ≠ Hautle 1.5×4 m Absen — nicht vermischen |
+| Canva Master | `Printvorlage Hotel Anker Flowbox 2x2m` — 4096², Totzone unten schwarz OK |
+| OAuth/`gog` | **FAIL** — redirect_uri_mismatch + 403 testing + kein IAM auf `nowak-central-hub-auth` |
+| Versandweg | Cursor-Browser → Gmail Web als `harald.nowak@modernlight.ch` |
+| Mail | An `info@richnerstutz.ch`, Betreff Offerte SEG/Keder LightBox 2×2 m Anker |
+| Anhang | `Hotel-Anker-Richnerstutz-Bespannung.zip` (~1.4 MB) — Gmail: Message sent |
+
