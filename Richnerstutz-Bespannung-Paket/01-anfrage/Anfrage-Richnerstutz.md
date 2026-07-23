@@ -1,6 +1,11 @@
 # Anfrage an Richnerstutz AG — Textilbespannung LightBox Hotel Anker
 
 **Status:** **Gesendet** 2026-07-23 ~17:27 CEST — von `harald.nowak@modernlight.ch` an `info@richnerstutz.ch` (Gmail Web UI), Anhang `Hotel-Anker-Richnerstutz-Bespannung.zip`.  
+**Gmail Thread:** `19f8f918df31493d` · Message-ID `19f8f96d1ba5b7b8`
+
+**Antwort-Watcher:** 2026-07-23 ~18:10 CEST — Automation `Richnerstutz Reply Watcher` getriggert. **Kein Richnerstutz-Reply** (Zapier-Echo der eigenen Outbound-Mail und/oder leerer Payload). Status bleibt **Antwort ausstehend**. Keine Outbound-Mail.  
+
+
 
 **Empfänger:** Richnerstutz AG, Nordstrasse 7, 5612 Villmergen · info@richnerstutz.ch · +41 56 616 67 67  
 **Auftraggeber:** Realia AG (Gottlieb Kündig), Industriestrasse 40b, 9400 Rorschach · UID CHE-113.325.481  

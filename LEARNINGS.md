@@ -225,3 +225,10 @@ Not done: fb-clock/ffprobe verify (unreachable). Do not unmask.
 ## Richnerstutz Anfrage (2026-07-23 ~17:27)
 - Mail Offerte SEG-Bespannung Hotel Anker Flowbox an info@richnerstutz.ch **gesendet** (Workspace Web).
 - OAuth/`gog` für Workspace-Send aktuell unbrauchbar (fremdes GCP-Projekt / Testing).
+
+## Richnerstutz Reply Watcher (2026-07-23 ~18:10 CEST) — kein Druckerei-Reply
+- Automation `ad5d35c0-86ac-11f1-a7d1-d6b4613131ce` (`Richnerstutz Reply Watcher`) doppelt getriggert (`bc-741eb254-…`, `bc-5dcbde76-…`).
+- Auswertung: **kein** Reply von `@richnerstutz.ch`. Parallel-Run sah Zapier-Echo der **eigenen** Outbound-Mail (`from: harald.nowak@modernlight.ch`, Subject Anfrage Offerte…, Date `Thu, 23 Jul 2026 17:27:31 +0200`, Thread `19f8f918df31493d`); anderer Run nur `{ automationId }`.
+- **Falle:** Gmail→Zapier darf Sent-Mail nicht als Druckerei-Antwort werten — Filter auf Absender `@richnerstutz.ch`.
+- Status bleibt **Gesendet / Antwort ausstehend**. Kein Reply-Draft, kein Outbound.
+- Koordination: weiter warten auf echte Antwort; dann Telegram/Zapier + Cursor; **kein** Senden ohne Harald-Go.
