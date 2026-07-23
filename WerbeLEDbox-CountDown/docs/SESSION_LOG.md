@@ -389,3 +389,16 @@ Goal: stabile 860×360 H.264-Produktion statt 4K `st24.mov` auf PI02 (Undervolta
 | Mail | An `info@richnerstutz.ch`, Betreff Offerte SEG/Keder LightBox 2×2 m Anker |
 | Anhang | `Hotel-Anker-Richnerstutz-Bespannung.zip` (~1.4 MB) — Gmail: Message sent |
 
+## 2026-07-23 ~18:10 CEST — Richnerstutz Reply Watcher: kein Druckerei-Reply
+
+| Ereignis | Ergebnis |
+|----------|----------|
+| Trigger | Automation `Richnerstutz Reply Watcher` (`ad5d35c0-…`), 2 parallele Runs |
+| Payload | Echo der **eigenen** Outbound-Mail und/oder leerer Trigger (`automationId` only) |
+| From (Echo) | `harald.nowak@modernlight.ch` — **nicht** `@richnerstutz.ch` |
+| Subject / Date | Anfrage Offerte SEG/Keder LightBox 2×2 m · `2026-07-23 17:27:31 +0200` |
+| Thread | `19f8f918df31493d` / Message `19f8f96d1ba5b7b8` |
+| Relevanz | **kein** Richnerstutz-Reply → Stop |
+| Status Anfrage | unverändert **Gesendet / Antwort ausstehend** |
+| Outbound | **keine** Mail entworfen/gesendet; wartet auf Harald-Go + echten Reply |
+
