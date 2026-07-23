@@ -352,3 +352,15 @@ Goal: stabile 860×360 H.264-Produktion statt 4K `st24.mov` auf PI02 (Undervolta
 | PI02 | Tailscale/LAN **offline** (last seen ~1h) — Deploy-Watcher wartet |
 | Unit vorbereitet | `systemd/fb_clock.service` → `clock_24h.mp4` + `fb_clock_play.py` continuous, Autostart |
 | Deploy-Skript | `scripts/deploy_clock_24h_when_ready.ps1` (SCP via TS/LAN, FPS-Messung, enable) |
+
+## 2026-07-23 ~03:45 — clock_24h.mp4 FERTIG; Deploy blockiert (PI02 offline)
+
+| Item | Ergebnis |
+|------|----------|
+| Encode | **OK** — NVENC ~4h39 wall, speed ~5–11×; MKV partial dann Remux |
+| Output | `media/clock_24h.mp4` — **860×360** H.264 25 fps, duration **86400.08 s**, size **12206138242** (~11.4 GiB) |
+| Script-Bug | `Start-Process` ExitCode leer → Script schrieb fälschlich FAILED; Datei trotzdem valid (progress=end); manueller Remux OK |
+| Unit | `systemd/fb_clock.service` zeigt auf `clock_24h.mp4` + `fb_clock_play.py` continuous |
+| Deploy-Watcher | läuft, wartet auf SSH |
+| **AnkerPI02** | Tailscale/LAN **offline** seit ~6h — kein SCP/Start möglich |
+| Nächster Schritt | PI02 power-cycle am Hotel (vermutlich Hang von 4K-Clock) → Watcher deployed automatisch |

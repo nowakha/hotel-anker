@@ -1,11 +1,18 @@
 # Hotel Anker â€” Learnings & Handoff
 
-Stand: **2026-07-22 ~19:41 CEST** (Abfahrt: encode paused, clock dauerhaft).
-Ziel: eine andere Cursor-Instanz auf einem anderen Rechner kann ohne mÃ¼ndlichen Kontext weiterarbeiten.
+Stand: **2026-07-23 ~03:45 CEST** (`clock_24h.mp4` fertig; PI02 offline → Deploy pending).
+Ziel: eine andere Cursor-Instanz auf einem anderen Rechner kann ohne mündlichen Kontext weiterarbeiten.
 
-**Workflow (verbindlich):** `.cursor/rules/hotel-anker-workflow.mdc` â€” jeden Schritt dokumentieren (Erfolg+Misserfolg), Credentials/Learnings mitziehen, commit + `git push origin HEAD`.
+**Workflow (verbindlich):** `.cursor/rules/hotel-anker-workflow.mdc` — jeden Schritt dokumentieren (Erfolg+Misserfolg), Credentials/Learnings mitziehen, commit + `git push origin HEAD`.
 
 Detaillierte Chronik: [`WerbeLEDbox-CountDown/docs/SESSION_LOG.md`](./WerbeLEDbox-CountDown/docs/SESSION_LOG.md).
+
+## Production `clock_24h.mp4` (2026-07-23 FERTIG)
+
+- Datei: `WerbeLEDbox-CountDown/media/clock_24h.mp4` (~11.4 GiB) — **860×360** H.264 25 fps `-g 25`, duration **86400.08 s**
+- Encode: NVENC auf MLT-NITRO5-HN; altes MP4-Partial ohne moov unbrauchbar → Re-Encode als MKV → Remux
+- Deploy-Watcher: `scripts/deploy_clock_24h_when_ready.ps1` (stop 4K, SCP via Tailscale, FPS-Messung, `fb-clock` enable)
+- **Blocker:** AnkerPI02 Tailscale offline (~6h) — vermutlich Hang von 4K-Uhr; Power-Cycle am Hotel nötig, dann Deploy automatisch
 
 ## Abfahrt 2026-07-22 ~19:41 — Encode pause + Clock live
 
