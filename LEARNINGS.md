@@ -1,13 +1,21 @@
 # Hotel Anker â€” Learnings & Handoff
 
-Stand: **2026-07-23 ~03:45 CEST** (`clock_24h.mp4` fertig; PI02 offline → Deploy pending).
+Stand: **2026-07-23 ~13:49 CEST** — `clock_24h.mp4` auf AnkerPI02 live, Autostart enabled, ~25 fps.
 Ziel: eine andere Cursor-Instanz auf einem anderen Rechner kann ohne mündlichen Kontext weiterarbeiten.
 
 **Workflow (verbindlich):** `.cursor/rules/hotel-anker-workflow.mdc` — jeden Schritt dokumentieren (Erfolg+Misserfolg), Credentials/Learnings mitziehen, commit + `git push origin HEAD`.
 
 Detaillierte Chronik: [`WerbeLEDbox-CountDown/docs/SESSION_LOG.md`](./WerbeLEDbox-CountDown/docs/SESSION_LOG.md).
 
-## Production `clock_24h.mp4` (2026-07-23 FERTIG)
+## Production clock LIVE (2026-07-23)
+
+- Video: `media/clock_24h.mp4` 860×360 H.264 25fps 86400s auf PI02
+- Service: `fb-clock.service` → `fb_clock_play.py` (continuous + resync 120s, HW decode, rotate 180)
+- Boot: **enabled**; NTP wait in ExecStartPre
+- FPS: live fbdev **~25 fps @ 1.02×** (vs ~0.1 fps mit 4K st24 extract)
+- `throttled=0x0` nach Start
+
+## Production `clock_24h.mp4` encode (2026-07-23)
 
 - Datei: `WerbeLEDbox-CountDown/media/clock_24h.mp4` (~11.4 GiB) — **860×360** H.264 25 fps `-g 25`, duration **86400.08 s**
 - Encode: NVENC auf MLT-NITRO5-HN; altes MP4-Partial ohne moov unbrauchbar → Re-Encode als MKV → Remux

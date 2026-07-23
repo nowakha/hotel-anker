@@ -364,3 +364,16 @@ Goal: stabile 860×360 H.264-Produktion statt 4K `st24.mov` auf PI02 (Undervolta
 | Deploy-Watcher | läuft, wartet auf SSH |
 | **AnkerPI02** | Tailscale/LAN **offline** seit ~6h — kein SCP/Start möglich |
 | Nächster Schritt | PI02 power-cycle am Hotel (vermutlich Hang von 4K-Clock) → Watcher deployed automatisch |
+
+## 2026-07-23 ~13:49 — clock_24h DEPLOY OK + FPS
+
+| Item | Ergebnis |
+|------|----------|
+| Upload | Tailscale SCP ~6 h → `media/clock_24h.mp4` **12 G** auf PI02 |
+| Alte 4K-Uhr | gestoppt |
+| Player | `fb_clock_play.py` continuous, video **860×360**, seek Wall-Clock `Europe/Zurich`, **hw=True**, rotate 180 |
+| systemd | `fb-clock` **active + enabled** (Boot-Autostart) |
+| Live-FPS (fbdev 15 s) | **~25–26 fps**, speed **~1.02×** (vorher 4K-Extract ~0.1 fps) |
+| Throughput-Messung | siehe `_deploy_clock_24h_remote.txt` |
+| `throttled` | **0x0** |
+| Journal | `start seek=13:49:15` matching wall time |
