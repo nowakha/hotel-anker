@@ -1,6 +1,6 @@
 # Hotel Anker â€” Learnings & Handoff
 
-Stand: **2026-07-23 ~13:49 CEST** — `clock_24h.mp4` auf AnkerPI02 live, Autostart enabled, ~25 fps.
+Stand: **2026-07-24 ~02:11 CEST** — Repo auf **DESKTOP-UJ8NNE9** (Harald) frisch geklont; Online-Stand `main` @ `2facf83`. Production-Clock auf PI02 weiter LIVE (Stand 2026-07-23).
 Ziel: eine andere Cursor-Instanz auf einem anderen Rechner kann ohne mündlichen Kontext weiterarbeiten.
 
 **Workflow (verbindlich):** `.cursor/rules/hotel-anker-workflow.mdc` — jeden Schritt dokumentieren (Erfolg+Misserfolg), Credentials/Learnings mitziehen, commit + `git push origin HEAD`.
@@ -136,8 +136,10 @@ Nach LAN-Kabel: SSH auf **`.112`** (eth) / mDNS `AnkerPI02.local`. Verify: **fb-
 
 ## Cursor Workspace (kanonisch)
 
-- **Einziger Arbeitsordner:** `C:\Users\User\Documents\Cursor Projects\Hotel Anker` (Name mit Leerzeichen) bzw. Harald-Pfad `C:\Users\Harald Nowak\Documents\Cursor Projects\Hotel Anker`.
-- Cursor-Linke Â«RepositoriesÂ»-Anzeige mit zwei Namen (**Hotel Anker** + **hotel-anker**) = derselbe Git-Stand: Ordnername vs. GitHub-Slug `nowakha/hotel-anker`.
+- **Arbeitsordner (Harald / DESKTOP-UJ8NNE9):** `C:\Users\Harald Nowak\Documents\Cursor Projects\Hotel Anker` — Clone 2026-07-24 von `nowakha/hotel-anker` (leer → `git clone … .`).
+- **Andere Maschine (MLT-NITRO5-HN):** `C:\Users\User\Documents\Cursor Projects\Hotel Anker`.
+- Cursor-Anzeige mit zwei Namen (**Hotel Anker** + **hotel-anker**) = derselbe Git-Stand: Ordnername vs. GitHub-Slug `nowakha/hotel-anker`.
+- Auf DESKTOP-UJ8NNE9: `git` installiert unter `C:\Program Files\Git\cmd\` (PATH oft leer → Session mit Full-PATH); `gh` fehlt noch.
 
 ## Repo & Secrets
 

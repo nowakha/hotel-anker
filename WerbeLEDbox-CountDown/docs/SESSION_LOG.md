@@ -389,3 +389,15 @@ Goal: stabile 860×360 H.264-Produktion statt 4K `st24.mov` auf PI02 (Undervolta
 | Mail | An `info@richnerstutz.ch`, Betreff Offerte SEG/Keder LightBox 2×2 m Anker |
 | Anhang | `Hotel-Anker-Richnerstutz-Bespannung.zip` (~1.4 MB) — Gmail: Message sent |
 
+## 2026-07-24 ~02:11 CEST — Sync DESKTOP-UJ8NNE9 (Harald)
+
+| Ereignis | Ergebnis |
+|----------|----------|
+| Workspace | `C:\Users\Harald Nowak\Documents\Cursor Projects\Hotel Anker` war **leer** (kein `.git`) |
+| Clone | `git clone https://github.com/nowakha/hotel-anker.git .` → **OK** |
+| Stand | `main` @ `2facf83` = `origin/main`, clean |
+| Host | `DESKTOP-UJ8NNE9` / user `harald nowak` |
+| Tooling | Git 2.55 unter `C:\Program Files\Git\cmd\` (nicht in Default-PATH); `gh` **fehlt** |
+| Media lokal | `clock_24h.mp4` / `st24.mov` **nicht** vorhanden (gitignored; liegen auf PI02 / Encode-Maschine) |
+| Continuity | `LEARNINGS.md` + `NEXT_AGENT.md` auf diesen Rechner aktualisiert |
+
