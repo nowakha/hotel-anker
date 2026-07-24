@@ -15,11 +15,16 @@ WorkingDirectory=/home/user/WerbeLEDbox-CountDown
 Environment=TZ=Europe/Zurich
 # Production: pre-cropped/scaled 860x360 H.264 (-g 25). Crop already baked into encode.
 Environment=VIDEO=/home/user/WerbeLEDbox-CountDown/media/clock_24h.mp4
-# Wait until NTP has set the clock (timesyncd)
+# Prefer I/O for large sequential MP4 reads (occasional SD stalls → visible hitch).
 ExecStartPre=/bin/bash -c 'for i in $(seq 1 120); do timedatectl show -p NTPSynchronized --value | grep -qx yes && exit 0; sleep 1; done; echo "warn: starting without NTP sync" >&2; exit 0'
-# Continuous play + periodic wall-clock resync. 860x360 fits Pi4 H.264 HW (≤1080p).
-# Neighbor upscale 860x360→3440x1440 + rotate 180 in vf. Fallback: add --no-hw if v4l2m2m fails.
-ExecStart=/usr/bin/python3 /home/user/WerbeLEDbox-CountDown/fb_clock_play.py --video ${VIDEO} --tz Europe/Zurich --resync-every 120
+# "+" = run as root despite User= (sysfs write needs root; "-" = ignore failure)
+ExecStartPre=-+/bin/bash -c 'echo 8192 > /sys/block/mmcblk0/queue/read_ahead_kb 2>/dev/null || true'
+# Continuous play; resync only on drift (no periodic hard kill → fewer visible hitches).
+# Flip 180° at 860×360 then neighbor×4 to 3440×1440. Fallback: player auto --no-hw after HW fails.
+Nice=-5
+IOSchedulingClass=best-effort
+IOSchedulingPriority=0
+ExecStart=/usr/bin/python3 /home/user/WerbeLEDbox-CountDown/fb_clock_play.py --video ${VIDEO} --tz Europe/Zurich --max-drift 0.35 --drift-check 5 --resync-every 0
 Restart=always
 RestartSec=5
 KillSignal=SIGTERM

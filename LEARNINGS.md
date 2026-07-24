@@ -1,6 +1,6 @@
 # Hotel Anker â€” Learnings & Handoff
 
-Stand: **2026-07-24 ~02:11 CEST** — Repo auf **DESKTOP-UJ8NNE9** (Harald) frisch geklont; Online-Stand `main` @ `2facf83`. Production-Clock auf PI02 weiter LIVE (Stand 2026-07-23).
+Stand: **2026-07-24 ~02:20 CEST** — Smooth-Patch für PI02-Uhr (Drift-Resync, Flip vor Upscale). Repo auf DESKTOP-UJ8NNE9; Deploy wartet auf PI02 online.
 Ziel: eine andere Cursor-Instanz auf einem anderen Rechner kann ohne mündlichen Kontext weiterarbeiten.
 
 **Workflow (verbindlich):** `.cursor/rules/hotel-anker-workflow.mdc` — jeden Schritt dokumentieren (Erfolg+Misserfolg), Credentials/Learnings mitziehen, commit + `git push origin HEAD`.
@@ -14,6 +14,15 @@ Detaillierte Chronik: [`WerbeLEDbox-CountDown/docs/SESSION_LOG.md`](./WerbeLEDbo
 - Boot: **enabled**; NTP wait in ExecStartPre
 - FPS: live fbdev **~25 fps @ 1.02×** (vs ~0.1 fps mit 4K st24 extract)
 - `throttled=0x0` nach Start
+
+## Clock smooth patch (2026-07-24, Deploy pending)
+
+User: gelegentliches Ruckeln. Ursachen im Code/Unit:
+1. **Harter ffmpeg-Kill alle 120s** → sichtbarer Hitch (Hauptverdacht „gelegentlich“)
+2. **`rotate=PI` nach Upscale auf 3440×1440** → unnötig teuer
+3. SD read-ahead / Scheduling
+
+Fix in Repo: Drift-Gate (`--max-drift 0.35`), Flip vor Scale, Unit ohne periodischen Resync, `deploy_fb_clock_smooth.ps1`. **Noch nicht auf PI02**, weil Host offline.
 
 ## Production `clock_24h.mp4` encode (2026-07-23)
 

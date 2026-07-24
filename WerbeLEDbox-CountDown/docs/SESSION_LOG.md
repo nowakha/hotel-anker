@@ -401,3 +401,15 @@ Goal: stabile 860×360 H.264-Produktion statt 4K `st24.mov` auf PI02 (Undervolta
 | Media lokal | `clock_24h.mp4` / `st24.mov` **nicht** vorhanden (gitignored; liegen auf PI02 / Encode-Maschine) |
 | Continuity | `LEARNINGS.md` + `NEXT_AGENT.md` auf diesen Rechner aktualisiert |
 
+## 2026-07-24 ~02:20 CEST — Clock smooth-Optimierung (Deploy pending)
+
+| Änderung | Warum (Ruckeln) |
+|----------|-----------------|
+| Resync nur bei Drift `>0.35s` (Check alle 5s); `--resync-every 0` | Harter Kill alle **120s** = sichtbarer Hitch |
+| `hflip,vflip` **vor** Upscale (statt `rotate=PI` @3440) | Rotate auf Panel-Res war CPU-teuer |
+| ffmpeg `-probesize 32k -analyzeduration 0 -fflags +fastseek+genpts` | Schnellerer Restart nach Drift |
+| Auto-Fallback Software nach 2× HW-Fail | Vermeidet Restart-Loop bei v4l2m2m-Fail |
+| Unit: `Nice=-5`, mmc `read_ahead_kb=8192`, kein periodischer Resync | Weniger SD-Stalls / Scheduling-Jank |
+| Script | `scripts/deploy_fb_clock_smooth.ps1` (+ `-Watch`) |
+| PI02 Reachability von DESKTOP-UJ8NNE9 | **FAIL** — TS `ankerpi02` offline (~2h); Deploy wartet |
+
