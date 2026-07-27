@@ -269,3 +269,9 @@ Not done: fb-clock/ffprobe verify (unreachable). Do not unmask.
 - Inhalt: `DRUCK-…-2100x2100.pdf`, Opazität-PDF, 5 Rahmenfotos, PRINT_SPEC, Nachtrag.
 - Mail-Entwurf: `01-anfrage/Mail-Finale-Druckdaten.md` — An `info@richnerstutz.ch`, Betreff AG 461414 / Spannmaß 210×210 cm.
 - Versand: Gmail-Compose geöffnet; Body in Zwischenablage; ZIP am Desktop — Anhang + Senden manuell (OAuth/`gog` unbrauchbar).
+
+## Git-Policy: alles Lokale tracken (2026-07-27)
+
+- Harald: Deliverables (ZIP, Druck-PDFs, Fotos, Offerte) **müssen** im Repo sein — kein «zu groß / nur Desktop».
+- `.gitignore` bereinigt: keine Ignore-Regeln mehr für print/media-Pakete; nur Scratch `_encode*` / venv / `__pycache__`.
+- Spiegel: `Richnerstutz-Bespannung-Paket/versand/` (Finale ZIP + Offerte + User-PDF).

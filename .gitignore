@@ -25,34 +25,22 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Python
+# Python bytecode / local venvs only (NOT project data)
 __pycache__/
 *.py[cod]
 .venv/
 venv/
 WerbeLEDbox-CountDown/.venv-opencv/
-WerbeLEDbox-CountDown/logs/
-
-# Misc
-*.tmp
-*.temp
-
-# Large clock / scratch media (keep README + splash + recovery cmdline)
-WerbeLEDbox-CountDown/media/*.mov
-WerbeLEDbox-CountDown/media/*.mp4
-WerbeLEDbox-CountDown/media/clock_24h.mp4
-WerbeLEDbox-CountDown/media/st24.mov
-WerbeLEDbox-CountDown/media/_encode*
-WerbeLEDbox-CountDown/media/_scp*
 
 # PlatformIO build cache (source + platformio.ini stay tracked)
 **/.pio/
 
-# Font extract cache (keep curated TTFs + zip in fonts/)
+# POLICY 2026-07-27 (Harald): Project deliverables, print PDFs, ZIPs, photos,
+# media, secrets handoff files MUST be tracked. Do not re-add ignore rules that
+# hide Anker/Richnerstutz/print/frame assets "because they are large".
+# GitHub soft limit ~100 MB/file — use Git LFS only if a single file exceeds that.
+# Encode scratch partials only:
+WerbeLEDbox-CountDown/media/_encode*
+WerbeLEDbox-CountDown/media/_scp*
 WerbeLEDbox-CountDown/fonts/_extract/
-
-# Local PI02 rescue watcher log (do not track)
 WerbeLEDbox-CountDown/docs/_pi02_rescue.log
-
-# Local package downloads (LAN-SCP staging; do not track large .deb)
-WerbeLEDbox-CountDown/tmp/

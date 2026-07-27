@@ -455,3 +455,12 @@ Goal: stabile 860×360 H.264-Produktion statt 4K `st24.mov` auf PI02 (Undervolta
 | Mail-Text | `01-anfrage/Mail-Finale-Druckdaten.md` |
 | Gmail | Compose geöffnet an info@richnerstutz.ch; Body Clipboard; **Senden: Harald** (Anhang ZIP) |
 
+
+## 2026-07-27 ~14:52 CEST — Alles Lokale nach Git
+
+| Aktion | Ergebnis |
+|--------|----------|
+| `versand/` | Finale ZIP, Offerte AG 461414, User-PDF, Chat-Originalfotos |
+| `.gitignore` | Media/print-Ignore entfernt (Policy: track deliverables) |
+| Push | folgt |
+
