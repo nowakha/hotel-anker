@@ -12,6 +12,12 @@ alwaysApply: true
 3. **Commit** mit klarer Message (warum).
 4. Sofort **`git push origin HEAD`** — andere Cursor-Instanzen sollen jederzeit weiterkönnen.
 
+## Deliverables IMMER ins Git (verbindlich, Harald 2026-07-27)
+
+- Druck-PDFs, ZIPs, Offerten, Rahmenfotos, Mail-Pakete: **commit + push**, auch wenn „groß“.
+- Nicht mit `.gitignore` oder „liegt nur auf Desktop“ abspeisen. Spiegel unter `Richnerstutz-Bespannung-Paket/versand/`.
+- Ausnahme nur echte Scratch (`_encode*`, `__pycache__`, `.venv`). Dateien >100 MB: Git LFS, aber trotzdem versionieren.
+
 ## Secrets & Zugang
 
 - Secrets unter `WerbeLEDbox-CountDown/secrets/*.yml` sind **absichtlich getrackt** (privates Repo, Handoff).
