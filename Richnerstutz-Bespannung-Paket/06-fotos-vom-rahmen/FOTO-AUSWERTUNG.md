@@ -1,42 +1,41 @@
-# Foto-Auswertung — LightBox / Kendu-Rahmen
+# Foto-Auswertung — LightBox / Kendu-Rahmen (Neu 2026-07-27)
 
-Stand: 22.07.2026 · drei Chat-Fotos + gemessene XY-Maße  
-Vertiefung 3D: siehe **`GEOMETRIE-3D.md`** und Schemata `schema-*.png`
+Originalfotos jetzt im Ordner (Chat-Uploads):
 
-**Bitte Originaldateien zusätzlich hier speichern** (für Mail-Anhang):
+| Datei | Motiv | Mess-/Sichtbefund |
+|-------|--------|-------------------|
+| `01-gesamtansicht.png` | Frontal, LED-Matrix + untere Controllerschiene | **8 Reihen** LED-Module sichtbar; darunter **leerer Kanal** mit Querprofil + weißen Anschlüssen/Controllern (ohne Textil sichtbar) |
+| `02-ecke-keder-nah.png` | Gehrungsecke | Kedernut an **vorderer Innenlippe**, 45°-Gehrung, KENDU-Panels TOP/BOTTOM |
+| `03-kendu-controller-diffuser.png` | Profil-Innen / Stack | KENDU-PCB, Diffusor-/Luftstrecke, dunkle Nut/Textil-Ebene |
+| `04-profil-tiefe-zollstock.png` | Seitenansicht Z | **Profilgesamttiefe ≈ 80–85 mm** (Zollstock 0 an Außenkante → ~8.0–8.5 cm) |
+| `05-rand-led-zu-profil-zollstock.png` | Innenrand → LED | **≈ 25 mm** von Profil-Innenecke bis Beginn der weißen LED-PCB |
 
-| Dateiname | Motiv |
-|-----------|--------|
-| `01-gesamtansicht.jpg` | Rahmen frontal, volle LED-Matrix, Ständer |
-| `02-ecke-keder-nah.jpg` | Gehrungsecke + Kedernut + LED-Platten |
-| `03-kendu-controller-diffuser.jpg` | Kendu-Controller + Diffusor mit LED-Raster |
+## Was die Fotos klar belegen
 
-## Bestätigt aus den Fotos
+1. **System:** Kendu Backlit-Panels (Logo auf PCB), SEG-Alurahmen mit Kedernut.
+2. **Z-Tiefe:** Gesamtes Profil **~80–85 mm** (Foto 04) — nicht „nur 45 mm Gesamttiefe“. Die frühere Angabe **45 mm** war die **optische Kavität Textil→LED** (Innenmaß), nicht die Außenprofiltiefe.
+3. **Rand LED↔Profil:** Innen **~25 mm** Freiraum Profilwand → LED-Board (Foto 05). Das ist der **Innenabstand zur Matrix**, nicht automatisch die Stirnbreite von außen.
+4. **Unten ohne Textil:** Unter der untersten Modulreihe liegt ein **Controller-/Versorgungskanal** (Foto 01). Mit aufgespanntem Textil ist das von vorne abgedeckt — dort kommt **kein LED-Licht**, deshalb Blockout/Schwarz sinnvoll.
+5. **Modulraster:** Frontal **8 Modulreihen** erkennbar (Annotierung); Spalten je nach Bildausschnitt 6–8 — Nennmaß weiter **8×8 × 250 mm** laut früherer Messung Außen 2100 / Fläche 2000.
 
-1. **Hersteller / System:** Kendu (Controller mit KENDU-Logo; CH1–CH4, DC 24V, DMX).
-2. **Aufbau:** Quadratischer Aluminium-Spannrahmen, silber/hell, freistehend auf Metallfuss.
-3. **Kederschiene:** Umlaufende Nut an der **vorderen Profil-Innenlippe** (SEG); Ecke auf Gehrung 45°.
-4. **Hinterleuchtung:** Flächige LED-Module auf der **Rückwand** (Backlit, nicht Edge-Lit); Module stoßen aneinander.
-5. **3D-Stack:** Textil vorne in der Nut → Luft/Diffusion **45 mm innen** → LED-Ebene → Reflexionsrückwand/Controller.
-6. **Diffusor-Hinweis:** LED-Punktraster scheint durch transluzentes Material → Blockout muss dicht sein.
-7. **Elektronik:** Kendu-Treiber am Rahmen (unterer Bereich / Querprofil).
+## Zwei Ränder — nicht vermischen
 
-## Maße
+| Begriff | Wert | Bedeutung |
+|---------|------|-----------|
+| Stirnbreite außen (XY) | **50 mm** | (2100−2000)/2 — sichtbarer Alu-Rand von vorne |
+| Innenabstand Profil→LED | **≈ 25 mm** | Foto 05, Zollstock |
+| Profiltiefe Z | **≈ 80–85 mm** | Foto 04, Zollstock |
+| Optische Kavität Textil→LED | **~45 mm** | frühere Innenmessung (weiter gültig als Lichtweg) |
+| Totzone Textil (Druck) | **250 mm** | 1 Modulreihe / 8/64 |
+| Optisch unten dunkel (Einbau) | **300 mm** | 250 Textil-Totzone + **50** Stirn unten |
 
-| Maß | Wert | Achse |
-|-----|------|--------|
-| LED-Panel | **250 × 250 mm** | XY |
-| Druck-/LED-Fläche | **2000 × 2000 mm** | XY |
-| Außenmaß Rahmen | **2100 × 2100 mm** | XY |
-| Profil-Stirnbreite | **50 mm** | XY (Rahmen +5 cm) |
-| Innen (Textil → LED) | **45 mm** | Z, Zollstock gemessen |
-| Content-Pitch | **31.25 mm** | XY (64×64) |
-| Totzone Textil | **250 mm** | unterste Modulreihe |
-| Optisch unten dunkel | **300 mm** | 250 Textil + 50 Stirn (Einbau) |
+## Konsequenz für Druck (unverändert zur Freigabe-Logik)
 
-## Relevanz für Richnerstutz
+- Richnerstutz: Textil **2000×2000 mm**, Schwarz unten **250 mm**.
+- Von außen wirkt der untere dunkle Streifen **300 mm** (250 + 50 Stirn).
+- Controllerkanal unten (Foto 01) bestätigt: unterste Zone ohne Nutzlicht → Blockout nötig; er ersetzt nicht die Stirn in der 300‑mm‑Rechnung.
 
-- Konfektion: SEG-/Kederschienenlippe in die **vordere Nut** (Foto 02).
-- Druckformat: **2000×2000 mm** Sichtfläche (nicht Außen 2100).
-- Totzone auf dem Stoff: **250 mm**; am eingebauten Kasten wirkt der untere dunkle Streifen **300 mm** (inkl. Stirn).
-- Material: Backlit-Textil + **selektiver Blockout** (Opazitätsplatte) — nötig wegen sichtbarem LED-Raster (Foto 03).
+## Offen / nächste Messung (optional)
+
+- Exakte Höhe des Controllerkanals in mm (Massband frontal, Textil ab).
+- Ob 25 mm Innenabstand umlaufend gleich ist (oben/unten/seitlich).

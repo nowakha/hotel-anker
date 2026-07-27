@@ -27,13 +27,18 @@ PROFILE_W_MM = PROFILE_FACE_W_MM  # back-compat: generators mean face rim
 OUTER_MM = 2100.0
 MODULE_PITCH_MM_CONFIRMED = 250.0
 
-# --- Z / depth (measured 2026-07-22, Zollstock photos «Innen 4.5 cm») ---
-# Optically relevant cavity: front inner lip (≈ textile / keder plane) → LED face
-INNER_DEPTH_MM = 45.0  # measured
-LED_RECESS_MM = INNER_DEPTH_MM  # alias
-# Full outer profile depth may be slightly larger behind the LED plane; cavity is 45 mm.
-PROFILE_DEPTH_MM = INNER_DEPTH_MM  # use measured cavity for schematics / light path
-PROFILE_DEPTH_SOURCE = "measured-innen-45mm-zollstock"
+# --- Z / depth ---
+# Optical cavity (textile plane → LED face): measured earlier ~45 mm
+INNER_DEPTH_MM = 45.0
+LED_RECESS_MM = INNER_DEPTH_MM
+# Full outer profile depth (front face → back of frame): Zollstock photo 04 ≈ 80–85 mm
+PROFILE_OUTER_DEPTH_MM = 82.0
+PROFILE_OUTER_DEPTH_SOURCE = "foto-04-zollstock-2026-07-27"
+# Inner clearance profile wall → LED PCB start: Zollstock photo 05 ≈ 25 mm
+LED_TO_PROFILE_INNER_MM = 25.0
+LED_TO_PROFILE_INNER_SOURCE = "foto-05-zollstock-2026-07-27"
+PROFILE_DEPTH_MM = INNER_DEPTH_MM  # generators: optical cavity
+PROFILE_DEPTH_SOURCE = "measured-innen-45mm-plus-foto-outer-82mm"
 
 # Optical stack (front → back), from photos + measurement
 # 1) SEG textile in keder groove (front lip)

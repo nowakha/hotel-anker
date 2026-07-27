@@ -246,3 +246,11 @@ Not done: fb-clock/ffprobe verify (unreachable). Do not unmask.
 - Lieferdateien: `02-druckdaten/DRUCK-Hotel-Anker-Flowbox-2000x2000.pdf` (MediaBox 2000 mm), `FREIGABE-Massblatt-2100.pdf` (MediaBox 2100 mm, Bemaßung 300 optisch), `DRUCK-Opazitaet-2000x2000.pdf`.
 - Spec-Konstante: `VISUAL_BOTTOM_DARK_MM = 300` in `kendu_flowbox_spec.py`.
 - Original-Rahmen-JPGs fehlen weiterhin in `06-fotos-vom-rahmen/` (nur Schemata).
+
+## Rahmenfotos eingepflegt (2026-07-27)
+
+- Originale in `Richnerstutz-Bespannung-Paket/06-fotos-vom-rahmen/01`–`05-*.png`.
+- Foto 04: **Profiltiefe Z ≈ 80–85 mm** (nicht mit 45 mm Kavität verwechseln).
+- Foto 05: **Innen Profil→LED ≈ 25 mm**.
+- Foto 01: unter den 8 Modulreihen **Controllerkanal** sichtbar (ohne Textil) → bestätigt dunkle Zone unten.
+- Drucklogik unverändert: Textil-Schwarz **250 mm**, optisch Einbau **300 mm** (=250+50 Stirn).

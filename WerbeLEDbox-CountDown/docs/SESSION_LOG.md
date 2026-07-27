@@ -423,3 +423,14 @@ Goal: stabile 860×360 H.264-Produktion statt 4K `st24.mov` auf PI02 (Undervolta
 | `FREIGABE-Massblatt-2100.pdf` | MediaBox **2100×2100 mm**, Label optisch 300 mm |
 | Spec | PRINT_SPEC + `VISUAL_BOTTOM_DARK_MM` + GEOMETRIE-3D Hinweis |
 | Nicht getan | Textil-Schwarz auf 300 mm; Druck auf 2100 mit gedrucktem Rahmen |
+
+## 2026-07-27 ~14:05 CEST — Original-Rahmenfotos analysiert
+
+| Foto | Befund |
+|------|--------|
+| 01 Gesamt | 8 Modulreihen + unterer Controllerkanal |
+| 04 Zollstock Z | Profiltiefe **~80–85 mm** |
+| 05 Zollstock XY | Profil→LED **~25 mm** |
+| Docs | FOTO-AUSWERTUNG + GEOMETRIE-3D + Spec-Konstanten aktualisiert |
+| Druck | 250 Textil / 300 optisch unverändert |
+
