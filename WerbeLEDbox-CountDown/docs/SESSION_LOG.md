@@ -455,3 +455,29 @@ Goal: stabile 860×360 H.264-Produktion statt 4K `st24.mov` auf PI02 (Undervolta
 | Mail-Text | `01-anfrage/Mail-Finale-Druckdaten.md` |
 | Gmail | Compose geöffnet an info@richnerstutz.ch; Body Clipboard; **Senden: Harald** (Anhang ZIP) |
 
+## 2026-07-27 ~14:20 CEST — Finale Druckdaten outbound bestätigt (kein Richner-Reply)
+
+| Feld | Wert |
+|------|------|
+| From | `harald.nowak@modernlight.ch` (**Outbound**, Filter = Stop) |
+| Subject | `Finale Druckdaten + Rahmenfotos — Hotel Anker / Offerte AG 461414 (Spannmass 210x210 cm)` |
+| Date | Mon, 27 Jul 2026 14:20:04 +0200 |
+| message_id / thread_id | `19fa384a1e1e75b4` / `19fa383e5312ec24` |
+| Filter | **Kein Richnerstutz-Reply** — eigene gesendete Mail via Zapier |
+
+**Inhalt (kurz):** Verbindliches Spannmaß 210×210 cm (Offerte AG 461414 anpassen); Sujet + Opazitäts-PDF; Schwarzstreifen 300 mm; 5 Kendu-Rahmenfotos; Realia = Rechnung, Harald = Technik.
+
+**Aktion Agent:** Status in Anfrage-/LEARNINGS-/Paket-Docs auf **gesendet** gesetzt. Kein Antwortentwurf (kein Printer-Reply). Warte auf Richner-Bestätigung; kein weiteres Outbound ohne Harald-Go.
+
+## 2026-07-27 ~14:21 CEST — Doppel-Webhook Outbound (kein Richner-Reply)
+
+| Feld | Wert |
+|------|------|
+| From | `harald.nowak@modernlight.ch` (**Outbound**, Filter = Stop) |
+| Subject | gleich wie Final-Mail |
+| Date | Mon, 27 Jul 2026 14:21:12 +0200 |
+| message_id / thread_id | `19fa385abefb7768` / `19fa383e5312ec24` (gleiche Thread) |
+| Filter | **Kein Richnerstutz-Reply** — Doppel-Trigger derselben Final-Mail |
+
+**Aktion Agent:** Docs nur um Doppel-ID ergänzt; kein neuer Status, kein Antwortentwurf, kein Outbound.
+

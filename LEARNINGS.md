@@ -263,9 +263,16 @@ Not done: fb-clock/ffprobe verify (unreachable). Do not unmask.
 - Spec: `PRINT_MM=2100`, `PRINT_DEAD_MM=300` in `kendu_flowbox_spec.py`.
 - Offerte AG 461414 noch 200×200 cm → Nachtrag-Text in `01-anfrage/Nachtrag-Spannmass-210cm.md`.
 
-## Finale Druckdaten-Mail an Richner (2026-07-27)
+## Richnerstutz Antwort (2026-07-27 ~13:23 CEST)
+- **Von:** Tanja Jelk (`Tanja.Jelk@richnerstutz.ch`), Direkt +41 56 616 67 73
+- **Inhalt:** Textil **Lumina** + Multilayer; Lieferfrist ~10 Tage ab Druckdaten; Offerte-PDF nur in Gmail (nicht im Webhook).
+- **Offen:** Preis im Anhang; Keder/SEG 2100 mm und Totzone/Opazität nicht explizit bestätigt.
 
-- ZIP: `~/Desktop/Hotel-Anker-Richnerstutz-Finale-Druckdaten.zip` (~20 MB) und Downloads.
-- Inhalt: `DRUCK-…-2100x2100.pdf`, Opazität-PDF, 5 Rahmenfotos, PRINT_SPEC, Nachtrag.
-- Mail-Entwurf: `01-anfrage/Mail-Finale-Druckdaten.md` — An `info@richnerstutz.ch`, Betreff AG 461414 / Spannmaß 210×210 cm.
-- Versand: Gmail-Compose geöffnet; Body in Zwischenablage; ZIP am Desktop — Anhang + Senden manuell (OAuth/`gog` unbrauchbar).
+## Finale Druckdaten-Mail an Richner (2026-07-27 ~14:20 CEST) — GESENDET
+- Gmail webhook bestätigt Outbound von `harald.nowak@modernlight.ch` (kein Richner-Reply).
+- Betreff: `Finale Druckdaten + Rahmenfotos — Hotel Anker / Offerte AG 461414 (Spannmass 210x210 cm)`
+- IDs: `message_id` `19fa384a1e1e75b4`, `thread_id` `19fa383e5312ec24`
+- Doppel-Webhook ~14:21:12: gleiche Thread-ID, weitere `message_id` `19fa385abefb7768` (gleicher Outbound-Inhalt — kein neues Ereignis).
+- Inhalt laut Body: Spannmaß 210×210 cm (Offerte anpassen), Druck-PDF + Opazitäts-PDF, 5 Rahmenfotos, Realia Rechnung / Harald Technik.
+- ZIP-Entwurf zuvor: `~/Desktop/Hotel-Anker-Richnerstutz-Finale-Druckdaten.zip` (~20 MB); Mail-Text `01-anfrage/Mail-Finale-Druckdaten.md`.
+- **Nächster Schritt:** auf Richner-Eingangs-/Mass-Bestätigung warten. Kein weiteres Outbound ohne Harald-Go.
