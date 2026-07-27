@@ -1,38 +1,30 @@
 # Druckdaten — Hotel Anker Countdown
 
-## Zwei Maßsysteme (nicht vermischen)
+## Kanonisch (verbindlich)
 
-| Ebene | Maß | Schwarz unten |
-|-------|-----|----------------|
-| **Außen / Freigabe** | 2100 × 2100 mm | **optisch 300 mm** (= 250 Textil + 50 Stirn) |
-| **Drucktextil Richnerstutz** | 2000 × 2000 mm | **250 mm** (eine Modulreihe; Stirn = Alu, nicht drucken) |
+| | |
+|--|--|
+| **Spann-/Druckmaß** | **2100 × 2100 mm** (= Außenrahmen) |
+| **Schwarz unten** | **300 mm** (= 250 Modul + 50 Stirn) |
+| **Master-PDF** | `DRUCK-Hotel-Anker-Flowbox-2100x2100.pdf` |
+
+Widerruf: 2000×2000 mm mit nur 250 mm Totzone war **falsch**.
 
 ## Produktionsdateien (an Richnerstutz)
 
 | Datei | Verwendung |
 |-------|------------|
-| **`DRUCK-Hotel-Anker-Flowbox-2000x2000.pdf`** | **Haupt-Druck-PDF** — MediaBox exakt 2000×2000 mm, Totzone deckend schwarz 250 mm |
-| **`DRUCK-Opazitaet-2000x2000.pdf`** | Opazitätsplatte gleiche Größe (schwarz=lichtdurchlässig, rot=Blockout) |
-| `print-ghost-hires.png` | PNG-Master 4096×4096 px |
-| `print-ghost-2000.png` | Verkleinerte Ansicht |
+| **`DRUCK-Hotel-Anker-Flowbox-2100x2100.pdf`** | Haupt-Druck-PDF — MediaBox **2100×2100 mm** |
+| **`DRUCK-Opazitaet-2100x2100.pdf`** | Opazitätsplatte gleiche Größe |
+| `print-ghost-hires.pdf` | Alias des Masters |
+| `print-ghost-hires.png` | PNG-Master 4200×4200 (2 px/mm) |
 | `PRINT_SPEC.md` | Technische Spezifikation |
 
-## Freigabe (für dich / Bauherr)
+Verify: `python WerbeLEDbox-CountDown/scripts/finalize_print_pdfs.py`
 
-| Datei | Verwendung |
-|-------|------------|
-| **`FREIGABE-Massblatt-2100.pdf`** | Außen 2100×2100 mm inkl. Alu-Rahmen, Bemaßung **optisch unten 300 mm** |
-| `FREIGABE-Massblatt-2100.png` | Rastervorschau |
+## LED-Physik (Hintergrund)
 
-Neu erzeugen: `python WerbeLEDbox-CountDown/scripts/finalize_print_pdfs.py`
+- LED-Fläche innen: 2000×2000 mm (8×8 × 250 mm)
+- Stirn: 50 mm → Außen 2100×2100 mm
 
-## Physik (gemessen 2026-07-22)
-
-- Druck-/LED-Fläche: **2000 × 2000 mm** (8×8 Panels à **250 × 250 mm**)
-- Außenmaß Rahmen: **2100 × 2100 mm**
-- Profil-Stirnbreite: **50 mm**
-- Content-Grid: **64 × 64** → Zellpitch **31.25 mm**
-- Totzone Textil: **250 mm** (8/64)
-- Optisch unten dunkel (Einbau): **300 mm**
-
-Opazitätsplatte: `../03-opazitaet/` · Lichtvideo: `../07-lichtvideo/`
+Opazität: `../03-opazitaet/`

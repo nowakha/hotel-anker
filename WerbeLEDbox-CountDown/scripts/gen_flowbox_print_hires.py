@@ -670,39 +670,19 @@ def add_caption(img: Image.Image, title: str, sub: str) -> Image.Image:
 
 def write_print_spec() -> None:
     (OUT / "PRINT_SPEC.md").write_text(
-        f"""# Print-Spezifikation — Hotel Anker Countdown (Kendu Flowbox 2 × 2 m)
+        f"""# Print-Spezifikation — Hotel Anker Countdown (Kendu Flowbox)
 
-## Zwei Maßsysteme (nicht vermischen)
+## Kanonisches Druckmaß (verbindlich)
 
-| Ebene | Maß | Schwarz unten |
-|-------|-----|----------------|
-| Außenrahmen (Freigabe / Einbau) | **{OUTER_MM:.0f} × {OUTER_MM:.0f} mm** | **optisch {VISUAL_BOTTOM_DARK_MM:.0f} mm** = {DEAD_H_MM:.0f} Textil + {PROFILE_FACE_W_MM:.0f} Stirn |
-| Drucktextil Richnerstutz | **{FACE_MM:.0f} × {FACE_MM:.0f} mm** | **{DEAD_H_MM:.0f} mm** (8/64). Stirn nicht mitdrucken. |
+| Ebene | Maß |
+|-------|-----|
+| Spann-/Druck-PDF | **{OUTER_MM:.0f} × {OUTER_MM:.0f} mm** |
+| Schwarz unten | **{VISUAL_BOTTOM_DARK_MM:.0f} mm** (= 250 Modul + 50 Stirn) |
+| Master | `DRUCK-Hotel-Anker-Flowbox-2100x2100.pdf` |
 
-## Kendu / Physik
-- Nennmaß Fläche: **{PHYSICAL_MM:.0f} × {PHYSICAL_MM:.0f} mm**
-- Profil-Stirnbreite: **{PROFILE_W_MM:.0f} mm**
-- Content-Grid: **{GRID} × {GRID}** → Zellpitch **{CELL_PITCH_MM:.2f} mm**
-- Totzone Textil: untere **{DEAD_ROWS}/64** (= {DEAD_H_MM:.0f} mm), deckend schwarz
-- Optisch unten dunkel: **{VISUAL_BOTTOM_DARK_MM:.0f} mm**
+LED-Fläche innen: **{FACE_MM:.0f} × {FACE_MM:.0f} mm** (nicht das Druckformat).
 
-## Format
-- `print-ghost-hires.png` · **{SIZE}×{SIZE} px** · {PRINT_PX_PER_MM:.3f} px/mm · **{CELL} px/Zelle** (exakt)
-- PDFs: `finalize_print_pdfs.py` → `DRUCK-…-2000x2000.pdf` + `FREIGABE-Massblatt-2100.pdf`
-
-## Ziel
-- Countdown endet **1. Oktober 2026, 13:00 Europe/Zurich** (nur live; Print zeigt „Zeit bis Baubeginn:“)
-- Logo: historischer Kronen-Anker (Fassadenmarke Hotel Anker Rorschach)
-
-## Layout (identisch Lichtvideo)
-- 8er füllen Höhe zwischen Liquid-Glass-Balken (`DH={DH}`)
-- Mitte der 8 = Mitte zwischen den Colon-Punkten
-- Tage y={DAY_Y}, Zeit y={TIME_Y}, Totzone ab {ACTIVE_H}
-
-## Opazitätsplatte
-- `print-opacity-mask-hires.png` · **schwarz = lichtdurchlässig**, **rot = lichtundurchlässig**
-- Rot: Totzone · Logo · Beschriftung · Fassadenlinien (auch über Glass-Balken) · DSEG7-Konturen / Colon-Ringe
-- Schwarz: Liquid-Glass-Balken · DSEG7-Segmentfüllungen / Colon-Kerne · Navy-Hintergrund
+Siehe `Richnerstutz-Bespannung-Paket/02-druckdaten/PRINT_SPEC.md` und `finalize_print_pdfs.py`.
 """,
         encoding="utf-8",
     )

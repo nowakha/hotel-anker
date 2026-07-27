@@ -25,14 +25,12 @@ Alles für die Anfrage an **Richnerstutz AG** (Druck + Konfektion mit Kederschie
 ## Was Richnerstutz braucht (Priorität)
 
 1. Anfrage aus `01-anfrage/`
-2. **Druck-PDF:** `02-druckdaten/DRUCK-Hotel-Anker-Flowbox-2000x2000.pdf` (2000×2000 mm)
-3. **Opazitäts-PDF:** `02-druckdaten/DRUCK-Opazitaet-2000x2000.pdf` (oder `03-opazitaet/`)  
+2. **Druck-PDF:** `02-druckdaten/DRUCK-Hotel-Anker-Flowbox-2100x2100.pdf` (**2100×2100 mm**, Schwarz unten **300 mm**)
+3. **Opazitäts-PDF:** `02-druckdaten/DRUCK-Opazitaet-2100x2100.pdf`  
    - **schwarz** = lichtdurchlässig  
    - **rot** = lichtundurchlässig / Blockout
-4. Freigabe-Maßblatt (optional intern): `02-druckdaten/FREIGABE-Massblatt-2100.pdf` — zeigt **optisch 300 mm** unten
-5. Fotos der Kederschiene / des Rahmens aus `06-fotos-vom-rahmen/`  
-   → Auswertung: `06-fotos-vom-rahmen/FOTO-AUSWERTUNG.md`  
-   → Original-JPGs bitte noch in denselben Ordner legen
+4. Fotos aus `06-fotos-vom-rahmen/`
+5. **Hinweis Offerte:** AG 461414 „Textil 200×200 cm“ → Spannmaß laut Master **210×210 cm** (Nachtrag an Richnerstutz)
 
 Optional: Massblatt-Overlays in `04-vorlagen-massblatt/`, Vorschauen in `05-vorschauen/`.
 

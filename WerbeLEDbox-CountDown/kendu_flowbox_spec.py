@@ -1,66 +1,60 @@
-"""Hotel Anker LightBox — physical ↔ 64×64 LED/print mapping (3D-aware).
+"""Hotel Anker LightBox — physical ↔ LED grid ↔ print master (3D-aware).
 
-Measured XY (2026-07-22):
-- LED panels: **250 × 250 mm**
-- Outer frame: **2100 × 2100 mm**
-- Face rim / Profil-Stirnbreite: **50 mm** → print/LED face **2000 × 2000 mm**
+Canonical PRINT (confirmed 2026-07-27 via user PDF `print-ghost-hires.pdf`):
+- Spann-/Druckmaß: **2100 × 2100 mm** (Außenmaß Rahmen)
+- Unterer Schwarzstreifen auf dem Druck: **300 mm** (= 250 mm Modulreihe + 50 mm Stirn)
 
-Photo + measured Z / depth:
-- True **backlit** stack (LEDs on rear plane, not edge-lit)
-- SEG keder groove on the **front inner lip** of the aluminium profile
-- **Innen 45 mm** measured (Zollstock): front lip / textile plane → LED panel face
-- Face rim 50 mm (XY) remains distinct from this Z cavity — see GEOMETRIE-3D.md
-
-Logical content grid (AnkerPI02 custom WS2812 retrofit):
-
-    pitch = FACE_MM / GRID  →  2000 / 64 = 31.25 mm / cell
-    module = 8 × 8 cells    →  250 × 250 mm (matches panel)
+LED / content grid (unchanged physics):
+- LED panels: **250 × 250 mm**, 8×8 → face **2000 × 2000 mm**
+- Profil-Stirnbreite: **50 mm** → outer **2100 × 2100 mm**
 """
 
 from __future__ import annotations
 
 # --- Measured XY ---
-FACE_MM = 2000.0  # SEG print / LED matrix face (inside profile)
-PHYSICAL_MM = FACE_MM  # back-compat alias used by generators
+FACE_MM = 2000.0  # LED matrix face (inside profile) — NOT the print canvas
+PHYSICAL_MM = FACE_MM  # back-compat: generators that mean LED face
 PROFILE_FACE_W_MM = 50.0  # front-view rim (outer − face) / 2
-PROFILE_W_MM = PROFILE_FACE_W_MM  # back-compat: generators mean face rim
+PROFILE_W_MM = PROFILE_FACE_W_MM
 OUTER_MM = 2100.0
 MODULE_PITCH_MM_CONFIRMED = 250.0
 
+# --- Print / SEG spannmaß (canonical production) ---
+PRINT_MM = OUTER_MM  # textile stretch size = outer frame
+PRINT_DEAD_MM = 300.0  # solid black on print (= module row 250 + face rim 50)
+assert abs(PRINT_DEAD_MM - (MODULE_PITCH_MM_CONFIRMED + PROFILE_FACE_W_MM)) < 1e-9
+
 # --- Z / depth ---
-# Optical cavity (textile plane → LED face): measured earlier ~45 mm
-INNER_DEPTH_MM = 45.0
+INNER_DEPTH_MM = 45.0  # optical cavity textile → LED
 LED_RECESS_MM = INNER_DEPTH_MM
-# Full outer profile depth (front face → back of frame): Zollstock photo 04 ≈ 80–85 mm
 PROFILE_OUTER_DEPTH_MM = 82.0
 PROFILE_OUTER_DEPTH_SOURCE = "foto-04-zollstock-2026-07-27"
-# Inner clearance profile wall → LED PCB start: Zollstock photo 05 ≈ 25 mm
 LED_TO_PROFILE_INNER_MM = 25.0
 LED_TO_PROFILE_INNER_SOURCE = "foto-05-zollstock-2026-07-27"
-PROFILE_DEPTH_MM = INNER_DEPTH_MM  # generators: optical cavity
+PROFILE_DEPTH_MM = INNER_DEPTH_MM
 PROFILE_DEPTH_SOURCE = "measured-innen-45mm-plus-foto-outer-82mm"
 
-# Optical stack (front → back), from photos + measurement
-# 1) SEG textile in keder groove (front lip)
-# 2) air / diffusion gap ≈ 45 mm
-# 3) LED panel plane (8×8 × 250 mm) on white reflector
-# 4) back braces / controllers (Kendu CH1–4, DC 24V, DMX)
-
-# --- Content grid ---
+# --- Content grid (LED / live) ---
 GRID = 64
-DEAD_ROWS = 8
+DEAD_ROWS = 8  # defective bottom module row on LED matrix
 ACTIVE_ROWS = GRID - DEAD_ROWS  # 56
 
 CELL_PITCH_MM = FACE_MM / GRID  # 31.25
 ACTIVE_H_MM = ACTIVE_ROWS * CELL_PITCH_MM  # 1750
-DEAD_H_MM = DEAD_ROWS * CELL_PITCH_MM  # 250 — black on textile / print file
-# Installed view from outside: bottom dark = textile totzone + aluminium face rim
-VISUAL_BOTTOM_DARK_MM = DEAD_H_MM + PROFILE_FACE_W_MM  # 300
+DEAD_H_MM = DEAD_ROWS * CELL_PITCH_MM  # 250 — LED dead row only
+# Print black includes the bottom face rim as well:
+VISUAL_BOTTOM_DARK_MM = PRINT_DEAD_MM  # 300 — same as print dead band
 assert abs(VISUAL_BOTTOM_DARK_MM - 300.0) < 1e-9
 
+# Legacy generator canvas (64 px/cell on LED face) — live/LED tools
 PRINT_PX_PER_CELL = 64
-PRINT_SIZE_PX = GRID * PRINT_PX_PER_CELL  # 4096
+PRINT_SIZE_PX = GRID * PRINT_PX_PER_CELL  # 4096 (LED-face tooling)
 PRINT_PX_PER_MM = PRINT_SIZE_PX / FACE_MM  # 2.048
+
+# Production raster from 2100 mm master @ 2 px/mm
+PRINT_MASTER_PX = int(round(PRINT_MM * 2.0))  # 4200
+PRINT_MASTER_PX_PER_MM = PRINT_MASTER_PX / PRINT_MM  # 2.0
+PRINT_DEAD_PX = int(round(PRINT_DEAD_MM * PRINT_MASTER_PX_PER_MM))  # 600
 
 MODULE_CELLS = 8
 MODULE_PITCH_MM = MODULE_CELLS * CELL_PITCH_MM  # 250.0
@@ -69,11 +63,10 @@ N_MODULES_SIDE = GRID // MODULE_CELLS  # 8
 assert abs(MODULE_PITCH_MM - MODULE_PITCH_MM_CONFIRMED) < 1e-9
 assert abs(FACE_MM + 2 * PROFILE_FACE_W_MM - OUTER_MM) < 1e-9
 
-# SEG keder groove (industry-typical; exact unpublished — photo: narrow front lip channel)
 KEDER_GROOVE_W_MM = 4.0
 KEDER_GROOVE_D_MM = 14.0
 
-OUTER_HINT_MM = OUTER_MM  # back-compat
+OUTER_HINT_MM = OUTER_MM
 
 
 def cell_to_mm(c: float) -> float:
@@ -85,7 +78,7 @@ def mm_to_cell(mm: float) -> float:
 
 
 def cell_to_print_px(c: float) -> int:
-    """Pixel origin of cell edge on the hires print canvas."""
+    """Pixel origin of cell edge on the legacy 4096 LED-face canvas."""
     return int(round(c * PRINT_PX_PER_CELL))
 
 

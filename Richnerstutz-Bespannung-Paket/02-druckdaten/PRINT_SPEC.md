@@ -1,38 +1,29 @@
 # Print-Spezifikation — Hotel Anker Countdown
 
-## Zwei Maßsysteme (nicht vermischen)
+## Kanonisches Druckmaß (verbindlich)
 
-| Ebene | Maß | Schwarz unten |
-|-------|-----|----------------|
-| **Außenrahmen** (Freigabe / Einbau) | **2100 × 2100 mm** | **optisch 300 mm** = Totzone Textil 250 + Stirn 50 |
-| **Drucktextil an Richnerstutz** | **2000 × 2000 mm** | **250 mm** (= 1 Modulreihe / 8/64). Stirn ist Aluminium — nicht mitdrucken. |
+| Angabe | Wert |
+|--------|------|
+| **Spann-/Druck-PDF** | **2100 × 2100 mm** (= Außenmaß Rahmen) |
+| **Schwarzstreifen unten** | **300 mm** (= 250 Modulreihe + 50 Stirn) |
+| Master-Datei | `DRUCK-Hotel-Anker-Flowbox-2100x2100.pdf` |
+| PNG-Master | `print-ghost-hires.png` · **4200×4200 px** · 2 px/mm |
 
-## Physik (gemessen)
-- Druck-/LED-Fläche: **2000 × 2000 mm** (8×8 Panels à **250 × 250 mm**)
-- Profil-Stirnbreite (XY): **50 mm**
-- Außenmaß Rahmen: **2100 × 2100 mm** (= 2000 + 2×50)
-- Innen Textil→LED (Z): **45 mm** (Zollstock)
-- Content-Grid: **64 × 64** → Zellpitch **31.25 mm**
-- Totzone Textil: untere **8/64** Zellen (= **250 mm**)
-- Optisch unten dunkel (Einbau): **300 mm**
+**Widerruf:** Frühere 2000×2000‑mm‑Produktion mit nur 250 mm Totzone war **falsch**.
 
-Stack vorne→hinten: SEG-Textil in Kedernut → Diffusion **45 mm** → LED-Panels → Rückwand/Controller  
-Details: `Richnerstutz-Bespannung-Paket/06-fotos-vom-rahmen/GEOMETRIE-3D.md`
+## LED-Physik (nicht das Druckformat)
 
-## Lieferdateien (Produktion)
-- `DRUCK-Hotel-Anker-Flowbox-2000x2000.pdf` — MediaBox **2000×2000 mm**, Totzone deckend schwarz 250 mm
-- `DRUCK-Opazitaet-2000x2000.pdf` — gleiche Größe; schwarz=lichtdurchlässig, rot=Blockout
-- `FREIGABE-Massblatt-2100.pdf` — MediaBox **2100×2100 mm**, Bemaßung inkl. optisch 300 mm
+- LED-Fläche: **2000 × 2000 mm** (8×8 × 250 mm)
+- Stirn: **50 mm** → Außen **2100 × 2100 mm**
+- Content-Grid live: 64×64, Totzone LED = unterste 8/64 (= 250 mm Module)
 
-## Raster / PNG-Master
-- `print-ghost-hires.png` · **4096×4096 px** · 2.048 px/mm · **64 px/Zelle**
-- Totzone ab Pixelzeile 3584 (= 56/64) — **rein schwarz**, kein Hinweistext
+## Lieferdateien
 
-## Ziel
-- Countdown endet **1. Oktober 2026, 13:00 Europe/Zurich** (nur live; Print zeigt „Zeit bis Baubeginn:“)
-- Logo: historischer Kronen-Anker (Fassadenmarke Hotel Anker Rorschach)
+- `DRUCK-Hotel-Anker-Flowbox-2100x2100.pdf` — Produktion
+- `DRUCK-Opazitaet-2100x2100.pdf` — schwarz=lichtdurchlässig, rot=Blockout (Totzone 300 mm)
+- `print-ghost-hires.pdf` — Alias des Masters
 
-## Opazitätsplatte
-- **schwarz** = lichtdurchlässig · **rot** = lichtundurchlässig
-- Rot: Totzone · Logo · Beschriftung · Fassadenlinien · DSEG7-Konturen / Colon-Ringe
-- Schwarz: Liquid-Glass-Balken · DSEG7-Segmentfüllungen / Colon-Kerne · Navy-Hintergrund
+## Opazität
+
+- Rot: Totzone 300 mm · Logo · Beschriftung · Fassadenlinien · Digit-Konturen
+- Schwarz: Glass-Balken · Segmentfüllungen · Navy-Hintergrund

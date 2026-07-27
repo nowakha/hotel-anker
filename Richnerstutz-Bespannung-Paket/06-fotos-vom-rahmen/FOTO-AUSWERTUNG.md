@@ -29,11 +29,11 @@ Originalfotos jetzt im Ordner (Chat-Uploads):
 | Totzone Textil (Druck) | **250 mm** | 1 Modulreihe / 8/64 |
 | Optisch unten dunkel (Einbau) | **300 mm** | 250 Textil-Totzone + **50** Stirn unten |
 
-## Konsequenz für Druck (unverändert zur Freigabe-Logik)
+## Konsequenz für Druck (kanonisch 2026-07-27)
 
-- Richnerstutz: Textil **2000×2000 mm**, Schwarz unten **250 mm**.
-- Von außen wirkt der untere dunkle Streifen **300 mm** (250 + 50 Stirn).
-- Controllerkanal unten (Foto 01) bestätigt: unterste Zone ohne Nutzlicht → Blockout nötig; er ersetzt nicht die Stirn in der 300‑mm‑Rechnung.
+- Spann-/Druckmaß: **2100×2100 mm** (User-Master-PDF bestätigt).
+- Schwarz unten auf dem Druck: **300 mm** (250 Modul + 50 Stirn).
+- Offerte AG 461414 nennt noch „Textil 200×200 cm“ — **Nachtrag nötig:** Spannmaß **210×210 cm**.
 
 ## Offen / nächste Messung (optional)
 

@@ -434,3 +434,14 @@ Goal: stabile 860×360 H.264-Produktion statt 4K `st24.mov` auf PI02 (Undervolta
 | Docs | FOTO-AUSWERTUNG + GEOMETRIE-3D + Spec-Konstanten aktualisiert |
 | Druck | 250 Textil / 300 optisch unverändert |
 
+
+## 2026-07-27 ~14:12 CEST — Druckmaster 2100×2100 / Schwarz 300 mm
+
+| Schritt | Ergebnis |
+|---------|----------|
+| User-PDF Analyse | MediaBox **2100 mm**, bottom black **≈300 mm** — bestätigt |
+| Import | `DRUCK-Hotel-Anker-Flowbox-2100x2100.pdf` + PNG 4200² |
+| Opazität | `DRUCK-Opazitaet-2100x2100.pdf`, Totzone 300 mm rot |
+| Widerruf | 2000/250-Produktion entfernt / Specs umgestellt |
+| Richner | Nachtrag-Entwurf `Nachtrag-Spannmass-210cm.md` (Offerte noch 200×200) |
+

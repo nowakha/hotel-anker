@@ -2,6 +2,8 @@
 
 **Status:** **Gesendet** 2026-07-23 ~17:27 CEST — von `harald.nowak@modernlight.ch` an `info@richnerstutz.ch` (Gmail Web UI), Anhang `Hotel-Anker-Richnerstutz-Bespannung.zip`.  
 
+**Korrektur Druckmaß (2026-07-27):** Kanonischer Master ist **2100 × 2100 mm** Spannmaß mit **300 mm** Schwarz unten (`DRUCK-Hotel-Anker-Flowbox-2100x2100.pdf`). Offerte AG 461414 („Textil 200×200 cm“) weicht ab — **Nachtrag an Richnerstutz:** bitte auf **210×210 cm** / MediaBox 2100 mm umstellen.  
+
 **Empfänger:** Richnerstutz AG, Nordstrasse 7, 5612 Villmergen · info@richnerstutz.ch · +41 56 616 67 67  
 **Auftraggeber:** Realia AG (Gottlieb Kündig), Industriestrasse 40b, 9400 Rorschach · UID CHE-113.325.481  
 **Technische Ansprechperson:** Harald Nowak, Modernlight — Projektleitung | Videoengineering · Harald.Nowak@modernlight.ch · +41 76 579 84 54
@@ -28,13 +30,14 @@ Am Standort **Hotel Anker, Rorschach** (Countdown-Bar / Sichtfenster zum Sanieru
 | Angabe | Wert | Bemerkung |
 |--------|------|-----------|
 | Systemfamilie | **Kendu Flowbox / Smartframe-SEG** (foto-bestätigt) | Aluminiumrahmen, Kedernut, Kendu-Controller DC 24V/DMX |
-| Nennfläche (Sicht-/Leuchtfläche) | **2000 × 2000 mm** | 8×8 LED-Panels à 250×250 mm |
+| Nennfläche (LED-Matrix) | **2000 × 2000 mm** | 8×8 LED-Panels à 250×250 mm |
+| **Spann-/Druckmaß Textil** | **2100 × 2100 mm** | = Außenmaß Rahmen; Master-PDF bestätigt |
 | Außenmaß Rahmen | **2100 × 2100 mm** | gemessen |
 | Profil-Stirnbreite (XY) | **50 mm** | (2100−2000)/2 · Rahmen +5 cm |
 | Innen Textil→LED (Z) | **45 mm** | Zollstock gemessen |
 | Konfektion | **Umlaufende Kederschienenlippe** (Silikon-/Flachkeder) | Einschub in die Profilnut, werkzeugloser Sujetwechsel |
 | Hinterleuchtung | Individuelle **LED-Matrix 64 × 64** hinter dem Textil | Custom-Retrofit, Zellpitch **31,25 mm** |
-| Totzone unten | **250 mm** (8/64 Zellen) | muss **vollständig lichtundurchlässig** gedruckt/gedeckt sein |
+| Schwarzstreifen unten (Druck) | **300 mm** | 250 mm Modulreihe + 50 mm Stirn; **vollständig lichtundurchlässig** |
 | Einsatzort | Innen, dauerhaft sichtbar | Countdown bis geplantem Baubeginn 1. Oktober 2026 |
 
 Die Bespannung muss **passgenau** in die vorhandene Kederschiene des Rahmens einsetzbar sein. Anhand der Fotos ist der **3D-Aufbau** klar: Kendu-Rahmen mit Kedernut an der **vorderen Innenlippe**, flächigen LED-Modulen auf der **Rückwand** (Backlit) und Controllern (DC 24V / DMX). Stirnbreite **50 mm**, Diffusionsstrecke innen **45 mm** (Textil-Ebene → LED, Zollstock). Den exakten Keder-Querschnitt stimmen wir gerne anhand der Fotos bzw. einer Musterlippe ab.
@@ -62,7 +65,7 @@ Das Sujet ist **kein klassischer Vollflächen-Hinterleuchtungsdruck**. Es muss a
 
 **B — lichtundurchlässig / Blockout** (kein sichtbares LED-Störlicht)
 
-- **Totzone** unten (250 mm über die volle Breite)
+- **Totzone / Schwarzstreifen** unten (**300 mm** über die volle Breite)
 - **Logo** (historischer Kronen-Anker / Fassadenmarke Hotel Anker)
 - **Beschriftungen** («Zeit bis Baubeginn:», «Tage», «Stunden», «Minuten», «Sekunden»)
 - **Fassadenlinien** / grafische Konturen (auch über den Glass-Balken)
@@ -72,12 +75,16 @@ Bitte prüfen Sie, welches Verfahren bei Ihnen geeignet ist (z. B. transluzentes
 
 ### 4. Beilagen in diesem Versandpaket
 
-- Drucksujet: `print-ghost-hires.png` (4096×4096)
-- Opazitätsplatte: `print-opacity-mask-hires.png` + Legende
+- **Druck-PDF:** `DRUCK-Hotel-Anker-Flowbox-2100x2100.pdf` (MediaBox **2100×2100 mm**, Schwarz unten **300 mm**)
+- Opazitätsplatte: `DRUCK-Opazitaet-2100x2100.pdf` + Legende
 - Massblatt-/Keder-Overlays und PRINT_SPEC
 - **Fotos des vorhandenen Kendu-Rahmens** (Gesamtansicht, Kedernut/Ecke, Controller/Diffusor mit sichtbarem LED-Raster)
 
 Hinweis aus den Fotos: Hinter transluzentem Material zeichnet sich das LED-Punktraster ab — die Blockout-Zonen (rot in der Opazitätsplatte) müssen streulichtfrei ausgeführt werden.
+
+### Nachtrag Offerte AG 461414
+
+Die Richtofferte listet «Textil 200×200 cm». Das **verbindliche Spannmaß** laut finalem Druckmaster ist **210×210 cm** (2100×2100 mm). Bitte Offerte und Zuschnitt/Keder (Umfang) entsprechend anpassen.
 
 ### 5. Bitte um Rückmeldung
 

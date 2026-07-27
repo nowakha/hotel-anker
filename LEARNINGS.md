@@ -254,3 +254,11 @@ Not done: fb-clock/ffprobe verify (unreachable). Do not unmask.
 - Foto 05: **Innen Profil→LED ≈ 25 mm**.
 - Foto 01: unter den 8 Modulreihen **Controllerkanal** sichtbar (ohne Textil) → bestätigt dunkle Zone unten.
 - Drucklogik unverändert: Textil-Schwarz **250 mm**, optisch Einbau **300 mm** (=250+50 Stirn).
+
+## Druckmaster korrigiert: 2100 × 2100 mm (2026-07-27)
+
+- **Wahrheit:** User-PDF `print-ghost-hires.pdf` — MediaBox **2100.09 mm**, Schwarz unten **≈300 mm**.
+- Frühere Repo-Produktion 2000 mm / 250 mm Totzone war **falsch** (widerrufen).
+- Kanonisch: `02-druckdaten/DRUCK-Hotel-Anker-Flowbox-2100x2100.pdf` + `DRUCK-Opazitaet-2100x2100.pdf`.
+- Spec: `PRINT_MM=2100`, `PRINT_DEAD_MM=300` in `kendu_flowbox_spec.py`.
+- Offerte AG 461414 noch 200×200 cm → Nachtrag-Text in `01-anfrage/Nachtrag-Spannmass-210cm.md`.
