@@ -1,5 +1,8 @@
 # Mail — Finale Druckdaten an Richnerstutz
 
+**Status:** **Gesendet** 2026-07-27 ~14:20 CEST — von `harald.nowak@modernlight.ch` (Gmail webhook bestätigt).  
+**Gmail:** `message_id` `19fa384a1e1e75b4` · `thread_id` `19fa383e5312ec24`
+
 **An:** info@richnerstutz.ch  
 **Cc:** Harald.Nowak@modernlight.ch  
 **Betreff:** Finale Druckdaten + Rahmenfotos — Hotel Anker / Offerte AG 461414 (Spannmaß 210×210 cm)
