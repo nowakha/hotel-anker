@@ -25,13 +25,14 @@ Alles für die Anfrage an **Richnerstutz AG** (Druck + Konfektion mit Kederschie
 ## Was Richnerstutz braucht (Priorität)
 
 1. Anfrage aus `01-anfrage/`
-2. Drucksujet: `02-druckdaten/print-ghost-hires.png` (4096×4096)
-3. Opazitätsplatte: `03-opazitaet/print-opacity-mask-hires.png`  
+2. **Druck-PDF:** `02-druckdaten/DRUCK-Hotel-Anker-Flowbox-2000x2000.pdf` (2000×2000 mm)
+3. **Opazitäts-PDF:** `02-druckdaten/DRUCK-Opazitaet-2000x2000.pdf` (oder `03-opazitaet/`)  
    - **schwarz** = lichtdurchlässig  
    - **rot** = lichtundurchlässig / Blockout
-4. Fotos der Kederschiene / des Rahmens aus `06-fotos-vom-rahmen/`  
-   → Auswertung: `06-fotos-vom-rahmen/FOTO-AUSWERTUNG.md` (Kendu bestätigt, Kedernut, dichtes LED-Raster)  
-   → Original-JPGs bitte noch in denselben Ordner legen für den Mail-Anhang
+4. Freigabe-Maßblatt (optional intern): `02-druckdaten/FREIGABE-Massblatt-2100.pdf` — zeigt **optisch 300 mm** unten
+5. Fotos der Kederschiene / des Rahmens aus `06-fotos-vom-rahmen/`  
+   → Auswertung: `06-fotos-vom-rahmen/FOTO-AUSWERTUNG.md`  
+   → Original-JPGs bitte noch in denselben Ordner legen
 
 Optional: Massblatt-Overlays in `04-vorlagen-massblatt/`, Vorschauen in `05-vorschauen/`.
 

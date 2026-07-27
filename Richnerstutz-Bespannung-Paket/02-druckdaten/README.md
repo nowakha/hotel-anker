@@ -1,21 +1,38 @@
 # Druckdaten — Hotel Anker Countdown
 
-## Produktionsdateien
+## Zwei Maßsysteme (nicht vermischen)
+
+| Ebene | Maß | Schwarz unten |
+|-------|-----|----------------|
+| **Außen / Freigabe** | 2100 × 2100 mm | **optisch 300 mm** (= 250 Textil + 50 Stirn) |
+| **Drucktextil Richnerstutz** | 2000 × 2000 mm | **250 mm** (eine Modulreihe; Stirn = Alu, nicht drucken) |
+
+## Produktionsdateien (an Richnerstutz)
 
 | Datei | Verwendung |
 |-------|------------|
-| `print-ghost-hires.png` | **Haupt-Druckvorlage** 4096×4096 px (= 2000×2000 mm @ 2.048 px/mm) |
-| `print-ghost-2000.png` | Verkleinerte Ansicht 2000×2000 px |
-| `print-lit-hires.png` | Referenz «beleuchtet» |
-| `print-lit-2000.png` | Verkleinerte Lit-Ansicht |
+| **`DRUCK-Hotel-Anker-Flowbox-2000x2000.pdf`** | **Haupt-Druck-PDF** — MediaBox exakt 2000×2000 mm, Totzone deckend schwarz 250 mm |
+| **`DRUCK-Opazitaet-2000x2000.pdf`** | Opazitätsplatte gleiche Größe (schwarz=lichtdurchlässig, rot=Blockout) |
+| `print-ghost-hires.png` | PNG-Master 4096×4096 px |
+| `print-ghost-2000.png` | Verkleinerte Ansicht |
 | `PRINT_SPEC.md` | Technische Spezifikation |
+
+## Freigabe (für dich / Bauherr)
+
+| Datei | Verwendung |
+|-------|------------|
+| **`FREIGABE-Massblatt-2100.pdf`** | Außen 2100×2100 mm inkl. Alu-Rahmen, Bemaßung **optisch unten 300 mm** |
+| `FREIGABE-Massblatt-2100.png` | Rastervorschau |
+
+Neu erzeugen: `python WerbeLEDbox-CountDown/scripts/finalize_print_pdfs.py`
 
 ## Physik (gemessen 2026-07-22)
 
 - Druck-/LED-Fläche: **2000 × 2000 mm** (8×8 Panels à **250 × 250 mm**)
 - Außenmaß Rahmen: **2100 × 2100 mm**
-- Profilbreite: **50 mm** ((2100−2000)/2)
+- Profil-Stirnbreite: **50 mm**
 - Content-Grid: **64 × 64** → Zellpitch **31.25 mm**
-- Totzone unten: **250 mm** (8/64)
+- Totzone Textil: **250 mm** (8/64)
+- Optisch unten dunkel (Einbau): **300 mm**
 
 Opazitätsplatte: `../03-opazitaet/` · Lichtvideo: `../07-lichtvideo/`

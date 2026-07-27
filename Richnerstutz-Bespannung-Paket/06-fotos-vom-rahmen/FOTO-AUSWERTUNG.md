@@ -31,9 +31,12 @@ Vertiefung 3D: siehe **`GEOMETRIE-3D.md`** und Schemata `schema-*.png`
 | Profil-Stirnbreite | **50 mm** | XY (Rahmen +5 cm) |
 | Innen (Textil → LED) | **45 mm** | Z, Zollstock gemessen |
 | Content-Pitch | **31.25 mm** | XY (64×64) |
+| Totzone Textil | **250 mm** | unterste Modulreihe |
+| Optisch unten dunkel | **300 mm** | 250 Textil + 50 Stirn (Einbau) |
 
 ## Relevanz für Richnerstutz
 
 - Konfektion: SEG-/Kederschienenlippe in die **vordere Nut** (Foto 02).
 - Druckformat: **2000×2000 mm** Sichtfläche (nicht Außen 2100).
+- Totzone auf dem Stoff: **250 mm**; am eingebauten Kasten wirkt der untere dunkle Streifen **300 mm** (inkl. Stirn).
 - Material: Backlit-Textil + **selektiver Blockout** (Opazitätsplatte) — nötig wegen sichtbarem LED-Raster (Foto 03).

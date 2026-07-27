@@ -30,5 +30,7 @@ Schemata: `schema-front-xy.png` · `schema-querschnitt-z.png` · `schema-3d-geom
 ## Konsequenzen für Druck / Licht
 
 - Lichtweg Textil↔LED nur **45 mm** → LED-Punktraster kann bei zu transparentem Druck sichtbar bleiben (Blockout kritisch).
-- Drucksujet: **2000×2000 mm** Fläche.
-- Keder an vorderer Nut; Stirnbreite **50 mm**.
+- Drucksujet: **2000×2000 mm** Fläche (Richnerstutz Offerte Textil 200×200 cm).
+- Keder an vorderer Nut; Stirnbreite **50 mm** (Aluminium — nicht mitdrucken).
+- Totzone auf dem Textil: **250 mm** (eine defekte Modulreihe).
+- **Optisch unten dunkel am Einbau:** **300 mm** = 250 mm Totzone Textil + 50 mm untere Stirn. Nicht mit „300 mm Schwarz auf dem Stoff“ verwechseln.

@@ -26,12 +26,17 @@ if str(PROJ) not in sys.path:
 
 from kendu_flowbox_spec import (  # noqa: E402
     CELL_PITCH_MM,
+    DEAD_H_MM,
+    FACE_MM,
     GRID,
+    OUTER_MM,
     PHYSICAL_MM,
     PRINT_PX_PER_CELL,
     PRINT_PX_PER_MM,
     PRINT_SIZE_PX,
+    PROFILE_FACE_W_MM,
     PROFILE_W_MM,
+    VISUAL_BOTTOM_DARK_MM,
     cell_to_print_px,
 )
 from layout_countdown_view import (  # noqa: E402
@@ -492,16 +497,10 @@ def compose(lit: bool, days_n=71, h=12, m=0, s=0) -> Image.Image:
     fd = ImageDraw.Draw(out)
     # Opaque black last title line — drawn on final RGB
     text_centered(fd, TITLE_LINES[-1], cx, zeit_cy, font_bis, BLACK)
-    # Totzone black, but keep facade lines that overhang ~1/3 into it
-    dead = np.asarray(out.crop((0, ACTIVE_PX, SIZE, SIZE))).copy()
-    keep = (dead[..., 0] > 160) & (dead[..., 1] > 160) & (dead[..., 2] > 160)
-    dead[:] = (0, 0, 0)
-    dead[keep] = (245, 248, 252)
-    out.paste(Image.fromarray(dead, "RGB"), (0, ACTIVE_PX))
-    fd = ImageDraw.Draw(out)
-    font_dead = find_sans(max(26, int(CELL * 0.65)), bold=True)
-    note = "TOTZONE (8/64) — LICHTUNDURCHLÄSSIG SCHWARZ"
-    text_centered(fd, note, cx, ACTIVE_PX + DEAD_PX // 2, font_dead, (55, 55, 55))
+    # Totzone: solid opaque black on textile (250 mm = 8/64). No text, no facade
+    # overhang — production print must measure cleanly. Visual 300 mm at install =
+    # this 250 mm + 50 mm aluminium face rim (not printed).
+    fd.rectangle([0, ACTIVE_PX, SIZE - 1, SIZE - 1], fill=BLACK)
     return out
 
 
@@ -673,14 +672,23 @@ def write_print_spec() -> None:
     (OUT / "PRINT_SPEC.md").write_text(
         f"""# Print-Spezifikation — Hotel Anker Countdown (Kendu Flowbox 2 × 2 m)
 
+## Zwei Maßsysteme (nicht vermischen)
+
+| Ebene | Maß | Schwarz unten |
+|-------|-----|----------------|
+| Außenrahmen (Freigabe / Einbau) | **{OUTER_MM:.0f} × {OUTER_MM:.0f} mm** | **optisch {VISUAL_BOTTOM_DARK_MM:.0f} mm** = {DEAD_H_MM:.0f} Textil + {PROFILE_FACE_W_MM:.0f} Stirn |
+| Drucktextil Richnerstutz | **{FACE_MM:.0f} × {FACE_MM:.0f} mm** | **{DEAD_H_MM:.0f} mm** (8/64). Stirn nicht mitdrucken. |
+
 ## Kendu / Physik
-- Nennmaß Fläche: **{PHYSICAL_MM:.0f} × {PHYSICAL_MM:.0f} mm** (Flowbox Standard Square)
-- Profilbreite: **{PROFILE_W_MM:.0f} mm** (Kendu FAQ)
+- Nennmaß Fläche: **{PHYSICAL_MM:.0f} × {PHYSICAL_MM:.0f} mm**
+- Profil-Stirnbreite: **{PROFILE_W_MM:.0f} mm**
 - Content-Grid: **{GRID} × {GRID}** → Zellpitch **{CELL_PITCH_MM:.2f} mm**
-- Totzone: untere **{DEAD_ROWS}/64** Zellen (= {DEAD_ROWS * CELL_PITCH_MM:.0f} mm)
+- Totzone Textil: untere **{DEAD_ROWS}/64** (= {DEAD_H_MM:.0f} mm), deckend schwarz
+- Optisch unten dunkel: **{VISUAL_BOTTOM_DARK_MM:.0f} mm**
 
 ## Format
 - `print-ghost-hires.png` · **{SIZE}×{SIZE} px** · {PRINT_PX_PER_MM:.3f} px/mm · **{CELL} px/Zelle** (exakt)
+- PDFs: `finalize_print_pdfs.py` → `DRUCK-…-2000x2000.pdf` + `FREIGABE-Massblatt-2100.pdf`
 
 ## Ziel
 - Countdown endet **1. Oktober 2026, 13:00 Europe/Zurich** (nur live; Print zeigt „Zeit bis Baubeginn:“)

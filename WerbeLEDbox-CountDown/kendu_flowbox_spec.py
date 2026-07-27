@@ -48,7 +48,10 @@ ACTIVE_ROWS = GRID - DEAD_ROWS  # 56
 
 CELL_PITCH_MM = FACE_MM / GRID  # 31.25
 ACTIVE_H_MM = ACTIVE_ROWS * CELL_PITCH_MM  # 1750
-DEAD_H_MM = DEAD_ROWS * CELL_PITCH_MM  # 250
+DEAD_H_MM = DEAD_ROWS * CELL_PITCH_MM  # 250 — black on textile / print file
+# Installed view from outside: bottom dark = textile totzone + aluminium face rim
+VISUAL_BOTTOM_DARK_MM = DEAD_H_MM + PROFILE_FACE_W_MM  # 300
+assert abs(VISUAL_BOTTOM_DARK_MM - 300.0) < 1e-9
 
 PRINT_PX_PER_CELL = 64
 PRINT_SIZE_PX = GRID * PRINT_PX_PER_CELL  # 4096

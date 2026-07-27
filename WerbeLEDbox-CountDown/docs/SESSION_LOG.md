@@ -413,3 +413,13 @@ Goal: stabile 860×360 H.264-Produktion statt 4K `st24.mov` auf PI02 (Undervolta
 | Script | `scripts/deploy_fb_clock_smooth.ps1` (+ `-Watch`) |
 | PI02 Reachability von DESKTOP-UJ8NNE9 | **FAIL** — TS `ankerpi02` offline (~2h); Deploy wartet |
 
+## 2026-07-27 ~13:57 CEST — Finale Druck-PDFs (250 Textil / 300 optisch)
+
+| Schritt | Ergebnis |
+|---------|----------|
+| Totzone Ghost/Lit | solid black 512 px = **250 mm** @ 4096→2000 mm (verify max=0) |
+| `DRUCK-Hotel-Anker-Flowbox-2000x2000.pdf` | MediaBox **2000×2000 mm** OK |
+| `DRUCK-Opazitaet-2000x2000.pdf` | MediaBox 2000 mm OK |
+| `FREIGABE-Massblatt-2100.pdf` | MediaBox **2100×2100 mm**, Label optisch 300 mm |
+| Spec | PRINT_SPEC + `VISUAL_BOTTOM_DARK_MM` + GEOMETRIE-3D Hinweis |
+| Nicht getan | Textil-Schwarz auf 300 mm; Druck auf 2100 mit gedrucktem Rahmen |

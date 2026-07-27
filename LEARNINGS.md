@@ -236,3 +236,13 @@ Not done: fb-clock/ffprobe verify (unreachable). Do not unmask.
 ## Richnerstutz Anfrage (2026-07-23 ~17:27)
 - Mail Offerte SEG-Bespannung Hotel Anker Flowbox an info@richnerstutz.ch **gesendet** (Workspace Web).
 - OAuth/`gog` für Workspace-Send aktuell unbrauchbar (fremdes GCP-Projekt / Testing).
+
+## Druckdaten 250 Textil / 300 optisch (2026-07-27)
+
+- **Optisch unten dunkel (Einbau):** 300 mm = 250 mm Totzone Textil + 50 mm Alu-Stirn.
+- **Drucktextil Richnerstutz:** 2000×2000 mm, Schwarz **250 mm** (Stirn nicht mitdrucken). Offerte AG 461414 = Textil 200×200 cm.
+- Generator: Totzone jetzt **deckend schwarz** (kein Grautext / Fassadenüberhang).
+- Script: `WerbeLEDbox-CountDown/scripts/finalize_print_pdfs.py`
+- Lieferdateien: `02-druckdaten/DRUCK-Hotel-Anker-Flowbox-2000x2000.pdf` (MediaBox 2000 mm), `FREIGABE-Massblatt-2100.pdf` (MediaBox 2100 mm, Bemaßung 300 optisch), `DRUCK-Opazitaet-2000x2000.pdf`.
+- Spec-Konstante: `VISUAL_BOTTOM_DARK_MM = 300` in `kendu_flowbox_spec.py`.
+- Original-Rahmen-JPGs fehlen weiterhin in `06-fotos-vom-rahmen/` (nur Schemata).
