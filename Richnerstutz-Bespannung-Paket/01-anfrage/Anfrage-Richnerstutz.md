@@ -1,10 +1,18 @@
 # Anfrage an Richnerstutz AG — Textilbespannung LightBox Hotel Anker
 
-**Status:** **Gesendet** 2026-07-23 ~17:27 CEST — von `harald.nowak@modernlight.ch` an `info@richnerstutz.ch` (Gmail Web UI), Anhang `Hotel-Anker-Richnerstutz-Bespannung.zip`.  
+**Status:** **Finale Druckdaten gesendet** 2026-07-27 ~14:20 CEST — Harald hat finale Druckdaten + Rahmenfotos an Richnerstutz geschickt (Gmail webhook bestätigt). Warte auf Richner-Eingangs-/Mass-Bestätigung. Weiteres Outbound nur nach Harald-Go.
 
-**Korrektur Druckmaß (2026-07-27):** Kanonischer Master ist **2100 × 2100 mm** Spannmaß mit **300 mm** Schwarz unten (`DRUCK-Hotel-Anker-Flowbox-2100x2100.pdf`). Offerte AG 461414 („Textil 200×200 cm“) weicht ab — **Nachtrag an Richnerstutz:** bitte auf **210×210 cm** / MediaBox 2100 mm umstellen.  
+**Timeline:**
+| Wann | Was |
+|------|-----|
+| 2026-07-23 ~17:27 | Erst-Anfrage Offerte an `info@richnerstutz.ch` (ZIP Bespannung) |
+| 2026-07-27 ~13:23 | Antwort Tanja Jelk: Textil **Lumina** + Multilayer; ~10 Tage ab Druckdaten; Offerte-PDF (nur in Gmail) |
+| 2026-07-27 ~14:20 | Outbound finale Druckdaten (210×210 cm + Opazität + Fotos); `message_id` `19fa384a1e1e75b4`, `thread_id` `19fa383e5312ec24` |
+
+**Korrektur Druckmaß (verbindlich in Final-Mail):** Master **2100 × 2100 mm**, Schwarz unten **300 mm**. Offerte AG 461414 („Textil 200×200 cm“) → bitte auf **210×210 cm** anpassen.
 
 **Empfänger:** Richnerstutz AG, Nordstrasse 7, 5612 Villmergen · info@richnerstutz.ch · +41 56 616 67 67  
+**Ansprechpartnerin Reply:** Tanja Jelk · Tanja.Jelk@richnerstutz.ch · +41 56 616 67 73  
 **Auftraggeber:** Realia AG (Gottlieb Kündig), Industriestrasse 40b, 9400 Rorschach · UID CHE-113.325.481  
 **Technische Ansprechperson:** Harald Nowak, Modernlight — Projektleitung | Videoengineering · Harald.Nowak@modernlight.ch · +41 76 579 84 54
 

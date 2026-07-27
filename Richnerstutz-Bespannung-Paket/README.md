@@ -30,7 +30,9 @@ Alles für die Anfrage an **Richnerstutz AG** (Druck + Konfektion mit Kederschie
    - **schwarz** = lichtdurchlässig  
    - **rot** = lichtundurchlässig / Blockout
 4. Fotos aus `06-fotos-vom-rahmen/`
-5. **Hinweis Offerte:** AG 461414 „Textil 200×200 cm“ → Spannmaß laut Master **210×210 cm** (Nachtrag an Richnerstutz)
+5. **Hinweis Offerte:** AG 461414 „Textil 200×200 cm“ → Spannmaß laut Master **210×210 cm** (in Final-Mail 2026-07-27 mitgeschickt)
+
+**Status (2026-07-27 ~14:20):** Finale Druckdaten-Mail **gesendet**. Richner-Antwort zuvor: Textil Lumina + Multilayer, ~10 Tage ab Druckdaten. Warte auf Bestätigung / aktualisierte Offerte 210×210. Kein weiteres Outbound ohne Harald-Go.
 
 Optional: Massblatt-Overlays in `04-vorlagen-massblatt/`, Vorschauen in `05-vorschauen/`.
 
