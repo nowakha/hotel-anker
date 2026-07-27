@@ -11,6 +11,11 @@ E-Mail: info@richnerstutz.ch
 Telefon: +41 56 616 67 67  
 Web: https://richnerstutz.ch/kontakt  
 
+**Ansprechpartnerin (Antwort 2026-07-27):** Tanja Jelk  
+Teamleitung Raumgestaltung und Kreation  
+E-Mail: Tanja.Jelk@richnerstutz.ch  
+Direkt: +41 56 616 67 73  
+
 ## Auftraggeber (Rechnung)
 
 **Realia AG**  
