@@ -469,3 +469,15 @@ Goal: stabile 860×360 H.264-Produktion statt 4K `st24.mov` auf PI02 (Undervolta
 
 **Aktion Agent:** Status in Anfrage-/LEARNINGS-/Paket-Docs auf **gesendet** gesetzt. Kein Antwortentwurf (kein Printer-Reply). Warte auf Richner-Bestätigung; kein weiteres Outbound ohne Harald-Go.
 
+## 2026-07-27 ~14:21 CEST — Doppel-Webhook Outbound (kein Richner-Reply)
+
+| Feld | Wert |
+|------|------|
+| From | `harald.nowak@modernlight.ch` (**Outbound**, Filter = Stop) |
+| Subject | gleich wie Final-Mail |
+| Date | Mon, 27 Jul 2026 14:21:12 +0200 |
+| message_id / thread_id | `19fa385abefb7768` / `19fa383e5312ec24` (gleiche Thread) |
+| Filter | **Kein Richnerstutz-Reply** — Doppel-Trigger derselben Final-Mail |
+
+**Aktion Agent:** Docs nur um Doppel-ID ergänzt; kein neuer Status, kein Antwortentwurf, kein Outbound.
+

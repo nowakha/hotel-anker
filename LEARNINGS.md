@@ -272,6 +272,7 @@ Not done: fb-clock/ffprobe verify (unreachable). Do not unmask.
 - Gmail webhook bestätigt Outbound von `harald.nowak@modernlight.ch` (kein Richner-Reply).
 - Betreff: `Finale Druckdaten + Rahmenfotos — Hotel Anker / Offerte AG 461414 (Spannmass 210x210 cm)`
 - IDs: `message_id` `19fa384a1e1e75b4`, `thread_id` `19fa383e5312ec24`
+- Doppel-Webhook ~14:21:12: gleiche Thread-ID, weitere `message_id` `19fa385abefb7768` (gleicher Outbound-Inhalt — kein neues Ereignis).
 - Inhalt laut Body: Spannmaß 210×210 cm (Offerte anpassen), Druck-PDF + Opazitäts-PDF, 5 Rahmenfotos, Realia Rechnung / Harald Technik.
 - ZIP-Entwurf zuvor: `~/Desktop/Hotel-Anker-Richnerstutz-Finale-Druckdaten.zip` (~20 MB); Mail-Text `01-anfrage/Mail-Finale-Druckdaten.md`.
 - **Nächster Schritt:** auf Richner-Eingangs-/Mass-Bestätigung warten. Kein weiteres Outbound ohne Harald-Go.
