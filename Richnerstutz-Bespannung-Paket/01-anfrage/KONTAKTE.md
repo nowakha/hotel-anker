@@ -11,6 +11,13 @@ E-Mail: info@richnerstutz.ch
 Telefon: +41 56 616 67 67  
 Web: https://richnerstutz.ch/kontakt  
 
+### Ansprechperson Offerte (seit 2026-07-27)
+
+**Tanja Jelk** — Teamleitung Raumgestaltung und Kreation  
+E-Mail: tanja.jelk@richnerstutz.ch  
+Direkt: +41 56 616 67 73  
+Antwort-Thread: Gmail `19fa351616b597b3` (Betreff Anker Rorschach LightBox 2×2 m) 
+
 ## Auftraggeber (Rechnung)
 
 **Realia AG**  

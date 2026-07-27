@@ -236,3 +236,11 @@ Not done: fb-clock/ffprobe verify (unreachable). Do not unmask.
 ## Richnerstutz Anfrage (2026-07-23 ~17:27)
 - Mail Offerte SEG-Bespannung Hotel Anker Flowbox an info@richnerstutz.ch **gesendet** (Workspace Web).
 - OAuth/`gog` für Workspace-Send aktuell unbrauchbar (fremdes GCP-Projekt / Testing).
+
+## Richnerstutz Antwort (2026-07-27 ~13:23 CEST)
+- **Von:** Tanja Jelk (`Tanja.Jelk@richnerstutz.ch`), Teamleitung Raumgestaltung und Kreation, Direkt +41 56 616 67 73
+- **Betreff:** `Anker Rorschach - SEG-/Keder-Bespannung LightBox 2 × 2 m, Hotel`
+- **Thread/Message:** `19fa351616b597b3`
+- **Inhalt:** Materialempfehlung **Textil Lumina**; Multilayer realisiert transluzente + Blockout-Bereiche im selben Motiv; Lieferfrist **ca. 10 Tage ab Zustellung Druckdaten**; Offerte **angehängt** (PDF im Zapier-Webhook-Body nicht enthalten — Harald in Gmail prüfen).
+- **Offen / Risiko:** Preis/Positionen nur im Anhang; Keder-Passgenauigkeit 2100 mm / SEG-Nut noch nicht explizit bestätigt; Totzone 250 mm unten und Opazitätsplatte (rot=Blockout) in Antwort nicht einzeln angesprochen; Musterstreifen offen.
+- **Koordination:** Kein Outbound ohne Harald-Go. Status-Docs: `Richnerstutz-Bespannung-Paket/01-anfrage/Anfrage-Richnerstutz.md`.
