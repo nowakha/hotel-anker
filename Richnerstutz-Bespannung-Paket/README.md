@@ -4,11 +4,13 @@ Alles für die Anfrage an **Richnerstutz AG** (Druck + Konfektion mit Kederschie
 
 | | |
 |--|--|
+| **Status** | **Antwort 2026-07-27** — Tanja Jelk empfiehlt Textil Lumina (Multilayer); Offerte anbei; Follow-up wartet auf Harald-Go |
 | **Auftraggeber** | Realia AG (Gottlieb Kündig), Industriestrasse 40b, 9400 Rorschach, UID CHE-113.325.481 |
 | **Technische Ansprechperson** | Harald Nowak, Modernlight — Projektleitung \| Videoengineering |
 | **E-Mail Technik** | Harald.Nowak@modernlight.ch |
 | **Mobil** | +41 76 579 84 54 |
 | **Modernlight** | Wangenstrasse 57, 3018 Bern |
+| **Druckerei-Kontakt** | Tanja Jelk · tanja.jelk@richnerstutz.ch · +41 56 616 67 73 |
 
 ## Ordnerstruktur
 

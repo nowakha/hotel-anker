@@ -401,6 +401,22 @@ Goal: stabile 860×360 H.264-Produktion statt 4K `st24.mov` auf PI02 (Undervolta
 | Media lokal | `clock_24h.mp4` / `st24.mov` **nicht** vorhanden (gitignored; liegen auf PI02 / Encode-Maschine) |
 | Continuity | `LEARNINGS.md` + `NEXT_AGENT.md` auf diesen Rechner aktualisiert |
 
+## 2026-07-27 ~13:23 CEST — Richnerstutz Antwort (Hotel Anker LightBox)
+
+| Feld | Wert |
+|------|------|
+| From | `Tanja.Jelk@richnerstutz.ch` |
+| Subject | `Anker Rorschach - SEG-/Keder-Bespannung LightBox 2 × 2 m, Hotel` |
+| Date (UTC) | 2026-07-27 11:23:59 |
+| thread/message_id | `19fa351616b597b3` |
+| Filter | **Treffer** — Richnerstutz-Reply zur Hotel-Anker / SEG-/Keder LightBox-Anfrage (nicht Hautle) |
+
+**Was sie sagen:** Dank für Anfrage; Offerte anbei; Empfehlung **Textil Lumina** mit Multilayer (transluzent + lichtsperrend im selben Motiv); Lieferfrist **ca. 10 Tage ab Druckdaten**; direkter Kontakt Tanja Jelk.
+
+**Offen / Risiken:** Preis nur im Anhang (Webhook ohne PDF); Maße/Keder/SEG-Passgenauigkeit und Totzone 250 mm / Opazitätsplatte nicht explizit bestätigt; Muster optional noch klären.
+
+**Aktion Agent:** Handoff-Docs aktualisiert; Antwortentwurf für Harald vorbereitet; **kein Versand** — wartet auf Go-ahead.
+
 ## 2026-07-24 ~02:20 CEST — Clock smooth-Optimierung (Deploy pending)
 
 | Änderung | Warum (Ruckeln) |

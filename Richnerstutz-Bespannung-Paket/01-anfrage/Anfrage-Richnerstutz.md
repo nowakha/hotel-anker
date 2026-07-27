@@ -1,6 +1,18 @@
 # Anfrage an Richnerstutz AG — Textilbespannung LightBox Hotel Anker
 
-**Status:** **Gesendet** 2026-07-23 ~17:27 CEST — von `harald.nowak@modernlight.ch` an `info@richnerstutz.ch` (Gmail Web UI), Anhang `Hotel-Anker-Richnerstutz-Bespannung.zip`.  
+**Status:** **Antwort eingegangen** 2026-07-27 ~13:23 CEST — Tanja Jelk (Richnerstutz) hat geantwortet; **Offerte angehängt** (Anhang im Webhook-Body nicht mitgeliefert). Outbound-Follow-up **wartet auf Harald-Go**.  
+
+**Outbound Anfrage:** Gesendet 2026-07-23 ~17:27 CEST — von `harald.nowak@modernlight.ch` an `info@richnerstutz.ch` (Gmail Web UI), Anhang `Hotel-Anker-Richnerstutz-Bespannung.zip`.  
+
+**Reply-Mail (Gmail):**  
+| Feld | Wert |
+|------|------|
+| From | `Tanja.Jelk@richnerstutz.ch` |
+| Subject | `Anker Rorschach - SEG-/Keder-Bespannung LightBox 2 × 2 m, Hotel` |
+| Date | Mon, 27 Jul 2026 11:23:59 +0000 |
+| thread/message_id | `19fa351616b597b3` |
+
+**Kern der Antwort:** Empfehlung **Textil Lumina** + Multilayer (transluzent + Blockout im selben Motiv); Lieferfrist **ca. 10 Tage ab Druckdaten**; Kontakt Tanja Jelk (+41 56 616 67 73 direkt).  
 
 **Empfänger:** Richnerstutz AG, Nordstrasse 7, 5612 Villmergen · info@richnerstutz.ch · +41 56 616 67 67  
 **Auftraggeber:** Realia AG (Gottlieb Kündig), Industriestrasse 40b, 9400 Rorschach · UID CHE-113.325.481  
