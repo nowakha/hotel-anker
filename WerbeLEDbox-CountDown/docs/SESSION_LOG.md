@@ -445,3 +445,13 @@ Goal: stabile 860×360 H.264-Produktion statt 4K `st24.mov` auf PI02 (Undervolta
 | Widerruf | 2000/250-Produktion entfernt / Specs umgestellt |
 | Richner | Nachtrag-Entwurf `Nachtrag-Spannmass-210cm.md` (Offerte noch 200×200) |
 
+
+## 2026-07-27 ~14:18 CEST — ZIP + Mail-Entwurf finale Druckdaten
+
+| Item | Pfad / Status |
+|------|----------------|
+| ZIP | `~/Desktop/Hotel-Anker-Richnerstutz-Finale-Druckdaten.zip` (~20 MB) |
+| Inhalt | Druck-PDF 2100, Opazität, 5 Fotos, Specs, Nachtrag |
+| Mail-Text | `01-anfrage/Mail-Finale-Druckdaten.md` |
+| Gmail | Compose geöffnet an info@richnerstutz.ch; Body Clipboard; **Senden: Harald** (Anhang ZIP) |
+

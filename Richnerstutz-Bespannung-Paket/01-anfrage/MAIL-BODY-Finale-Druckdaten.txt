@@ -1,0 +1,34 @@
+Sehr geehrte Damen und Herren
+
+Bezugnehmend auf Ihre Richtofferte AG 461414 (Hotel Anker Rorschach) senden wir hiermit die finalen Druckdaten sowie Fotos des vorhandenen Kendu-LED-Rahmens.
+
+1) Spann-/Druckmaß (verbindlich)
+- Textil / MediaBox: 2100 × 2100 mm (= 210 × 210 cm)
+- Bitte Offerte-Position «Textil 200×200 cm» auf 210×210 cm anpassen (Zuschnitt + Keder-lfm)
+
+2) Sujet
+- Datei: DRUCK-Hotel-Anker-Flowbox-2100x2100.pdf
+- Unterer lichtundurchlässiger Schwarzstreifen: 300 mm (250 mm Modulreihe + 50 mm Stirn)
+
+3) Opazität (selektiv transluzent / Blockout)
+- Datei: DRUCK-Opazitaet-2100x2100.pdf
+- schwarz = lichtdurchlässig
+- rot = lichtundurchlässig / Blockout
+- Details: OPAZITAET-LEGENDE.md / PRINT_SPEC.md
+
+4) Rahmenfotos (Kendu SEG)
+- 01 Gesamtansicht (LED-Matrix + Controllerkanal)
+- 02 Ecke / Kedernut
+- 03 Stack / Diffusor
+- 04 Profiltiefe Zollstock (~80–85 mm)
+- 05 Rand Profil→LED Zollstock (~25 mm)
+
+Auftraggeber / Rechnung: Realia AG, Rorschach (Gottlieb Kündig).
+Technische Abstimmung: Harald Nowak, Modernlight.
+
+Freundliche Grüsse
+Harald Nowak
+Modernlight — Projektleitung | Videoengineering
+Harald.Nowak@modernlight.ch
++41 76 579 84 54
+Wangenstrasse 57, 3018 Bern
