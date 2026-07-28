@@ -60,11 +60,24 @@ from layout_countdown_view import (  # noqa: E402
     layout_origins_cells,
 )
 
-# Exact cell grid: 64 px/cell → 4096 px = 2 m @ 2.048 px/mm (Kendu 2×2 m)
+# Exact cell grid: 64 px/cell → 4096 px = 2 m @ 2.048 px/mm (LED tooling default).
+# Production export bumps CELL via configure_print_resolution() (~125 → 8000 px face).
 SIZE = PRINT_SIZE_PX
 CELL = PRINT_PX_PER_CELL
 DEAD_PX = cell_to_print_px(DEAD_ROWS)
 ACTIVE_PX = cell_to_print_px(ACTIVE_H)
+
+
+def configure_print_resolution(cell_px: int) -> None:
+    """Scale the LED-face generator canvas (must call before compose*)."""
+    global SIZE, CELL, DEAD_PX, ACTIVE_PX, _DSEG_CACHE
+    if cell_px < 32:
+        raise ValueError(f"cell_px too small: {cell_px}")
+    CELL = int(cell_px)
+    SIZE = GRID * CELL
+    DEAD_PX = DEAD_ROWS * CELL
+    ACTIVE_PX = ACTIVE_H * CELL
+    _DSEG_CACHE.clear()
 
 NAVY_DEEP = (2, 6, 18)
 ANKER_GOLD = (198, 164, 110)
@@ -131,8 +144,8 @@ def find_dseg(size: int):
 
 
 def cell_to_px(c: float) -> int:
-    """Map layout cell → print px (exact Kendu grid: 64 px/cell)."""
-    return cell_to_print_px(c)
+    """Map layout cell → print px on the current generator canvas."""
+    return int(round(c * CELL))
 
 
 def _dseg_placement(ox: int, oy: int, ch: str, *, cells_w: int = DW, scale: float = 1.34):
@@ -419,10 +432,11 @@ def compose(lit: bool, days_n=71, h=12, m=0, s=0) -> Image.Image:
     overlay = Image.new("RGBA", (SIZE, SIZE), (0, 0, 0, 0))
     od = ImageDraw.Draw(overlay)
 
-    # --- Logo: Canva scale (~1.91× kit) — tall, centered, overlaps title bar ---
+    # --- Logo: tall, centered, overlaps title bar; keep inside face (Sperrzone) ---
     anchor = extract_anchor_mark()
-    # Canva fill: top≈-40, height≈783 on 4096 canvas
-    ah = int(round(783.1648448692365))
+    # Legacy Canva fill was top≈-40 on 4096 (= into rim). Clamp to face top so
+    # after 50 mm Stirn-Pad the mark stays ≥ SPERRZONE from trim.
+    ah = int(round(783.1648448692365 * CELL / PRINT_PX_PER_CELL))
     aspect = anchor.width / max(1, anchor.height)
     aw = int(round(ah * aspect))
     max_w = int(SIZE * 0.20)
@@ -430,7 +444,7 @@ def compose(lit: bool, days_n=71, h=12, m=0, s=0) -> Image.Image:
         aw, ah = max_w, int(max_w / aspect)
     anchor = anchor.resize((aw, ah), Image.Resampling.LANCZOS)
     ax = (SIZE - aw) // 2
-    ay = int(round(-40.0))
+    ay = max(0, int(round(-40.0 * CELL / PRINT_PX_PER_CELL)))
     overlay.paste(anchor, (ax, ay), anchor)
 
     # --- Title bar: Hotel Anker / SAN-RE-MO… / Zeit bis Baubeginn: ---
@@ -505,45 +519,43 @@ def compose(lit: bool, days_n=71, h=12, m=0, s=0) -> Image.Image:
 
 
 def compose_opacity_mask() -> Image.Image:
-    """Print opacity plate: black = lichtdurchlässig, red = lichtundurchlässig.
+    """Blocker plate for Richnerstutz: black = blockout, white = light-through.
 
-    Layering (intentional):
-      - Liquid-glass bars → BLACK (glass lets backlight through)
-      - Facade chrome lines → RED (also across glass bars / tower)
-      - Digit / colon geometry: outline RED, segment/dot fill BLACK
-      - Lettering on bars · logo · totzone → RED
+    Same geometry as compose() so Sujet and Blocker stay aligned.
+    (Legacy delivery used red=block / black=transmit — Druckerei rejected that.)
     """
-    RED = (220, 24, 24)
-    plate = Image.new("RGB", (SIZE, SIZE), BLACK)
+    BLOCK = (0, 0, 0)  # schwarz = blockt
+    CLEAR = (255, 255, 255)  # weiss = leuchtet / lichtdurchlässig
+    plate = Image.new("RGB", (SIZE, SIZE), CLEAR)
     pd = ImageDraw.Draw(plate)
 
     # Facade line mask (keep for re-apply after glass punch-out)
     bp = load_blueprint()
     arr = np.asarray(bp)
     facade_lines = (arr[..., 0] > 180) & (arr[..., 1] > 180) & (arr[..., 2] > 180)
-    red_arr = np.asarray(plate).copy()
-    red_arr[facade_lines] = RED
-    plate = Image.fromarray(red_arr, "RGB")
+    blk_arr = np.asarray(plate).copy()
+    blk_arr[facade_lines] = BLOCK
+    plate = Image.fromarray(blk_arr, "RGB")
     pd = ImageDraw.Draw(plate)
 
-    # Liquid-glass / label bars → BLACK (transmissive body)
+    # Liquid-glass / label bars → WHITE (transmissive body)
     for y_cell, h in (
         (TITLE_BAR_Y, TITLE_H),
         (TAGE_BAR_Y, LABEL_H),
         (HMS_BAR_Y, LABEL_H),
     ):
         y0, y1 = cell_to_px(y_cell), cell_to_px(y_cell + h)
-        pd.rectangle([0, y0, SIZE - 1, max(y0, y1 - 1)], fill=BLACK)
+        pd.rectangle([0, y0, SIZE - 1, max(y0, y1 - 1)], fill=CLEAR)
 
     # Re-paint facade chrome over glass bands (Zwiebelturm / roof must stay continuous)
-    red_arr = np.asarray(plate).copy()
-    red_arr[facade_lines] = RED
-    plate = Image.fromarray(red_arr, "RGB")
+    blk_arr = np.asarray(plate).copy()
+    blk_arr[facade_lines] = BLOCK
+    plate = Image.fromarray(blk_arr, "RGB")
     pd = ImageDraw.Draw(plate)
 
-    # Logo (Canva placement) → opaque
+    # Logo → opaque block
     anchor = extract_anchor_mark()
-    ah = int(round(783.1648448692365))
+    ah = int(round(783.1648448692365 * CELL / PRINT_PX_PER_CELL))
     aspect = anchor.width / max(1, anchor.height)
     aw = int(round(ah * aspect))
     max_w = int(SIZE * 0.20)
@@ -553,46 +565,46 @@ def compose_opacity_mask() -> Image.Image:
     a = np.asarray(anchor)
     rgb = a[..., :3].copy()
     alpha = a[..., 3]
-    rgb[:] = RED
-    red_logo = Image.fromarray(np.dstack([rgb, alpha]).astype(np.uint8), "RGBA")
+    rgb[:] = BLOCK
+    blk_logo = Image.fromarray(np.dstack([rgb, alpha]).astype(np.uint8), "RGBA")
     ax = (SIZE - aw) // 2
-    ay = int(round(-40.0))
+    ay = max(0, int(round(-40.0 * CELL / PRINT_PX_PER_CELL)))
     plate_rgba = plate.convert("RGBA")
-    plate_rgba.paste(red_logo, (ax, ay), red_logo)
+    plate_rgba.paste(blk_logo, (ax, ay), blk_logo)
     plate = plate_rgba.convert("RGB")
     pd = ImageDraw.Draw(plate)
 
     days, day_y, time_digits, time_y, colons = layout_origins_cells()
     from layout_countdown_view import COLON_W as _COLON_W
 
-    # Clear digit / colon cells, then paint real glyph geometry (not solid black boxes)
+    # Clear digit / colon cells, then paint glyph geometry
     stroke = max(12, CELL // 4)
     for ox in days:
         x0, y0 = cell_to_px(ox), cell_to_px(day_y)
-        pd.rectangle([x0, y0, x0 + DW * CELL - 1, y0 + DH * CELL - 1], fill=BLACK)
+        pd.rectangle([x0, y0, x0 + DW * CELL - 1, y0 + DH * CELL - 1], fill=CLEAR)
     for ox in time_digits:
         x0, y0 = cell_to_px(ox), cell_to_px(time_y)
-        pd.rectangle([x0, y0, x0 + DW * CELL - 1, y0 + DH * CELL - 1], fill=BLACK)
+        pd.rectangle([x0, y0, x0 + DW * CELL - 1, y0 + DH * CELL - 1], fill=CLEAR)
     for cox, coy in colons:
         x0, y0 = cell_to_px(cox), cell_to_px(coy)
         pd.rectangle(
             [x0, y0, x0 + _COLON_W * CELL - 1, y0 + DH * CELL - 1],
-            fill=BLACK,
+            fill=CLEAR,
         )
 
     plate_rgba = plate.convert("RGBA")
     for ox in days:
         glyph = _dseg_glyph_layer(
-            ox, day_y, "8", stroke=stroke, outline_rgb=RED, fill_rgb=BLACK
+            ox, day_y, "8", stroke=stroke, outline_rgb=BLOCK, fill_rgb=CLEAR
         )
         plate_rgba.paste(glyph, (glyph.info["ox"], glyph.info["oy"]), glyph)
     for ox in time_digits:
         glyph = _dseg_glyph_layer(
-            ox, time_y, "8", stroke=stroke, outline_rgb=RED, fill_rgb=BLACK
+            ox, time_y, "8", stroke=stroke, outline_rgb=BLOCK, fill_rgb=CLEAR
         )
         plate_rgba.paste(glyph, (glyph.info["ox"], glyph.info["oy"]), glyph)
 
-    # Colons: ring RED (opaque), fill BLACK (LED hole)
+    # Colons: ring BLOCK, fill CLEAR (LED hole)
     ring_w = max(6, CELL // 10)
     dot_r = int(DH * CELL * 0.06)
     ld = ImageDraw.Draw(plate_rgba)
@@ -606,14 +618,14 @@ def compose_opacity_mask() -> Image.Image:
             cx = x0 + cw // 2
             ld.ellipse(
                 [cx - r - ring_w, cy - r - ring_w, cx + r + ring_w, cy + r + ring_w],
-                fill=(*RED, 255),
+                fill=(*BLOCK, 255),
             )
-            ld.ellipse([cx - r, cy - r, cx + r, cy + r], fill=(0, 0, 0, 255))
+            ld.ellipse([cx - r, cy - r, cx + r, cy + r], fill=(*CLEAR, 255))
 
     plate = plate_rgba.convert("RGB")
     pd = ImageDraw.Draw(plate)
 
-    # Texts on glass bars → RED (opaque lettering; drawn after facade restore)
+    # Texts on glass bars → BLOCK (opaque lettering)
     cx = SIZE // 2
     font_label = find_sans(max(64, int(CELL * 1.7)), bold=True)
     ty0, ty1 = cell_to_px(TITLE_BAR_Y), cell_to_px(TITLE_BAR_Y + TITLE_H)
@@ -630,7 +642,7 @@ def compose_opacity_mask() -> Image.Image:
     mid = (ty0 + ty1) // 2
     y_cursor = mid - block // 2
     for line, fnt, hh in zip(TITLE_LINES, fonts_t, heights):
-        text_centered(pd, line, cx, y_cursor + hh // 2, fnt, RED)
+        text_centered(pd, line, cx, y_cursor + hh // 2, fnt, BLOCK)
         y_cursor += hh + gap
 
     day_mid_px = (cell_to_px(days[0]) + cell_to_px(days[-1] + DW)) // 2
@@ -641,7 +653,7 @@ def compose_opacity_mask() -> Image.Image:
         y0, y1 = cell_to_px(y_cell), cell_to_px(y_cell + LABEL_H)
         mid_y = (y0 + y1) // 2
         if not multi:
-            text_centered(pd, label, day_mid_px, mid_y, font_label, RED)
+            text_centered(pd, label, day_mid_px, mid_y, font_label, BLOCK)
         else:
             pairs = [
                 (time_digits[0], time_digits[1] + DW, "Stunden"),
@@ -650,10 +662,10 @@ def compose_opacity_mask() -> Image.Image:
             ]
             for x_a, x_b, name in pairs:
                 midx = (cell_to_px(x_a) + cell_to_px(x_b)) // 2
-                text_centered(pd, name, midx, mid_y, font_label, RED)
+                text_centered(pd, name, midx, mid_y, font_label, BLOCK)
 
-    # Totzone fully opaque
-    pd.rectangle([0, ACTIVE_PX, SIZE - 1, SIZE - 1], fill=RED)
+    # Totzone fully opaque (LED dead row on face canvas)
+    pd.rectangle([0, ACTIVE_PX, SIZE - 1, SIZE - 1], fill=BLOCK)
     return plate
 
 
@@ -721,7 +733,7 @@ def main():
     )
     add_caption(lit, "Print · Lit", "LED gold").save(OUT / "preview-lit.png")
     add_caption(
-        opacity, "Print · Opacity", "schwarz=lichtdurchlässig · rot=lichtundurchlässig"
+        opacity, "Print · Blocker", "schwarz=blockt · weiss=leuchtet"
     ).save(OUT / "preview-opacity-mask.png")
     write_print_spec()
     generate_led_preview()

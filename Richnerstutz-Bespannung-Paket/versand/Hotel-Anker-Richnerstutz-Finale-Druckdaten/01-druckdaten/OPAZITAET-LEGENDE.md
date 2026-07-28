@@ -1,27 +1,30 @@
-# Opazitätsplatte — Legende für Richnerstutz
+# Blocker / Opazitätsplatte — Legende für Richnerstutz
 
-Datei: `print-opacity-mask-hires.png` (4096×4096 px, = 2000×2000 mm)
+Datei: `DRUCK-Blocker-2100x2100.pdf` (Alias: `DRUCK-Opazitaet-2100x2100.pdf`)
 
 | Farbe | Bedeutung | Druckziel |
 |-------|-----------|-----------|
-| **Schwarz** | lichtdurchlässig / transluzent | LED-Licht soll klar durchscheinen |
-| **Rot** | lichtundurchlässig / Blockout | kein Streulicht, klare Silhouette |
+| **Schwarz** | blockt / lichtundurchlässig | kein Streulicht, klare Silhouette |
+| **Weiss** | leuchtet / lichtdurchlässig | LED-Licht soll klar durchscheinen |
 
-## Schwarz (transluzent)
+**Wichtig:** Frühere Lieferung mit Rot=Blockout / Schwarz=transluzent ist **ungültig**.
 
-- Füllungen der 7-Segment-Ziffern (Ghost-8 / aktive Segmente)
+## Schwarz (Blockout)
+
+- Totzone unten: volle Breite × 300 mm (Trim)
+- Logo Kronen-Anker
+- Beschriftungen («Zeit bis Baubeginn:», Tage/Stunden/Minuten/Sekunden)
+- Fassadenlinien
+- Konturen der 7-Segment-Ziffern und Ringe der Doppelpunkte
+- Aluminium-Stirn (50 mm Rahmen um die LED-Fläche)
+
+## Weiss (lichtdurchlässig)
+
+- Füllungen der 7-Segment-Ziffern (Ghost-8)
 - Kerne der Doppelpunkte
 - Liquid-Glass-Balken (Titel-/Labelbänder)
 - Navy-Hintergrund in den LED-Durchscheinflächen
 
-## Rot (Blockout)
+## Passung
 
-- Totzone unten: volle Breite × 250 mm (8/64 Zellen)
-- Logo Kronen-Anker
-- Beschriftungen («Zeit bis Baubeginn:», Tage/Stunden/Minuten/Sekunden)
-- Fassadenlinien (auch über Glass-Balken)
-- Konturen der 7-Segment-Ziffern und Ringe der Doppelpunkte
-
-## Bitte an die Produktion
-
-Selektiver Blockout auf Backlit-/SEG-Textil (oder gleichwertiges Verfahren), sodass Rot-Zonen streulichtfrei bleiben und Schwarz-Zonen die RGB-LED-Farben brillant wiedergeben.
+Blocker und Sujet werden im selben Script erzeugt und 1:1 auf Trim 2100 mm + Bleed 20 mm gelegt.
