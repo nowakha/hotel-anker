@@ -1,6 +1,30 @@
-﻿# SESSION_LOG â€” Hotel Anker / WerbeLEDbox
+﻿# SESSION_LOG — Hotel Anker / WerbeLEDbox
 
-Chronik fÃ¼r Cross-Machine-Handoff. Erfolg **und** Misserfolg.
+Chronik für Cross-Machine-Handoff. Erfolg **und** Misserfolg.
+
+## 2026-07-28 — Domain-Check Hotel Anker Rorschach
+
+| Item | Ergebnis |
+|------|----------|
+| Methode | RDAP nic.ch / nic.swiss / Verisign / DNS NS |
+| Belegt (kritisch) | `hotelanker.ch`, `hotel-anker.ch`, `anker-hotel.ch` (Hostpoint, Sites tot); `hotelanker.com` Afternic; `hotelanker.de`/`.eu` |
+| Frei (Must) | `ankerhotel.ch`, `hotelankerrorschach.ch`, `hotel-anker-rorschach.ch`, `hotelanker.swiss` |
+| Paket A Jahr 1 | ca. **CHF 105** (Hostpoint: .ch 5→15, .swiss 90, Markt-Verlängerung .swiss 100–170) |
+| Canvas | `canvases/hotel-anker-domains.canvas.tsx` (Cursor IDE, neben Chat) |
+| Hinweis | Luzern = `hotel-restaurant-anker.ch` — Geo-Domain Rorschach zwingend |
+
+## 2026-07-28 — UniFi inventory + Guest portal mockup
+
+| Item | Ergebnis |
+|------|----------|
+| UDM Pro Max `192.168.1.254` SSH read-only | OK — FW 5.1.27 |
+| U7 Pro Wall `192.168.1.220` | OK — U7PIW 8.6.11 |
+| Netze | Default `.1.0/24`, CountDown Bar VLAN2 `.2.0/24`, Guest VLAN3 `.3.0/24` |
+| SSIDs | `Administration`, `HotelAnker`, `HotelAnkerGuest` (open+portal, noch UniFi-Default-Branding) |
+| Skill | `.cursor/skills/ubiquiti-unifi/` |
+| Docs | `docs/NETWORK_UNIFI.md` |
+| Portal mockup | `guest-wifi-portal/` — **nicht live applied** (wartet Visual-OK) |
+| Pi IPs | neu `.2.x` — Secrets aktualisiert |
 
 ## 2026-07-22 (Workstation MLT-NITRO5-HN)
 
@@ -8,24 +32,24 @@ Chronik fÃ¼r Cross-Machine-Handoff. Erfolg **und** Misserfolg.
 
 | Ereignis | Ergebnis |
 |----------|----------|
-| Git installiert (fehlte) + GitHub CLI | OK â€” Account `nowakha` |
+| Git installiert (fehlte) + GitHub CLI | OK — Account `nowakha` |
 | Repo geklont `nowakha/hotel-anker` | OK |
 | SSH-Key neu `hotel-anker-dev@MLT-NITRO5-HN` auf PI01+PI02 | OK (Passwort `12345678`) |
-| Tailscale auf PI02 installiert + joined | OK â€” `ankerpi02` = `100.103.54.63` |
-| Tailscale auf PI01 | **FAIL** â€” apt Download `pkgs.tailscale.com` Timeout/DNS; Deb-Install unterbrochen |
+| Tailscale auf PI02 installiert + joined | OK — `ankerpi02` = `100.103.54.63` |
+| Tailscale auf PI01 | **FAIL** — apt Download `pkgs.tailscale.com` Timeout/DNS; Deb-Install unterbrochen |
 | DNS nur Router `192.168.8.254` | Fragil; Fix-Skript vorbereitet, auf PI02 wegen USB-Copy **abgebrochen** (User: nicht kicken) |
 
 ### Clock-Video / AnkerPI02
 
 | Ereignis | Ergebnis |
 |----------|----------|
-| Quelle `C:\Users\User\Videos\st24.mov` | 3840Ã—2160 H.264, 25 fps, **86400.08 s**, ~12.7 GB |
-| Crop (Premiere): L0 T386 R0 B127 â†’ ~3840Ã—1647 (~21:9) | Spec |
-| Ziel-Spec Produktion | `media/clock_24h.mp4` 860Ã—360 25fps H.264 `-g 25` |
-| NVENC zuerst | **FAIL** â€” Driver 596 vs FFmpeg 8.1 braucht NVENC API 13.1; nach Driver-Update 610.62 OK |
-| Full NVENC-Encode 24h | **nicht gestartet** (ETA ~6 h); User: spÃ¤ter remote |
+| Quelle `C:\Users\User\Videos\st24.mov` | 3840×2160 H.264, 25 fps, **86400.08 s**, ~12.7 GB |
+| Crop (Premiere): L0 T386 R0 B127 → ~3840×1647 (~21:9) | Spec |
+| Ziel-Spec Produktion | `media/clock_24h.mp4` 860×360 25fps H.264 `-g 25` |
+| NVENC zuerst | **FAIL** — Driver 596 vs FFmpeg 8.1 braucht NVENC API 13.1; nach Driver-Update 610.62 OK |
+| Full NVENC-Encode 24h | **nicht gestartet** (ETA ~6 h); User: später remote |
 | LAN-scp st24.mov | **FAIL/abgebrochen** bei ~2.3 GB; PI02 ging offline |
-| USB `st24.mov` â†’ `/mnt/usb` â†’ rsync nach `~/â€¦/media/st24.mov` | **OK** â€” 774 s, ~16.9 MB/s, Bytes match `13687155613` |
+| USB `st24.mov` → `/mnt/usb` → rsync nach `~/…/media/st24.mov` | **OK** — 774 s, ~16.9 MB/s, Bytes match `13687155613` |
 | Runtime Underclock CPU 1000 MHz + config.txt-Block | OK (Transfer) |
 | Underclock aus config entfernt + CPU 1.8 GHz | OK (nach USB-Remove) |
 | `fb-clock` auf `st24.mov` + Crop + resync 60s | Unit geschrieben |

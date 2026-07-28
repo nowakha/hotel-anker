@@ -1,11 +1,20 @@
 # Hotel Anker â€” Learnings & Handoff
 
-Stand: **2026-07-24 ~02:20 CEST** — Smooth-Patch für PI02-Uhr (Drift-Resync, Flip vor Upscale). Repo auf DESKTOP-UJ8NNE9; Deploy wartet auf PI02 online.
+Stand: **2026-07-28** — Domain-Check Rorschach (siehe unten). Zuvor: Smooth-Patch PI02-Uhr pending Deploy.
 Ziel: eine andere Cursor-Instanz auf einem anderen Rechner kann ohne mündlichen Kontext weiterarbeiten.
 
 **Workflow (verbindlich):** `.cursor/rules/hotel-anker-workflow.mdc` — jeden Schritt dokumentieren (Erfolg+Misserfolg), Credentials/Learnings mitziehen, commit + `git push origin HEAD`.
 
 Detaillierte Chronik: [`WerbeLEDbox-CountDown/docs/SESSION_LOG.md`](./WerbeLEDbox-CountDown/docs/SESSION_LOG.md).
+
+## Domains Hotel Anker Rorschach (2026-07-28)
+
+- **Belegt:** `hotelanker.ch` / `hotel-anker.ch` / `anker-hotel.ch` (Hostpoint, keine Website); `hotelanker.com` Aftermarket; `hotelanker.de` + `.eu`.
+- **Sofort kaufen:** `ankerhotel.ch` + `hotelankerrorschach.ch` + `hotel-anker-rorschach.ch` + `hotelanker.swiss` ≈ **CHF 105** Jahr 1 (Hostpoint).
+- **Empfohlen dazu:** `hotelankerrorschach.com`, `hotelanker.net`, `anker-rorschach.ch`.
+- **Warum Geo:** sonst Verwechslung mit Luzern (`hotel-restaurant-anker.ch`).
+- **.swiss:** OFCOM-Validierung; Verlängerung Markt ca. CHF 100–170.
+- Canvas-Detail: Cursor `canvases/hotel-anker-domains.canvas.tsx`.
 
 ## Production clock LIVE (2026-07-23)
 
