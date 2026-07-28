@@ -7,6 +7,18 @@ Ziel: eine andere Cursor-Instanz auf einem anderen Rechner kann ohne mündlichen
 
 Detaillierte Chronik: [`WerbeLEDbox-CountDown/docs/SESSION_LOG.md`](./WerbeLEDbox-CountDown/docs/SESSION_LOG.md).
 
+<<<<<<< Updated upstream
+=======
+## Hauptprojekt & Netz (2026-07-28)
+
+- **Ein Repo:** `Hotel Anker/` = Remote `hotel-anker`. Module sind Ordner, keine zweiten Roots.
+- **SSIDs:** `Administration` (`.1.x`, Pis+Staff) · `HotelAnker` (Bar `.2.x`) · `HotelAnkerGuest` (Portal `.3.x`).
+- **PSK Staff:** `HeimatSchutz` (`secrets/wifi.hotelanker.yml`) — gilt für Administration **und** HotelAnker.
+- **Pis umziehen:** `scripts/migrate_pis_to_administration_wifi.py` (SSH-Jump über UDM; Windows routed VLAN2 nicht).
+- **2026-07-28 Versuch:** PI01 teilweise umgestellt, danach offline — **Power-Cycle**, dann Skript erneut. PI02 war schon ohne SSH.
+- **~19:00 Recheck:** beide Tailscale offline; UniFi zeigt keine Pi-Clients; DHCP noch Bar-Leases (PI02 `.2.222`). **Ja Strom-Reset**, **kein** Factory/SD-Wipe (SD schwer erreichbar). Nach Boot oft wieder HotelAnker → Skript.
+
+>>>>>>> Stashed changes
 ## Domains Hotel Anker Rorschach (2026-07-28)
 
 - **Belegt:** `hotelanker.ch` / `hotel-anker.ch` / `anker-hotel.ch` (Hostpoint, keine Website); `hotelanker.com` Aftermarket; `hotelanker.de` + `.eu`.
