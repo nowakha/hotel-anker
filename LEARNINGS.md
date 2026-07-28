@@ -1,14 +1,12 @@
 # Hotel Anker â€” Learnings & Handoff
 
-Stand: **2026-07-28** — Domain-Check Rorschach (siehe unten). Zuvor: Smooth-Patch PI02-Uhr pending Deploy.
+Stand: **2026-07-28** — AnkerPIs nach WLAN-Umzug offline → Power-Cycle; Domain-Check Rorschach.
 Ziel: eine andere Cursor-Instanz auf einem anderen Rechner kann ohne mündlichen Kontext weiterarbeiten.
 
 **Workflow (verbindlich):** `.cursor/rules/hotel-anker-workflow.mdc` — jeden Schritt dokumentieren (Erfolg+Misserfolg), Credentials/Learnings mitziehen, commit + `git push origin HEAD`.
 
 Detaillierte Chronik: [`WerbeLEDbox-CountDown/docs/SESSION_LOG.md`](./WerbeLEDbox-CountDown/docs/SESSION_LOG.md).
 
-<<<<<<< Updated upstream
-=======
 ## Hauptprojekt & Netz (2026-07-28)
 
 - **Ein Repo:** `Hotel Anker/` = Remote `hotel-anker`. Module sind Ordner, keine zweiten Roots.
@@ -18,7 +16,6 @@ Detaillierte Chronik: [`WerbeLEDbox-CountDown/docs/SESSION_LOG.md`](./WerbeLEDbo
 - **2026-07-28 Versuch:** PI01 teilweise umgestellt, danach offline — **Power-Cycle**, dann Skript erneut. PI02 war schon ohne SSH.
 - **~19:00 Recheck:** beide Tailscale offline; UniFi zeigt keine Pi-Clients; DHCP noch Bar-Leases (PI02 `.2.222`). **Ja Strom-Reset**, **kein** Factory/SD-Wipe (SD schwer erreichbar). Nach Boot oft wieder HotelAnker → Skript.
 
->>>>>>> Stashed changes
 ## Domains Hotel Anker Rorschach (2026-07-28)
 
 - **Belegt:** `hotelanker.ch` / `hotel-anker.ch` / `anker-hotel.ch` (Hostpoint, keine Website); `hotelanker.com` Aftermarket; `hotelanker.de` + `.eu`.

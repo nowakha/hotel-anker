@@ -2,8 +2,6 @@
 
 Chronik für Cross-Machine-Handoff. Erfolg **und** Misserfolg.
 
-<<<<<<< Updated upstream
-=======
 ## 2026-07-28 ~19:00 — AnkerPI02 Tailscale offline nach WLAN-Umzug
 
 | Check | Ergebnis |
@@ -109,7 +107,6 @@ Chronik für Cross-Machine-Handoff. Erfolg **und** Misserfolg.
 | Docs | `docs/NETWORK_UNIFI.md` |
 | Noch offen | Handy-Live-Test; Logo manuell; optional Guest-mDNS aus |
 
->>>>>>> Stashed changes
 ## 2026-07-28 — Domain-Check Hotel Anker Rorschach
 
 | Item | Ergebnis |
