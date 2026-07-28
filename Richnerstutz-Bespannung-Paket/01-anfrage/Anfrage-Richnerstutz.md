@@ -1,8 +1,19 @@
 # Anfrage an Richnerstutz AG — Textilbespannung LightBox Hotel Anker
 
-**Status:** **Gesendet** 2026-07-23 ~17:27 CEST — von `harald.nowak@modernlight.ch` an `info@richnerstutz.ch` (Gmail Web UI), Anhang `Hotel-Anker-Richnerstutz-Bespannung.zip`.  
+**Status:** **Korrektur #2 gesendet — warte auf Vorstufen-Bestätigung** (Stand 2026-07-28 ~17:34 CEST).  
+
+**Chronik:**
+- Anfrage gesendet 2026-07-23 ~17:27 an `info@richnerstutz.ch`.
+- Offerte Tanja Jelk / AG 461414 (Lumina + Multilayer, ~10 Tage ab Druckdaten).
+- Finale Daten 2026-07-27 → abgelehnt 2026-07-28 vormittag (CMYK, Bleed, Blocker-Polarität, Pixelung).
+- Korrektur outbound 2026-07-28 ~16:29 (CMYK FOGRA39, Bleed 20 mm, Blocker schwarz/weiss, ~4 px/mm).
+- Feedback Melanie Vogt 2026-07-28 ~17:07: (1) Sujet hochgerechnet; (2) Blocker nicht deckungsgleich; (3) keine Schnittzeichen.
+- **Korrektur #2 outbound 2026-07-28 ~17:34** an Vogt — Fassade 4096-Master, Blocker 1:1, ohne Schnittzeichen. Msg `19fa95c8982c258c` / Thread `19fa95c4dd51c323`. Meta: [`MAIL-KORREKTUR-META.md`](./MAIL-KORREKTUR-META.md).
 
 **Korrektur Druckmaß (2026-07-27):** Kanonischer Master ist **2100 × 2100 mm** Spannmaß mit **300 mm** Schwarz unten (`DRUCK-Hotel-Anker-Flowbox-2100x2100.pdf`). Offerte AG 461414 („Textil 200×200 cm“) weicht ab — **Nachtrag an Richnerstutz:** bitte auf **210×210 cm** / MediaBox 2100 mm umstellen.  
+
+**Offen:** Bestätigung Druckvorstufe (Passung Blocker/Sujet). Lieferfrist startet erst nach Freigabe. **Kein weiterer Outbound ohne Harald-Go / neuen Richner-Reply.**  
+
 
 **Empfänger:** Richnerstutz AG, Nordstrasse 7, 5612 Villmergen · info@richnerstutz.ch · +41 56 616 67 67  
 **Auftraggeber:** Realia AG (Gottlieb Kündig), Industriestrasse 40b, 9400 Rorschach · UID CHE-113.325.481  

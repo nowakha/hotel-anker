@@ -1,6 +1,6 @@
 # Hotel Anker â€” Learnings & Handoff
 
-Stand: **2026-07-28** — Domain-Check Rorschach (siehe unten). Zuvor: Smooth-Patch PI02-Uhr pending Deploy.
+Stand: **2026-07-28 ~17:34 CEST** — Harald **Korrektur #2 outbound gesendet** an Melanie Vogt (Fassade/Blocker/ohne Schnittzeichen). Kein Richnerstutz-Reply in diesem Webhook. Warten auf Vorstufen-Bestätigung.
 Ziel: eine andere Cursor-Instanz auf einem anderen Rechner kann ohne mündlichen Kontext weiterarbeiten.
 
 **Workflow (verbindlich):** `.cursor/rules/hotel-anker-workflow.mdc` — jeden Schritt dokumentieren (Erfolg+Misserfolg), Credentials/Learnings mitziehen, commit + `git push origin HEAD`.
@@ -284,3 +284,27 @@ Not done: fb-clock/ffprobe verify (unreachable). Do not unmask.
 - Harald: Deliverables (ZIP, Druck-PDFs, Fotos, Offerte) **müssen** im Repo sein — kein «zu groß / nur Desktop».
 - `.gitignore` bereinigt: keine Ignore-Regeln mehr für print/media-Pakete; nur Scratch `_encode*` / venv / `__pycache__`.
 - Spiegel: `Richnerstutz-Bespannung-Paket/versand/` (Finale ZIP + Offerte + User-PDF).
+
+## Richnerstutz Druckvorstufe — 2. Feedback Melanie Vogt (2026-07-28 ~17:07 CEST)
+
+- **Von:** Melanie.Vogt@richnerstutz.ch (Druckvorstufe) · **An:** Harald (Thread AG 461414)
+- **Betreff:** `RE: Druckdaten Korrektur — Hotel Anker / AG 461414 (CMYK, Bleed, Blocker)`
+- **Gmail:** message_id `19fa9444ef26689e` · thread `19fa92144f742d67` · date 2026-07-28 15:07 UTC
+- Bezug: Haralds Korrektur-Outbound ~16:29 CEST (CMYK, Bleed 20 mm, Blocker Polarität, ~4 px/mm)
+- **Ablehnung / Nacharbeit nötig — 3 Punkte:**
+  1. **Pixelung:** Auflösung numerisch ok, aber Sujet **hochgerechnet** → Gebäude + Logo verpixelt (Screenshots 16:55)
+  2. **Blocker nicht deckungsgleich:** weisse Linien würden leuchten (sollten nicht); auch um Zahlen herum (Screenshot 16:59)
+  3. **Keine Schnittzeichen** in den Druckdaten
+- Anhänge im Webhook **nicht** enthalten → Screenshots in Gmail prüfen
+- **Risiken:** Liefertermin (~10 Tage ab freigegebenen Daten) verzögert sich bis Freigabe; Blocker-Mismatch = Leuchtartefakte; Upscale-Quelle unbrauchbar für Fassade/Logo
+- Antwortentwurf (überholt, siehe Korrektur #2): `Richnerstutz-Bespannung-Paket/01-anfrage/Mail-Entwurf-Antwort-Vogt-2026-07-28.md`
+
+## Richnerstutz — Korrektur #2 outbound (2026-07-28 ~17:34 CEST)
+
+- **Webhook:** `from: harald.nowak@modernlight.ch` — **kein** Richnerstutz-Reply (eigene Outbound-Mail / Zapier-Echo).
+- **Betreff:** `RE: Druckdaten Korrektur — Hotel Anker / AG 461414 (Passung + ohne Schnittzeichen)`
+- **Gmail:** message_id `19fa95c8982c258c` · thread `19fa95c4dd51c323` · date Tue, 28 Jul 2026 17:34:03 +0200
+- **An:** Frau Vogt (Druckvorstufe); Body = `01-anfrage/MAIL-KORREKTUR-Druckdaten.txt`
+- **Inhalt (Harald → Vogt):** Daten neu aufgebaut — (1) Fassade aus 4096-Master ohne weiches Upscale, Logo hart gerastert, ~4 px/mm, MediaBox 2140 / Trim 2100; (2) Blocker deckungsgleich (gleiche Glyph-Geometrie, keine weissen Zahlen-Kästen, Konturen strikt schwarz); (3) Passer/Schnittzeichen entfernt. Dateien: `DRUCK-Hotel-Anker-Flowbox-2100x2100.pdf`, `DRUCK-Blocker-2100x2100.pdf`. Bitte um Bestätigung der Passung.
+- **Meta:** `01-anfrage/MAIL-KORREKTUR-META.md` · Build-Branch `cursor/print-cmyk-bleed-blocker-1415` @ `c2254ab`
+- **Status:** Korrektur #2 **gesendet**. Offen: Vorstufen-Freigabe (Passung). Lieferfrist (~10 Tage) läuft erst ab Freigabe. **Kein weiterer Outbound ohne Harald-Go / ohne neuen Richner-Reply.**
