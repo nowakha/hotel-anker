@@ -145,36 +145,42 @@ nmcli device wifi rescan || true
 sleep 2
 nmcli -t -f IN-USE,SSID,SIGNAL,CHAN device wifi list | grep -i Admin || true
 # Create/update Administration
+# Administration is WPA2/WPA3 Transition — use wpa-psk (NOT sae).
+# Pi Zero 2 W (CYW43436) cannot reliably do WPA3-only SAE.
 if nmcli -t -f NAME connection show | grep -qx Administration; then
   echo {password!r} | sudo -S nmcli connection modify Administration \
+    wifi-sec.key-mgmt wpa-psk \
     wifi-sec.psk {WLAN_PSK!r} \
+    wifi-sec.psk-flags 0 \
+    wifi-sec.pmf 1 \
+    connection.interface-name wlan0 \
     connection.autoconnect yes \
     connection.autoconnect-priority 100 \
     802-11-wireless.powersave 2 \
     ipv4.method auto ipv4.ignore-auto-dns yes ipv4.dns '1.1.1.1 8.8.8.8' ipv6.method disabled
 else
   echo {password!r} | sudo -S nmcli connection add type wifi ifname wlan0 con-name Administration ssid {SSID} \
-    wifi-sec.key-mgmt wpa-psk wifi-sec.psk {WLAN_PSK!r} \
+    wifi-sec.key-mgmt wpa-psk wifi-sec.psk {WLAN_PSK!r} wifi-sec.pmf 1 \
     connection.autoconnect yes connection.autoconnect-priority 100 \
     802-11-wireless.powersave 2 \
     ipv4.method auto ipv4.ignore-auto-dns yes ipv4.dns '1.1.1.1 8.8.8.8' ipv6.method disabled
 fi
 # Prefer Administration but do NOT disable HotelAnker until success
-echo {password!r} | sudo -S nmcli connection modify HotelAnker connection.autoconnect-priority 10 || true
+echo {password!r} | sudo -S nmcli connection modify HotelAnker connection.autoconnect yes connection.autoconnect-priority 10 || true
 """
         if not zero_2w:
             cmd += f"""
-echo {password!r} | sudo -S nmcli connection modify HotelAnker_5G connection.autoconnect-priority 5 || true
+echo {password!r} | sudo -S nmcli connection modify HotelAnker_5G connection.autoconnect yes connection.autoconnect-priority 5 || true
 """
         cmd += f"""
 # Connect now — keep HotelAnker autoconnect=yes until Admin is proven on .1.x
-echo {password!r} | sudo -S nmcli device wifi connect {SSID} password {WLAN_PSK!r} ifname wlan0 name Administration || \
-  echo {password!r} | sudo -S nmcli connection up Administration
+echo {password!r} | sudo -S nmcli connection up Administration || \
+  echo {password!r} | sudo -S nmcli device wifi connect {SSID} password {WLAN_PSK!r} ifname wlan0 name Administration
 # Hold connection and re-check (avoid racing DHCP / brief associate flaps)
 ok=0
-for i in 1 2 3 4 5 6; do
+for i in 1 2 3 4 5 6 7 8; do
   sleep 3
-  SSID_NOW=$(iwgetid -r || true)
+  SSID_NOW=$(nmcli -t -f ACTIVE,SSID device wifi | awk -F: '$1=="yes"{{print $2; exit}}' || true)
   IP_NOW=$(ip -4 -o addr show wlan0 | awk '{{print $4}}' | cut -d/ -f1 | head -n1)
   echo TRY=$i SSID_NOW=$SSID_NOW IP_NOW=$IP_NOW
   if [ "$SSID_NOW" = "{SSID}" ] && echo "$IP_NOW" | grep -q '^192\\.168\\.1\\.'; then

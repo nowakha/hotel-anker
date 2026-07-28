@@ -2,6 +2,18 @@
 
 Chronik für Cross-Machine-Handoff. Erfolg **und** Misserfolg.
 
+## 2026-07-29 ~00:35 — Administration Recheck (WPA2/WPA3 Transition) + PI01 connect
+
+| Check | Ergebnis |
+|-------|----------|
+| UniFi `Administration` | `wpa3_support=true`, **`wpa3_transition=true`**, `pmf_mode=optional` (nicht mehr WPA3-only) |
+| UniFi `HotelAnker` | ebenfalls Transition / PMF optional |
+| PI01 Scan | `Administration:WPA2 WPA3` Signal ~64 @ ch6 |
+| Zero 2 W | WPA3-only ungeeignet; NM **`key-mgmt=wpa-psk`** |
+| Doku | `NETWORK_UNIFI.md`, `wifi.hotelanker.yml`, `LEARNINGS.md`, migrate-Skript |
+| Connect | **OK** — PI01 `Administration` / **`192.168.1.91`** (wpa-psk, Tailscale `100.67.4.18` bleibt) |
+| Persist | NM-Profil Administration unter `/etc/...`; HotelAnker Fallback prio 10 |
+
 ## 2026-07-29 ~00:06 — AnkerPI01 SD WiFi rescue (Administration primary)
 
 | Item | Ergebnis |

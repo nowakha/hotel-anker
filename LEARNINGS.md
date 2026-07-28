@@ -1,16 +1,23 @@
 # Hotel Anker â€” Learnings & Handoff
 
-Stand: **2026-07-28** — AnkerPIs nach WLAN-Umzug offline → Power-Cycle; Domain-Check Rorschach.
+Stand: **2026-07-29** — Administration = WPA2/WPA3 Transition; PI01 → Administration; Zero 2 W ≠ WPA3-only.
 Ziel: eine andere Cursor-Instanz auf einem anderen Rechner kann ohne mündlichen Kontext weiterarbeiten.
 
 **Workflow (verbindlich):** `.cursor/rules/hotel-anker-workflow.mdc` — jeden Schritt dokumentieren (Erfolg+Misserfolg), Credentials/Learnings mitziehen, commit + `git push origin HEAD`.
 
 Detaillierte Chronik: [`WerbeLEDbox-CountDown/docs/SESSION_LOG.md`](./WerbeLEDbox-CountDown/docs/SESSION_LOG.md).
 
+## WPA3 / AnkerPI01 Zero 2 W (2026-07-29)
+
+- **Administration** live: `wpa3_transition=true`, `pmf_mode=optional` → Scan `WPA2 WPA3` (nicht mehr WPA3-only).
+- Pi Zero 2 W (CYW43436): **kein zuverlässiges WPA3-SAE**; NM immer `key-mgmt=wpa-psk`. WPA3-only + PMF required → Association fail / „Secrets were required“.
+- Vor Migrate immer UniFi `wlanconf` + Client-Scan SECURITY prüfen — nicht Docs-Annahme „WPA2“ blind glauben.
+- Siehe `WerbeLEDbox-CountDown/docs/NETWORK_UNIFI.md` § WPA3.
+
 ## AnkerPI01 SD WiFi rescue (2026-07-29)
 
 - **Never** set `HotelAnker` `autoconnect=no` until Administration is associated **and** wlan0 has `192.168.1.x` for several seconds. Doing that when Admin fails → **zero WiFi** (PI01 bricked offline).
-- Soll runtime: SSID **Administration** primary (prio 100, powersave=2, PSK `HeimatSchutz`). HotelAnker may stay on disk with autoconnect=false if user forbids Bar preferred; migrate script safer default keeps Bar as low-prio fallback until proven.
+- Soll runtime: SSID **Administration** primary (prio 100, powersave=2, PSK `HeimatSchutz`, **wpa-psk**). HotelAnker low-prio fallback until proven.
 - SD offline fix path (TabletHi10Max): usbipd busid **6-2** Mass Storage → WSL mount bootfs/rootfs → `scripts/pi01_sd_wifi_rescue.sh --auto` → sync/umount → `usbipd detach` → SD back into Pi + power on.
 - Always **umount before** `usbipd detach`; yank-while-mounted caused EXT4 journal I/O errors (recoverable via `e2fsck -fy`).
 
