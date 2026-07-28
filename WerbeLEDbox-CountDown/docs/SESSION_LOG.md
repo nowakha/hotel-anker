@@ -488,3 +488,19 @@ Goal: stabile 860×360 H.264-Produktion statt 4K `st24.mov` auf PI02 (Undervolta
 | `.gitignore` | Media/print-Ignore entfernt (Policy: track deliverables) |
 | Push | folgt |
 
+## 2026-07-28 ~17:07 CEST — Richnerstutz Druckvorstufe Feedback #2 (Melanie Vogt)
+
+| Item | Wert |
+|------|------|
+| From | `Melanie.Vogt@richnerstutz.ch` |
+| Subject | `RE: Druckdaten Korrektur — Hotel Anker / AG 461414 (CMYK, Bleed, Blocker)` |
+| Date (UTC) | 2026-07-28 15:07:03 |
+| Thread / Msg | `19fa92144f742d67` / `19fa9444ef26689e` |
+| Kontext | Antwort auf Haralds Korrektur-Mail (~16:29 CEST, CMYK/Bleed/Blocker) |
+| Punkt 1 | Auflösung ok, aber Sujet hochgerechnet → Gebäude + Logo verpixelt |
+| Punkt 2 | Blocker nicht deckungsgleich; weisse Linien (auch um Zahlen) würden leuchten |
+| Punkt 3 | Keine Schnittzeichen in den Daten |
+| Anhänge | 3 Screenshots genannt; **nicht** im Zapier-Webhook — in Gmail prüfen |
+| Status | Druckdaten **noch nicht freigegeben** — Nacharbeit nötig |
+| Outbound | **STOP** — warten auf Harald-Go; Entwurf unter `01-anfrage/Mail-Entwurf-Antwort-Vogt-2026-07-28.md` |
+
