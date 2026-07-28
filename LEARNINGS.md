@@ -1,6 +1,6 @@
 # Hotel Anker â€” Learnings & Handoff
 
-Stand: **2026-07-28** — Domain-Check Rorschach (siehe unten). Zuvor: Smooth-Patch PI02-Uhr pending Deploy.
+Stand: **2026-07-28 ~17:33 CEST** — Richnerstutz-Watcher: Harald-Outbound Korrektur (kein Druckerei-Reply). Vogt-Feedback #2 weiterhin offen (warte Harald-Go).
 Ziel: eine andere Cursor-Instanz auf einem anderen Rechner kann ohne mündlichen Kontext weiterarbeiten.
 
 **Workflow (verbindlich):** `.cursor/rules/hotel-anker-workflow.mdc` — jeden Schritt dokumentieren (Erfolg+Misserfolg), Credentials/Learnings mitziehen, commit + `git push origin HEAD`.
@@ -284,3 +284,11 @@ Not done: fb-clock/ffprobe verify (unreachable). Do not unmask.
 - Harald: Deliverables (ZIP, Druck-PDFs, Fotos, Offerte) **müssen** im Repo sein — kein «zu groß / nur Desktop».
 - `.gitignore` bereinigt: keine Ignore-Regeln mehr für print/media-Pakete; nur Scratch `_encode*` / venv / `__pycache__`.
 - Spiegel: `Richnerstutz-Bespannung-Paket/versand/` (Finale ZIP + Offerte + User-PDF).
+
+## Richnerstutz Print-Watcher (2026-07-28)
+
+- **Druckvorstufe abgelehnt** (vormittags, Tanja Jelk): Blocker-Passung, CMYK, Bleed, Auflösung, Polarität.
+- **Korrektur outbound** (Harald → Jelk, CC Vogt): mehrfach getriggert; zuletzt Webhook **17:33 CEST** `from: harald.nowak@…`, Betreff `RE: Druckdaten Korrektur — Hotel Anker / AG 461414 (Passung + ohne Schnittzeichen)`, thread `19fa95bb5ca38b34`, msg `19fa95bf81f900ee`.
+- Inhalt Korrektur laut Body: Blocker 1:1 aus Generatorlauf (schwarz=blockt / weiss=leuchtet), CMYK FOGRA39, Bleed 20 mm → MediaBox **2140×2140**, Trim **2100**, ~**4 px/mm**, Schwarz unten **300 mm**.
+- **Feedback #2 Melanie Vogt** (~17:07 CEST, msg `19fa9444ef26689e`): Sujet hochgerechnet/verpixelt; Blocker nicht deckungsgleich (weiße Linien); **keine Schnittzeichen**. **Antwort an Vogt: STOP — warte Harald-Go.**
+- Watcher-Filter: Outbound Harald ≠ Druckerei-Reply → kurz melden, Status setzen, kein Auto-Send.
