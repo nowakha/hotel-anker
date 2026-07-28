@@ -2,6 +2,74 @@
 
 Chronik für Cross-Machine-Handoff. Erfolg **und** Misserfolg.
 
+## 2026-07-28 — Sprachumschalter fix (Captive Portal)
+
+| Item | Ergebnis |
+|------|----------|
+| Bug | Links auf `/?lang=…` → nginx `:80` `location /` leitet auf HTTPS um → Sprache wechselte nicht |
+| Fix | Language-Buttons + JS `URLSearchParams` auf **aktueller** URL (`/guest/s/default/…`) |
+| Verifiziert | DE→EN→RM Umschaltung; Formular+Consent→Success; bekannte MAC→direkt Success |
+
+## 2026-07-28 — Guest-E-Mail-Portal auf UDM (live)
+
+| Item | Ergebnis |
+|------|----------|
+| Dienst | `hotel-anker-guest-portal.service` → Python `:9090` unter `/data/hotel-anker/` |
+| UI | Navy/Gold/Anker; Sprachen **DE/EN/FR/IT/Rumantsch**; Consent-Checkbox; iPhone-Hinweis Private Address |
+| Speicher | SQLite+CSV `/data/hotel-anker/guest-emails/`; gleiche E-Mail = Update, kein zweiter Row |
+| Session | **120 Min**; bekannte MAC skippt Formular (erneut nur „verbinden“/Success) |
+| UniFi | `auth=custom`, `custom_ip=192.168.1.254`, expire=120; nginx :80 `/guest/`→9090; Ports 80+9090 in portal ipset |
+| Export | `scripts/export_guest_emails.py` / Cursor „E-Mails exportieren“ |
+| Bugfix | SQLite-Init Deadlock (`Lock`→`RLock`); systemd `#` in Passwort muss gequotet sein |
+| Token-Reset | Guest unauthorize + `ipset flush UBIOS_authorized_guests` für Handy-Retest |
+
+## 2026-07-28 — iOS Success: keine weiße Weiterleitung mehr
+
+| Item | Ergebnis |
+|------|----------|
+| Ursache | Nach Connect Redirect zu google/detectportal → Captive-WebView weiß + „SUCCESS“ |
+| Fix | `window.location` nach Success entfernt — gebrandete Seite bleibt bis iPhone-Haken |
+| Success-UI | Anker zentriert, DE-Text, Hinweis „Tippen Sie oben rechts auf Fertig…“ |
+
+## 2026-07-28 — Success-Seite gebrandet
+
+| Item | Ergebnis |
+|------|----------|
+| successLogo | UniFi-Haken → Anker-SVG (wie Landing) |
+| Größe | 120 → 180 px |
+| Text | „Verbunden — schönen Aufenthalt im Hotel Anker!“ |
+| Powered-by | UniFi-Footer SVG neutralisiert |
+| BG | gleicher Print-Fassaden-Hintergrund (Layout-Patch) |
+
+## 2026-07-28 — Portal-JS-Patch repariert (Connect wieder nutzbar)
+
+| Item | Ergebnis |
+|------|----------|
+| Bug | Patch `()=>{backgroundColor:...}` ohne Objekt-Return → React crash → nur Hotelbild |
+| Fix | JS aus `.orig` restored; korrekt `()=>({...backgroundImage...})` |
+| BG | Lightbox-Print-Fassade `01-facade-blueprint.png` |
+| Logo | Anker-SVG bleibt |
+| Auth | `POST /login` → `authorized:true` |
+
+## 2026-07-28 — Portal-Hintergrund: Lightbox-Print-Fassade
+
+| Item | Ergebnis |
+|------|----------|
+| Problem | CSS-BG unsichtbar — SPA setzt Inline `background:#0B1C2C` über die Root-Fläche |
+| Fix | `main.*.js` patched: Cover-BG `./static/media/hotel-anker-outline-bg.jpg` |
+| Bild | `assets/kendu-flowbox-2m-print/canva-upload/01-facade-blueprint.png` |
+| Export | `guest-wifi-portal/exports/bg-lightbox-print-facade.jpg` |
+
+## 2026-07-28 — Portal Logo Anker + Outline-Hintergrund
+
+| Item | Ergebnis |
+|------|----------|
+| Logo | UniFi-Default `uiLogoHotspot*.svg` ersetzt durch Anker (`assets/hotel-anker-historic-anchor.png` → transparent SVG) |
+| Hintergrund | Letzte Outline `WerbeLEDbox-CountDown/assets/hotel-anker-blueprint-simplified.png` als Cover-BG (Navy `#0B1C2C`) |
+| Exports | `guest-wifi-portal/exports/logo-anchor-gold.{png,svg}`, `bg-hotel-outline.jpg` |
+| Live | `:8880` assets 200; CSS `!important` gegen Inline-`bg_color` |
+| Hinweis | Offizieller `portalfile`-Upload-API weiter unbrauchbar (`InvalidObject`); SPA-Media-Patch als Workaround |
+
 ## 2026-07-28 — Guest WiFi Portal repariert + verifiziert
 
 | Item | Ergebnis |

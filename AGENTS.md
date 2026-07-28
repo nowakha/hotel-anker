@@ -36,4 +36,5 @@ Hotel Anker/
 - Root: [`README.md`](./README.md), [`LEARNINGS.md`](./LEARNINGS.md)
 - Session: [`WerbeLEDbox-CountDown/docs/SESSION_LOG.md`](./WerbeLEDbox-CountDown/docs/SESSION_LOG.md)
 - LED/Pi: [`WerbeLEDbox-CountDown/README.md`](./WerbeLEDbox-CountDown/README.md)
+- UniFi/WLAN: [`WerbeLEDbox-CountDown/docs/NETWORK_UNIFI.md`](./WerbeLEDbox-CountDown/docs/NETWORK_UNIFI.md), Skill `.cursor/skills/ubiquiti-unifi/`
 - Print: [`Richnerstutz-Bespannung-Paket/README.md`](./Richnerstutz-Bespannung-Paket/README.md)

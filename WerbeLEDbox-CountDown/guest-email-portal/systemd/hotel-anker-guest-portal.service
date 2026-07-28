@@ -1,0 +1,17 @@
+[Unit]
+Description=Hotel Anker Guest Email Portal
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/data/hotel-anker/guest-email-portal
+EnvironmentFile=-/data/hotel-anker/guest-email-portal/portal.env
+ExecStartPre=/bin/bash -c 'ipset add UBIOS_guest_portal_ports 9090 2>/dev/null || true; ipset add UBIOS_guest_portal_ports 80 2>/dev/null || true'
+ExecStart=/usr/bin/python3 /data/hotel-anker/guest-email-portal/server.py
+Restart=always
+RestartSec=3
+User=root
+
+[Install]
+WantedBy=multi-user.target
