@@ -6,14 +6,16 @@ Handoff-Wissen: [`../LEARNINGS.md`](../LEARNINGS.md)
 
 ## Zielplattformen
 
-**AnkerPI01** — Raspberry Pi Zero 2 W (`AnkerPI01.local` / DHCP oft `192.168.8.102`)  
+**AnkerPI01** — Raspberry Pi Zero 2 W (`AnkerPI01.local`, Soll: **Administration** `192.168.1.x`)  
 Docs: [`docs/ANKERPI01.md`](docs/ANKERPI01.md) · Secrets: [`secrets/ankerpi01.credentials.yml`](secrets/ankerpi01.credentials.yml)  
 Services: `ws2812put` + `countdown_pi01` (Producer → Baubeginn 2026-10-01 13:00)
 
-**AnkerPI02** — Raspberry Pi 4  
+**AnkerPI02** — Raspberry Pi 4 (Soll: **Administration** `192.168.1.x` + Tailscale)  
 - HDMI clock — **live** `fb_clock_live.py` (Default) — [`docs/ANKERPI02.md`](docs/ANKERPI02.md)  
 - USB **Teensy** 8×512 — [`docs/ANKERPI02-TEENSY.md`](docs/ANKERPI02-TEENSY.md) · Hex: [`teensy/hex/`](teensy/hex/)  
 Secrets: [`secrets/ankerpi02.credentials.yml`](secrets/ankerpi02.credentials.yml)
+
+Netz: [`docs/NETWORK_UNIFI.md`](docs/NETWORK_UNIFI.md) · WiFi-Umzug: `scripts/migrate_pis_to_administration_wifi.py`
 
 **Pico** (`pico/`) — **Lab / abgelöst** (früher USB-Receiver; Live = Teensy).
 

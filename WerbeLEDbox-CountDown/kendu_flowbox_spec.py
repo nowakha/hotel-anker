@@ -51,10 +51,19 @@ PRINT_PX_PER_CELL = 64
 PRINT_SIZE_PX = GRID * PRINT_PX_PER_CELL  # 4096 (LED-face tooling)
 PRINT_PX_PER_MM = PRINT_SIZE_PX / FACE_MM  # 2.048
 
-# Production raster from 2100 mm master @ 2 px/mm
-PRINT_MASTER_PX = int(round(PRINT_MM * 2.0))  # 4200
-PRINT_MASTER_PX_PER_MM = PRINT_MASTER_PX / PRINT_MM  # 2.0
-PRINT_DEAD_PX = int(round(PRINT_DEAD_MM * PRINT_MASTER_PX_PER_MM))  # 600
+# Production raster (Richnerstutz 2026-07): higher dpi + bleed
+# ~4 px/mm ≈ 102 dpi — large-format textile; old 2 px/mm was too soft
+PRINT_MASTER_PX_PER_MM = 4.0
+BLEED_MM = 20.0  # Bildzugabe rundum (Druckerei)
+SPERRZONE_MM = 20.0  # Stoff-Sperrzone / safe margin from trim
+PRINT_TRIM_MM = PRINT_MM  # 2100 — Endformat / Spannmaß
+PRINT_EXPORT_MM = PRINT_TRIM_MM + 2.0 * BLEED_MM  # 2140 — MediaBox inkl. Bleed
+PRINT_MASTER_PX = int(round(PRINT_TRIM_MM * PRINT_MASTER_PX_PER_MM))  # 8400
+PRINT_EXPORT_PX = int(round(PRINT_EXPORT_MM * PRINT_MASTER_PX_PER_MM))  # 8560
+PRINT_DEAD_PX = int(round(PRINT_DEAD_MM * PRINT_MASTER_PX_PER_MM))  # 1200
+FACE_MASTER_PX = int(round(FACE_MM * PRINT_MASTER_PX_PER_MM))  # 8000
+# Legacy low-res master (pre-correction) kept for reference only
+PRINT_MASTER_PX_LEGACY_2PPM = int(round(PRINT_MM * 2.0))  # 4200
 
 MODULE_CELLS = 8
 MODULE_PITCH_MM = MODULE_CELLS * CELL_PITCH_MM  # 250.0

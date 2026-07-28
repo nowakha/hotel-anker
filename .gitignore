@@ -44,3 +44,9 @@ WerbeLEDbox-CountDown/media/_encode*
 WerbeLEDbox-CountDown/media/_scp*
 WerbeLEDbox-CountDown/fonts/_extract/
 WerbeLEDbox-CountDown/docs/_pi02_rescue.log
+
+# print build cache
+Richnerstutz-Bespannung-Paket/02-druckdaten/_trim_cache/
+
+# local gmail send screenshots
+Richnerstutz-Bespannung-Paket/versand/_gmail_*.png

@@ -1,29 +1,42 @@
-# Print-Spezifikation — Hotel Anker Countdown
+# Print-Spezifikation — Hotel Anker Countdown (Richnerstutz)
 
-## Kanonisches Druckmaß (verbindlich)
+Korrektur nach Druckvorstufe (Tanja Jelk): CMYK · Bleed · Sperrzone · Blocker schwarz/weiss · höhere Auflösung.
+
+## Endformat / Spannmaß
 
 | Angabe | Wert |
 |--------|------|
-| **Spann-/Druck-PDF** | **2100 × 2100 mm** (= Außenmaß Rahmen) |
+| **Trim / Spannmaß** | **2100 × 2100 mm** (= Außenmaß Rahmen) |
+| **Bildzugabe (Bleed)** | **20 mm rundum** |
+| **MediaBox (Liefer-PDF)** | **2140 × 2140 mm** (= Trim + 2×Bleed) |
+| **Stoff-Sperrzone** | **20 mm** vom Trim-Rand — kritisches Sujet nur innerhalb |
 | **Schwarzstreifen unten** | **300 mm** (= 250 Modulreihe + 50 Stirn) |
-| Master-Datei | `DRUCK-Hotel-Anker-Flowbox-2100x2100.pdf` |
-| PNG-Master | `print-ghost-hires.png` · **4200×4200 px** · 2 px/mm |
-
-**Widerruf:** Frühere 2000×2000‑mm‑Produktion mit nur 250 mm Totzone war **falsch**.
-
-## LED-Physik (nicht das Druckformat)
-
-- LED-Fläche: **2000 × 2000 mm** (8×8 × 250 mm)
-- Stirn: **50 mm** → Außen **2100 × 2100 mm**
-- Content-Grid live: 64×64, Totzone LED = unterste 8/64 (= 250 mm Module)
+| **Farbraum** | **CMYK** (sRGB → FOGRA39 Coated) |
+| **Auflösung** | **4 px/mm** (≈ 102 dpi) |
 
 ## Lieferdateien
 
-- `DRUCK-Hotel-Anker-Flowbox-2100x2100.pdf` — Produktion
-- `DRUCK-Opazitaet-2100x2100.pdf` — schwarz=lichtdurchlässig, rot=Blockout (Totzone 300 mm)
-- `print-ghost-hires.pdf` — Alias des Masters
+| Datei | Inhalt |
+|-------|--------|
+| `DRUCK-Hotel-Anker-Flowbox-2100x2100.pdf` | Sujet CMYK, MediaBox 2140 mm |
+| `DRUCK-Blocker-2100x2100.pdf` | Blocker CMYK, gleiche Geometrie / MediaBox |
+| `DRUCK-Opazitaet-2100x2100.pdf` | Alias des Blockers (Dateiname-Kompatibilität) |
+| `print-ghost-hires.png` | RGB-Preview **inkl. Bleed** 8560² (= 2140 mm) |
+| `print-opacity-mask-hires.png` | Blocker RGB-Preview **inkl. Bleed** 8560² (identisch zum Sujet) |
 
-## Opazität
+## Blocker-Legende (verbindlich)
 
-- Rot: Totzone 300 mm · Logo · Beschriftung · Fassadenlinien · Digit-Konturen
-- Schwarz: Glass-Balken · Segmentfüllungen · Navy-Hintergrund
+| Farbe | Bedeutung |
+|-------|-----------|
+| **Schwarz** | blockt / lichtundurchlässig |
+| **Weiss** | leuchtet / lichtdurchlässig |
+
+Kein Rot. Blocker und Sujet stammen aus demselben Generator-Lauf.
+
+## LED-Physik (nicht das Druckformat)
+
+- LED-Fläche: **2000 × 2000 mm** (8×8 × 250 mm)
+- Stirn: **50 mm** → Außen **2100 × 2100 mm**
+- Sujet der LED-Fläche ist zentriert im Trim; Stirn = Navy (Sujet) bzw. Schwarz (Blocker)
+
+Rebuild: `python WerbeLEDbox-CountDown/scripts/build_richnerstutz_druckdaten.py`

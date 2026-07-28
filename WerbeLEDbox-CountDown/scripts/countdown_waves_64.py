@@ -679,7 +679,7 @@ def regen_opacity_mask_companion() -> None:
         mod.OUT / "print-opacity-mask-2000.png"
     )
     mod.add_caption(
-        opacity, "Print · Opacity", "schwarz=lichtdurchlässig · rot=lichtundurchlässig"
+        opacity, "Print · Blocker", "schwarz=blockt · weiss=leuchtet"
     ).save(mod.OUT / "preview-opacity-mask.png")
     print("wrote opacity mask", mod.OUT)
 

@@ -1,0 +1,52 @@
+# Mail — Korrektur Druckdaten an Richnerstutz
+
+**Status:** Versand vorbereitet 2026-07-28  
+**Von:** Harald.Nowak@modernlight.ch  
+**An:** info@richnerstutz.ch  
+**Cc:** tanja.jelk@richnerstutz.ch; melanie.vogt@richnerstutz.ch  
+**Betreff:** AW: Druckdaten Korrektur — Hotel Anker / AG 461414 (CMYK, Bleed, Blocker)
+
+**Anhang:** `Hotel-Anker-Korrektur-Druckdaten-2026-07-28.zip`  
+(Sujet + Blocker CMYK, MediaBox 2140 mm inkl. 20 mm Bleed, PRINT_SPEC, Legende)
+
+---
+
+Guten Tag Frau Jelk
+
+vielen Dank für die Prüfung und die klaren Punkte — Entschuldigung für den Mehraufwand.
+
+Die Druckdaten sind entsprechend Ihrer Vorgaben neu aufbereitet und liegen als Anhang bei:
+
+1) Blocker / Opazität
+   - Neu aus demselben Generatorlauf wie das Sujet (Geometrie 1:1 passend)
+   - Polarität korrigiert: schwarz = blockt, weiss = leuchtet (kein Rot mehr)
+   - Datei: DRUCK-Blocker-2100x2100.pdf
+     (DRUCK-Opazitaet-2100x2100.pdf ist derselbe Inhalt, Alias)
+
+2) Farbraum
+   - Beide PDFs in CMYK (sRGB → FOGRA39 Coated)
+
+3) Bildzugabe / Sperrzone
+   - 20 mm Bleed rundum → MediaBox 2140 × 2140 mm
+   - Trim / Spannmaß unverändert 2100 × 2100 mm
+   - TrimBox 2100 mm + Passermarken in der Bleed-Zone
+   - Sujet und Blocker sind 1:1 übereinanderlegbar (identischer Bleed)
+   - Kritisches Sujet innerhalb der LED-Fläche (Stirn 50 mm),
+     damit die 20 mm Stoff-Sperrzone frei bleibt
+
+4) Auflösung
+   - Neu ca. 4 px/mm (≈ 102 dpi) statt zuvor 2 px/mm
+
+Unterer Schwarzstreifen weiterhin 300 mm (250 mm Modulreihe + 50 mm Stirn).
+
+Details im Anhang: PRINT_SPEC.md und OPAZITAET-LEGENDE.md.
+
+Bitte Frau Vogt (Melanie Vogt, Druckvorstufe) im Cc belassen — danke, dass sie die Daten aufarbeitet.
+Für Rückfragen stehe ich gerne kurzfristig zur Verfügung, damit wir den Liefertermin halten.
+
+Freundliche Grüsse
+Harald Nowak
+Modernlight — Projektleitung | Videoengineering
+Harald.Nowak@modernlight.ch
++41 76 579 84 54
+Wangenstrasse 57, 3018 Bern
