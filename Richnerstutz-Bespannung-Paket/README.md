@@ -22,15 +22,22 @@ Alles für die Anfrage an **Richnerstutz AG** (Druck + Konfektion mit Kederschie
 | `06-fotos-vom-rahmen/` | Fotos / Auswertung |
 | `07-lichtvideo/` | Neu berechnetes LED-Lichtvideo (GIF + Stills) |
 
-## Was Richnerstutz braucht (Priorität)
+## Status (2026-07-28)
 
-1. Anfrage aus `01-anfrage/`
-2. **Druck-PDF:** `02-druckdaten/DRUCK-Hotel-Anker-Flowbox-2100x2100.pdf` (**2100×2100 mm**, Schwarz unten **300 mm**)
-3. **Opazitäts-PDF:** `02-druckdaten/DRUCK-Opazitaet-2100x2100.pdf`  
-   - **schwarz** = lichtdurchlässig  
-   - **rot** = lichtundurchlässig / Blockout
+Druckvorstufe Richnerstutz (**Tanja Jelk**) hat die angelieferten Daten **abgelehnt**. Korrektur nötig vor Produktion. Antwortentwurf: [`01-anfrage/Antwort-Richnerstutz-2026-07-28-Druckdaten-Korrektur.md`](./01-anfrage/Antwort-Richnerstutz-2026-07-28-Druckdaten-Korrektur.md). **Kein Outbound ohne Harald-Go.**
+
+Beanstandungen: Blocker ≠ Sujet · RGB statt CMYK · keine 2 cm Zugabe / Sperrzone · verpixelt · Blocker-Polarität falsch (soll **schwarz=blockt / weiss=leuchtet**, nicht rot).
+
+## Was Richnerstutz braucht (Priorität — nach Korrektur)
+
+1. Anfrage / Korrespondenz aus `01-anfrage/`
+2. **Druck-PDF:** `02-druckdaten/DRUCK-Hotel-Anker-Flowbox-2100x2100.pdf` (**2100×2100 mm**, Schwarz unten **300 mm**) — neu: **CMYK**, **2 cm Zugabe**, höhere Auflösung
+3. **Opazitäts-/Blocker-PDF:** neu gemäss Richner-Konvention  
+   - **schwarz** = blockt (lichtundurchlässig)  
+   - **weiss** = leuchtet (transluzent) — **kein Rot**  
+   - (Repo-Alt: schwarz=transluzent / rot=Blockout — **widerrufen für Lieferung**)
 4. Fotos aus `06-fotos-vom-rahmen/`
-5. **Hinweis Offerte:** AG 461414 „Textil 200×200 cm“ → Spannmaß laut Master **210×210 cm** (Nachtrag an Richnerstutz)
+5. Offerte AG 461414: Spannmaß **210×210 cm**
 
 Optional: Massblatt-Overlays in `04-vorlagen-massblatt/`, Vorschauen in `05-vorschauen/`.
 

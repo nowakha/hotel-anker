@@ -25,5 +25,13 @@
 
 ## Opazität
 
-- Rot: Totzone 300 mm · Logo · Beschriftung · Fassadenlinien · Digit-Konturen
-- Schwarz: Glass-Balken · Segmentfüllungen · Navy-Hintergrund
+- **Richner 2026-07-28:** Blocker neu als **schwarz=blockt / weiss=leuchtet** (kein Rot). Gelieferte Dateien noch rot/schwarz — neu erzeugen.
+- Historisch Rot: Totzone 300 mm · Logo · Beschriftung · Fassadenlinien · Digit-Konturen
+- Historisch Schwarz: Glass-Balken · Segmentfüllungen · Navy-Hintergrund
+
+## Offene Korrekturen Druckerei (2026-07-28)
+
+- CMYK (aktuell RGB)
+- Rundum 2 cm Bildzugabe + 2 cm Stoff-Sperrzone
+- Höhere Auflösung (Sujet verpixelt laut Vorstufe)
+- Blocker 1:1 zum Sujet + Polarität umkehren

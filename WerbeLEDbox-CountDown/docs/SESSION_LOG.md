@@ -464,3 +464,19 @@ Goal: stabile 860×360 H.264-Produktion statt 4K `st24.mov` auf PI02 (Undervolta
 | `.gitignore` | Media/print-Ignore entfernt (Policy: track deliverables) |
 | Push | folgt |
 
+## 2026-07-28 ~11:45 CEST — Richnerstutz: Druckdaten zurückgewiesen
+
+| Item | Ergebnis |
+|------|----------|
+| Trigger | Zapier Gmail-Webhook → Automation print-replies |
+| From | `Tanja.Jelk@richnerstutz.ch` |
+| Subject | `Druckdatei Hotel Anker` |
+| Date | 2026-07-28 09:43:26 +0000 |
+| IDs | `message_id`/`thread_id` `19fa81bceee18dd4` |
+| Filter | **Match** Hotel Anker / Flowbox Bespannung (nicht Hautle) |
+| Inhalt | 5 Korrekturpunkte: Blocker-Mismatch, RGB→CMYK, 2 cm Zugabe/Sperrzone, Pixelung, Blocker schwarz/weiss statt rot |
+| Screenshots | nur in Gmail, nicht im Webhook-Body |
+| Docs | LEARNINGS + Anfrage-Status + Antwortentwurf aktualisiert |
+| Outbound | **STOP** — Entwurf bereit, wartet auf Harald-Go |
+| PDF-Check | `DRUCK-…2100` + Opazität = `/DeviceRGB`, keine BleedBox |
+
