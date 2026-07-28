@@ -488,3 +488,16 @@ Goal: stabile 860×360 H.264-Produktion statt 4K `st24.mov` auf PI02 (Undervolta
 | `.gitignore` | Media/print-Ignore entfernt (Policy: track deliverables) |
 | Push | folgt |
 
+
+## 2026-07-28 ~16:29 CEST — Print-Watcher: Harald-Outbound Korrektur (kein RS-Reply)
+
+| Feld | Wert |
+|------|------|
+| from | `harald.nowak@modernlight.ch` |
+| subject | `AW: Druckdaten Korrektur — Hotel Anker / AG 461414 (CMYK, Bleed, Blocker)` |
+| date | Tue, 28 Jul 2026 16:29:44 +0200 |
+| message_id / thread | `19fa921a6f9e3890` / `19fa92144f742d67` |
+| Klassifikation | **Eigene Outbound-Mail** an Frau Jelk — Filter: kein Druckerei-Reply → Stop |
+| Inhalt | Korrekturpaket angekündigt: Blocker Polarität, CMYK, Bleed 20 mm, ~4 px/mm, Vogt Cc |
+| Nächster Schritt | Warten auf Richnerstutz Druckvorstufe; kein weiterer Outbound ohne Harald-Go |
+
