@@ -12,6 +12,8 @@ Chronik für Cross-Machine-Handoff. Erfolg **und** Misserfolg.
 | PI01 Versuch | Profil gelegt; `nmcli up Administration` meldete zeitweise „network could not be found“; danach **offline** (kein Ping) — **Power-Cycle nötig**, dann Skript erneut |
 | PI02 | War bereits unzuverlässig / kein SSH von UDM — ebenfalls Power-Cycle + Skript |
 | Windows | Kann VLAN2 `.2.x` nicht routen — nur UDM-Jump oder Tailscale |
+| Git | Commit `d6153da` gepusht auf `cursor/print-cmyk-bleed-blocker-1415` |
+| Recheck ~18:56 | UniFi: keine AnkerPI-Clients; Tailscale `.18`/`.63`, `.2.91`, mDNS — alles offline → **Strom-Reset beider Pis**, dann Skript |
 
 ## 2026-07-28 — Sprachumschalter fix (Captive Portal)
 
