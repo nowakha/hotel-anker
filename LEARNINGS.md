@@ -7,6 +7,13 @@ Ziel: eine andere Cursor-Instanz auf einem anderen Rechner kann ohne mündlichen
 
 Detaillierte Chronik: [`WerbeLEDbox-CountDown/docs/SESSION_LOG.md`](./WerbeLEDbox-CountDown/docs/SESSION_LOG.md).
 
+## AnkerPI01 SD WiFi rescue (2026-07-29)
+
+- **Never** set `HotelAnker` `autoconnect=no` until Administration is associated **and** wlan0 has `192.168.1.x` for several seconds. Doing that when Admin fails → **zero WiFi** (PI01 bricked offline).
+- Soll runtime: SSID **Administration** primary (prio 100, powersave=2, PSK `HeimatSchutz`). HotelAnker may stay on disk with autoconnect=false if user forbids Bar preferred; migrate script safer default keeps Bar as low-prio fallback until proven.
+- SD offline fix path (TabletHi10Max): usbipd busid **6-2** Mass Storage → WSL mount bootfs/rootfs → `scripts/pi01_sd_wifi_rescue.sh --auto` → sync/umount → `usbipd detach` → SD back into Pi + power on.
+- Always **umount before** `usbipd detach`; yank-while-mounted caused EXT4 journal I/O errors (recoverable via `e2fsck -fy`).
+
 ## Hauptprojekt & Netz (2026-07-28)
 
 - **Ein Repo:** `Hotel Anker/` = Remote `hotel-anker`. Module sind Ordner, keine zweiten Roots.

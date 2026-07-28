@@ -2,6 +2,21 @@
 
 Chronik für Cross-Machine-Handoff. Erfolg **und** Misserfolg.
 
+## 2026-07-29 ~00:06 — AnkerPI01 SD WiFi rescue (Administration primary)
+
+| Item | Ergebnis |
+|------|----------|
+| Mistake (admit) | `migrate_pis_to_administration_wifi.py` set Administration prio 100 then **HotelAnker autoconnect=no** without verifying Admin associated + `192.168.1.x` → when Admin failed to associate, PI01 had **zero WiFi** |
+| Medium | SD via usbipd busid **6-2** (USB Mass Storage) → WSL `/dev/sde` (later reattach also `sdf`) |
+| Hostname | Confirmed **AnkerPI01** on rootfs |
+| Written rootfs NM | `Administration.nmconnection`: autoconnect=yes, prio=100, `interface-name=wlan0`, powersave=2, PSK `HeimatSchutz`, DNS 1.1.1.1/8.8.8.8 |
+| Written rootfs NM | `HotelAnker.nmconnection`: **kept**, autoconnect=**no** (user wants Administration, not Bar preferred) |
+| bootfs | `network-config`: Administration listed **FIRST**; comment that runtime NM uses Admin |
+| Verify | Re-mounted after e2fsck: PSK+flags OK (`REVERIFY_OK`) |
+| Unmount/detach | sync + umount boot/root → `usbipd detach --busid 6-2` → state **Shared**, SD gone from WSL |
+| Scripts | `scripts/pi01_sd_wifi_rescue.sh` updated; migrate script no longer disables HotelAnker until Admin SSID + `.1.x` confirmed; safer default leaves Bar as low-prio fallback |
+| User next | Physically remove SD from reader → insert into **AnkerPI01** → power on → expect UniFi client on SSID **Administration** / `192.168.1.x` |
+
 ## 2026-07-28 ~19:15 — Warum Pis nach Power-Cycle offline bleiben
 
 | Fakt | Detail |

@@ -9,8 +9,11 @@ Usage:
   py WerbeLEDbox-CountDown/scripts/migrate_pis_to_administration_wifi.py --only pi01
 
 After a failed switch, power-cycle the Pi, wait until it is back on any
-reachable SSID, then re-run. HotelAnker stays as autoconnect fallback until
-Administration activates successfully.
+reachable SSID, then re-run.
+
+SAFETY: HotelAnker MUST stay autoconnect=yes until Administration is verified
+online for several seconds AND wlan0 has a 192.168.1.x address. Never disable
+Bar WiFi on a failed/partial Admin associate — that bricks the Pi (zero WiFi).
 """
 
 from __future__ import annotations
@@ -164,28 +167,40 @@ echo {password!r} | sudo -S nmcli connection modify HotelAnker connection.autoco
 echo {password!r} | sudo -S nmcli connection modify HotelAnker_5G connection.autoconnect-priority 5 || true
 """
         cmd += f"""
-# Connect now
+# Connect now — keep HotelAnker autoconnect=yes until Admin is proven on .1.x
 echo {password!r} | sudo -S nmcli device wifi connect {SSID} password {WLAN_PSK!r} ifname wlan0 name Administration || \
   echo {password!r} | sudo -S nmcli connection up Administration
-sleep 5
+# Hold connection and re-check (avoid racing DHCP / brief associate flaps)
+ok=0
+for i in 1 2 3 4 5 6; do
+  sleep 3
+  SSID_NOW=$(iwgetid -r || true)
+  IP_NOW=$(ip -4 -o addr show wlan0 | awk '{{print $4}}' | cut -d/ -f1 | head -n1)
+  echo TRY=$i SSID_NOW=$SSID_NOW IP_NOW=$IP_NOW
+  if [ "$SSID_NOW" = "{SSID}" ] && echo "$IP_NOW" | grep -q '^192\\.168\\.1\\.'; then
+    ok=1
+    break
+  fi
+done
 ACTIVE=$(nmcli -t -f NAME,DEVICE,STATE connection show --active | grep wlan0 || true)
 echo ACTIVE=$ACTIVE
 ip -4 -br addr show wlan0
-SSID_NOW=$(iwgetid -r || true)
-echo SSID_NOW=$SSID_NOW
-test "$SSID_NOW" = "{SSID}"
-# Only after success: demote Bar SSIDs
-echo {password!r} | sudo -S nmcli connection modify HotelAnker autoconnect no || true
+test "$ok" = "1"
+# Optional demote ONLY after Admin SSID + 192.168.1.x confirmed for several seconds.
+# Prefer leaving HotelAnker as low-prio fallback (safer). Demote only with --disable-bar
+# from the remote shell snippet below when explicitly requested.
+# Default safer migrate: leave HotelAnker autoconnect=yes at low priority.
+echo {password!r} | sudo -S nmcli connection modify HotelAnker connection.autoconnect yes connection.autoconnect-priority 10 || true
 """
         if not zero_2w:
             cmd += f"""
-echo {password!r} | sudo -S nmcli connection modify HotelAnker_5G autoconnect no || true
+echo {password!r} | sudo -S nmcli connection modify HotelAnker_5G connection.autoconnect yes connection.autoconnect-priority 5 || true
 """
         cmd += f"""
-echo {password!r} | sudo -S nmcli connection modify netplan-wlan0-HotelAnker autoconnect no || true
-echo OK
+echo {password!r} | sudo -S nmcli connection modify netplan-wlan0-HotelAnker connection.autoconnect yes connection.autoconnect-priority 5 || true
+echo OK_ADMIN_ON_192_168_1_x
 """
-        print(run(pi, cmd, timeout=120), flush=True)
+        print(run(pi, cmd, timeout=180), flush=True)
     finally:
         try:
             pi.close()
