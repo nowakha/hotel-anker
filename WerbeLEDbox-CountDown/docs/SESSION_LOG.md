@@ -2,6 +2,20 @@
 
 Chronik für Cross-Machine-Handoff. Erfolg **und** Misserfolg.
 
+## 2026-07-28 — Guest WiFi Portal repariert + verifiziert
+
+| Item | Ergebnis |
+|------|----------|
+| Symptom | `:8880/guest/s/default/` → HTTP 200, **Content-Length 0**; `FileNotFoundException` index.html |
+| Ursache | `/data/unifi/data/sites/default/app-unifi-hotspot-portal/` unvollständig (nur `static/`) |
+| Fix | Stock-ZIP aus `ace.jar` → `internal-dependencies.jar` → `app-unifi-hotspot-portal.zip` extrahiert |
+| Portal | Index + `hotspotconfig` OK — Title **Hotel Anker**, Button **Jetzt verbinden**, `auth=none` |
+| Auth-API | `POST …/login` + EC-Cookie → `authorized:true` (Test-Guest wieder entfernt) |
+| Isolation | `l2_isolation`, `UBIOS_GUEST_*`, Corporate `.1`+`.2` geblockt für Unautorisierte |
+| Skript | `scripts/repair_unifi_hotspot_portal.py` |
+| Docs | `docs/NETWORK_UNIFI.md` |
+| Noch offen | Handy-Live-Test; Logo manuell; optional Guest-mDNS aus |
+
 ## 2026-07-28 — Domain-Check Hotel Anker Rorschach
 
 | Item | Ergebnis |
@@ -12,6 +26,8 @@ Chronik für Cross-Machine-Handoff. Erfolg **und** Misserfolg.
 | Paket A Jahr 1 | ca. **CHF 105** (Hostpoint: .ch 5→15, .swiss 90, Markt-Verlängerung .swiss 100–170) |
 | Canvas | `canvases/hotel-anker-domains.canvas.tsx` (Cursor IDE, neben Chat) |
 | Hinweis | Luzern = `hotel-restaurant-anker.ch` — Geo-Domain Rorschach zwingend |
+| Inhaber-Hinweis | HTTP 301 aller drei Kurzdomains → Remimag Luzern; HTTPS tot |
+| Kaufanfrage | **GESENDET** 2026-07-28 ~15:50 CEST an `info@remimag.ch` von `Harald.Nowak@modernlight.ch` — keine Ablöse; Draft `docs/domain-kaufanfrage-remimag/` |
 
 ## 2026-07-28 — UniFi inventory + Guest portal mockup
 

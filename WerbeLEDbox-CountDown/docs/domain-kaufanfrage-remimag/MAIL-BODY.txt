@@ -1,0 +1,24 @@
+Sehr geehrte Damen und Herren
+
+im Rahmen der Wiedereröffnung des historischen Hotels Anker in Rorschach (SG) sind wir bei Modernlight für die technische und digitale Projektbegleitung zuständig. Für die künftige Online-Präsenz des Rorschacher Hotels benötigen wir eine klare, standortbezogene Domain.
+
+Unsere Recherche zeigt, dass die Domains hotelanker.ch, hotel-anker.ch und anker-hotel.ch bei Hostpoint liegen und per HTTP-Redirect auf Ihre Primärseite hotel-restaurant-anker.ch (Hotel Anker Luzern / Remimag) zeigen. Gleichzeitig stellen wir fest:
+
+- HTTPS auf hotelanker.ch / hotel-anker.ch / anker-hotel.ch ist derzeit nicht erreichbar (Verbindungsfehler).
+- Der Redirect funktioniert nur über HTTP und wirkt damit für Gäste, Browser und Suchmaschinen unzuverlässig bzw. veraltet.
+- Ihre eigentliche Marken- und Buchungsdomain ist bereits hotel-restaurant-anker.ch — die Kurzformen leisten für Luzern praktisch keinen stabilen Nutzen.
+
+Wir möchten Sie deshalb höflich anfragen, ob Remimag bereit wäre, hotelanker.ch sowie die Varianten hotel-anker.ch und anker-hotel.ch an das Projekt Hotel Anker Rorschach (bzw. den von uns benannten Halter) zu übertragen.
+
+Wichtig für uns: Wir suchen eine unentgeltliche bzw. kostenneutrale Übertragung (keine Ablöse / kein Kaufpreis). Selbstverständlich übernehmen wir die üblichen Registrar-/Transferkosten sowie den administrativen Aufwand auf unserer Seite. Für Sie entfallen damit laufende Verlängerungskosten für Domains, die aktuell ohnehin nicht sauber funktionieren.
+
+Falls eine vollständige Übertragung der Kurzdomains für Sie nicht in Frage kommt, wären wir auch für eine Teillösung dankbar (z. B. nur hotelanker.ch) oder für einen kurzen Hinweis, wer intern bei Remimag dafür zuständig ist.
+
+Gerne klären wir Details telefonisch oder per Mail.
+
+Freundliche Grüsse
+Harald Nowak
+Modernlight — Projektleitung | Videoengineering
+Harald.Nowak@modernlight.ch
++41 76 579 84 54
+Wangenstrasse 57, 3018 Bern
