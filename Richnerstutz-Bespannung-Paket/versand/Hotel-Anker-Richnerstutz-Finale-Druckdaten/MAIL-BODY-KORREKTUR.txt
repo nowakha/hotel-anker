@@ -2,7 +2,7 @@ Guten Tag Frau Jelk
 
 vielen Dank für die Prüfung und die klaren Punkte — Entschuldigung für den Mehraufwand.
 
-Die Druckdaten sind entsprechend Ihrer Vorgaben neu aufbereitet:
+Die Druckdaten sind entsprechend Ihrer Vorgaben neu aufbereitet und liegen als Anhang bei:
 
 1) Blocker / Opazität
    - Neu aus demselben Generatorlauf wie das Sujet (Geometrie 1:1 passend)
@@ -16,21 +16,20 @@ Die Druckdaten sind entsprechend Ihrer Vorgaben neu aufbereitet:
 3) Bildzugabe / Sperrzone
    - 20 mm Bleed rundum → MediaBox 2140 × 2140 mm
    - Trim / Spannmaß unverändert 2100 × 2100 mm
-   - Kritisches Sujet innerhalb der LED-Fläche (Stirn 50 mm navy/schwarz),
-     damit die 20 mm Stoff-Sperrzone frei bleibt; Logo nicht mehr über den oberen Rand gezogen
+   - TrimBox 2100 mm + Passermarken in der Bleed-Zone
+   - Sujet und Blocker sind 1:1 übereinanderlegbar (identischer Bleed)
+   - Kritisches Sujet innerhalb der LED-Fläche (Stirn 50 mm),
+     damit die 20 mm Stoff-Sperrzone frei bleibt
 
 4) Auflösung
    - Neu ca. 4 px/mm (≈ 102 dpi) statt zuvor 2 px/mm
 
 Unterer Schwarzstreifen weiterhin 300 mm (250 mm Modulreihe + 50 mm Stirn).
 
-Sujet und Blocker haben identische MediaBox 2140 mm, identischen 20 mm Bleed,
-dieselbe TrimBox 2100 mm und Passermarken in der Bleed-Zone — 1:1 uebereinanderlegbar.
+Details im Anhang: PRINT_SPEC.md und OPAZITAET-LEGENDE.md.
 
-Details: PRINT_SPEC.md und OPAZITAET-LEGENDE.md im Paket.
-
-Bitte Frau Vogt im CC belassen — danke, dass sie die Daten aufarbeitet.
-Für Rückfragen stehe ich gerne kurzfristig zur Verfügung.
+Bitte Frau Vogt (Melanie Vogt, Druckvorstufe) im Cc belassen — danke, dass sie die Daten aufarbeitet.
+Für Rückfragen stehe ich gerne kurzfristig zur Verfügung, damit wir den Liefertermin halten.
 
 Freundliche Grüsse
 Harald Nowak
@@ -38,6 +37,3 @@ Modernlight — Projektleitung | Videoengineering
 Harald.Nowak@modernlight.ch
 +41 76 579 84 54
 Wangenstrasse 57, 3018 Bern
-
-— An: Tanja Jelk (Richnerstutz AG)
-— CC: Frau Vogt (Richnerstutz AG), Gottlieb Kündig (Realia AG) nach Bedarf

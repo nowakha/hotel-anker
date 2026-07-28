@@ -1,3 +1,16 @@
+# Mail — Korrektur Druckdaten an Richnerstutz
+
+**Status:** Versand vorbereitet 2026-07-28  
+**Von:** Harald.Nowak@modernlight.ch  
+**An:** info@richnerstutz.ch  
+**Cc:** tanja.jelk@richnerstutz.ch; melanie.vogt@richnerstutz.ch  
+**Betreff:** AW: Druckdaten Korrektur — Hotel Anker / AG 461414 (CMYK, Bleed, Blocker)
+
+**Anhang:** `Hotel-Anker-Korrektur-Druckdaten-2026-07-28.zip`  
+(Sujet + Blocker CMYK, MediaBox 2140 mm inkl. 20 mm Bleed, PRINT_SPEC, Legende)
+
+---
+
 Guten Tag Frau Jelk
 
 vielen Dank für die Prüfung und die klaren Punkte — Entschuldigung für den Mehraufwand.
