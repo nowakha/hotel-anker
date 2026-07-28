@@ -21,7 +21,7 @@ Network map: [`WerbeLEDbox-CountDown/docs/NETWORK_UNIFI.md`](../../../WerbeLEDbo
 2. **Never** `factory-reset.sh`, never reboot the UDM unless the user explicitly asks.
 3. **Never** write MongoDB `ace` for portal/WLAN branding — use UniFi UI / official API only.
 4. **Never** paste `x_api_token`, device SSH passwords, or PSKs into markdown docs — secrets YAML only.
-5. **One change at a time**, then verify AP online + SSIDs + AnkerPIs on `192.168.2.x`.
+5. **One change at a time**, then verify AP online + SSIDs + AnkerPIs on `192.168.1.x` (Administration).
 6. **No live apply** of guest portal or DHCP/VLAN edits until the user explicitly approves that change.
 7. Prefer **Insights → Hotspot → Landing Page** for branding. Exception: if the portal SPA is missing (`index.html` 404 / empty body), restore the stock package with `scripts/repair_unifi_hotspot_portal.py` (no mongo writes).
 
@@ -43,8 +43,9 @@ UI admin may differ from SSH root — if API login returns 403, do not brute-for
 | `HotelAnker` | CountDown Bar (VLAN 2) | `192.168.2.0/24` |
 | `HotelAnkerGuest` | Guest Network (VLAN 3) | `192.168.3.0/24` |
 
-- Tri-band single SSIDs (2.4/5/6) — **do not** recreate legacy `HotelAnker_5G`.
-- AnkerPI01/02 live on **CountDown Bar** (`.2.x`), not old `192.168.8.x`.
+- Tri-band single SSIDs (2.4/5/6) — **do not** recreate legacy `HotelAnker_5G` as primary.
+- AnkerPI01/02 live on **Administration** (`.1.x`), PSK `HeimatSchutz` — not Bar VLAN `.2.x`.
+- Migrate script: `scripts/migrate_pis_to_administration_wifi.py` (SSH jump via UDM).
 
 ## Read-only inventory (SSH)
 

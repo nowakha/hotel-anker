@@ -14,13 +14,14 @@ Skill: `.cursor/skills/ubiquiti-unifi/`
 
 ## SSIDs ↔ VLANs
 
-| SSID | Netzwerk | Subnetz | Auth |
-|------|----------|---------|------|
-| `Administration` | Default | `192.168.1.0/24` | WPA2 |
-| `HotelAnker` | CountDown Bar (VLAN 2) | `192.168.2.0/24` | WPA2 |
-| `HotelAnkerGuest` | Guest (VLAN 3) | `192.168.3.0/24` | Open + Captive Portal |
+| SSID | Netzwerk | Subnetz | Auth | Geräte |
+|------|----------|---------|------|--------|
+| `Administration` | Default | `192.168.1.0/24` | WPA2 (`HeimatSchutz`) | **AnkerPI01/02**, Staff, UDM |
+| `HotelAnker` | CountDown Bar (VLAN 2) | `192.168.2.0/24` | WPA2 | Bar / Event |
+| `HotelAnkerGuest` | Guest (VLAN 3) | `192.168.3.0/24` | Open + E-Mail-Portal | Gäste |
 
-AnkerPI01/02: CountDown Bar (`192.168.2.x`), nicht Legacy `192.168.8.x`.
+PSK: [`../secrets/wifi.hotelanker.yml`](../secrets/wifi.hotelanker.yml).  
+Skript Umzug Pis → Administration: [`../scripts/migrate_pis_to_administration_wifi.py`](../scripts/migrate_pis_to_administration_wifi.py) (Jump über UDM).
 
 ## Gäste-WLAN — Sollzustand
 

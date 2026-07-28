@@ -2,6 +2,17 @@
 
 Chronik für Cross-Machine-Handoff. Erfolg **und** Misserfolg.
 
+## 2026-07-28 — Hauptprojekt-Doku + Pis → Administration
+
+| Item | Ergebnis |
+|------|----------|
+| Doku | Root `README.md` / `AGENTS.md` als **ein** Hauptprojekt mit Modulen (LED, Portal, UniFi, Druck) |
+| Soll-WLAN | AnkerPI01/02 → SSID **Administration** (PSK `HeimatSchutz`, Netz `192.168.1.0/24`) |
+| Skript | `scripts/migrate_pis_to_administration_wifi.py` (UDM Jump, Bar bleibt Fallback bis Success) |
+| PI01 Versuch | Profil gelegt; `nmcli up Administration` meldete zeitweise „network could not be found“; danach **offline** (kein Ping) — **Power-Cycle nötig**, dann Skript erneut |
+| PI02 | War bereits unzuverlässig / kein SSH von UDM — ebenfalls Power-Cycle + Skript |
+| Windows | Kann VLAN2 `.2.x` nicht routen — nur UDM-Jump oder Tailscale |
+
 ## 2026-07-28 — Sprachumschalter fix (Captive Portal)
 
 | Item | Ergebnis |
