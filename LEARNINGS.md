@@ -292,3 +292,4 @@ Not done: fb-clock/ffprobe verify (unreachable). Do not unmask.
 - Message-ID `19fa921a6f9e3890` · Thread `19fa92144f742d67` · Date Tue, 28 Jul 2026 16:29:44 +0200
 - Inhalt (Harald → Tanja Jelk): neu aufbereitete Druckdaten laut Ablehnungspunkten — Blocker schwarz=blockt/weiss=leuchtet, CMYK FOGRA39, 20 mm Bleed (MediaBox 2140), ~4 px/mm, Schwarzstreifen 300 mm; Frau Vogt im Cc.
 - **Status:** Korrektur **gesendet**; warten auf Druckvorstufe-Rückmeldung. Kein weiterer Outbound ohne Harald-Go.
+- **Doppel-Trigger ~16:40 CEST:** Zapier lieferte `Fwd:` derselben Korrektur (id `19fa92b43ce45dc7`, gleicher Thread) — weiterhin **kein** Richnerstutz-Reply.
