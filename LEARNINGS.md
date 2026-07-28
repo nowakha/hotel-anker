@@ -1,6 +1,6 @@
 # Hotel Anker â€” Learnings & Handoff
 
-Stand: **2026-07-24 ~02:20 CEST** — Smooth-Patch für PI02-Uhr (Drift-Resync, Flip vor Upscale). Repo auf DESKTOP-UJ8NNE9; Deploy wartet auf PI02 online.
+Stand: **2026-07-28 ~11:45 CEST** — Richnerstutz Druckvorstufe hat finale Druckdaten abgelehnt (CMYK/Bleed/Blocker/Auflösung). Antwortentwurf bereit, **kein Outbound ohne Harald-Go**.
 Ziel: eine andere Cursor-Instanz auf einem anderen Rechner kann ohne mündlichen Kontext weiterarbeiten.
 
 **Workflow (verbindlich):** `.cursor/rules/hotel-anker-workflow.mdc` — jeden Schritt dokumentieren (Erfolg+Misserfolg), Credentials/Learnings mitziehen, commit + `git push origin HEAD`.
@@ -275,3 +275,27 @@ Not done: fb-clock/ffprobe verify (unreachable). Do not unmask.
 - Harald: Deliverables (ZIP, Druck-PDFs, Fotos, Offerte) **müssen** im Repo sein — kein «zu groß / nur Desktop».
 - `.gitignore` bereinigt: keine Ignore-Regeln mehr für print/media-Pakete; nur Scratch `_encode*` / venv / `__pycache__`.
 - Spiegel: `Richnerstutz-Bespannung-Paket/versand/` (Finale ZIP + Offerte + User-PDF).
+
+## Richnerstutz Druckvorstufe abgelehnt (2026-07-28)
+
+| Item | Detail |
+|------|--------|
+| From | Tanja.Jelk@richnerstutz.ch (Teamleitung Raumgestaltung) |
+| Subject | Druckdatei Hotel Anker |
+| Date | Tue, 28 Jul 2026 09:43:26 +0000 |
+| Gmail | `message_id` / `thread_id` `19fa81bceee18dd4` |
+| Cc-Hinweis | Frau Vogt (Vorstufe) im CC belassen |
+| Screenshots | erwähnt, **nicht** im Zapier-Webhook → in Gmail prüfen |
+
+**Beanstandungen (alle für Produktion blockierend):**
+1. Blocker-Datei passt nicht zum Sujet
+2. RGB → muss **CMYK** (sonst keine Farbgarantie)
+3. Keine Zugabe → rundum **2 cm Bildzugabe**; Stoff **2 cm Sperrzone**; Sujet oben zu knapp
+4. Sujet verpixelt → höhere Auflösung
+5. Blocker **umgekehrt**: blockt = **schwarz**, leuchtet = **weiss** (nicht rot)
+
+**Repo-Befund (reproduzierbar):** beide PDFs `/DeviceRGB` (keine CMYK), keine BleedBox/TrimBox.
+
+**Risiken:** Liefertermin (~10 Tage ab freigegebenen Daten, Offerte 27.07.) · Farbshift CMYK · Layout durch Bleed/Sperrzone · Opazitäts-Polarität Repo-weit falsch für Richner-Lieferung.
+
+**Nächster Schritt:** Canva/`gen_flowbox_print_hires` + `finalize_print_pdfs` anpassen → neues ZIP. Antwortentwurf: `Richnerstutz-Bespannung-Paket/01-anfrage/Antwort-Richnerstutz-2026-07-28-Druckdaten-Korrektur.md`. **Warten auf Harald-Go — nichts senden.**

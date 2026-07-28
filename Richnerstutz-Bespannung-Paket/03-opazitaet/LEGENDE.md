@@ -1,11 +1,20 @@
 # Opazitätsplatte — Legende für Richnerstutz
 
-Datei: `print-opacity-mask-hires.png` (4096×4096 px, = 2000×2000 mm)
+> **2026-07-28 — Richner-Vorgabe (verbindlich für nächste Lieferung):**  
+> **schwarz = blockt** · **weiss = leuchtet** · **kein Rot**.  
+> Die bisherige Repo-Legende (schwarz=transluzent / rot=Blockout) gilt nur noch als historische Erklärung der gelieferten Dateien und muss vor dem nächsten Versand umgestellt werden.
 
-| Farbe | Bedeutung | Druckziel |
-|-------|-----------|-----------|
+Datei: `print-opacity-mask-hires.png` (historisch 4096×4096 / rot-schwarz)
+
+| Farbe (alt, geliefert) | Bedeutung | Druckziel |
+|------------------------|-----------|-----------|
 | **Schwarz** | lichtdurchlässig / transluzent | LED-Licht soll klar durchscheinen |
 | **Rot** | lichtundurchlässig / Blockout | kein Streulicht, klare Silhouette |
+
+| Farbe (neu, Richner 2026-07-28) | Bedeutung |
+|---------------------------------|-----------|
+| **Schwarz** | blockt / lichtundurchlässig |
+| **Weiss** | leuchtet / transluzent |
 
 ## Schwarz (transluzent)
 
