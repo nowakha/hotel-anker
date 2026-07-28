@@ -1,6 +1,6 @@
 # Hotel Anker â€” Learnings & Handoff
 
-Stand: **2026-07-29** — Administration = WPA2/WPA3 Transition; PI01 → Administration; Zero 2 W ≠ WPA3-only.
+Stand: **2026-07-29** — PI01+PI02 auf Administration; PI02 smooth `fb-clock` enabled (clock_24h).
 Ziel: eine andere Cursor-Instanz auf einem anderen Rechner kann ohne mündlichen Kontext weiterarbeiten.
 
 **Workflow (verbindlich):** `.cursor/rules/hotel-anker-workflow.mdc` — jeden Schritt dokumentieren (Erfolg+Misserfolg), Credentials/Learnings mitziehen, commit + `git push origin HEAD`.

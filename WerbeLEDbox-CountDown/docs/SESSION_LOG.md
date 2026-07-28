@@ -2,6 +2,17 @@
 
 Chronik für Cross-Machine-Handoff. Erfolg **und** Misserfolg.
 
+## 2026-07-29 ~00:50 — AnkerPI02 smooth fb-clock autostart LIVE
+
+| Item | Ergebnis |
+|------|----------|
+| Host | Tailscale `100.103.54.63` / WLAN **Administration** `192.168.1.222` |
+| Video | `media/clock_24h.mp4` 12G vorhanden |
+| Deploy | `fb_clock_play.py` + `systemd/fb_clock.service` (max-drift 0.35, resync-every 0) |
+| systemd | `fb-clock` **active + enabled** (Boot-Autostart), NRestarts=0 |
+| Journal | `start seek=00:50:51` matching wall; hw=True; flip=hflip+vflip |
+| Hinweis | `throttled=0x80008` (soft temp / UV history) — beobachten |
+
 ## 2026-07-29 ~00:35 — Administration Recheck (WPA2/WPA3 Transition) + PI01 connect
 
 | Check | Ergebnis |

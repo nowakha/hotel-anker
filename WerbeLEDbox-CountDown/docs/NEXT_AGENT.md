@@ -1,23 +1,25 @@
 ﻿# NEXT AGENT — Sofortmaßnahmen
 
-Stand: 2026-07-24 ~02:20. Lies `LEARNINGS.md` + `docs/SESSION_LOG.md`.
+Stand: 2026-07-29 ~00:50. Lies `LEARNINGS.md` + `docs/SESSION_LOG.md`.
 
-## Status Clock
+## Status Clock / Netz
 
-- **LIVE** auf AnkerPI02 mit `clock_24h.mp4` (Stand 2026-07-23, ~25 fps).
-- **Smooth-Patch bereit** lokal/`main`: Drift-Resync + billigeres Flip + Unit-Tuning.
-- **Deploy noch offen** — PI02 von DESKTOP-UJ8NNE9 offline (Tailscale last seen ~2h).
+- **PI01:** Administration `192.168.1.91`, Tailscale `100.67.4.18` (wpa-psk; Zero 2 W ≠ WPA3-only).
+- **PI02:** Administration `192.168.1.222`, Tailscale `100.103.54.63`.
+- **Clock LIVE:** smooth `fb-clock.service` **enabled** — `fb_clock_play.py` `--max-drift 0.35 --resync-every 0`, video `clock_24h.mp4`.
 
-## Jetzt tun
+## Verify (optional)
 
-1. Wenn PI02 online:  
-   `pwsh WerbeLEDbox-CountDown/scripts/deploy_fb_clock_smooth.ps1`  
-   oder `-Watch` bis SSH:22 antwortet.
-2. Verify: `journalctl -u fb-clock -f` — kein `periodic resync` mehr; nur `drift=…` selten; `get_throttled=0x0`.
-3. Optisch: keine 2‑Minuten-Hitches mehr; Rest-Jank = SD/Last → PSU prüfen.
+```bash
+ssh user@100.103.54.63
+systemctl status fb-clock
+journalctl -u fb-clock -f
+# erwartet: kein periodic resync; selten drift=…; get_throttled beachten (0x80008 gesehen)
+```
 
 ## Nicht tun
 
 - Kein `cmdline.txt`-Experiment
 - Kein apt `python3-opencv`
 - Kein `ffmpeg … -f null -` auf 24h/4K
+- Administration nicht auf WPA3-only stellen (bricht PI01)
