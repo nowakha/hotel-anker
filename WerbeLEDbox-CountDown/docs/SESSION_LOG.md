@@ -488,3 +488,17 @@ Goal: stabile 860×360 H.264-Produktion statt 4K `st24.mov` auf PI02 (Undervolta
 | `.gitignore` | Media/print-Ignore entfernt (Policy: track deliverables) |
 | Push | folgt |
 
+## 2026-07-28 ~17:33 CEST — Print-Watcher: Harald-Outbound (kein Richner-Reply)
+
+| Feld | Wert |
+|------|------|
+| from | `harald.nowak@modernlight.ch` (**Outbound**, nicht `@richnerstutz.ch`) |
+| subject | `RE: Druckdaten Korrektur — Hotel Anker / AG 461414 (Passung + ohne Schnittzeichen)` |
+| date | Tue, 28 Jul 2026 17:33:26 +0200 |
+| thread_id | `19fa95bb5ca38b34` |
+| message_id | `19fa95bf81f900ee` |
+| An / CC (laut Body) | Tanja Jelk; CC Frau Vogt (+ Kündig nach Bedarf) |
+| Klassifikation | **Hotel Anker / AG 461414** — relevant, aber **kein Druckerei-Reply** → Watcher STOP |
+| Behauptete Fixes | Blocker-Polarität + 1:1-Geometrie; CMYK FOGRA39; Bleed 20 mm / MediaBox 2140; ~4 px/mm; Totzone 300 mm |
+| Offen / Risiko | Vogt-Feedback #2 (~17:07) noch unbeantwortet: Verpixelung, Blocker-Linien, keine Schnittzeichen. Body erwähnt Passermarken trotz Betreff „ohne Schnittzeichen“. **Kein weiterer Outbound ohne Harald-Go.** |
+
