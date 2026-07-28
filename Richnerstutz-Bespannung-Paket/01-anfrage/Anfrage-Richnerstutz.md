@@ -1,8 +1,10 @@
 # Anfrage an Richnerstutz AG — Textilbespannung LightBox Hotel Anker
 
-**Status:** **Gesendet** 2026-07-23 ~17:27 CEST — von `harald.nowak@modernlight.ch` an `info@richnerstutz.ch` (Gmail Web UI), Anhang `Hotel-Anker-Richnerstutz-Bespannung.zip`.  
+**Status:** **Korrektur-Druckdaten outbound gesendet** 2026-07-28 ~16:29 CEST — Harald an Tanja Jelk (AG 461414), Betreff `AW: Druckdaten Korrektur — Hotel Anker / AG 461414 (CMYK, Bleed, Blocker)`, Gmail id `19fa921a6f9e3890` / thread `19fa92144f742d67`. Warte auf Druckvorstufe-Freigabe.  
 
-**Korrektur Druckmaß (2026-07-27):** Kanonischer Master ist **2100 × 2100 mm** Spannmaß mit **300 mm** Schwarz unten (`DRUCK-Hotel-Anker-Flowbox-2100x2100.pdf`). Offerte AG 461414 („Textil 200×200 cm“) weicht ab — **Nachtrag an Richnerstutz:** bitte auf **210×210 cm** / MediaBox 2100 mm umstellen.  
+**Chronik:** Anfrage Offerte **gesendet** 2026-07-23 ~17:27 → Offerte Jelk 2026-07-27 (Lumina/Multilayer) → Finale Druckdaten outbound 2026-07-27 → Druckvorstufe **abgelehnt** 2026-07-28 (CMYK, Bleed, Blocker-Polarität, Auflösung) → Korrektur neu aufbereitet und **von Harald gesendet** 2026-07-28 ~16:29. Zapier lieferte danach mehrfach `Fwd:` derselben Mail (ids `19fa92b43ce45dc7`, `19fa92c523c37946`) — kein neuer Druckerei-Inhalt.  
+
+**Korrektur Druckmaß (2026-07-27/+28):** Kanonischer Master ist **2100 × 2100 mm** Spannmaß mit **300 mm** Schwarz unten; mit Bleed MediaBox **2140 × 2140 mm** (`DRUCK-Hotel-Anker-Flowbox-2100x2100.pdf` + `DRUCK-Blocker-2100x2100.pdf`). Offerte AG 461414 („Textil 200×200 cm“) weicht ab — **Nachtrag:** **210×210 cm**.  
 
 **Empfänger:** Richnerstutz AG, Nordstrasse 7, 5612 Villmergen · info@richnerstutz.ch · +41 56 616 67 67  
 **Auftraggeber:** Realia AG (Gottlieb Kündig), Industriestrasse 40b, 9400 Rorschach · UID CHE-113.325.481  

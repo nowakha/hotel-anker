@@ -1,6 +1,6 @@
 # Hotel Anker â€” Learnings & Handoff
 
-Stand: **2026-07-28** — Domain-Check Rorschach (siehe unten). Zuvor: Smooth-Patch PI02-Uhr pending Deploy.
+Stand: **2026-07-28 ~16:41 CEST** — Richnerstutz: Korrektur-Druckdaten outbound gesendet; warte Druckvorstufe. Zapier-Mehrfach-`Fwd:` (kein RS-Reply). Domain-Check Rorschach unten. Smooth-Patch PI02 pending.
 Ziel: eine andere Cursor-Instanz auf einem anderen Rechner kann ohne mündlichen Kontext weiterarbeiten.
 
 **Workflow (verbindlich):** `.cursor/rules/hotel-anker-workflow.mdc` — jeden Schritt dokumentieren (Erfolg+Misserfolg), Credentials/Learnings mitziehen, commit + `git push origin HEAD`.
@@ -284,3 +284,13 @@ Not done: fb-clock/ffprobe verify (unreachable). Do not unmask.
 - Harald: Deliverables (ZIP, Druck-PDFs, Fotos, Offerte) **müssen** im Repo sein — kein «zu groß / nur Desktop».
 - `.gitignore` bereinigt: keine Ignore-Regeln mehr für print/media-Pakete; nur Scratch `_encode*` / venv / `__pycache__`.
 - Spiegel: `Richnerstutz-Bespannung-Paket/versand/` (Finale ZIP + Offerte + User-PDF).
+
+## Richnerstutz — Korrektur outbound (2026-07-28 ~16:29 CEST)
+
+- **Webhook:** `from: harald.nowak@modernlight.ch` — **kein** Richnerstutz-Reply (eigene Outbound-Mail).
+- Betreff: `AW: Druckdaten Korrektur — Hotel Anker / AG 461414 (CMYK, Bleed, Blocker)`
+- Message-ID `19fa921a6f9e3890` · Thread `19fa92144f742d67` · Date Tue, 28 Jul 2026 16:29:44 +0200
+- Inhalt (Harald → Tanja Jelk): neu aufbereitete Druckdaten laut Ablehnungspunkten — Blocker schwarz=blockt/weiss=leuchtet, CMYK FOGRA39, 20 mm Bleed (MediaBox 2140), ~4 px/mm, Schwarzstreifen 300 mm; Frau Vogt im Cc.
+- **Status:** Korrektur **gesendet**; warten auf Druckvorstufe-Rückmeldung. Kein weiterer Outbound ohne Harald-Go.
+- **Doppel-Trigger ~16:40 CEST:** Zapier `Fwd:` derselben Korrektur (id `19fa92b43ce45dc7`, gleicher Thread).
+- **Dreifach-Trigger ~16:41 CEST:** Zapier erneut `Fwd:` (id `19fa92c523c37946`, gleicher Thread, date 16:41:24 +0200) — weiterhin **kein** Richnerstutz-Reply.
