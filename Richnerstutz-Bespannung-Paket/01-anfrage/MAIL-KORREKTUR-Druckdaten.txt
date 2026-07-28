@@ -24,6 +24,9 @@ Die Druckdaten sind entsprechend Ihrer Vorgaben neu aufbereitet:
 
 Unterer Schwarzstreifen weiterhin 300 mm (250 mm Modulreihe + 50 mm Stirn).
 
+Sujet und Blocker haben identische MediaBox 2140 mm, identischen 20 mm Bleed,
+dieselbe TrimBox 2100 mm und Passermarken in der Bleed-Zone — 1:1 uebereinanderlegbar.
+
 Details: PRINT_SPEC.md und OPAZITAET-LEGENDE.md im Paket.
 
 Bitte Frau Vogt im CC belassen — danke, dass sie die Daten aufarbeitet.

@@ -21,8 +21,8 @@ Korrektur nach Druckvorstufe (Tanja Jelk): CMYK · Bleed · Sperrzone · Blocker
 | `DRUCK-Hotel-Anker-Flowbox-2100x2100.pdf` | Sujet CMYK, MediaBox 2140 mm |
 | `DRUCK-Blocker-2100x2100.pdf` | Blocker CMYK, gleiche Geometrie / MediaBox |
 | `DRUCK-Opazitaet-2100x2100.pdf` | Alias des Blockers (Dateiname-Kompatibilität) |
-| `print-ghost-hires.png` | RGB-Preview Trim 8400² |
-| `print-opacity-mask-hires.png` | Blocker RGB-Preview Trim 8400² |
+| `print-ghost-hires.png` | RGB-Preview **inkl. Bleed** 8560² (= 2140 mm) |
+| `print-opacity-mask-hires.png` | Blocker RGB-Preview **inkl. Bleed** 8560² (identisch zum Sujet) |
 
 ## Blocker-Legende (verbindlich)
 
