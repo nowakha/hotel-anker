@@ -23,9 +23,9 @@ BODY = (
 ).read_text(encoding="utf-8").strip() + "\n"
 SHOT = ROOT / "Richnerstutz-Bespannung-Paket" / "versand"
 
-TO = "info@richnerstutz.ch"
-CC = "tanja.jelk@richnerstutz.ch, melanie.vogt@richnerstutz.ch"
-SUBJ = "AW: Druckdaten Korrektur — Hotel Anker / AG 461414 (CMYK, Bleed, Blocker)"
+TO = "Melanie.Vogt@richnerstutz.ch"
+CC = "Tanja.Jelk@richnerstutz.ch, info@richnerstutz.ch"
+SUBJ = "RE: Druckdaten Korrektur — Hotel Anker / AG 461414 (Passung + ohne Schnittzeichen)"
 
 
 def dismiss_popups(page) -> None:

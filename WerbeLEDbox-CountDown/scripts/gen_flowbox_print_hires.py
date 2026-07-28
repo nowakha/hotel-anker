@@ -321,6 +321,21 @@ def load_blueprint() -> Image.Image:
     return Image.fromarray(arr, "RGB")
 
 
+def resize_crisp(im: Image.Image, size: tuple[int, int]) -> Image.Image:
+    """High-quality down/up for logos: 2× LANCZOS then target (less soft than 1-step)."""
+    w, h = size
+    if im.size == size:
+        return im
+    hi = im.resize((max(w * 2, im.width), max(h * 2, im.height)), Image.Resampling.LANCZOS)
+    out = hi.resize((w, h), Image.Resampling.LANCZOS)
+    if out.mode == "RGBA":
+        r, g, b, a = out.split()
+        # Harden alpha so logo edge is print-sharp (no mushy fringe)
+        a = a.point(lambda v: 255 if v >= 140 else 0)
+        out = Image.merge("RGBA", (r, g, b, a))
+    return out
+
+
 def extract_anchor_mark() -> Image.Image:
     """Historic Grand Hotel Anker Rorschach mark: crown + admiralty anchor."""
     dedicated = [
@@ -442,7 +457,7 @@ def compose(lit: bool, days_n=71, h=12, m=0, s=0) -> Image.Image:
     max_w = int(SIZE * 0.20)
     if aw > max_w:
         aw, ah = max_w, int(max_w / aspect)
-    anchor = anchor.resize((aw, ah), Image.Resampling.LANCZOS)
+    anchor = resize_crisp(anchor, (aw, ah))
     ax = (SIZE - aw) // 2
     ay = max(0, int(round(-40.0 * CELL / PRINT_PX_PER_CELL)))
     overlay.paste(anchor, (ax, ay), anchor)
@@ -561,7 +576,7 @@ def compose_opacity_mask() -> Image.Image:
     max_w = int(SIZE * 0.20)
     if aw > max_w:
         aw, ah = max_w, int(max_w / aspect)
-    anchor = anchor.resize((aw, ah), Image.Resampling.LANCZOS)
+    anchor = resize_crisp(anchor, (aw, ah))
     a = np.asarray(anchor)
     rgb = a[..., :3].copy()
     alpha = a[..., 3]
@@ -577,21 +592,10 @@ def compose_opacity_mask() -> Image.Image:
     days, day_y, time_digits, time_y, colons = layout_origins_cells()
     from layout_countdown_view import COLON_W as _COLON_W
 
-    # Clear digit / colon cells, then paint glyph geometry
+    # Digits/colons: ONLY paint exact glyph geometry (no full-cell white pads).
+    # Full-cell CLEAR rects caused white light boxes that did not match Sujet
+    # outlines (Melanie Vogt: nicht deckungsgleich um die Zahlen).
     stroke = max(12, CELL // 4)
-    for ox in days:
-        x0, y0 = cell_to_px(ox), cell_to_px(day_y)
-        pd.rectangle([x0, y0, x0 + DW * CELL - 1, y0 + DH * CELL - 1], fill=CLEAR)
-    for ox in time_digits:
-        x0, y0 = cell_to_px(ox), cell_to_px(time_y)
-        pd.rectangle([x0, y0, x0 + DW * CELL - 1, y0 + DH * CELL - 1], fill=CLEAR)
-    for cox, coy in colons:
-        x0, y0 = cell_to_px(cox), cell_to_px(coy)
-        pd.rectangle(
-            [x0, y0, x0 + _COLON_W * CELL - 1, y0 + DH * CELL - 1],
-            fill=CLEAR,
-        )
-
     plate_rgba = plate.convert("RGBA")
     for ox in days:
         glyph = _dseg_glyph_layer(
@@ -604,7 +608,7 @@ def compose_opacity_mask() -> Image.Image:
         )
         plate_rgba.paste(glyph, (glyph.info["ox"], glyph.info["oy"]), glyph)
 
-    # Colons: ring BLOCK, fill CLEAR (LED hole)
+    # Colons: identical geometry to paint_colon()
     ring_w = max(6, CELL // 10)
     dot_r = int(DH * CELL * 0.06)
     ld = ImageDraw.Draw(plate_rgba)

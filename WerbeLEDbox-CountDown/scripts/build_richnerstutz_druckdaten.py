@@ -229,25 +229,47 @@ def place_on_trim(
     rim_px = int(round(PROFILE_FACE_W_MM * ppm))
     assert face_px + 2 * rim_px == trim_px, (face_px, rim_px, trim_px)
 
-    face_r = face.resize((face_px, face_px), Image.Resampling.LANCZOS)
+    # Exact pixel match: generate face at FACE_MASTER_PX and paste without resample.
+    # Resampling sujet vs blocker differently was shifting digit fills (Vogt screenshot).
+    if face.size != (face_px, face_px):
+        resample = Image.Resampling.NEAREST if is_blocker else Image.Resampling.LANCZOS
+        face_r = face.resize((face_px, face_px), resample)
+    else:
+        face_r = face
+
     if is_blocker:
-        # Rim over aluminium: block (black). Light-through only on LED face.
         canvas = Image.new("RGB", (trim_px, trim_px), (0, 0, 0))
+        face_r = harden_blocker_rgb(face_r)
     else:
         canvas = Image.new("RGB", (trim_px, trim_px), navy)
 
     canvas.paste(face_r, (rim_px, rim_px))
 
-    # Bottom print dead band = 300 mm from trim bottom (module + face rim)
     dead_px = int(round(PRINT_DEAD_MM * ppm))
     d = ImageDraw.Draw(canvas)
     d.rectangle([0, trim_px - dead_px, trim_px - 1, trim_px - 1], fill=(0, 0, 0))
-
+    if is_blocker:
+        canvas = harden_blocker_rgb(canvas)
     return canvas
 
 
+def harden_blocker_rgb(img: Image.Image) -> Image.Image:
+    """Strict B/W + expand block (black) so thin lines stay closed, no gray halos."""
+    from PIL import ImageFilter
+
+    lum = np.asarray(img.convert("RGB"), dtype=np.float32).mean(axis=2)
+    # Only near-white stays light-through; gray AA fringes become block
+    binary = np.where(lum >= 220, 255, 0).astype(np.uint8)
+    im = Image.fromarray(binary, "L")
+    # Expand black (block) by 1px so facade strokes & digit rings don't leak white
+    im = im.filter(ImageFilter.MinFilter(3))
+    arr = np.asarray(im)
+    rgb = np.stack([arr, arr, arr], axis=-1)
+    return Image.fromarray(rgb, "RGB")
+
+
 def export_pair(ghost_trim: Image.Image, blocker_trim: Image.Image) -> tuple[Image.Image, Image.Image]:
-    """Same bleed + same crop marks on both plates (pixel-identical geometry)."""
+    """Same bleed on both plates — NO crop/Schnittzeichen (Druckerei Verbot)."""
     bleed_px = int(round(BLEED_MM * PRINT_MASTER_PX_PER_MM))
     if ghost_trim.size != (PRINT_MASTER_PX, PRINT_MASTER_PX):
         raise SystemExit(f"trim size {ghost_trim.size}, expected {PRINT_MASTER_PX}")
@@ -258,11 +280,10 @@ def export_pair(ghost_trim: Image.Image, blocker_trim: Image.Image) -> tuple[Ima
 
     ghost_export = extend_bleed(ghost_trim.convert("RGB"), bleed_px)
     blocker_export = extend_bleed(blocker_trim.convert("RGB"), bleed_px)
+    blocker_export = harden_blocker_rgb(blocker_export)
     assert_sujet_blocker_aligned(ghost_export, blocker_export)
-    ghost_export = draw_trim_crop_marks(ghost_export, light=True)
-    blocker_export = draw_trim_crop_marks(blocker_export, light=True)
     if ghost_export.size != blocker_export.size:
-        raise SystemExit("export size mismatch after crop marks")
+        raise SystemExit("export size mismatch")
     return ghost_export, blocker_export
 
 
@@ -353,6 +374,7 @@ Korrektur nach Druckvorstufe (Tanja Jelk): CMYK · Bleed · Sperrzone · Blocker
 | **Bildzugabe (Bleed)** | **{BLEED_MM:.0f} mm rundum** |
 | **MediaBox (Liefer-PDF)** | **{PRINT_EXPORT_MM:.0f} × {PRINT_EXPORT_MM:.0f} mm** (= Trim + 2×Bleed) |
 | **Stoff-Sperrzone** | **{SPERRZONE_MM:.0f} mm** vom Trim-Rand — kritisches Sujet nur innerhalb |
+| **Schnittzeichen** | **keine** (explizit nicht in den Daten) |
 | **Schwarzstreifen unten** | **{PRINT_DEAD_MM:.0f} mm** (= 250 Modulreihe + 50 Stirn) |
 | **Farbraum** | **CMYK** (sRGB → FOGRA39 Coated) |
 | **Auflösung** | **{PRINT_MASTER_PX_PER_MM:.0f} px/mm** (≈ {PRINT_MASTER_PX_PER_MM * 25.4:.0f} dpi) |
@@ -458,39 +480,32 @@ Rebuild: `python WerbeLEDbox-CountDown/scripts/build_richnerstutz_druckdaten.py`
 
 
 def write_mail_reply() -> None:
-    body = """Guten Tag Frau Jelk
+    body = """Guten Abend Frau Vogt
 
-vielen Dank für die Prüfung und die klaren Punkte — Entschuldigung für den Mehraufwand.
+vielen Dank für die klare Rückmeldung und die Screenshots — Entschuldigung für den erneuten Aufwand.
 
-Die Druckdaten sind entsprechend Ihrer Vorgaben neu aufbereitet:
+Die Druckdaten sind nochmals neu aufgebaut:
 
-1) Blocker / Opazität
-   - Neu aus demselben Generatorlauf wie das Sujet (Geometrie 1:1 passend)
-   - Polarität korrigiert: schwarz = blockt, weiss = leuchtet (kein Rot mehr)
-   - Datei: DRUCK-Blocker-2100x2100.pdf
-     (DRUCK-Opazitaet-2100x2100.pdf ist derselbe Inhalt, Alias)
+1) Sujet / Auflösung
+   - Fassade aus dem 4096-Master, ohne weiches Hochrechnen
+   - Logo mit harter Kante neu gerastert
+   - Weiterhin ca. 4 px/mm, MediaBox 2140 mm (20 mm Bleed), Trim 2100 mm
 
-2) Farbraum
-   - Beide PDFs in CMYK (sRGB → FOGRA39 Coated)
+2) Blocker deckungsgleich
+   - Ziffern/Doppelpunkte identische Glyph-Geometrie wie im Sujet
+   - Keine weissen Vollflächen-Kästen mehr um die Zahlen
+   - Fassadenlinien und Konturen strikt schwarz (blockt), ohne Graukanten
+   - Sujet und Blocker pixelgleich auf demselben Raster inkl. Bleed
 
-3) Bildzugabe / Sperrzone
-   - 20 mm Bleed rundum → MediaBox 2140 × 2140 mm
-   - Trim / Spannmaß unverändert 2100 × 2100 mm
-   - Kritisches Sujet innerhalb der LED-Fläche (Stirn 50 mm navy/schwarz),
-     damit die 20 mm Stoff-Sperrzone frei bleibt; Logo nicht mehr über den oberen Rand gezogen
+3) Keine Schnittzeichen
+   - Passermarken/Schnittzeichen entfernt
 
-4) Auflösung
-   - Neu ca. 4 px/mm (≈ 102 dpi) statt zuvor 2 px/mm
+Dateien:
+   - DRUCK-Hotel-Anker-Flowbox-2100x2100.pdf
+   - DRUCK-Blocker-2100x2100.pdf
+     (DRUCK-Opazitaet-2100x2100.pdf = Alias)
 
-Unterer Schwarzstreifen weiterhin 300 mm (250 mm Modulreihe + 50 mm Stirn).
-
-Sujet und Blocker haben identische MediaBox 2140 mm, identischen 20 mm Bleed,
-dieselbe TrimBox 2100 mm und Passermarken in der Bleed-Zone — 1:1 uebereinanderlegbar.
-
-Details: PRINT_SPEC.md und OPAZITAET-LEGENDE.md im Paket.
-
-Bitte Frau Vogt im CC belassen — danke, dass sie die Daten aufarbeitet.
-Für Rückfragen stehe ich gerne kurzfristig zur Verfügung.
+Bitte kurz bestätigen, wenn die Passung jetzt für die Druckvorstufe stimmt.
 
 Freundliche Grüsse
 Harald Nowak
@@ -498,9 +513,6 @@ Modernlight — Projektleitung | Videoengineering
 Harald.Nowak@modernlight.ch
 +41 76 579 84 54
 Wangenstrasse 57, 3018 Bern
-
-— An: Tanja Jelk (Richnerstutz AG)
-— CC: Frau Vogt (Richnerstutz AG), Gottlieb Kündig (Realia AG) nach Bedarf
 """
     for dest in (
         VERSAND / "MAIL-BODY-KORREKTUR.txt",

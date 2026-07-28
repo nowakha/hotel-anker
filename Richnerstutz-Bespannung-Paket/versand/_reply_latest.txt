@@ -1,0 +1,156 @@
+Subject: RE: Druckdaten Korrektur — Hotel Anker / AG 461414 (CMYK, Bleed, Blocker)
+From: Melanie Vogt <Melanie.Vogt@richnerstutz.ch>
+URL: https://mail.google.com/mail/u/0/#search/from%3Arichnerstutz.ch+newer_than%3A1d
+
+
+
+Guten Abend Herr Nowak
+
+
+Vielen Dank für die neuen Daten.
+
+
+Die Auflösung ist ok, aber das Sujet wurde hochgerechnet und das Gebäude und Logo sind verpixelt. Screenshot anbei.
+Download
+Add to Drive
+Save a copy to Photos
+Download
+Add to Drive
+Save a copy to Photos
+
+
+
+
+
+
+
+
+
+
+
+Die Blockerdatei ist nicht genau deckungsgleich. Die weissen Linien würden leuchten, das sollte nicht so sein. Auch um die Zahlen herum gut zu sehen.
+
+
+
+
+Download
+Add to Drive
+Save a copy to Photos
+
+
+
+
+
+
+
+Und bitte keine Schnittzeichen in den Daten.
+
+
+
+
+Vielen Dank für Ihre Rückmeldung
+
+
+
+
+Freundliche Grüsse
+
+Melanie Vogt
+
+Druckvorstufe,  melanie.vogt@richnerstutz.ch
+Richnerstutz AG, Nordstrasse 7​, CH-5​6​1​2​ Villmergen, +4​1​ 5​6​ 6​1​6​ 6​7​ 6​7​, www.richnerstutz.ch
+
+
+Von: Harald Nowak <harald.nowak@modernlight.ch>
+Datum: Dienstag, 28. Juli 2026 um 16:42
+An: Tanja Jelk <Tanja.Jelk@richnerstutz.ch>
+Cc: Melanie Vogt <Melanie.Vogt@richnerstutz.ch>
+Betreff: Fwd: Druckdaten Korrektur — Hotel Anker / AG 461414 (CMYK, Bleed, Blocker)
+
+
+
+
+
+---------- Forwarded message ---------
+From: Harald Nowak  <harald.nowak@modernlight.ch>
+Date: Tue, Jul 28, 2026 at 4:29 PM
+Subject: AW: Druckdaten Korrektur — Hotel Anker / AG 461414 (CMYK, Bleed, Blocker)
+To: <info@richnerstutz.ch>
+
+
+
+
+
+
+
+
+--
+
+Mit freundlichen Grüssen
+
+Harald Nowak
+Project Manager
+Elektrofachkraft für Veranstaltungstechnik
+
+Modernlight Projects AG I Wangenstrasse 57 I CH-3018 Bern
+
+T: +41 31 980 20 30 I D: +41 31 980 20 41 I M: +41 76 579 84 54
+harald.nowak@modernlight.ch I www.modernlight.chGuten Tag Frau Jelk
+
+
+
+vielen Dank für die Prüfung und die klaren Punkte — Entschuldigung für den Mehraufwand.
+
+
+Die Druckdaten sind entsprechend Ihrer Vorgaben neu aufbereitet und liegen als Anhang bei:
+
+
+1) Blocker / Opazität
+   - Neu aus demselben Generatorlauf wie das Sujet (Geometrie 1:1 passend)
+   - Polarität korrigiert: schwarz = blockt, weiss = leuchtet (kein Rot mehr)
+   - Datei: DRUCK-Blocker-2100x2100.pdf
+     (DRUCK-Opazitaet-2100x2100.pdf ist derselbe Inhalt, Alias)
+
+
+2) Farbraum
+   - Beide PDFs in CMYK (sRGB → FOGRA39 Coated)
+
+
+3) Bildzugabe / Sperrzone
+   - 20 mm Bleed rundum → MediaBox 2140 × 2140 mm
+   - Trim / Spannmaß unverändert 2100 × 2100 mm
+   - TrimBox 2100 mm + Passermarken in der Bleed-Zone
+   - Sujet und Blocker sind 1:1 übereinanderlegbar (identischer Bleed)
+   - Kritisches Sujet innerhalb der LED-Fläche (Stirn 50 mm),
+     damit die 20 mm Stoff-Sperrzone frei bleibt
+
+
+4) Auflösung
+   - Neu ca. 4 px/mm (≈ 102 dpi) statt zuvor 2 px/mm
+
+
+Unterer Schwarzstreifen weiterhin 300 mm (250 mm Modulreihe + 50 mm Stirn).
+
+
+Details im Anhang: PRINT_SPEC.md und OPAZITAET-LEGENDE.md
+
+
+Bitte Frau Vogt (Melanie Vogt, Druckvorstufe) im Cc belassen — danke, dass sie die Daten aufarbeitet.
+Für Rückfragen stehe ich gerne kurzfristig zur Verfügung, damit wir den Liefertermin halten.
+
+
+Freundliche Grüsse
+Harald Nowak
+Modernlight — Projektleitung | Videoengineering
+Harald.Nowak@modernlight.ch
++41 76 579 84 54
+Wangenstrasse 57, 3018 Bern
+
+
+
+
+
+
+Download
+
+
