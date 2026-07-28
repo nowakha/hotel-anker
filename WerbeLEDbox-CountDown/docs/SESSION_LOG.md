@@ -2,6 +2,18 @@
 
 Chronik für Cross-Machine-Handoff. Erfolg **und** Misserfolg.
 
+## 2026-07-28 ~19:15 — Warum Pis nach Power-Cycle offline bleiben
+
+| Fakt | Detail |
+|------|--------|
+| Ursache Netz | Beide MACs **nicht** am AP assoziiert (UniFi 0 Clients Anker*; ARP incomplete; Ping Host Unreachable) |
+| WLAN selbst | OK — Handys auf `Administration` + `HotelAnker` |
+| Nach Strom-Reset remote geändert? | **Nein** — kein SSH möglich → nichts deployed/umgeschrieben |
+| PI01 Kontext | Heute Migrationsversuch Administration: `nmcli up` fail („network could not be found“) → danach offline — **vermutlich kaputtes/hängendes NM-Profil** |
+| PI02 Kontext | Schon **vor** Migration ohne SSH; Power-Cycle bringt kein WLAN → eher Boot/NM/PSU, nicht frischer Remote-Fail |
+| Uhr | Ohne Netz nicht remote startbar; lokal nur wenn `fb-clock` enabled und Boot durchkommt |
+| Nächster Schritt | **Ethernet** an PI02 (Decke) → dann Smooth-Clock + WiFi-Repair; PI01 gleiches oder SD |
+
 ## 2026-07-28 ~19:00 — AnkerPI02 Tailscale offline nach WLAN-Umzug
 
 | Check | Ergebnis |
