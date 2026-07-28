@@ -488,3 +488,34 @@ Goal: stabile 860×360 H.264-Produktion statt 4K `st24.mov` auf PI02 (Undervolta
 | `.gitignore` | Media/print-Ignore entfernt (Policy: track deliverables) |
 | Push | folgt |
 
+## 2026-07-28 ~17:07 CEST — Richnerstutz Druckvorstufe Feedback #2 (Melanie Vogt)
+
+| Item | Wert |
+|------|------|
+| From | `Melanie.Vogt@richnerstutz.ch` |
+| Subject | `RE: Druckdaten Korrektur — Hotel Anker / AG 461414 (CMYK, Bleed, Blocker)` |
+| Date (UTC) | 2026-07-28 15:07:03 |
+| Thread / Msg | `19fa92144f742d67` / `19fa9444ef26689e` |
+| Kontext | Antwort auf Haralds Korrektur-Mail (~16:29 CEST, CMYK/Bleed/Blocker) |
+| Punkt 1 | Auflösung ok, aber Sujet hochgerechnet → Gebäude + Logo verpixelt |
+| Punkt 2 | Blocker nicht deckungsgleich; weisse Linien (auch um Zahlen) würden leuchten |
+| Punkt 3 | Keine Schnittzeichen in den Daten |
+| Anhänge | 3 Screenshots genannt; **nicht** im Zapier-Webhook — in Gmail prüfen |
+| Status | Druckdaten **noch nicht freigegeben** — Nacharbeit nötig |
+| Outbound | damals STOP — Harald hat danach Korrektur #2 selbst gesendet (siehe nächster Eintrag) |
+
+## 2026-07-28 ~17:34 CEST — Harald Korrektur #2 outbound (kein Druckerei-Reply)
+
+| Item | Wert |
+|------|------|
+| From | `harald.nowak@modernlight.ch` (**eigenes Outbound / Zapier-Echo**) |
+| Subject | `RE: Druckdaten Korrektur — Hotel Anker / AG 461414 (Passung + ohne Schnittzeichen)` |
+| Date | Tue, 28 Jul 2026 17:34:03 +0200 |
+| Thread / Msg | `19fa95c4dd51c323` / `19fa95c8982c258c` |
+| An | Frau Vogt (Druckvorstufe) |
+| Inhalt | Fassade 4096-Master ohne weiches Upscale; Logo hart; Blocker deckungsgleich; keine Schnittzeichen; MediaBox 2140 / Trim 2100 |
+| Anhänge (genannt) | `DRUCK-Hotel-Anker-Flowbox-2100x2100.pdf`, `DRUCK-Blocker-2100x2100.pdf` |
+| Klassifikation | **Kein** Richnerstutz-Reply → Watcher stoppt Outbound |
+| Status | Korrektur #2 **gesendet**; warten auf Vorstufen-Bestätigung Passung |
+| Docs | `MAIL-KORREKTUR-META.md`, `MAIL-KORREKTUR-Druckdaten.txt` |
+
