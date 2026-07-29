@@ -1,6 +1,6 @@
 # Hotel Anker â€” Learnings & Handoff
 
-Stand: **2026-07-29 ~14:01 CEST** — Harald **Druckfreigabe outbound gesendet** (Job SEG 627 828): „Sehr gut so“, zeitnah produzieren, Versand an Realia AG Rorschach. Kein Richnerstutz-Reply in diesem Webhook. Warten auf Produktions-/Versandbestätigung.
+Stand: **2026-07-29 ~14:04 CEST** — Richnerstutz SEG (627 828): Melanie Vogt bestätigt **Produktionsstart** (GO + Lieferadresse erhalten). Offen: Liefer-/Versandtermin. Kein Outbound ohne Harald-Go.
 Ziel: eine andere Cursor-Instanz auf einem anderen Rechner kann ohne mündlichen Kontext weiterarbeiten.
 
 **Workflow (verbindlich):** `.cursor/rules/hotel-anker-workflow.mdc` — jeden Schritt dokumentieren (Erfolg+Misserfolg), Credentials/Learnings mitziehen, commit + `git push origin HEAD`.
