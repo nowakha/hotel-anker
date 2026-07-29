@@ -488,3 +488,37 @@ Goal: stabile 860×360 H.264-Produktion statt 4K `st24.mov` auf PI02 (Undervolta
 | `.gitignore` | Media/print-Ignore entfernt (Policy: track deliverables) |
 | Push | folgt |
 
+## 2026-07-29 ~07:39 CEST — Richnerstutz Gut zum Druck (Melanie Vogt)
+
+| Item | Wert |
+|------|------|
+| From | `Melanie.Vogt@richnerstutz.ch` |
+| Subject | `Modernlight Production AG, Hotel Anker Rorschach - SEG (627 828)` |
+| Thread | `19fac62d97c94e3d` |
+| Inhalt | Gut zum Druck + Qualitäts-Screenshot; **Gebäude noch verpixelt**; wartet auf Bescheid |
+| Status | Vor Freigabe — siehe Harald-Outbound 14:01 |
+
+## 2026-07-29 ~14:01 CEST — Harald Druckfreigabe outbound (kein Druckerei-Reply)
+
+| Item | Wert |
+|------|------|
+| From | `harald.nowak@modernlight.ch` (**eigenes Outbound / Zapier-Echo**) |
+| Subject | `Re: Modernlight Production AG, Hotel Anker Rorschach - SEG (627 828)` |
+| Date | Wed, 29 Jul 2026 14:01:20 +0200 |
+| Thread / Msg | `19fac62d97c94e3d` / `19fadc031b2a6de9` |
+| Inhalt | „Sehr gut so!“ — zeitnah produzieren; Versand an Realia AG, z.H. Gottlieb Kündig, Industriestrasse 40b, 9400 Rorschach |
+| Pixelung | bewusst akzeptiert trotz Vorstufen-Hinweis |
+| Klassifikation | **Kein** Richnerstutz-Reply → Watcher stoppt weiteren Outbound |
+| Status | Druckfreigabe **gesendet**; warten auf Produktion/Versandavis |
+| Docs | `MAIL-FREIGABE-META.md`, optional `Mail-Entwurf-Nachfrage-Liefertermin-2026-07-29.md` |
+
+## 2026-07-29 ~14:02 CEST — Zapier-Duplikat Druckfreigabe (kein neuer Inhalt)
+
+| Item | Wert |
+|------|------|
+| From | `harald.nowak@modernlight.ch` (erneutes Echo derselben Outbound-Mail) |
+| Date | Wed, 29 Jul 2026 14:02:18 +0200 |
+| Msg / Thread | `19fadc110ad8126a` / `19fac62d97c94e3d` |
+| Klassifikation | **Duplikat** der Freigabe ~14:01 — kein neuer Druckerei-Reply |
+| Aktion | Status unverändert; **STOP** — warten auf `@richnerstutz.ch` Produktion/Versand |
+

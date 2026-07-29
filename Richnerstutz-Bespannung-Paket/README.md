@@ -2,6 +2,8 @@
 
 Alles für die Anfrage an **Richnerstutz AG** (Druck + Konfektion mit Kederschienenlippe).
 
+**Status (2026-07-29 ~14:01):** Druckfreigabe **gesendet** (Job SEG 627 828) — Versand an Realia AG Rorschach. Details: [`01-anfrage/MAIL-FREIGABE-META.md`](./01-anfrage/MAIL-FREIGABE-META.md).
+
 | | |
 |--|--|
 | **Auftraggeber** | Realia AG (Gottlieb Kündig), Industriestrasse 40b, 9400 Rorschach, UID CHE-113.325.481 |
