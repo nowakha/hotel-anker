@@ -1,6 +1,6 @@
 # Hotel Anker â€” Learnings & Handoff
 
-Stand: **2026-07-28** — Domain-Check Rorschach (siehe unten). Zuvor: Smooth-Patch PI02-Uhr pending Deploy.
+Stand: **2026-07-29 ~14:01 CEST** — Harald **Druckfreigabe outbound gesendet** (Job SEG 627 828): „Sehr gut so“, zeitnah produzieren, Versand an Realia AG Rorschach. Kein Richnerstutz-Reply in diesem Webhook. Warten auf Produktions-/Versandbestätigung.
 Ziel: eine andere Cursor-Instanz auf einem anderen Rechner kann ohne mündlichen Kontext weiterarbeiten.
 
 **Workflow (verbindlich):** `.cursor/rules/hotel-anker-workflow.mdc` — jeden Schritt dokumentieren (Erfolg+Misserfolg), Credentials/Learnings mitziehen, commit + `git push origin HEAD`.
@@ -284,3 +284,21 @@ Not done: fb-clock/ffprobe verify (unreachable). Do not unmask.
 - Harald: Deliverables (ZIP, Druck-PDFs, Fotos, Offerte) **müssen** im Repo sein — kein «zu groß / nur Desktop».
 - `.gitignore` bereinigt: keine Ignore-Regeln mehr für print/media-Pakete; nur Scratch `_encode*` / venv / `__pycache__`.
 - Spiegel: `Richnerstutz-Bespannung-Paket/versand/` (Finale ZIP + Offerte + User-PDF).
+
+## Richnerstutz — Gut zum Druck Melanie Vogt (2026-07-29 ~07:39 CEST)
+
+- **Von:** Melanie.Vogt@richnerstutz.ch (Druckvorstufe) · Thread Job **SEG (627 828)**
+- **Betreff:** `Modernlight Production AG, Hotel Anker Rorschach - SEG (627 828)`
+- **Inhalt:** Dank neue Datenlieferung; Gut-zum-Druck + Qualitäts-Screenshot; **Gebäude noch verpixelt**; wartet auf Bescheid ob so in Druck.
+- **Risiko:** Fassade soft/pixelig im Druck sichtbar (Harald hat später trotzdem freigegeben — siehe nächster Eintrag).
+
+## Richnerstutz — Druckfreigabe outbound Harald (2026-07-29 ~14:01 CEST)
+
+- **Webhook:** `from: harald.nowak@modernlight.ch` — **kein** Richnerstutz-Reply (eigene Outbound-Mail / Zapier-Echo).
+- **Betreff:** `Re: Modernlight Production AG, Hotel Anker Rorschach - SEG (627 828)`
+- **Gmail:** message_id `19fadc031b2a6de9` · thread `19fac62d97c94e3d` · date Wed, 29 Jul 2026 14:01:20 +0200
+- **Inhalt (Harald → Richnerstutz):** „Sehr gut so!“ — zeitnah produzieren und versenden an:
+  - Realia AG · z.H. Gottlieb Kündig · Industriestrasse 40b · 9400 Rorschach
+- **Akzeptanz:** Pixelung Gebäude bewusst akzeptiert („Sehr gut so“ trotz Vorstufen-Hinweis).
+- **Status:** Druckfreigabe **gesendet**. Offen: Produktionsstart / Liefertermin / Versandavis. Lieferfrist (~10 Tage ab Freigabe) läuft jetzt. **Kein weiterer Outbound ohne Harald-Go / ohne neuen `@richnerstutz.ch`-Reply.**
+- Meta: `Richnerstutz-Bespannung-Paket/01-anfrage/MAIL-FREIGABE-META.md`
