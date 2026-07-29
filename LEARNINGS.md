@@ -5,7 +5,14 @@ Ziel: eine andere Cursor-Instanz auf einem anderen Rechner kann ohne mündlichen
 
 **Workflow (verbindlich):** `.cursor/rules/hotel-anker-workflow.mdc` — jeden Schritt dokumentieren (Erfolg+Misserfolg), Credentials/Learnings mitziehen, commit + `git push origin HEAD`.
 
+**Agent-Handoff (eine Datei):** [`AGENTS.md`](./AGENTS.md) — Status, Next, Session-Chronik (ersetzt `NEXT_AGENT.md` + Roh-Transkripte).  
 Detaillierte Chronik: [`WerbeLEDbox-CountDown/docs/SESSION_LOG.md`](./WerbeLEDbox-CountDown/docs/SESSION_LOG.md).
+
+## Agent-Docs konsolidiert (2026-07-29)
+
+- `AGENTS.md` = kanonisch (Orientierung + LIVE-Status + alle Top-Level-Agent-Sessions).
+- `WerbeLEDbox-CountDown/docs/NEXT_AGENT.md` entfernt; Verweise → `AGENTS.md`.
+- Guest-Portal-Quellen wieder auf dem aktiven Branch; Export CSV unter `guest-email-portal/exports/`.
 
 ## WPA3 / AnkerPI01 Zero 2 W (2026-07-29)
 

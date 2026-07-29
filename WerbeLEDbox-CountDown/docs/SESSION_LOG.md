@@ -2,6 +2,16 @@
 
 Chronik für Cross-Machine-Handoff. Erfolg **und** Misserfolg.
 
+## 2026-07-29 ~02:45 — Agent-Docs konsolidiert + Guest-Mails exportiert
+
+| Item | Ergebnis |
+|------|----------|
+| Doku | Alle Agent-Sessions → Root [`AGENTS.md`](../../../AGENTS.md); `docs/NEXT_AGENT.md` entfernt |
+| Transkripte | Cursor `agent-transcripts/` gelöscht (Inhalt in AGENTS.md § Chronik) |
+| Guest-Portal | Code von Branch `cursor/print-cmyk-bleed-blocker-1415` auf aktuellen Branch zurückgeholt |
+| Export | UDM `/data/hotel-anker/guest-emails/` → `guest-email-portal/exports/guest-emails-20260729T004238Z.csv` |
+| Mails 2026-07-29 | **keine neuen** (Consent alle 2026-07-28 UTC): `nowakha@gmail.com`, `cvetkovicteodoraa@outlook.com`, `danutmatioca75@yahoo.com` |
+
 ## 2026-07-29 ~00:50 — AnkerPI02 smooth fb-clock autostart LIVE
 
 | Item | Ergebnis |

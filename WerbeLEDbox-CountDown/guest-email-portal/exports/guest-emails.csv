@@ -1,0 +1,4 @@
+id,email,mac,lang,consent_at,first_seen,last_seen,user_agent,source
+7,danutmatioca75@yahoo.com,ce:12:c5:04:d7:ce,it,2026-07-28T19:44:11Z,2026-07-28T19:44:11Z,2026-07-28T19:44:11Z,"Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",guest_wifi
+6,cvetkovicteodoraa@outlook.com,ee:97:f3:fe:a6:94,en,2026-07-28T15:58:05Z,2026-07-28T15:58:05Z,2026-07-28T15:58:05Z,"Mozilla/5.0 (Linux; Android 16; BRP-NX1M Build/HONORBRP-N21M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/150.0.7871.124 Mobile Safari/537.36",guest_wifi
+5,nowakha@gmail.com,72:a3:f3:98:03:9d,de,2026-07-28T15:54:58Z,2026-07-28T15:54:58Z,2026-07-28T21:46:14Z,CaptiveNetworkSupport-542.0.0.0.1 wispr,guest_wifi
