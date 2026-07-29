@@ -51,7 +51,7 @@ Hotel Anker/
 
 - **PI01:** Administration `192.168.1.91`, Tailscale `100.67.4.18` — NM `key-mgmt=wpa-psk` (Zero 2 W ≠ WPA3-only).
 - **PI02:** Administration `192.168.1.222`, Tailscale `100.103.54.63`.
-- **Clock:** `fb-clock.service` **enabled** — `fb_clock_play.py --max-drift 0.35 --resync-every 0`, Video `media/clock_24h.mp4`.
+- **Clock:** `fb-clock.service` **enabled** — `fb_clock_play.py` mit ffmpeg `out_time`-Drift, `--seek-lead 1.4 --max-fps 12 --max-drift 0.5`, Video `media/clock_24h.mp4`.
 - **WLAN-Staff-PSK:** `HeimatSchutz` → `secrets/wifi.hotelanker.yml` (Administration + HotelAnker).
 - **SSIDs:** `Administration` (`.1.x`) · `HotelAnker` (Bar `.2.x`) · `HotelAnkerGuest` (Portal `.3.x`).
 - **Administration:** `wpa3_transition=true`, `pmf_mode=optional` (Scan `WPA2 WPA3`) — **nicht** WPA3-only.
@@ -78,7 +78,7 @@ journalctl -u fb-clock -f
 - Guest-E-Mails: UDM `/data/hotel-anker/guest-emails/` · Export `scripts/export_guest_emails.py`
 - Domains: Kaufanfrage Remimag gesendet; Geo-Paket Hostpoint noch kaufen
 - Richnerstutz: Finale Druckdaten / Offerte im Versand-Paket; Antwort abwarten
-- PI02 Throttling `0x80008` beobachten (PSU/Kühlung)
+- PI02 Soft-Temp / Throttle (`0xe0008`, ~82–85 °C) — Kühlung/PSU; sonst Clock-Drift wächst und resynct
 - Pico bleibt Lab; Live-Pusher = Teensy
 
 ---

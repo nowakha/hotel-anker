@@ -5,7 +5,7 @@
 param(
     [switch]$Watch,
     [int]$PollSeconds = 15,
-    [string[]]$Hosts = @("100.103.54.63", "192.168.8.106", "192.168.8.112", "AnkerPI02.local")
+    [string[]]$Hosts = @("100.103.54.63", "192.168.1.222", "192.168.8.106", "AnkerPI02.local")
 )
 
 $ErrorActionPreference = "Stop"

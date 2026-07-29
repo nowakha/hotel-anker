@@ -2,6 +2,17 @@
 
 Chronik für Cross-Machine-Handoff. Erfolg **und** Misserfolg.
 
+## 2026-07-29 ~03:20 — fb-clock Sync: out_time + seek-lead (Uhr ging nach)
+
+| Item | Ergebnis |
+|------|----------|
+| Symptom | Uhrvideo nachgehend; alter Gate (`seek+mono`) sah keinen Drift |
+| Live vorher | seit 00:50 ohne Resync; ffmpeg ~340 % CPU; `temp≈85°C` / `throttled=0xe0008` |
+| Fix | `-progress pipe:1` → echte `out_time`; `--seek-lead 1.4` (Pipeline); `--max-fps 12`; max-drift 0.5 |
+| Deploy | `fb_clock_play.py` + `fb_clock.service` auf PI02 TS `.63` — **active** |
+| Verify | nach Lead: drift ~+0.1…0.3 s / 4 min, kein Resync-Thrash; fps=12 deployed |
+| Offen | Soft-Temp / Kühlung — bei wachsendem Drift gelegentlicher Hard-Seek-Hitch erwartet |
+
 ## 2026-07-29 ~02:45 — Agent-Docs konsolidiert + Guest-Mails exportiert
 
 | Item | Ergebnis |
