@@ -1,6 +1,6 @@
 # Hotel Anker â€” Learnings & Handoff
 
-Stand: **2026-07-28** — Domain-Check Rorschach (siehe unten). Zuvor: Smooth-Patch PI02-Uhr pending Deploy.
+Stand: **2026-07-29** — Richnerstutz Gut-zum-Druck (Fassade verpixelt); Domain-Check Rorschach siehe unten.
 Ziel: eine andere Cursor-Instanz auf einem anderen Rechner kann ohne mündlichen Kontext weiterarbeiten.
 
 **Workflow (verbindlich):** `.cursor/rules/hotel-anker-workflow.mdc` — jeden Schritt dokumentieren (Erfolg+Misserfolg), Credentials/Learnings mitziehen, commit + `git push origin HEAD`.
@@ -284,3 +284,13 @@ Not done: fb-clock/ffprobe verify (unreachable). Do not unmask.
 - Harald: Deliverables (ZIP, Druck-PDFs, Fotos, Offerte) **müssen** im Repo sein — kein «zu groß / nur Desktop».
 - `.gitignore` bereinigt: keine Ignore-Regeln mehr für print/media-Pakete; nur Scratch `_encode*` / venv / `__pycache__`.
 - Spiegel: `Richnerstutz-Bespannung-Paket/versand/` (Finale ZIP + Offerte + User-PDF).
+
+## Richnerstutz — Gut zum Druck / Fassade verpixelt (2026-07-29 ~07:39 CEST)
+
+- **Von:** Melanie.Vogt@richnerstutz.ch (Druckvorstufe)  
+- **Betreff:** `Modernlight Production AG, Hotel Anker Rorschach - SEG (627 828)`  
+- **Msg/Thread:** `19fac62d97c94e3d` · Date Wed, 29 Jul 2026 05:39:33 +0000  
+- **Inhalt:** Dank für neue Datenlieferung; **Gut zum Druck** + Qualitäts-Screenshot; **Gebäude noch verpixelt**; warten auf Bescheid, ob so in Druck.  
+- **Kontext:** Nach Korrektur #2 (2026-07-28 ~17:34, Fassade 4096-Master / Blocker 1:1 / ohne Schnittzeichen) — Vorstufe meldet Fassade weiterhin soft/pixelig.  
+- **Risiken:** Freigabe trotz Pixelung = sichtbare Fassade am 2×2-m-Textil; Hold = Lieferfrist (~10 Tage ab Freigabe) verschiebt sich. Material/Preis/Mass in dieser Mail nicht neu angesprochen.  
+- **Aktion:** Entwurf A (Hold) / B (Freigabe) in `01-anfrage/MAIL-ENTWURF-Gut-zum-Druck-2026-07-29.md`. **STOP — kein Outbound ohne Harald-Go.** Screenshot nicht im Webhook → in Gmail prüfen.

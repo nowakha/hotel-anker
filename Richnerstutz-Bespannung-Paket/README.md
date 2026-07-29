@@ -2,6 +2,8 @@
 
 Alles für die Anfrage an **Richnerstutz AG** (Druck + Konfektion mit Kederschienenlippe).
 
+**Status 2026-07-29:** Gut zum Druck angefragt (Melanie Vogt) — Gebäude laut Vorstufe noch verpixelt. Entscheidung Harald offen. Entwurf: [`01-anfrage/MAIL-ENTWURF-Gut-zum-Druck-2026-07-29.md`](./01-anfrage/MAIL-ENTWURF-Gut-zum-Druck-2026-07-29.md).
+
 | | |
 |--|--|
 | **Auftraggeber** | Realia AG (Gottlieb Kündig), Industriestrasse 40b, 9400 Rorschach, UID CHE-113.325.481 |

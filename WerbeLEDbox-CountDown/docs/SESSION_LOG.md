@@ -488,3 +488,18 @@ Goal: stabile 860×360 H.264-Produktion statt 4K `st24.mov` auf PI02 (Undervolta
 | `.gitignore` | Media/print-Ignore entfernt (Policy: track deliverables) |
 | Push | folgt |
 
+## 2026-07-29 ~07:39 CEST — Richnerstutz Gut zum Druck (Fassade verpixelt)
+
+| Feld | Wert |
+|------|------|
+| Filter | **Match** — `@richnerstutz.ch`, Hotel Anker Rorschach, SEG/Bespannung (Job 627 828) |
+| From | Melanie Vogt `<Melanie.Vogt@richnerstutz.ch>` |
+| Subject | `Modernlight Production AG, Hotel Anker Rorschach - SEG (627 828)` |
+| Date | Wed, 29 Jul 2026 05:39:33 +0000 |
+| Thread/Msg | `19fac62d97c94e3d` |
+| Aussage | Gut zum Druck + Qualitäts-Screenshot; **Gebäude noch verpixelt**; warten auf Freigabe |
+| Offen | Harald: Freigabe trotz Pixelung **oder** Hold + schärfere Fassade |
+| Risiken | Sichtqualität Fassade am 2×2 m; Lieferstart (~10 Tage) erst nach Freigabe |
+| Entwurf | `Richnerstutz-Bespannung-Paket/01-anfrage/MAIL-ENTWURF-Gut-zum-Druck-2026-07-29.md` |
+| Outbound | **STOP** — kein Senden ohne Harald-Go; Anhänge/Screenshot in Gmail prüfen |
+
