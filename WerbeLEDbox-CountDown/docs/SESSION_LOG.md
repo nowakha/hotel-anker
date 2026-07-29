@@ -512,3 +512,13 @@ Goal: stabile 860×360 H.264-Produktion statt 4K `st24.mov` auf PI02 (Undervolta
 | Status | Druckfreigabe **gesendet**; warten auf Produktion/Versandavis |
 | Docs | `MAIL-FREIGABE-META.md`, optional `Mail-Entwurf-Nachfrage-Liefertermin-2026-07-29.md` |
 
+## 2026-07-29 ~14:02 CEST — Zapier-Duplikat Druckfreigabe (kein neuer Inhalt)
+
+| Item | Wert |
+|------|------|
+| From | `harald.nowak@modernlight.ch` (erneutes Echo derselben Outbound-Mail) |
+| Date | Wed, 29 Jul 2026 14:02:18 +0200 |
+| Msg / Thread | `19fadc110ad8126a` / `19fac62d97c94e3d` |
+| Klassifikation | **Duplikat** der Freigabe ~14:01 — kein neuer Druckerei-Reply |
+| Aktion | Status unverändert; **STOP** — warten auf `@richnerstutz.ch` Produktion/Versand |
+

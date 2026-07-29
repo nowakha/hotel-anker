@@ -6,7 +6,8 @@
 | Von | harald.nowak@modernlight.ch |
 | An | Thread SEG (627 828) / Melanie Vogt (zitiert) |
 | Betreff | Re: Modernlight Production AG, Hotel Anker Rorschach - SEG (627 828) |
-| Gmail message_id | `19fadc031b2a6de9` |
+| Gmail message_id | `19fadc031b2a6de9` (Primär ~14:01) |
+| Zapier-Duplikat | message_id `19fadc110ad8126a` · date Wed, 29 Jul 2026 14:02:18 +0200 · gleicher Thread/Body |
 | Thread | `19fac62d97c94e3d` |
 | Klassifikation | **Zapier-Echo eigener Outbound** — kein Druckerei-Reply |
 

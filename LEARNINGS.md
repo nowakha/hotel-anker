@@ -297,6 +297,7 @@ Not done: fb-clock/ffprobe verify (unreachable). Do not unmask.
 - **Webhook:** `from: harald.nowak@modernlight.ch` — **kein** Richnerstutz-Reply (eigene Outbound-Mail / Zapier-Echo).
 - **Betreff:** `Re: Modernlight Production AG, Hotel Anker Rorschach - SEG (627 828)`
 - **Gmail:** message_id `19fadc031b2a6de9` · thread `19fac62d97c94e3d` · date Wed, 29 Jul 2026 14:01:20 +0200
+- **Zapier-Duplikat ~14:02:** message_id `19fadc110ad8126a`, gleicher Body/Thread — kein neuer Status.
 - **Inhalt (Harald → Richnerstutz):** „Sehr gut so!“ — zeitnah produzieren und versenden an:
   - Realia AG · z.H. Gottlieb Kündig · Industriestrasse 40b · 9400 Rorschach
 - **Akzeptanz:** Pixelung Gebäude bewusst akzeptiert („Sehr gut so“ trotz Vorstufen-Hinweis).
