@@ -19,12 +19,14 @@ Environment=VIDEO=/home/user/WerbeLEDbox-CountDown/media/clock_24h.mp4
 ExecStartPre=/bin/bash -c 'for i in $(seq 1 120); do timedatectl show -p NTPSynchronized --value | grep -qx yes && exit 0; sleep 1; done; echo "warn: starting without NTP sync" >&2; exit 0'
 # "+" = run as root despite User= (sysfs write needs root; "-" = ignore failure)
 ExecStartPre=-+/bin/bash -c 'echo 8192 > /sys/block/mmcblk0/queue/read_ahead_kb 2>/dev/null || true'
-# Continuous play; resync only on drift (no periodic hard kill → fewer visible hitches).
+# Continuous play; resync on real ffmpeg out_time drift (not mono estimate).
+# fps=12 before upscale eases thermal lag (Pi soft-temp ~82–85°C under 25fps scale).
+# seek-lead cancels ~1.4s v4l2m2m/fbdev pipeline latency so wall sync is real.
 # Flip 180° at 860×360 then neighbor×4 to 3440×1440. Fallback: player auto --no-hw after HW fails.
 Nice=-5
 IOSchedulingClass=best-effort
 IOSchedulingPriority=0
-ExecStart=/usr/bin/python3 /home/user/WerbeLEDbox-CountDown/fb_clock_play.py --video ${VIDEO} --tz Europe/Zurich --max-drift 0.35 --drift-check 5 --resync-every 0
+ExecStart=/usr/bin/python3 /home/user/WerbeLEDbox-CountDown/fb_clock_play.py --video ${VIDEO} --tz Europe/Zurich --max-drift 0.5 --drift-check 2 --grace 5 --seek-lead 1.4 --max-fps 12 --log-drift-every 60 --resync-every 0
 Restart=always
 RestartSec=5
 KillSignal=SIGTERM

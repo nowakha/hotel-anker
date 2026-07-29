@@ -8,8 +8,10 @@ Monitor is mounted 180° — frames are flipped in the ffmpeg filter graph
 Optional --crop-* args apply before scale (Premiere-style margins in source pixels).
 
 Playback aims for smooth continuous output:
-- Flip 180° at source resolution (cheap), then integer upscale to fb.
-- Resync only when wall-clock drift exceeds --max-drift (no periodic hard kill).
+- Flip 180° at source resolution (cheap), optional fps cap, then integer upscale.
+- Drift is measured from ffmpeg -progress out_time (real decode position),
+  not from wall/monotonic estimates (those miss lag when the Pi throttles).
+- Resync (hard seek) only when |wall − video| exceeds --max-drift.
 """
 
 from __future__ import annotations
@@ -17,6 +19,7 @@ from __future__ import annotations
 import argparse
 import os
 import re
+import select
 import shutil
 import signal
 import subprocess
@@ -30,8 +33,13 @@ DEFAULT_TZ = "Europe/Zurich"
 DAY_S = 86400.0
 # Safety-only forced restart (seconds). 0 = never force; drift gate handles sync.
 DEFAULT_FORCE_RESYNC_S = 0
-DEFAULT_MAX_DRIFT_S = 0.35
-DEFAULT_DRIFT_CHECK_S = 5.0
+DEFAULT_MAX_DRIFT_S = 0.5
+DEFAULT_DRIFT_CHECK_S = 2.0
+DEFAULT_GRACE_S = 5.0
+DEFAULT_MAX_FPS = 12.0
+DEFAULT_LOG_DRIFT_S = 60.0
+# ffmpeg/v4l2m2m + first fbdev frames ≈ 1.3–1.5s behind wall if we seek to "now".
+DEFAULT_SEEK_LEAD_S = 1.4
 
 
 def ffmpeg_bin() -> str:
@@ -92,10 +100,12 @@ def build_vf(
     crop_bottom: int = 0,
     crop_left: int = 0,
     crop_right: int = 0,
+    max_fps: float = 0.0,
 ) -> str:
-    """Filter graph: crop → flip180 @src → upscale → rgb565.
+    """Filter graph: crop → flip180 @src → fps? → upscale → rgb565.
 
     Flip before upscale so rotate work stays at 860×360, not 3440×1440.
+    Optional fps cap cuts RGB565 scale cost when the Pi is thermally limited.
     """
     parts: list[str] = []
     cropped: tuple[int, int] | None = src
@@ -107,6 +117,9 @@ def build_vf(
 
     # 180° mount: hflip+vflip is far cheaper than rotate=PI
     parts.append("hflip,vflip")
+
+    if max_fps and max_fps > 0:
+        parts.append(f"fps={max_fps:.3f}".rstrip("0").rstrip("."))
 
     if (
         cropped
@@ -174,6 +187,7 @@ def build_cmd(
     hw: bool,
 ) -> list[str]:
     # Low probe/analyze → faster restart after drift resync.
+    # -progress pipe:1 → real out_time for drift (stdout).
     cmd = [
         ffmpeg,
         "-hide_banner",
@@ -186,6 +200,10 @@ def build_cmd(
         "0",
         "-fflags",
         "+fastseek+genpts",
+        "-progress",
+        "pipe:1",
+        "-stats_period",
+        "0.5",
     ]
     cmd += ["-ss", format_ts(seek_s)]
     if hw:
@@ -204,6 +222,51 @@ def build_cmd(
         fb,
     ]
     return cmd
+
+
+def drain_progress(proc: subprocess.Popen, buf: bytearray) -> float | None:
+    """Read ffmpeg -progress stdout; return latest out_time seconds if seen."""
+    if proc.stdout is None:
+        return None
+    out_time_s: float | None = None
+    while True:
+        try:
+            ready, _, _ = select.select([proc.stdout], [], [], 0)
+        except (ValueError, OSError):
+            break
+        if not ready:
+            break
+        chunk = proc.stdout.read(4096)
+        if not chunk:
+            break
+        buf.extend(chunk)
+        while True:
+            nl = buf.find(b"\n")
+            if nl < 0:
+                break
+            line = bytes(buf[:nl]).decode("utf-8", "replace").strip()
+            del buf[: nl + 1]
+            if line.startswith("out_time_ms="):
+                raw = line.split("=", 1)[1].strip()
+                if raw.isdigit() or (raw.startswith("-") and raw[1:].isdigit()):
+                    ms = int(raw)
+                    if ms >= 0:
+                        out_time_s = ms / 1000.0
+            elif line.startswith("out_time=") and not line.startswith("out_time_ms="):
+                # out_time=HH:MM:SS.microseconds
+                raw = line.split("=", 1)[1].strip()
+                if raw and raw != "N/A":
+                    parts = raw.split(":")
+                    if len(parts) == 3:
+                        try:
+                            out_time_s = (
+                                int(parts[0]) * 3600
+                                + int(parts[1]) * 60
+                                + float(parts[2])
+                            )
+                        except ValueError:
+                            pass
+    return out_time_s
 
 
 def main() -> int:
@@ -227,7 +290,31 @@ def main() -> int:
         "--drift-check",
         type=float,
         default=DEFAULT_DRIFT_CHECK_S,
-        help="How often to compare wall clock vs expected video position",
+        help="How often to compare wall clock vs ffmpeg out_time",
+    )
+    p.add_argument(
+        "--grace",
+        type=float,
+        default=DEFAULT_GRACE_S,
+        help="Seconds after start before drift resync is allowed",
+    )
+    p.add_argument(
+        "--seek-lead",
+        type=float,
+        default=DEFAULT_SEEK_LEAD_S,
+        help="Seek this many seconds ahead of wall to cancel pipeline latency",
+    )
+    p.add_argument(
+        "--max-fps",
+        type=float,
+        default=DEFAULT_MAX_FPS,
+        help="Cap painted fps before upscale (0=unlimited; 15 eases thermal lag)",
+    )
+    p.add_argument(
+        "--log-drift-every",
+        type=float,
+        default=DEFAULT_LOG_DRIFT_S,
+        help="Log measured drift every N seconds (0=never)",
     )
     p.add_argument("--no-hw", action="store_true")
     p.add_argument("--crop-top", type=int, default=0)
@@ -256,7 +343,7 @@ def main() -> int:
     dst_w, dst_h = fb_size()
     src = probe_size(ff, args.video)
     crop = (args.crop_top, args.crop_bottom, args.crop_left, args.crop_right)
-    vf = build_vf(src, dst_w, dst_h, *crop)
+    vf = build_vf(src, dst_w, dst_h, *crop, max_fps=args.max_fps)
     src_s = f"{src[0]}x{src[1]}" if src else "?"
     use_hw = not args.no_hw
     hw_fail_streak = 0
@@ -264,7 +351,8 @@ def main() -> int:
         f"fb_clock: video={args.video} ({src_s}) fb={args.fb} {dst_w}x{dst_h} "
         f"crop=T{args.crop_top},B{args.crop_bottom},L{args.crop_left},R{args.crop_right} "
         f"tz={args.tz} max_drift={args.max_drift}s drift_check={args.drift_check}s "
-        f"force_resync={args.resync_every}s hw={use_hw} flip=hflip+vflip",
+        f"grace={args.grace}s seek_lead={args.seek_lead}s max_fps={args.max_fps} "
+        f"force_resync={args.resync_every}s hw={use_hw} flip=hflip+vflip progress=out_time",
         flush=True,
     )
 
@@ -274,25 +362,42 @@ def main() -> int:
             if stop:
                 break
             src = probe_size(ff, args.video)
-            vf = build_vf(src, dst_w, dst_h, *crop)
+            vf = build_vf(src, dst_w, dst_h, *crop, max_fps=args.max_fps)
 
-        seek = seconds_since_midnight(args.tz)
+        wall0 = seconds_since_midnight(args.tz)
+        seek = (wall0 + max(0.0, args.seek_lead)) % DAY_S
         cmd = build_cmd(ff, args.video, args.fb, seek, vf, hw=use_hw)
         t0_mono = time.monotonic()
         print(
-            f"fb_clock: start seek={format_ts(seek)} hw={use_hw} "
-            f"(wall={datetime.now(ZoneInfo(args.tz)).isoformat(timespec='seconds')})",
+            f"fb_clock: start seek={format_ts(seek)} lead={args.seek_lead:.2f}s "
+            f"hw={use_hw} (wall={datetime.now(ZoneInfo(args.tz)).isoformat(timespec='seconds')})",
             flush=True,
         )
 
-        proc = subprocess.Popen(cmd)
+        proc = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            bufsize=0,
+        )
+        progress_buf = bytearray()
+        last_out_time: float | None = None
         force_deadline = (
             t0_mono + max(30, args.resync_every) if args.resync_every > 0 else None
         )
-        next_drift_check = t0_mono + max(1.0, args.drift_check)
+        next_drift_check = t0_mono + max(0.5, args.grace)
+        next_drift_log = (
+            t0_mono + max(1.0, args.log_drift_every)
+            if args.log_drift_every > 0
+            else None
+        )
         exited_early = False
 
         while not stop and proc.poll() is None:
+            got = drain_progress(proc, progress_buf)
+            if got is not None:
+                last_out_time = got
+
             now = time.monotonic()
             if force_deadline is not None and now >= force_deadline:
                 print("fb_clock: forced resync (resync-every)", flush=True)
@@ -302,26 +407,55 @@ def main() -> int:
 
             if now >= next_drift_check:
                 elapsed = now - t0_mono
-                video_pos = (seek + elapsed) % DAY_S
+                if last_out_time is not None:
+                    video_pos = (seek + last_out_time) % DAY_S
+                    source = "out_time"
+                else:
+                    # Fallback before first progress line (or ancient ffmpeg).
+                    video_pos = (seek + elapsed) % DAY_S
+                    source = "mono"
                 wall_pos = seconds_since_midnight(args.tz)
                 drift = signed_drift(wall_pos, video_pos)
-                if abs(drift) > args.max_drift:
+                if (
+                    next_drift_log is not None
+                    and now >= next_drift_log
+                    and elapsed >= args.grace
+                ):
                     print(
-                        f"fb_clock: drift={drift:+.3f}s > {args.max_drift}s — resync",
+                        f"fb_clock: drift={drift:+.3f}s ({source} "
+                        f"out={last_out_time if last_out_time is not None else float('nan'):.3f}s "
+                        f"elapsed={elapsed:.1f}s)",
+                        flush=True,
+                    )
+                    next_drift_log = now + max(1.0, args.log_drift_every)
+                if elapsed >= args.grace and abs(drift) > args.max_drift:
+                    print(
+                        f"fb_clock: drift={drift:+.3f}s > {args.max_drift}s "
+                        f"({source}) — resync",
                         flush=True,
                     )
                     stop_proc(proc)
                     exited_early = True
                     break
-                next_drift_check = now + max(1.0, args.drift_check)
+                next_drift_check = now + max(0.5, args.drift_check)
 
-            time.sleep(0.25)
+            time.sleep(0.2)
         else:
+            # Drain stderr for HW-fail diagnostics
+            err = b""
+            if proc.stderr is not None:
+                try:
+                    err = proc.stderr.read() or b""
+                except Exception:
+                    err = b""
             if proc.poll() is None:
                 stop_proc(proc)
             elif not stop:
                 rc = proc.returncode
+                err_s = err.decode("utf-8", "replace").strip()
                 print(f"fb_clock: ffmpeg exit rc={rc} — restart", flush=True)
+                if err_s:
+                    print(f"fb_clock: ffmpeg err: {err_s[:400]}", flush=True)
                 if use_hw and rc not in (0, -15, -9):  # not clean/SIGTERM/SIGKILL
                     hw_fail_streak += 1
                     if hw_fail_streak >= 2:
@@ -340,6 +474,16 @@ def main() -> int:
             hw_fail_streak = 0
             # Tiny pause so fbdev release completes before next open
             time.sleep(0.05)
+            if proc.stdout:
+                try:
+                    proc.stdout.close()
+                except Exception:
+                    pass
+            if proc.stderr:
+                try:
+                    proc.stderr.close()
+                except Exception:
+                    pass
 
     print("fb_clock: stopped", flush=True)
     return 0

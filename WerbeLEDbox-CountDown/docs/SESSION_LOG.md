@@ -2,6 +2,182 @@
 
 Chronik für Cross-Machine-Handoff. Erfolg **und** Misserfolg.
 
+## 2026-07-29 ~03:20 — fb-clock Sync: out_time + seek-lead (Uhr ging nach)
+
+| Item | Ergebnis |
+|------|----------|
+| Symptom | Uhrvideo nachgehend; alter Gate (`seek+mono`) sah keinen Drift |
+| Live vorher | seit 00:50 ohne Resync; ffmpeg ~340 % CPU; `temp≈85°C` / `throttled=0xe0008` |
+| Fix | `-progress pipe:1` → echte `out_time`; `--seek-lead 1.4` (Pipeline); `--max-fps 12`; max-drift 0.5 |
+| Deploy | `fb_clock_play.py` + `fb_clock.service` auf PI02 TS `.63` — **active** |
+| Verify | nach Lead: drift ~+0.1…0.3 s / 4 min, kein Resync-Thrash; fps=12 deployed |
+| Offen | Soft-Temp / Kühlung — bei wachsendem Drift gelegentlicher Hard-Seek-Hitch erwartet |
+
+## 2026-07-29 ~02:45 — Agent-Docs konsolidiert + Guest-Mails exportiert
+
+| Item | Ergebnis |
+|------|----------|
+| Doku | Alle Agent-Sessions → Root [`AGENTS.md`](../../../AGENTS.md); `docs/NEXT_AGENT.md` entfernt |
+| Transkripte | Cursor `agent-transcripts/` gelöscht (Inhalt in AGENTS.md § Chronik) |
+| Guest-Portal | Code von Branch `cursor/print-cmyk-bleed-blocker-1415` auf aktuellen Branch zurückgeholt |
+| Export | UDM `/data/hotel-anker/guest-emails/` → `guest-email-portal/exports/guest-emails-20260729T004238Z.csv` |
+| Mails 2026-07-29 | **keine neuen** (Consent alle 2026-07-28 UTC): `nowakha@gmail.com`, `cvetkovicteodoraa@outlook.com`, `danutmatioca75@yahoo.com` |
+
+## 2026-07-29 ~00:50 — AnkerPI02 smooth fb-clock autostart LIVE
+
+| Item | Ergebnis |
+|------|----------|
+| Host | Tailscale `100.103.54.63` / WLAN **Administration** `192.168.1.222` |
+| Video | `media/clock_24h.mp4` 12G vorhanden |
+| Deploy | `fb_clock_play.py` + `systemd/fb_clock.service` (max-drift 0.35, resync-every 0) |
+| systemd | `fb-clock` **active + enabled** (Boot-Autostart), NRestarts=0 |
+| Journal | `start seek=00:50:51` matching wall; hw=True; flip=hflip+vflip |
+| Hinweis | `throttled=0x80008` (soft temp / UV history) — beobachten |
+
+## 2026-07-29 ~00:35 — Administration Recheck (WPA2/WPA3 Transition) + PI01 connect
+
+| Check | Ergebnis |
+|-------|----------|
+| UniFi `Administration` | `wpa3_support=true`, **`wpa3_transition=true`**, `pmf_mode=optional` (nicht mehr WPA3-only) |
+| UniFi `HotelAnker` | ebenfalls Transition / PMF optional |
+| PI01 Scan | `Administration:WPA2 WPA3` Signal ~64 @ ch6 |
+| Zero 2 W | WPA3-only ungeeignet; NM **`key-mgmt=wpa-psk`** |
+| Doku | `NETWORK_UNIFI.md`, `wifi.hotelanker.yml`, `LEARNINGS.md`, migrate-Skript |
+| Connect | **OK** — PI01 `Administration` / **`192.168.1.91`** (wpa-psk, Tailscale `100.67.4.18` bleibt) |
+| Persist | NM-Profil Administration unter `/etc/...`; HotelAnker Fallback prio 10 |
+
+## 2026-07-29 ~00:06 — AnkerPI01 SD WiFi rescue (Administration primary)
+
+| Item | Ergebnis |
+|------|----------|
+| Mistake (admit) | `migrate_pis_to_administration_wifi.py` set Administration prio 100 then **HotelAnker autoconnect=no** without verifying Admin associated + `192.168.1.x` → when Admin failed to associate, PI01 had **zero WiFi** |
+| Medium | SD via usbipd busid **6-2** (USB Mass Storage) → WSL `/dev/sde` (later reattach also `sdf`) |
+| Hostname | Confirmed **AnkerPI01** on rootfs |
+| Written rootfs NM | `Administration.nmconnection`: autoconnect=yes, prio=100, `interface-name=wlan0`, powersave=2, PSK `HeimatSchutz`, DNS 1.1.1.1/8.8.8.8 |
+| Written rootfs NM | `HotelAnker.nmconnection`: **kept**, autoconnect=**no** (user wants Administration, not Bar preferred) |
+| bootfs | `network-config`: Administration listed **FIRST**; comment that runtime NM uses Admin |
+| Verify | Re-mounted after e2fsck: PSK+flags OK (`REVERIFY_OK`) |
+| Unmount/detach | sync + umount boot/root → `usbipd detach --busid 6-2` → state **Shared**, SD gone from WSL |
+| Scripts | `scripts/pi01_sd_wifi_rescue.sh` updated; migrate script no longer disables HotelAnker until Admin SSID + `.1.x` confirmed; safer default leaves Bar as low-prio fallback |
+| User next | Physically remove SD from reader → insert into **AnkerPI01** → power on → expect UniFi client on SSID **Administration** / `192.168.1.x` |
+
+## 2026-07-28 ~19:15 — Warum Pis nach Power-Cycle offline bleiben
+
+| Fakt | Detail |
+|------|--------|
+| Ursache Netz | Beide MACs **nicht** am AP assoziiert (UniFi 0 Clients Anker*; ARP incomplete; Ping Host Unreachable) |
+| WLAN selbst | OK — Handys auf `Administration` + `HotelAnker` |
+| Nach Strom-Reset remote geändert? | **Nein** — kein SSH möglich → nichts deployed/umgeschrieben |
+| PI01 Kontext | Heute Migrationsversuch Administration: `nmcli up` fail („network could not be found“) → danach offline — **vermutlich kaputtes/hängendes NM-Profil** |
+| PI02 Kontext | Schon **vor** Migration ohne SSH; Power-Cycle bringt kein WLAN → eher Boot/NM/PSU, nicht frischer Remote-Fail |
+| Uhr | Ohne Netz nicht remote startbar; lokal nur wenn `fb-clock` enabled und Boot durchkommt |
+| Nächster Schritt | **Ethernet** an PI02 (Decke) → dann Smooth-Clock + WiFi-Repair; PI01 gleiches oder SD |
+
+## 2026-07-28 ~19:00 — AnkerPI02 Tailscale offline nach WLAN-Umzug
+
+| Check | Ergebnis |
+|-------|----------|
+| Tailscale `ankerpi02` `100.103.54.63` | **offline**, last seen ~18:42 CEST |
+| Tailscale `ankerpi01` `100.67.4.18` | **offline**, last seen ~18:50 CEST |
+| UniFi active clients | **kein** AnkerPI01/02 (nur Phones/Tablet/Watch) |
+| DHCP-Lease (stale) | PI02 noch `192.168.2.222` / MAC `e4:5f:01:e8:92:28` (Bar); PI01 `192.168.2.91` |
+| Empfehlung | **Power-Cycle (Strom)**, kein Factory/SD-Wipe. Danach Fallback HotelAnker `.2.x` erwarten → `migrate_pis_to_administration_wifi.py` |
+
+## 2026-07-28 — Hauptprojekt-Doku + Pis → Administration
+
+| Item | Ergebnis |
+|------|----------|
+| Doku | Root `README.md` / `AGENTS.md` als **ein** Hauptprojekt mit Modulen (LED, Portal, UniFi, Druck) |
+| Soll-WLAN | AnkerPI01/02 → SSID **Administration** (PSK `HeimatSchutz`, Netz `192.168.1.0/24`) |
+| Skript | `scripts/migrate_pis_to_administration_wifi.py` (UDM Jump, Bar bleibt Fallback bis Success) |
+| PI01 Versuch | Profil gelegt; `nmcli up Administration` meldete zeitweise „network could not be found“; danach **offline** (kein Ping) — **Power-Cycle nötig**, dann Skript erneut |
+| PI02 | War bereits unzuverlässig / kein SSH von UDM — ebenfalls Power-Cycle + Skript |
+| Windows | Kann VLAN2 `.2.x` nicht routen — nur UDM-Jump oder Tailscale |
+| Git | Commit `d6153da` gepusht auf `cursor/print-cmyk-bleed-blocker-1415` |
+| Recheck ~18:56 | UniFi: keine AnkerPI-Clients; Tailscale `.18`/`.63`, `.2.91`, mDNS — alles offline → **Strom-Reset beider Pis**, dann Skript |
+
+## 2026-07-28 — Sprachumschalter fix (Captive Portal)
+
+| Item | Ergebnis |
+|------|----------|
+| Bug | Links auf `/?lang=…` → nginx `:80` `location /` leitet auf HTTPS um → Sprache wechselte nicht |
+| Fix | Language-Buttons + JS `URLSearchParams` auf **aktueller** URL (`/guest/s/default/…`) |
+| Verifiziert | DE→EN→RM Umschaltung; Formular+Consent→Success; bekannte MAC→direkt Success |
+
+## 2026-07-28 — Guest-E-Mail-Portal auf UDM (live)
+
+| Item | Ergebnis |
+|------|----------|
+| Dienst | `hotel-anker-guest-portal.service` → Python `:9090` unter `/data/hotel-anker/` |
+| UI | Navy/Gold/Anker; Sprachen **DE/EN/FR/IT/Rumantsch**; Consent-Checkbox; iPhone-Hinweis Private Address |
+| Speicher | SQLite+CSV `/data/hotel-anker/guest-emails/`; gleiche E-Mail = Update, kein zweiter Row |
+| Session | **120 Min**; bekannte MAC skippt Formular (erneut nur „verbinden“/Success) |
+| UniFi | `auth=custom`, `custom_ip=192.168.1.254`, expire=120; nginx :80 `/guest/`→9090; Ports 80+9090 in portal ipset |
+| Export | `scripts/export_guest_emails.py` / Cursor „E-Mails exportieren“ |
+| Bugfix | SQLite-Init Deadlock (`Lock`→`RLock`); systemd `#` in Passwort muss gequotet sein |
+| Token-Reset | Guest unauthorize + `ipset flush UBIOS_authorized_guests` für Handy-Retest |
+
+## 2026-07-28 — iOS Success: keine weiße Weiterleitung mehr
+
+| Item | Ergebnis |
+|------|----------|
+| Ursache | Nach Connect Redirect zu google/detectportal → Captive-WebView weiß + „SUCCESS“ |
+| Fix | `window.location` nach Success entfernt — gebrandete Seite bleibt bis iPhone-Haken |
+| Success-UI | Anker zentriert, DE-Text, Hinweis „Tippen Sie oben rechts auf Fertig…“ |
+
+## 2026-07-28 — Success-Seite gebrandet
+
+| Item | Ergebnis |
+|------|----------|
+| successLogo | UniFi-Haken → Anker-SVG (wie Landing) |
+| Größe | 120 → 180 px |
+| Text | „Verbunden — schönen Aufenthalt im Hotel Anker!“ |
+| Powered-by | UniFi-Footer SVG neutralisiert |
+| BG | gleicher Print-Fassaden-Hintergrund (Layout-Patch) |
+
+## 2026-07-28 — Portal-JS-Patch repariert (Connect wieder nutzbar)
+
+| Item | Ergebnis |
+|------|----------|
+| Bug | Patch `()=>{backgroundColor:...}` ohne Objekt-Return → React crash → nur Hotelbild |
+| Fix | JS aus `.orig` restored; korrekt `()=>({...backgroundImage...})` |
+| BG | Lightbox-Print-Fassade `01-facade-blueprint.png` |
+| Logo | Anker-SVG bleibt |
+| Auth | `POST /login` → `authorized:true` |
+
+## 2026-07-28 — Portal-Hintergrund: Lightbox-Print-Fassade
+
+| Item | Ergebnis |
+|------|----------|
+| Problem | CSS-BG unsichtbar — SPA setzt Inline `background:#0B1C2C` über die Root-Fläche |
+| Fix | `main.*.js` patched: Cover-BG `./static/media/hotel-anker-outline-bg.jpg` |
+| Bild | `assets/kendu-flowbox-2m-print/canva-upload/01-facade-blueprint.png` |
+| Export | `guest-wifi-portal/exports/bg-lightbox-print-facade.jpg` |
+
+## 2026-07-28 — Portal Logo Anker + Outline-Hintergrund
+
+| Item | Ergebnis |
+|------|----------|
+| Logo | UniFi-Default `uiLogoHotspot*.svg` ersetzt durch Anker (`assets/hotel-anker-historic-anchor.png` → transparent SVG) |
+| Hintergrund | Letzte Outline `WerbeLEDbox-CountDown/assets/hotel-anker-blueprint-simplified.png` als Cover-BG (Navy `#0B1C2C`) |
+| Exports | `guest-wifi-portal/exports/logo-anchor-gold.{png,svg}`, `bg-hotel-outline.jpg` |
+| Live | `:8880` assets 200; CSS `!important` gegen Inline-`bg_color` |
+| Hinweis | Offizieller `portalfile`-Upload-API weiter unbrauchbar (`InvalidObject`); SPA-Media-Patch als Workaround |
+
+## 2026-07-28 — Guest WiFi Portal repariert + verifiziert
+
+| Item | Ergebnis |
+|------|----------|
+| Symptom | `:8880/guest/s/default/` → HTTP 200, **Content-Length 0**; `FileNotFoundException` index.html |
+| Ursache | `/data/unifi/data/sites/default/app-unifi-hotspot-portal/` unvollständig (nur `static/`) |
+| Fix | Stock-ZIP aus `ace.jar` → `internal-dependencies.jar` → `app-unifi-hotspot-portal.zip` extrahiert |
+| Portal | Index + `hotspotconfig` OK — Title **Hotel Anker**, Button **Jetzt verbinden**, `auth=none` |
+| Auth-API | `POST …/login` + EC-Cookie → `authorized:true` (Test-Guest wieder entfernt) |
+| Isolation | `l2_isolation`, `UBIOS_GUEST_*`, Corporate `.1`+`.2` geblockt für Unautorisierte |
+| Skript | `scripts/repair_unifi_hotspot_portal.py` |
+| Docs | `docs/NETWORK_UNIFI.md` |
+| Noch offen | Handy-Live-Test; Logo manuell; optional Guest-mDNS aus |
+
 ## 2026-07-28 — Domain-Check Hotel Anker Rorschach
 
 | Item | Ergebnis |

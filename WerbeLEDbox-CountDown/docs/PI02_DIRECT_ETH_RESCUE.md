@@ -49,5 +49,5 @@ powershell -NoProfile -ExecutionPolicy Bypass -File WerbeLEDbox-CountDown\script
 ## Danach
 
 1. Verifizieren: Player enthält `ffprobe` / `Never decode`, **kein** `-f null` Full-Decode.
-2. Erst dann `fb-clock` unmask/enable (siehe [`NEXT_AGENT.md`](./NEXT_AGENT.md)).
+2. Erst dann `fb-clock` unmask/enable (siehe Root [`AGENTS.md`](../../../AGENTS.md) § Status).
 

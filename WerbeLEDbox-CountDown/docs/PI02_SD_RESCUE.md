@@ -105,7 +105,7 @@ systemctl is-active fb-clock     # erwartet: inactive
 grep -n 'ffprobe\|Never decode' ~/WerbeLEDbox-CountDown/fb_clock_play.py | head
 ```
 
-Erst danach Unit aus Repo deployen, **unmask**, `daemon-reload`, `enable --now` — siehe `docs/NEXT_AGENT.md`.
+Erst danach Unit aus Repo deployen, **unmask**, `daemon-reload`, `enable --now` — siehe Root [`AGENTS.md`](../../../AGENTS.md) § Status.
 
 ---
 

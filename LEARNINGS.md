@@ -1,11 +1,50 @@
 # Hotel Anker â€” Learnings & Handoff
 
-Stand: **2026-07-28** — Domain-Check Rorschach (siehe unten). Zuvor: Smooth-Patch PI02-Uhr pending Deploy.
+Stand: **2026-07-29** — PI01+PI02 auf Administration; PI02 `fb-clock` mit echter `out_time`-Sync.
 Ziel: eine andere Cursor-Instanz auf einem anderen Rechner kann ohne mündlichen Kontext weiterarbeiten.
+
+## Clock geht nach (2026-07-29 ~03:15)
+
+- **Symptom:** Uhrvideo auf PI02 sichtbar hinter Wanduhr; alter Drift-Gate meldete nichts.
+- **Ursache 1:** Drift wurde als `seek + monotonic` geschätzt — bei ffmpeg-Lag (Throttle) bleibt Drift≈0, obwohl Bild nachgeht.
+- **Ursache 2:** Pi unter Last `temp≈82–85°C`, `throttled=0xe0008` (soft temp) — Scale 860→3440 RGB565 @25 fps hält `-re` nicht.
+- **Ursache 3:** Pipeline-Latenz v4l2m2m→fbdev ≈ **1.4 s**; ohne Seek-Lead thrashte echter `out_time`-Check (Resync-Schleife).
+- **Fix LIVE:** `fb_clock_play.py` liest ffmpeg `-progress out_time`; `--seek-lead 1.4`; `--max-fps 12` vor Upscale; `--max-drift 0.5` / check 2 s. Unit deployed.
+- **Hardware:** Kühlung/PSU weiter beobachten — sonst Drift wächst langsam und resynct gelegentlich (sichtbarer Hitch).
 
 **Workflow (verbindlich):** `.cursor/rules/hotel-anker-workflow.mdc` — jeden Schritt dokumentieren (Erfolg+Misserfolg), Credentials/Learnings mitziehen, commit + `git push origin HEAD`.
 
+**Agent-Handoff (eine Datei):** [`AGENTS.md`](./AGENTS.md) — Status, Next, Session-Chronik (ersetzt `NEXT_AGENT.md` + Roh-Transkripte).  
 Detaillierte Chronik: [`WerbeLEDbox-CountDown/docs/SESSION_LOG.md`](./WerbeLEDbox-CountDown/docs/SESSION_LOG.md).
+
+## Agent-Docs konsolidiert (2026-07-29)
+
+- `AGENTS.md` = kanonisch (Orientierung + LIVE-Status + alle Top-Level-Agent-Sessions).
+- `WerbeLEDbox-CountDown/docs/NEXT_AGENT.md` entfernt; Verweise → `AGENTS.md`.
+- Guest-Portal-Quellen wieder auf dem aktiven Branch; Export CSV unter `guest-email-portal/exports/`.
+
+## WPA3 / AnkerPI01 Zero 2 W (2026-07-29)
+
+- **Administration** live: `wpa3_transition=true`, `pmf_mode=optional` → Scan `WPA2 WPA3` (nicht mehr WPA3-only).
+- Pi Zero 2 W (CYW43436): **kein zuverlässiges WPA3-SAE**; NM immer `key-mgmt=wpa-psk`. WPA3-only + PMF required → Association fail / „Secrets were required“.
+- Vor Migrate immer UniFi `wlanconf` + Client-Scan SECURITY prüfen — nicht Docs-Annahme „WPA2“ blind glauben.
+- Siehe `WerbeLEDbox-CountDown/docs/NETWORK_UNIFI.md` § WPA3.
+
+## AnkerPI01 SD WiFi rescue (2026-07-29)
+
+- **Never** set `HotelAnker` `autoconnect=no` until Administration is associated **and** wlan0 has `192.168.1.x` for several seconds. Doing that when Admin fails → **zero WiFi** (PI01 bricked offline).
+- Soll runtime: SSID **Administration** primary (prio 100, powersave=2, PSK `HeimatSchutz`, **wpa-psk**). HotelAnker low-prio fallback until proven.
+- SD offline fix path (TabletHi10Max): usbipd busid **6-2** Mass Storage → WSL mount bootfs/rootfs → `scripts/pi01_sd_wifi_rescue.sh --auto` → sync/umount → `usbipd detach` → SD back into Pi + power on.
+- Always **umount before** `usbipd detach`; yank-while-mounted caused EXT4 journal I/O errors (recoverable via `e2fsck -fy`).
+
+## Hauptprojekt & Netz (2026-07-28)
+
+- **Ein Repo:** `Hotel Anker/` = Remote `hotel-anker`. Module sind Ordner, keine zweiten Roots.
+- **SSIDs:** `Administration` (`.1.x`, Pis+Staff) · `HotelAnker` (Bar `.2.x`) · `HotelAnkerGuest` (Portal `.3.x`).
+- **PSK Staff:** `HeimatSchutz` (`secrets/wifi.hotelanker.yml`) — gilt für Administration **und** HotelAnker.
+- **Pis umziehen:** `scripts/migrate_pis_to_administration_wifi.py` (SSH-Jump über UDM; Windows routed VLAN2 nicht).
+- **2026-07-28 Versuch:** PI01 teilweise umgestellt, danach offline — **Power-Cycle**, dann Skript erneut. PI02 war schon ohne SSH.
+- **~19:00 Recheck:** beide Tailscale offline; UniFi zeigt keine Pi-Clients; DHCP noch Bar-Leases (PI02 `.2.222`). **Ja Strom-Reset**, **kein** Factory/SD-Wipe (SD schwer erreichbar). Nach Boot oft wieder HotelAnker → Skript.
 
 ## Domains Hotel Anker Rorschach (2026-07-28)
 
@@ -24,14 +63,13 @@ Detaillierte Chronik: [`WerbeLEDbox-CountDown/docs/SESSION_LOG.md`](./WerbeLEDbo
 - FPS: live fbdev **~25 fps @ 1.02×** (vs ~0.1 fps mit 4K st24 extract)
 - `throttled=0x0` nach Start
 
-## Clock smooth patch (2026-07-24, Deploy pending)
+## Clock smooth patch (2026-07-24; Sync-Nachzug 2026-07-29)
 
-User: gelegentliches Ruckeln. Ursachen im Code/Unit:
-1. **Harter ffmpeg-Kill alle 120s** → sichtbarer Hitch (Hauptverdacht „gelegentlich“)
-2. **`rotate=PI` nach Upscale auf 3440×1440** → unnötig teuer
-3. SD read-ahead / Scheduling
-
-Fix in Repo: Drift-Gate (`--max-drift 0.35`), Flip vor Scale, Unit ohne periodischen Resync, `deploy_fb_clock_smooth.ps1`. **Noch nicht auf PI02**, weil Host offline.
+User: gelegentliches Ruckeln / Uhr geht nach. Ursachen:
+1. **Harter ffmpeg-Kill alle 120s** → sichtbarer Hitch (behoben: kein periodischer Resync)
+2. **`rotate=PI` nach Upscale** → Flip vor Scale
+3. **Mono-Drift-Gate** sah ffmpeg-Lag nicht → 2026-07-29: echte `out_time` + seek-lead + max-fps 12
+4. SD read-ahead / Scheduling / Soft-Temp
 
 ## Production `clock_24h.mp4` encode (2026-07-23)
 
