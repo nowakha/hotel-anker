@@ -1,6 +1,6 @@
 # Hotel Anker â€” Learnings & Handoff
 
-Stand: **2026-07-28** — Domain-Check Rorschach (siehe unten). Zuvor: Smooth-Patch PI02-Uhr pending Deploy.
+Stand: **2026-08-04 ~15:45 CEST** — Richnerstutz SEG (627 828): Print **angekommen**; Harald-Outbound mit Material-Kritik (Webhook-Text abgebrochen). Kein Druckerei-Reply. Kein Outbound ohne Harald-Go.
 Ziel: eine andere Cursor-Instanz auf einem anderen Rechner kann ohne mündlichen Kontext weiterarbeiten.
 
 **Workflow (verbindlich):** `.cursor/rules/hotel-anker-workflow.mdc` — jeden Schritt dokumentieren (Erfolg+Misserfolg), Credentials/Learnings mitziehen, commit + `git push origin HEAD`.
@@ -284,3 +284,17 @@ Not done: fb-clock/ffprobe verify (unreachable). Do not unmask.
 - Harald: Deliverables (ZIP, Druck-PDFs, Fotos, Offerte) **müssen** im Repo sein — kein «zu groß / nur Desktop».
 - `.gitignore` bereinigt: keine Ignore-Regeln mehr für print/media-Pakete; nur Scratch `_encode*` / venv / `__pycache__`.
 - Spiegel: `Richnerstutz-Bespannung-Paket/versand/` (Finale ZIP + Offerte + User-PDF).
+
+## Richnerstutz — Produktionsstart Melanie Vogt (2026-07-29 ~14:04 CEST)
+
+- Echter Reply: GO + Lieferadresse erhalten; Produktion startet sofort. Job SEG (627 828).
+- Vorher: Harald-Freigabe ~14:01 („Sehr gut so“, Versand Realia AG Rorschach); Gut zum Druck ~07:39 (Gebäude verpixelt, bewusst akzeptiert).
+
+## Richnerstutz — Lieferung + Material-Kritik Harald outbound (2026-08-04 ~15:45 CEST)
+
+- **Webhook:** `from: harald.nowak@modernlight.ch` — **kein** Richnerstutz-Reply (eigene Outbound-Mail / Zapier-Echo).
+- **Betreff:** `Re: Modernlight Production AG, Hotel Anker Rorschach - SEG (627 828)`
+- **Gmail:** message_id `19fcd05a76a1396e` · thread `19fac62d97c94e3d` · date Tue, 4 Aug 2026 15:45:27 +0200
+- **Inhalt (unvollständig):** Print heute angekommen; Dank schnelle Bearbeitung; **Grundmaterial** „wirkt komp…“ (abgebrochen — vermutlich „kompakt“).
+- **Risiken:** Material zu dicht für Backlit/LED-Transluzenz; Abweichung von Offerte Lumina+Multilayer; Nacharbeit/Ersatz möglich.
+- **Status:** Ware angekommen; Material-Feedback klären. Entwurf: `01-anfrage/Mail-Entwurf-Material-Feedback-2026-08-04.md`. **STOP** — kein Outbound ohne Harald-Go.

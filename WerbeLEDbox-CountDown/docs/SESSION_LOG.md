@@ -488,3 +488,26 @@ Goal: stabile 860×360 H.264-Produktion statt 4K `st24.mov` auf PI02 (Undervolta
 | `.gitignore` | Media/print-Ignore entfernt (Policy: track deliverables) |
 | Push | folgt |
 
+## 2026-07-29 ~14:04 CEST — Richnerstutz Produktionsstart (Melanie Vogt)
+
+| Item | Wert |
+|------|------|
+| From | `Melanie.Vogt@richnerstutz.ch` |
+| Subject | `RE: Modernlight Production AG, Hotel Anker Rorschach - SEG (627 828)` |
+| Thread / Msg | `19fac62d97c94e3d` / `19fadc335e9acd33` |
+| Inhalt | Dank GO + Lieferadresse; **Produktion startet gleich** |
+| Status | Produktion gestartet; offen war Liefertermin |
+
+## 2026-08-04 ~15:45 CEST — Harald outbound: Print angekommen + Material-Kritik (kein Druckerei-Reply)
+
+| Item | Wert |
+|------|------|
+| From | `harald.nowak@modernlight.ch` (**eigenes Outbound / Zapier-Echo**) |
+| Subject | `Re: Modernlight Production AG, Hotel Anker Rorschach - SEG (627 828)` |
+| Date | Tue, 4 Aug 2026 15:45:27 +0200 |
+| Thread / Msg | `19fac62d97c94e3d` / `19fcd05a76a1396e` |
+| Inhalt | Print heute angekommen; Dank; Grundmaterial „wirkt komp…“ (**Webhook abgebrochen**) |
+| Klassifikation | **Kein** Richnerstutz-Reply → Watcher stoppt Outbound |
+| Status | Ware **angekommen**; Material-Feedback klären |
+| Entwurf | `Mail-Entwurf-Material-Feedback-2026-08-04.md` — **STOP** ohne Harald-Go |
+
