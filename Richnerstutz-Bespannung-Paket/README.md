@@ -2,6 +2,8 @@
 
 Alles für die Anfrage an **Richnerstutz AG** (Druck + Konfektion mit Kederschienenlippe).
 
+**Status 2026-08-04:** Ware angekommen — Material beanstandet (komplett lichtundurchlässig/schwarz). Siehe `01-anfrage/MAIL-MATERIAL-META.md`. **Kein Outbound ohne Harald-Go.**
+
 | | |
 |--|--|
 | **Auftraggeber** | Realia AG (Gottlieb Kündig), Industriestrasse 40b, 9400 Rorschach, UID CHE-113.325.481 |

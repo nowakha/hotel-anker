@@ -488,3 +488,17 @@ Goal: stabile 860×360 H.264-Produktion statt 4K `st24.mov` auf PI02 (Undervolta
 | `.gitignore` | Media/print-Ignore entfernt (Policy: track deliverables) |
 | Push | folgt |
 
+## 2026-08-04 ~15:47 CEST — Harald Material-Kritik outbound (kein Druckerei-Reply)
+
+| Item | Wert |
+|------|------|
+| From | `harald.nowak@modernlight.ch` (**eigenes Outbound / Zapier-Echo**) |
+| Subject | `Re: Modernlight Production AG, Hotel Anker Rorschach - SEG (627 828)` |
+| Date | Tue, 4 Aug 2026 15:47:33 +0200 |
+| Thread / Msg | `19fac62d97c94e3d` / `19fcd079537beb1c` |
+| Inhalt | Print angekommen; Dank Tempo; Material **komplett lichtundurchlässig und schwarz**; Opera-/Rückpro-Frage; Body bricht bei „sofotrt“ ab |
+| Klassifikation | **Kein** Richnerstutz-Reply |
+| Risiko | Backlit unbrauchbar wenn Vollflächen-Blockout statt Lumina/Multilayer |
+| Status | Ware da / Material beanstandet; Entwurf Reklamation bereit; **STOP** ohne Harald-Go |
+| Docs | `MAIL-MATERIAL-META.md`, `Mail-Entwurf-Material-Reklamation-2026-08-04.md`, Anfrage-Status |
+
