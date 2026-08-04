@@ -284,3 +284,18 @@ Not done: fb-clock/ffprobe verify (unreachable). Do not unmask.
 - Harald: Deliverables (ZIP, Druck-PDFs, Fotos, Offerte) **müssen** im Repo sein — kein «zu groß / nur Desktop».
 - `.gitignore` bereinigt: keine Ignore-Regeln mehr für print/media-Pakete; nur Scratch `_encode*` / venv / `__pycache__`.
 - Spiegel: `Richnerstutz-Bespannung-Paket/versand/` (Finale ZIP + Offerte + User-PDF).
+
+## Richnerstutz — Produktionsstart Melanie Vogt (2026-07-29 ~14:04 CEST)
+
+- **Echter Reply** `Melanie.Vogt@richnerstutz.ch` — GO + Lieferadresse erhalten; Produktion startet sofort.
+- Msg `19fadc335e9acd33` / Thread `19fac62d97c94e3d`. Freigabe Harald zuvor ~14:01 („Sehr gut so“, Pixelung akzeptiert).
+
+## Richnerstutz — Ware + Material-Kritik Harald outbound (2026-08-04 ~15:47 CEST)
+
+- **Webhook:** `from: harald.nowak@modernlight.ch` — **kein** Druckerei-Reply (Outbound / Zapier-Echo).
+- **Betreff:** `Re: Modernlight Production AG, Hotel Anker Rorschach - SEG (627 828)`
+- **Gmail:** message_id `19fcd079537beb1c` · thread `19fac62d97c94e3d` · date Tue, 4 Aug 2026 15:47:33 +0200
+- **Inhalt:** Print heute angekommen; Dank für Tempo; Grundmaterial wirkt **komplett lichtundurchlässig (und schwarz)**; Frage ob Opera-Folie wie Rückpro-Leinwand; Satz bricht bei „Da muss wohl sofotrt“ ab.
+- **Früherer Truncate (~15:45):** „wirkt komp…“ — war **nicht** „kompakt“, sondern **komplett lichtundurchlässig**.
+- **Risiko:** Vollflächen-Blockout statt Offerte Lumina + Multilayer → Backlit tot. Kritisch für LED-Countdown.
+- **Status:** Ware da / Material beanstandet. Entwurf `01-anfrage/Mail-Entwurf-Material-Reklamation-2026-08-04.md`. **STOP — kein Outbound ohne Harald-Go.** Meta: `MAIL-MATERIAL-META.md`.
