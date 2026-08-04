@@ -488,3 +488,13 @@ Goal: stabile 860×360 H.264-Produktion statt 4K `st24.mov` auf PI02 (Undervolta
 | `.gitignore` | Media/print-Ignore entfernt (Policy: track deliverables) |
 | Push | folgt |
 
+
+## 2026-08-04 — Reklamation: Print ohne Durchlicht
+
+| Item | Status |
+|------|--------|
+| Foto installiert | `08-reklamation-licht/2026-08-04-installiert-kein-durchlicht.png` |
+| Mail Harald → Richner | gesendet; warten auf Antwort |
+| Symptom | Grundmaterial wirkt voll opak / schwarz, kein LED-Durchschein |
+| Soll | Backlit + selektive Opazität laut Platte |
+
