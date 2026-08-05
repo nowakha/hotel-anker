@@ -21,6 +21,7 @@ Alles für die Anfrage an **Richnerstutz AG** (Druck + Konfektion mit Kederschie
 | `05-vorschauen/` | Kleine Previews zum schnellen Anschauen |
 | `06-fotos-vom-rahmen/` | Fotos / Auswertung |
 | `07-lichtvideo/` | Neu berechnetes LED-Lichtvideo (GIF + Stills) |
+| `08-reklamation-licht/` | Install-Foto + Reklamation 2026-08-04; Melanie-FW 2026-08-05 (Material-Verdacht) |
 
 ## Was Richnerstutz braucht (Priorität)
 
@@ -39,4 +40,4 @@ Optional: Massblatt-Overlays in `04-vorlagen-massblatt/`, Vorschauen in `05-vors
 Richnerstutz AG · Nordstrasse 7 · 5612 Villmergen  
 info@richnerstutz.ch · +41 56 616 67 67 · https://richnerstutz.ch/kontakt
 
-| `08-reklamation-licht/` | Install-Foto + Reklamation 2026-08-04 (kein Durchlicht) |
+**Status 2026-08-05:** Reklamation (kein Durchlicht) → Melanie intern an Tanja („Evt falsches Material?“). Formelle Antwort / Nachdruck offen. Details: `08-reklamation-licht/`.

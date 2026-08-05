@@ -1,6 +1,7 @@
 # Reklamation an Richnerstutz — 2026-08-04
 
-**Status:** Gesendet durch Harald; **warten auf Antwort**.
+**Status:** Gesendet durch Harald 2026-08-04.  
+**Update 2026-08-05:** Melanie Vogt hat intern an Tanja weitergeleitet („Evt falsches Material?“). Msg `19fd061e190ff598` / Thread `19fac62d97c94e3d`. Formelle Antwort / Nachdruck-Zusage noch offen.
 
 **Foto:** `2026-08-04-installiert-kein-durchlicht.png` (Installiert am Hotel Anker; kein Durchleuchten sichtbar)
 
@@ -24,4 +25,5 @@ Gruss Harald Nowak
 
 ## Nächster Schritt
 
-Antwort Richnerstutz abwarten → dann Nachdruck / Materialkorrektur mit Muster-Abnahme vor Vollfläche.
+Formelle Antwort Tanja/Melanie abwarten (Material, Nachdruck, Kosten, Termin).  
+Entwurf für Harald (nur nach Go absenden): `Mail-Entwurf-Antwort-2026-08-05.md`.
