@@ -498,3 +498,17 @@ Goal: stabile 860×360 H.264-Produktion statt 4K `st24.mov` auf PI02 (Undervolta
 | Symptom | Grundmaterial wirkt voll opak / schwarz, kein LED-Durchschein |
 | Soll | Backlit + selektive Opazität laut Platte |
 
+
+## 2026-08-05 ~07:24 CEST — Melanie Vogt FW intern an Tanja (Material-Verdacht)
+
+| Item | Detail |
+|------|--------|
+| From | Melanie.Vogt@richnerstutz.ch |
+| Subject | FW: Modernlight Production AG, Hotel Anker Rorschach - SEG (627 828) |
+| Date | Wed, 5 Aug 2026 05:24:51 +0000 |
+| Msg / Thread | `19fd061e190ff598` / `19fac62d97c94e3d` |
+| Inhalt | Melanie → Tanja: „Darf ich dir das Mail so weiterleiten? Evt falsches Material?“ + Thread mit Harald-Reklamation 04.08. |
+| Bewertung | Echter Richnerstutz-Hit; intern eskaliert; **noch keine Lösung an Harald** |
+| Risiko | Ware unbrauchbar für Backlit; Nachdruck/Kosten/Termin offen; Muster übersprungen? |
+| Aktion Agent | Docs + Entwurf aktualisiert; **kein Outbound**; STOP bis Harald-Go |
+

@@ -1,8 +1,12 @@
 # Anfrage an Richnerstutz AG — Textilbespannung LightBox Hotel Anker
 
-**Status:** **Gesendet** 2026-07-23 ~17:27 CEST — von `harald.nowak@modernlight.ch` an `info@richnerstutz.ch` (Gmail Web UI), Anhang `Hotel-Anker-Richnerstutz-Bespannung.zip`.  
+**Status:** Anfrage gesendet 2026-07-23 → Offerte AG 461414 / Job **SEG (627 828)** → Druckfreigabe 2026-07-29 → Lieferung ~2026-08-04.  
 
-**Korrektur Druckmaß (2026-07-27):** Kanonischer Master ist **2100 × 2100 mm** Spannmaß mit **300 mm** Schwarz unten (`DRUCK-Hotel-Anker-Flowbox-2100x2100.pdf`). Offerte AG 461414 („Textil 200×200 cm“) weicht ab — **Nachtrag an Richnerstutz:** bitte auf **210×210 cm** / MediaBox 2100 mm umstellen.  
+**Reklamation 2026-08-04:** Print **ohne Durchlicht** (Material wirkt voll opak). Harald reklamiert.  
+
+**Update 2026-08-05 ~07:24 CEST:** Melanie Vogt FW intern an Tanja — „Evt falsches Material?“ (Msg `19fd061e190ff598`, Thread `19fac62d97c94e3d`). Formelle Antwort / Nachdruck noch offen. **STOP** ohne Harald-Go.  
+
+**Korrektur Druckmaß (2026-07-27):** Kanonischer Master ist **2100 × 2100 mm** Spannmaß mit **300 mm** Schwarz unten (`DRUCK-Hotel-Anker-Flowbox-2100x2100.pdf`). Offerte AG 461414 („Textil 200×200 cm“) weicht ab — Nachtrag war 210×210 cm.  
 
 **Empfänger:** Richnerstutz AG, Nordstrasse 7, 5612 Villmergen · info@richnerstutz.ch · +41 56 616 67 67  
 **Auftraggeber:** Realia AG (Gottlieb Kündig), Industriestrasse 40b, 9400 Rorschach · UID CHE-113.325.481  
