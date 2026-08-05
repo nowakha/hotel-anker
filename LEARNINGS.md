@@ -289,5 +289,12 @@ Not done: fb-clock/ffprobe verify (unreachable). Do not unmask.
 
 - Print installiert am Hotel Anker: wirkt **komplett lichtundurchlässig** (Foto in `08-reklamation-licht/`).
 - Harald hat Richnerstutz bereits reklamiert (Opera-/Rückpro-Vergleich; Nachdruck auf richtigem Untergrund).
-- **Warten auf Antwort Richnerstutz.**
 - Spec war Backlit + selektiver Blockout; Ergebnis passt nicht — Ursache offen (Material/Layer/Kommunikation/Muster übersprungen).
+
+## Richnerstutz Antwort Tanja Jelk (2026-08-05 ~14:50 CEST / 12:50 UTC)
+
+- **Von:** `Tanja.Jelk@richnerstutz.ch` · Betreff `WG: … Hotel Anker Rorschach - SEG (627 828)` · Thread `19fac62d97c94e3d` · Msg `19fd1f99bf599a4f`.
+- **Inhalt:** Morgen im Büro → mit Produktion prüfen → meldet sich morgen.
+- Thread-Kontext: Melanie Vogt (~07:24) FW intern an Tanja mit Verdacht „Evt falsches Material?“ + Harald-Reklamation 2026-08-04.
+- **Noch offen:** Materialname, Bestätigung Lumina/Backlit transluzent, Nachdruck-Go, Termin, Kosten, Muster.
+- **STOP:** Kein Outbound ohne Harald-Go. Entwurf: `08-reklamation-licht/Mail-Entwurf-Antwort-2026-08-05.md`.

@@ -498,3 +498,16 @@ Goal: stabile 860×360 H.264-Produktion statt 4K `st24.mov` auf PI02 (Undervolta
 | Symptom | Grundmaterial wirkt voll opak / schwarz, kein LED-Durchschein |
 | Soll | Backlit + selektive Opazität laut Platte |
 
+## 2026-08-05 ~14:50 CEST — Tanja Jelk: Prüfung mit Produktion morgen
+
+| Item | Wert |
+|------|------|
+| From | `Tanja.Jelk@richnerstutz.ch` |
+| Subject | `WG: Modernlight Production AG, Hotel Anker Rorschach - SEG (627 828)` |
+| Date | Wed, 5 Aug 2026 12:50:18 +0000 |
+| Thread / Msg | `19fac62d97c94e3d` / `19fd1f99bf599a4f` |
+| Aussage | Morgen Büro → mit Produktion anschauen → meldet sich morgen |
+| Vorlauf Melanie | ~07:24 FW an Tanja: „Evt falsches Material?“ |
+| Offen | Material, Nachdruck, Termin, Kosten, Muster |
+| Outbound | **STOP** — warte Harald-Go; Entwurf in `08-reklamation-licht/Mail-Entwurf-Antwort-2026-08-05.md` |
+

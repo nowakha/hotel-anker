@@ -11,6 +11,10 @@ E-Mail: info@richnerstutz.ch
 Telefon: +41 56 616 67 67  
 Web: https://richnerstutz.ch/kontakt  
 
+**Aktuelle Ansprechpersonen (Job SEG 627 828):**  
+- Tanja Jelk — `Tanja.Jelk@richnerstutz.ch` (Offerte / Produktion)  
+- Melanie Vogt — `Melanie.Vogt@richnerstutz.ch` (Druckvorstufe)  
+
 ## Auftraggeber (Rechnung)
 
 **Realia AG**  
