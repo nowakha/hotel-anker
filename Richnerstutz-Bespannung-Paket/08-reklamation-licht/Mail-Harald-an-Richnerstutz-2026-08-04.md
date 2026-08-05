@@ -1,6 +1,8 @@
 # Reklamation an Richnerstutz — 2026-08-04
 
-**Status:** Gesendet durch Harald; **warten auf Antwort**.
+**Status:** Gesendet durch Harald 2026-08-04.  
+**Zwischenantwort:** Tanja Jelk 2026-08-05 ~14:50 CEST — prüft morgen mit Produktion, meldet sich.  
+**Noch offen:** formelle Material-/Nachdruck-Lösung (kein Go, kein Termin, keine Kosten).
 
 **Foto:** `2026-08-04-installiert-kein-durchlicht.png` (Installiert am Hotel Anker; kein Durchleuchten sichtbar)
 
