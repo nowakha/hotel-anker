@@ -289,5 +289,14 @@ Not done: fb-clock/ffprobe verify (unreachable). Do not unmask.
 
 - Print installiert am Hotel Anker: wirkt **komplett lichtundurchlässig** (Foto in `08-reklamation-licht/`).
 - Harald hat Richnerstutz bereits reklamiert (Opera-/Rückpro-Vergleich; Nachdruck auf richtigem Untergrund).
-- **Warten auf Antwort Richnerstutz.**
 - Spec war Backlit + selektiver Blockout; Ergebnis passt nicht — Ursache offen (Material/Layer/Kommunikation/Muster übersprungen).
+
+## Richnerstutz Thread SEG 627 828 — Tanja + Harald Klarstellung (2026-08-06)
+
+- Job: **SEG (627 828)** / Hotel Anker Rorschach / Thread `19fac62d97c94e3d`.
+- **Tanja Jelk ~15:48:** Intern + Digital-Abteilung; unsicher ob LED-Screen (Textil ohne Abstand streut nicht) vs. angesteuerter Leuchtkasten; **Musterstück** Druck **morgen Mittag** (~07.08.); asap Rückmeldung.
+- **Harald outbound ~15:53** (Msg `19fd7598a37586fe`, from Harald — kein neuer Richner-Inbound): Kendu Flowbox-URL; LEDs **~4,5 cm** hinter Bespannung; Tuchfläche hätte **farblos/unbedruckt** sein sollen; Referenz Rückprojektionsfolie grau (Rabenring); Material bei Bestellung unklar formuliert.
+- Geometrie Repo: Textil→LED **45 mm** — passt zu Haralds 4,5 cm; **kein** Direct-View-Screen.
+- **Spannung:** Spec = bedrucktes Backlit + selektiver Blockout; Haralds Mail sagt «unbedruckt» — vermutlich transluzentes Grundmaterial gemeint, nicht Verzicht auf Sujet.
+- **Offen:** Muster-Ergebnis, welches Material die gelieferte Ware hat, Nachdruck/Kosten/Termin, Totzone 300 mm.
+- **STOP:** kein weiteres Outbound ohne Harald-Go. Docs: `08-reklamation-licht/`.
