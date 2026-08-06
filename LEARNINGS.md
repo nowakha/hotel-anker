@@ -285,9 +285,11 @@ Not done: fb-clock/ffprobe verify (unreachable). Do not unmask.
 - `.gitignore` bereinigt: keine Ignore-Regeln mehr für print/media-Pakete; nur Scratch `_encode*` / venv / `__pycache__`.
 - Spiegel: `Richnerstutz-Bespannung-Paket/versand/` (Finale ZIP + Offerte + User-PDF).
 
-## Reklamation Richnerstutz — kein Durchlicht (2026-08-04)
+## Reklamation Richnerstutz — kein Durchlicht (2026-08-04 → 2026-08-06)
 
 - Print installiert am Hotel Anker: wirkt **komplett lichtundurchlässig** (Foto in `08-reklamation-licht/`).
-- Harald hat Richnerstutz bereits reklamiert (Opera-/Rückpro-Vergleich; Nachdruck auf richtigem Untergrund).
-- **Warten auf Antwort Richnerstutz.**
-- Spec war Backlit + selektiver Blockout; Ergebnis passt nicht — Ursache offen (Material/Layer/Kommunikation/Muster übersprungen).
+- Harald reklamiert 2026-08-04 (Opera-/Rückpro-Verdacht; Nachdruck). Spec: Backlit + selektiver Blockout.
+- **2026-08-05 ~14:50** Tanja Jelk: intern/Produktion prüfen, meldet sich morgen — noch keine Lösung.
+- **2026-08-06 ~15:48** Tanja Jelk (SEG 627 828): Unsicherheit LED-Screen vs. Leuchtkasten; Stoff ohne Abstand streut nicht; sie gingen von angesteuertem Leuchtkasten aus; **Musterstück** intern, Druck **morgen Mittag** fertig, meldet sich asap.
+- **2026-08-06 ~15:51** Harald outbound: Kendu-Flowbox-Link + «LEDs liegen etwa 4.5 cm hinter» (Msg `19fd7579987c316e` / Thread `19fac62d97c94e3d`). Satz wirkt abgeschnitten («hinter …»).
+- **Offen:** Materialname der gelieferten Ware, Nachdruck-Go/Kosten, Liefertermin Ersatz, Muster-Ergebnis. **STOP** — kein weiteres Outbound ohne Harald-Go.
