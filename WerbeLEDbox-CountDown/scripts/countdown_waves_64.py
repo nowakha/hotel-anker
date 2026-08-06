@@ -54,24 +54,45 @@ from layout_countdown_view import (  # noqa: E402
 
 TARGET = datetime(2026, 10, 1, 13, 0, 0, tzinfo=TZ)
 
-# Blue wave field (high pre-dim contrast); non-digit chrome → 25% in render_frame
+# --- Night look (proven through dark print at dusk) ---
 NAVY = np.array([0, 2, 22], dtype=np.float32)
 NAVY_MID = np.array([0, 28, 140], dtype=np.float32)
 NAVY_HI = np.array([0, 90, 255], dtype=np.float32)
-# Everything except lit digits/colons is at 25% display brightness
-NON_DIGIT_BRIGHTNESS = 0.25
-# Max orange digits (not yellow): full R, low G, no wash
+NON_DIGIT_BRIGHTNESS_NIGHT = 0.25
 AMBER = np.array([255, 96, 0], dtype=np.uint8)
 AMBER_HI = np.array([255, 88, 0], dtype=np.uint8)
 GOLD = np.array([180, 90, 16], dtype=np.uint8)
 GOLD_HI = np.array([220, 120, 24], dtype=np.uint8)
 GOLD_SHINE = np.array([255, 170, 60], dtype=np.uint8)
 WHITE = np.array([255, 255, 255], dtype=np.uint8)
-DIGIT = AMBER_HI  # lit segments — undimmed max orange
+DIGIT = AMBER_HI  # lit segments — night default (max orange)
 GHOST = np.array([0, 0, 0], dtype=np.uint8)  # unused 8-segments: black
+
+# --- Day look (opaque textile needs full LED power) ---
+DAY_NAVY = np.array([0, 55, 95], dtype=np.float32)
+DAY_NAVY_MID = np.array([0, 185, 220], dtype=np.float32)
+DAY_NAVY_HI = np.array([110, 255, 255], dtype=np.float32)
+NON_DIGIT_BRIGHTNESS_DAY = 1.0
+DAY_DIGIT = WHITE  # full-power white numerals
+DAY_GOLD = np.array([255, 130, 0], dtype=np.float32)
+DAY_GOLD_HI = np.array([255, 175, 25], dtype=np.float32)
+DAY_GOLD_SHINE = np.array([255, 230, 90], dtype=np.float32)
+DAY_HOT = np.array([255, 190, 50], dtype=np.float32)
+
+# Rorschach (Hotel Anker) — solar elevation for real daylight fade
+RORSCHACH_LAT = 47.4789
+RORSCHACH_LON = 9.4902
+# Civil twilight (~-6°) → bright day (~+10°): smooth day_factor 0..1
+DAY_ELEV_LO = -6.0
+DAY_ELEV_HI = 10.0
+
+# Runtime look: "auto" (solar), "day", or "night" — set via --look / COUNTDOWN_LOOK
+_LOOK_MODE = "auto"
 
 SHM = "shm://ws2812"
 OUT = ASSETS / "kendu-64x64"
+# Keep old name for night chrome default (tests / docs)
+NON_DIGIT_BRIGHTNESS = NON_DIGIT_BRIGHTNESS_NIGHT
 
 DAYS_X, DAY_Y, TIME_X, TIME_Y, COLONS = layout_origins_cells()
 assert DAY_Y + DH <= TIME_Y
@@ -94,6 +115,73 @@ _GOLD_F = GOLD.astype(np.float32)
 _GOLD_HI_F = GOLD_HI.astype(np.float32)
 _GOLD_SHINE_F = GOLD_SHINE.astype(np.float32)
 _HOT_F = np.array([255.0, 160.0, 40.0], dtype=np.float32)  # orange-hot, not cream
+_AMBER_HI_F = AMBER_HI.astype(np.float32)
+
+
+def _smoothstep(edge0: float, edge1: float, x: float) -> float:
+    t = (x - edge0) / (edge1 - edge0) if edge1 != edge0 else 0.0
+    t = 0.0 if t < 0.0 else 1.0 if t > 1.0 else t
+    return t * t * (3.0 - 2.0 * t)
+
+
+def _julian_day_utc(dt_utc: datetime) -> float:
+    y, m = dt_utc.year, dt_utc.month
+    day = (
+        dt_utc.day
+        + (dt_utc.hour + dt_utc.minute / 60.0 + dt_utc.second / 3600.0) / 24.0
+    )
+    if m <= 2:
+        y -= 1
+        m += 12
+    a = y // 100
+    b = 2 - a + a // 4
+    return int(365.25 * (y + 4716)) + int(30.6001 * (m + 1)) + day + b - 1524.5
+
+
+def solar_elevation_deg(
+    when: datetime | None = None,
+    *,
+    lat: float = RORSCHACH_LAT,
+    lon: float = RORSCHACH_LON,
+) -> float:
+    """Apparent solar elevation (degrees) for Rorschach / given lat,lon."""
+    if when is None:
+        when = datetime.now(TZ)
+    elif when.tzinfo is None:
+        when = when.replace(tzinfo=TZ)
+    utc = when.astimezone(timezone.utc)
+    jd = _julian_day_utc(utc)
+    n = jd - 2451545.0
+    L = (280.460 + 0.9856474 * n) % 360.0
+    g = math.radians((357.528 + 0.9856003 * n) % 360.0)
+    lam = math.radians((L + 1.915 * math.sin(g) + 0.020 * math.sin(2.0 * g)) % 360.0)
+    eps = math.radians(23.439 - 0.0000004 * n)
+    ra = math.atan2(math.cos(eps) * math.sin(lam), math.cos(lam))
+    dec = math.asin(math.sin(eps) * math.sin(lam))
+    gmst = (280.46061837 + 360.98564736629 * (jd - 2451545.0)) % 360.0
+    lst = math.radians((gmst + lon) % 360.0)
+    ha = lst - ra
+    lat_r = math.radians(lat)
+    elev = math.asin(
+        math.sin(lat_r) * math.sin(dec)
+        + math.cos(lat_r) * math.cos(dec) * math.cos(ha)
+    )
+    return math.degrees(elev)
+
+
+def day_factor(now: datetime | None = None) -> float:
+    """0 = night look, 1 = full-power day look. Forced via _LOOK_MODE."""
+    mode = (_LOOK_MODE or "auto").strip().lower()
+    if mode in ("day", "full", "1"):
+        return 1.0
+    if mode in ("night", "0"):
+        return 0.0
+    elev = solar_elevation_deg(now)
+    return _smoothstep(DAY_ELEV_LO, DAY_ELEV_HI, elev)
+
+
+def _lerp_rgb(a: np.ndarray, b: np.ndarray, t: float) -> np.ndarray:
+    return a * (1.0 - t) + b * t
 
 
 def _ensure_grids() -> tuple[np.ndarray, np.ndarray]:
@@ -256,21 +344,37 @@ def _blit_mask(buf: np.ndarray, ox: int, oy: int, mask: np.ndarray, color: np.nd
     dest[region > 0] = color
 
 
-def paint_digit_with_ghost(buf: np.ndarray, ox: int, oy: int, value: int) -> None:
-    """DSEG7: black ghost-8 (no outline), then lit digit in gold."""
+def paint_digit_with_ghost(
+    buf: np.ndarray,
+    ox: int,
+    oy: int,
+    value: int,
+    *,
+    digit_color: np.ndarray | None = None,
+) -> None:
+    """DSEG7: black ghost-8 (no outline), then lit digit (night amber / day white)."""
     ghost_m = _dseg_mask("8", DW)
     lit_m = _dseg_mask(str(value), DW)
     if ghost_m is None or lit_m is None:
         return
+    color = DIGIT if digit_color is None else digit_color
     _blit_mask(buf, ox, oy, ghost_m, GHOST)
-    _blit_mask(buf, ox, oy, lit_m, DIGIT)
+    _blit_mask(buf, ox, oy, lit_m, color)
 
 
-def paint_colon(buf: np.ndarray, ox: int, oy: int, lit: bool) -> None:
+def paint_colon(
+    buf: np.ndarray,
+    ox: int,
+    oy: int,
+    lit: bool,
+    *,
+    digit_color: np.ndarray | None = None,
+) -> None:
     """Two-dot colon centered in COLON_W; midpoint == vertical center of the 8s."""
     from layout_countdown_view import COLON_W
 
-    color = DIGIT if lit else GHOST
+    base = DIGIT if digit_color is None else digit_color
+    color = base if lit else GHOST
     # Single LED per dot when COLON_W=2; 2×2 only if slot is wider — matches print ~6% DH
     side = 1 if COLON_W <= 2 else 2
     cx0 = ox + max(0, (COLON_W - side) // 2)
@@ -380,8 +484,8 @@ def logo_mask_64() -> np.ndarray | None:
     return _LOGO_MASK
 
 
-def wave_background(t: float) -> np.ndarray:
-    """Blue waves with clear contrast, soft slow motion; facade lines secondary."""
+def wave_background(t: float, day_f: float = 0.0) -> np.ndarray:
+    """Waves: night navy → day luminous cyan; facade lines secondary."""
     yy, xx = _ensure_grids()
 
     # Soft, slow multi-layer motion (3 layers — enough contrast, cheaper @25 fps)
@@ -397,44 +501,55 @@ def wave_background(t: float) -> np.ndarray:
     field = np.clip((field + 1.05) / 1.85, 0.0, 1.0)
     field = np.power(field, 0.72)
 
+    navy = _lerp_rgb(NAVY, DAY_NAVY, day_f)
+    mid = _lerp_rgb(NAVY_MID, DAY_NAVY_MID, day_f)
+    hi = _lerp_rgb(NAVY_HI, DAY_NAVY_HI, day_f)
+
     f = field[..., None]
     rgb = (
-        NAVY[None, None, :] * (1.0 - f)
-        + NAVY_MID[None, None, :] * (0.45 * f)
-        + NAVY_HI[None, None, :] * (0.85 * f * f)
+        navy[None, None, :] * (1.0 - f)
+        + mid[None, None, :] * (0.45 * f)
+        + hi[None, None, :] * (0.85 * f * f)
     )
 
     # White hotel lines — light support (bool mask cached)
     blueprint_mask_64()
     if _BP_LINE is not None and _BP_LINE.any():
         act = rgb[:ACTIVE_H]
-        # match prior mix: strength 0.72 → keep 0.5536, add white 0.6336
-        act[_BP_LINE] = act[_BP_LINE] * 0.5536 + _WHITE_F * 0.6336
+        # Day: brighter facade ink so the building still reads through dense textile
+        keep = 0.5536 - 0.15 * day_f
+        add = 0.6336 + 0.25 * day_f
+        act[_BP_LINE] = act[_BP_LINE] * keep + _WHITE_F * add
 
     logo = logo_mask_64()
     if logo is not None:
-        rgb[logo > 0.5] = _AMBER_F
+        # Night amber mark → day hot orange (stays brand, punches through print)
+        logo_c = _lerp_rgb(_AMBER_F, DAY_HOT, day_f)
+        rgb[logo > 0.5] = logo_c
 
     if _BP_DEAD is not None:
         dead = rgb[ACTIVE_H:]
         dead[:] = 0
         if _BP_DEAD.any():
-            dead[_BP_DEAD] = _WHITE_F * 0.55
+            dead[_BP_DEAD] = _WHITE_F * (0.55 + 0.35 * day_f)
     else:
         rgb[ACTIVE_H:, :, :] = 0
     return np.clip(rgb, 0, 255).astype(np.uint8)
 
 
-def paint_liquid_glass_bars(buf: np.ndarray, t: float, *, final: bool = False) -> None:
+def paint_liquid_glass_bars(
+    buf: np.ndarray, t: float, *, final: bool = False, day_f: float = 0.0
+) -> None:
     """Liquid Glass bars — title (slower) + narrow label bars (independent motion).
 
     When final=True, colors are written at display intensity (after chrome dim).
     Narrow 2-row bars use a high-contrast traveling caustic so motion reads clearly.
+    Day: very bright orange liquid glass (full LED power through dense textile).
     """
-    gold = _GOLD_F
-    gold_hi = _GOLD_HI_F
-    shine = _GOLD_SHINE_F
-    hot = _HOT_F
+    gold = _lerp_rgb(_GOLD_F, DAY_GOLD, day_f)
+    gold_hi = _lerp_rgb(_GOLD_HI_F, DAY_GOLD_HI, day_f)
+    shine = _lerp_rgb(_GOLD_SHINE_F, DAY_GOLD_SHINE, day_f)
+    hot = _lerp_rgb(_HOT_F, DAY_HOT, day_f)
     xx = _ensure_glass_xx()
 
     # (y0, h, speed, phase0, pulse_hz, breath_hz) — label bars async vs title
@@ -540,65 +655,90 @@ def paint_liquid_glass_bars(buf: np.ndarray, t: float, *, final: bool = False) -
 
 
 def render_frame(t: float, now: datetime | None = None) -> np.ndarray:
-    """Viewer-upright: all chrome @25%, digits/colons max orange undimmed."""
-    buf = wave_background(t)
-    # Glass into the composition BEFORE dim — then whole chrome hits 25%
-    paint_liquid_glass_bars(buf, t, final=False)
+    """Viewer-upright: chrome dimmed by day_factor; digits undimmed (amber→white)."""
+    if now is None:
+        now = datetime.now(TZ)
+    elif now.tzinfo is None:
+        now = now.replace(tzinfo=TZ)
 
-    active = buf[:ACTIVE_H].astype(np.float32) * NON_DIGIT_BRIGHTNESS
+    df = day_factor(now)
+    chrome = NON_DIGIT_BRIGHTNESS_NIGHT + (
+        NON_DIGIT_BRIGHTNESS_DAY - NON_DIGIT_BRIGHTNESS_NIGHT
+    ) * df
+    dig = np.clip(
+        _lerp_rgb(_AMBER_HI_F, DAY_DIGIT.astype(np.float32), df), 0, 255
+    ).astype(np.uint8)
+
+    buf = wave_background(t, day_f=df)
+    # Glass into the composition BEFORE dim — then whole chrome hits day/night level
+    paint_liquid_glass_bars(buf, t, final=False, day_f=df)
+
+    active = buf[:ACTIVE_H].astype(np.float32) * chrome
     buf[:ACTIVE_H] = np.clip(active, 0, 255).astype(np.uint8)
 
     if _BP_DEAD is not None:
         dead = buf[ACTIVE_H:]
         dead[:] = 0
         if _BP_DEAD.any():
-            # Same 25% rule for overhang lines in dead band
-            dead[_BP_DEAD] = (_WHITE_F * 0.55 * NON_DIGIT_BRIGHTNESS).astype(np.uint8)
+            dead[_BP_DEAD] = (_WHITE_F * (0.55 + 0.35 * df) * chrome).astype(np.uint8)
         buf[ACTIVE_H:] = dead
     else:
         buf[ACTIVE_H:, :, :] = 0
 
-    # Digits / colons AFTER dim — full max orange
+    # Digits / colons AFTER dim — full power (white by day, amber by night)
     days, hours, mins, secs = remaining(now)
     d_vals = [days // 100, (days // 10) % 10, days % 10]
     t_vals = [hours // 10, hours % 10, mins // 10, mins % 10, secs // 10, secs % 10]
 
     for ox, val in zip(DAYS_X, d_vals):
-        paint_digit_with_ghost(buf, ox, DAY_Y, val)
+        paint_digit_with_ghost(buf, ox, DAY_Y, val, digit_color=dig)
     for ox, val in zip(TIME_X, t_vals):
-        paint_digit_with_ghost(buf, ox, TIME_Y, val)
+        paint_digit_with_ghost(buf, ox, TIME_Y, val, digit_color=dig)
 
     for cx, cy in COLONS:
-        paint_colon(buf, cx, cy, lit=(secs % 2) == 0)
+        paint_colon(buf, cx, cy, lit=(secs % 2) == 0, digit_color=dig)
 
     return buf
 
 
 def save_previews(path_dir: Path) -> None:
+    global _LOOK_MODE
     path_dir.mkdir(parents=True, exist_ok=True)
     try:
         from PIL import Image
     except ImportError as e:
         raise SystemExit(f"Pillow required for preview: {e}") from e
 
-    frames = []
-    for i in range(24):
-        fr = render_frame(i * 0.2, now=datetime.now(TZ) + timedelta(seconds=i))
-        frames.append(fr)
-        if i == 0:
-            Image.fromarray(fr, "RGB").resize((640, 640), Image.NEAREST).save(
-                path_dir / "countdown-waves-gold.png"
-            )
-            Image.fromarray(fr, "RGB").save(path_dir / "countdown-waves-gold-1x.png")
+    saved_mode = _LOOK_MODE
+    try:
+        # Night (legacy filenames) + forced full-power day
+        for look, stem in (("night", "countdown-waves-gold"), ("day", "countdown-waves-day")):
+            _LOOK_MODE = look
+            frames = []
+            for i in range(24):
+                fr = render_frame(i * 0.2, now=datetime.now(TZ) + timedelta(seconds=i))
+                frames.append(fr)
+                if i == 0:
+                    Image.fromarray(fr, "RGB").resize((640, 640), Image.NEAREST).save(
+                        path_dir / f"{stem}.png"
+                    )
+                    Image.fromarray(fr, "RGB").save(path_dir / f"{stem}-1x.png")
+            strip = np.concatenate(frames[::4], axis=1)
+            Image.fromarray(strip, "RGB").resize(
+                (strip.shape[1] * 6, strip.shape[0] * 6), Image.NEAREST
+            ).save(path_dir / f"{stem}-strip.png")
+    finally:
+        _LOOK_MODE = saved_mode
 
-    strip = np.concatenate(frames[::4], axis=1)
-    Image.fromarray(strip, "RGB").resize(
-        (strip.shape[1] * 6, strip.shape[0] * 6), Image.NEAREST
-    ).save(path_dir / "countdown-waves-gold-strip.png")
-
+    elev = solar_elevation_deg()
+    df = day_factor()
     d, h, m, s = remaining()
     print(f"preview -> {path_dir}")
     print(f"remaining -> {d}d {h:02d}:{m:02d}:{s:02d} until {TARGET.date()}")
+    print(
+        f"daylight -> elev={elev:.1f}° day_factor={df:.3f} look_mode={saved_mode}",
+        flush=True,
+    )
 
 
 def run_shm(fps: float, seconds: float | None) -> None:
@@ -625,7 +765,13 @@ def run_shm(fps: float, seconds: float | None) -> None:
     fps_t0 = t0
     fps_n = 0
     render_ms_acc = 0.0
-    print(f"countdown_waves: SHM {SHM} target_fps={fps}", flush=True)
+    elev0 = solar_elevation_deg()
+    df0 = day_factor()
+    print(
+        f"countdown_waves: SHM {SHM} target_fps={fps} look={_LOOK_MODE} "
+        f"elev={elev0:.1f}° day_factor={df0:.3f}",
+        flush=True,
+    )
     while True:
         if seconds is not None and (time.perf_counter() - t0) >= seconds:
             break
@@ -640,9 +786,12 @@ def run_shm(fps: float, seconds: float | None) -> None:
         if elapsed_fps >= 10.0:
             actual = fps_n / elapsed_fps
             avg_ms = render_ms_acc / max(1, fps_n)
+            elev = solar_elevation_deg()
+            df = day_factor()
             print(
                 f"countdown_waves: fps={actual:.2f} (target={fps}, "
-                f"render_ms={avg_ms:.1f}, frames={fps_n}, window={elapsed_fps:.1f}s)",
+                f"render_ms={avg_ms:.1f}, frames={fps_n}, window={elapsed_fps:.1f}s, "
+                f"elev={elev:.1f}° day_factor={df:.3f})",
                 flush=True,
             )
             fps_t0 = now_m
@@ -685,12 +834,28 @@ def regen_opacity_mask_companion() -> None:
 
 
 def main() -> int:
+    import os
+
+    global _LOOK_MODE
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--preview", action="store_true")
     p.add_argument("--shm", action="store_true")
     p.add_argument("--fps", type=float, default=25.0)
     p.add_argument("--seconds", type=float, default=None)
+    p.add_argument(
+        "--look",
+        choices=("auto", "day", "night"),
+        default=None,
+        help="auto=solar day/night fade (Rorschach); day/night force look",
+    )
     args = p.parse_args()
+    env_look = (os.environ.get("COUNTDOWN_LOOK") or "").strip().lower()
+    if args.look:
+        _LOOK_MODE = args.look
+    elif env_look in ("auto", "day", "night"):
+        _LOOK_MODE = env_look
+    else:
+        _LOOK_MODE = "auto"
     if not args.preview and not args.shm:
         args.preview = True
     if args.preview:

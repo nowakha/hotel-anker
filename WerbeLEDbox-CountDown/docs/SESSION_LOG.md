@@ -2,6 +2,18 @@
 
 Chronik für Cross-Machine-Handoff. Erfolg **und** Misserfolg.
 
+## 2026-08-06 — Day/Night Full-Power Waves auf AnkerPI01
+
+| Item | Ergebnis |
+|------|----------|
+| Ist | PI01 `100.67.4.18`: `countdown-waves` + `ws2812put-pi02` bereits LIVE |
+| Code | `countdown_waves_64.py`: Solar day_factor Rorschach; Tag=weiss/cyan/orange@100%, Nacht=alt |
+| Deploy | SCP Script → `systemctl restart countdown-waves` |
+| Verify | `elev≈45° day_factor=1.000`, fps≈25, render_ms≈16.6 |
+| Preview | `assets/kendu-64x64/countdown-waves-day*.png` von Pi gezogen |
+| Creds | `ankerpi01.credentials.yml` Tailscale-IP gefüllt |
+| Misserfolg | Mac `python3` numpy kaputt (lokaler Shadow/Install) — Smoke auf Pi OK; Key-SSH Mac→Pi denied → sshpass |
+
 ## 2026-07-28 — Domain-Check Hotel Anker Rorschach
 
 | Item | Ergebnis |

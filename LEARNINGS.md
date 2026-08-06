@@ -291,3 +291,15 @@ Not done: fb-clock/ffprobe verify (unreachable). Do not unmask.
 - Harald hat Richnerstutz bereits reklamiert (Opera-/Rückpro-Vergleich; Nachdruck auf richtigem Untergrund).
 - **Warten auf Antwort Richnerstutz.**
 - Spec war Backlit + selektiver Blockout; Ergebnis passt nicht — Ursache offen (Material/Layer/Kommunikation/Muster übersprungen).
+- Nachfoto Abend 2026-08-04: **Nacht funktioniert grundsätzlich**, Material bleibt sehr dunkel → Tag braucht mehr LED-Power (siehe unten).
+
+## Day/Night Full-Power Countdown (2026-08-06) — LIVE AnkerPI01
+
+- **Host:** AnkerPI01 Tailscale `100.67.4.18` (nicht PI02 für Waves).
+- **Services:** `countdown-waves.service` + `ws2812put-pi02.service` (64×64 → Teensy).
+- **Code:** `WerbeLEDbox-CountDown/scripts/countdown_waves_64.py` — Solar-Elevation Rorschach, smooth `day_factor` −6°…+10°.
+- **Tag:** weiße Ziffern, helles Cyan-Wellenmuster, helles orange Liquid Glass, Chrome 100%.
+- **Nacht:** bisheriger Look (Amber-Ziffern, Navy, Glass @25%).
+- **Verify:** `journalctl -u countdown-waves` → `look=auto elev=… day_factor=1.000` (Nachmittag).
+- Previews: `assets/kendu-64x64/countdown-waves-day*.png` / `…-gold*.png`.
+- Force: `--look day|night` oder `COUNTDOWN_LOOK`.

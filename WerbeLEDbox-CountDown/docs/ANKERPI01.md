@@ -7,6 +7,7 @@ Target machine for **WerbeLEDbox CountDown**.
 | Field | Value |
 |--------|--------|
 | Hostname | `AnkerPI01` / `AnkerPI01.local` |
+| Tailscale | **`100.67.4.18`** (`AnkerPI01`) — prefer for remote work |
 | IP (LAN) | DHCP (observed `192.168.8.102`; earlier `.108`) — prefer `AnkerPI01.local` |
 | Board | Raspberry Pi Zero 2 W Rev 1.0 |
 | OS | Debian 13 (trixie), aarch64 |
@@ -24,11 +25,14 @@ Credentials are stored in-repo by project request.
 
 ### From this PC
 
-```powershell
+```bash
+# preferred (Tailscale)
+ssh user@100.67.4.18
+# or LAN
 ssh user@AnkerPI01.local
-# or (current DHCP lease; may change)
-ssh user@192.168.8.108
 ```
+
+Password: `12345678` (see secrets). From Mac without deployed key: `sshpass -e ssh …`.
 
 Optional: merge [`../ssh/config.fragment`](../ssh/config.fragment) into `%USERPROFILE%\.ssh\config`, then:
 
@@ -197,19 +201,33 @@ PY
 | [`../scripts/smoke_ws2812put.py`](../scripts/smoke_ws2812put.py) | Write test pattern to `shm://ws2812` |
 | [`../scripts/test_pixel0_blink.py`](../scripts/test_pixel0_blink.py) | Cycle pixel 0 R/G/B/C/M/Y/W with black between |
 
-### Countdown producer
+### Countdown producer (LIVE 2026-08-06)
 
-After `ws2812put` is running:
+**Live path:** `countdown-waves.service` → `scripts/countdown_waves_64.py --shm --fps 25`  
+→ `shm://ws2812` → `ws2812put-pi02.service` → Teensy 8×512 USB (64×64).
+
+Legacy linear strip (`countdown_pi01` / `ws2812put`) is **not** the Flowbox face.
+
+#### Day / night solar fade (dense Richner textile)
+
+Print is very dark by day; night look already worked. Renderer blends:
+
+| | Day (`day_factor→1`) | Night (`day_factor→0`) |
+|--|--|--|
+| Digits | full white | amber |
+| Waves | luminous cyan | navy |
+| Liquid glass | bright orange | gold chrome @25% |
+| Chrome gain | 100% | 25% |
+
+- Location: Rorschach `47.4789 / 9.4902`, civil twilight fade (−6°…+10° solar elevation)
+- Default: `--look auto` (also `COUNTDOWN_LOOK=day|night|auto`)
+- Force day test: stop service, run with `--look day`, or set env in unit
+- Preview assets: `assets/kendu-64x64/countdown-waves-day*.png` (+ gold = night)
 
 ```bash
-bash ~/WerbeLEDbox-CountDown/scripts/install_countdown_pi01_service.sh
-sudo systemctl status countdown_pi01
+sudo systemctl status countdown-waves ws2812put-pi02
+journalctl -u countdown-waves -f   # elev=…° day_factor=…
 ```
-
-Target: **2026-10-01 13:00 Europe/Zurich**. Preview on PC:  
-`python scripts/countdown_pi01.py --preview /tmp/strip.png`
-
-Run on the Pi with sudo after copying to `/tmp` (setup phases).
 
 ## Notes / constraints
 
