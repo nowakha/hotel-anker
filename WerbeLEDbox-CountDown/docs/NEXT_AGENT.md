@@ -1,6 +1,15 @@
 ﻿# NEXT AGENT — Sofortmaßnahmen
 
-Stand: **2026-08-07**. Lies `LEARNINGS.md` + `docs/SESSION_LOG.md`.
+Stand: **2026-08-07 ~14:47 CEST**. Lies `LEARNINGS.md` + `docs/SESSION_LOG.md`.
+
+## Print / Richnerstutz (PRIORITÄT)
+
+- Job **SEG (627 828)** — Thread `19fac62d97c94e3d` · Msg Tanja `19fdc43b49050a5c` (2026-08-07).
+- **Ergebnis Muster/Prüfung:** Richnerstutz hat **kein** Flowbox-/Beamer-geeignetes Material; Nachdruck gleiches Material sinnlos; Empfehlung: Textil beim Flowbox-Hersteller.
+- **Kulanz:** bereits 30 % Materialrabatt; zusätzlich **+10 %** auf Material; **Arbeitsleistungen** werden verrechnet. Rechnungsadresse angefragt (Realia AG bereits bekannt).
+- Video Richner: Adobe Acrobat `IMG_1987.MOV` (URN `aaid:sc:EU:86ef1c12-08be-4d61-9000-dff8b2a2ae6e`).
+- **STOP Outbound** ohne Harald-Go. Entwurf: `Richnerstutz-Bespannung-Paket/08-reklamation-licht/Mail-Entwurf-Antwort-2026-08-07.md`.
+- Bei weiterem Richner-Inbound: Docs + Summary; **kein** Mail-Versand durch Agent.
 
 ## LIVE jetzt
 
@@ -27,3 +36,4 @@ sudo systemctl start countdown-waves
 - Kein `sa.create` im Countdown-Producer
 - Kein `cmdline.txt`-Experiment
 - Kein `ffmpeg … -f null -` auf 24h/4K
+- Kein Mail an Richnerstutz ohne Harald-Freigabe
