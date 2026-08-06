@@ -498,3 +498,28 @@ Goal: stabile 860×360 H.264-Produktion statt 4K `st24.mov` auf PI02 (Undervolta
 | Symptom | Grundmaterial wirkt voll opak / schwarz, kein LED-Durchschein |
 | Soll | Backlit + selektive Opazität laut Platte |
 
+## 2026-08-05 ~14:50 CEST — Tanja Jelk: Prüfung mit Produktion morgen
+
+| Item | Wert |
+|------|------|
+| From | `Tanja.Jelk@richnerstutz.ch` |
+| Subject | `WG: Modernlight Production AG, Hotel Anker Rorschach - SEG (627 828)` |
+| Date | Wed, 5 Aug 2026 12:50:18 +0000 |
+| Thread / Msg | `19fac62d97c94e3d` / `19fd1f99bf599a4f` |
+| Aussage | Morgen Büro → mit Produktion anschauen → meldet sich morgen |
+| Vorlauf Melanie | ~07:24 FW an Tanja: „Evt falsches Material?“ |
+| Offen | Material, Nachdruck, Termin, Kosten, Muster |
+
+## 2026-08-06 ~15:48 CEST — Tanja Jelk: LED-Screen-Frage + Muster morgen Mittag
+
+| Item | Wert |
+|------|------|
+| From | `Tanja.Jelk@richnerstutz.ch` |
+| Subject | `WG: Modernlight Production AG, Hotel Anker Rorschach - SEG (627 828)` |
+| Date | Thu, 6 Aug 2026 13:47:55 +0000 |
+| Thread / Msg | `19fac62d97c94e3d` / `19fd754b740da14d` |
+| Aussage | Intern/digital: unsicher Screen vs. Leuchtkasten; ohne Abstand kein Streuen; **Musterstück** Druck morgen Mittag |
+| Risiko | Verwechslung Direct-View-Screen ↔ Kendu-SEG-Backlit (~45 mm Luft) |
+| Spec-Soll | Lumina/Backlit transluzent + selektiver Multilayer; Totzone unten opak |
+| Outbound | **STOP** — warte Harald-Go; Entwurf `08-reklamation-licht/Mail-Entwurf-Antwort-2026-08-06.md` |
+

@@ -1,6 +1,9 @@
 # Reklamation an Richnerstutz — 2026-08-04
 
-**Status:** Gesendet durch Harald; **warten auf Antwort**.
+**Status:** Gesendet durch Harald 2026-08-04.  
+**Zwischenantwort 2026-08-05:** Tanja Jelk — prüft mit Produktion, meldet sich.  
+**Antwort 2026-08-06 ~15:48 CEST:** Tanja Jelk — Technikfrage Screen vs. Leuchtkasten; **Musterstück** Druck morgen Mittag. Msg `19fd754b740da14d` / Thread `19fac62d97c94e3d`.  
+**Noch offen:** Bestätigung Backlit-Material (Lumina o.ä.), Vollnachdruck, Termin, Kosten, Totzone/Blockout. **STOP** — kein Outbound ohne Harald-Go.
 
 **Foto:** `2026-08-04-installiert-kein-durchlicht.png` (Installiert am Hotel Anker; kein Durchleuchten sichtbar)
 
@@ -15,6 +18,7 @@ Gruss Harald Nowak
 - Hinterleuchtetes SEG / Backlit (Lumina o.ä. als **transluzentes** Grundmaterial)
 - Multilayer/Blockout nur **selektiv** laut Opazitätsplatte (schwarz=lichtdurchlässig, rot=Blockout)
 - Ziffernfüllungen, Colon-Kerne, Glass-Balken, Navy müssen LED-Licht durchlassen
+- Geometrie: **Leuchtkasten** (Kendu Flowbox), Diffusionsstrecke Textil→LED **~45 mm** — Stoff liegt **nicht** direkt auf den LEDs
 
 ## Offerte AG 461414 (Kontext)
 
@@ -24,4 +28,4 @@ Gruss Harald Nowak
 
 ## Nächster Schritt
 
-Antwort Richnerstutz abwarten → dann Nachdruck / Materialkorrektur mit Muster-Abnahme vor Vollfläche.
+Harald-Go für Klärungsmail (Entwurf `Mail-Entwurf-Antwort-2026-08-06.md`) **oder** auf Musterrückmeldung Tanja warten → dann Nachdruck / Materialkorrektur.

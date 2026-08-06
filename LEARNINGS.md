@@ -289,5 +289,19 @@ Not done: fb-clock/ffprobe verify (unreachable). Do not unmask.
 
 - Print installiert am Hotel Anker: wirkt **komplett lichtundurchlässig** (Foto in `08-reklamation-licht/`).
 - Harald hat Richnerstutz bereits reklamiert (Opera-/Rückpro-Vergleich; Nachdruck auf richtigem Untergrund).
-- **Warten auf Antwort Richnerstutz.**
 - Spec war Backlit + selektiver Blockout; Ergebnis passt nicht — Ursache offen (Material/Layer/Kommunikation/Muster übersprungen).
+
+## Richnerstutz Tanja Jelk — Zwischenantwort (2026-08-05 ~14:50 CEST)
+
+- Msg `19fd1f99bf599a4f` / Thread `19fac62d97c94e3d`: morgen Büro → mit Produktion prüfen → meldet sich.
+- Melanie FW (~07:24): Verdacht „Evt falsches Material?“
+
+## Richnerstutz Tanja Jelk — Technikfrage + Muster (2026-08-06 ~15:48 CEST / 13:47 UTC)
+
+- **Von:** `Tanja.Jelk@richnerstutz.ch` · Betreff `WG: … Hotel Anker Rorschach - SEG (627 828)` · Thread `19fac62d97c94e3d` · Msg `19fd754b740da14d`.
+- Intern + digitale Abteilung: anhand Fotos unsicher, ob **LED-Screen** (Stoff direkt drauf) oder **Leuchtkasten**.
+- Aussage: liegt Stoff **ohne Abstand** auf dem Screen, kann er nicht streuen; auf LED-Screen funktioniere das Konzept nicht wie bei angesteuertem Leuchtkasten.
+- **Musterstück** intern in Produktion — Druck **morgen Mittag** fertig (~2026-08-07), meldet sich asap.
+- **Risiko:** Begriffsverwirrung Screen vs. Kendu-Flowbox-Backlit. Repo-Wahrheit: SEG-Leuchtkasten, Diffusionsstrecke Textil→LED **~45 mm** (nicht 0 mm), Offerte Lumina + selektiver Multilayer.
+- **Offen:** Material des Musters / Vollnachdruck, Termin, Kosten, Totzone/Blockout-Handling.
+- **STOP:** Kein Outbound ohne Harald-Go. Entwurf: `08-reklamation-licht/Mail-Entwurf-Antwort-2026-08-06.md`.
