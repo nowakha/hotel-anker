@@ -2,6 +2,14 @@
 
 Chronik für Cross-Machine-Handoff. Erfolg **und** Misserfolg.
 
+## 2026-08-06 — Day look max-heat
+
+| Item | Ergebnis |
+|------|----------|
+| Feedback | Tag noch heißer für Kontrast durch dunkles Textil |
+| Fix | DAY_NAVY tiefer, MID/HI near-white cyan; Glass max orange; day field harder contrast curve + higher mid/hi weights |
+| Deploy | PI01 `countdown-waves` restart |
+
 ## 2026-08-06 — Hotellinien tagsüber aus
 
 | Item | Ergebnis |

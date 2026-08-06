@@ -68,16 +68,16 @@ WHITE = np.array([255, 255, 255], dtype=np.uint8)
 DIGIT = AMBER_HI  # lit segments — night default (max orange)
 GHOST = np.array([0, 0, 0], dtype=np.uint8)  # unused 8-segments: black
 
-# --- Day look (opaque textile needs full LED power) ---
-DAY_NAVY = np.array([0, 55, 95], dtype=np.float32)
-DAY_NAVY_MID = np.array([0, 185, 220], dtype=np.float32)
-DAY_NAVY_HI = np.array([110, 255, 255], dtype=np.float32)
+# --- Day look (max heat — dense textile needs every LED watt for contrast) ---
+DAY_NAVY = np.array([0, 8, 28], dtype=np.float32)  # deep trough → digits pop
+DAY_NAVY_MID = np.array([0, 230, 255], dtype=np.float32)
+DAY_NAVY_HI = np.array([200, 255, 255], dtype=np.float32)  # near-white cyan peaks
 NON_DIGIT_BRIGHTNESS_DAY = 1.0
 DAY_DIGIT = WHITE  # full-power white numerals
-DAY_GOLD = np.array([255, 130, 0], dtype=np.float32)
-DAY_GOLD_HI = np.array([255, 175, 25], dtype=np.float32)
-DAY_GOLD_SHINE = np.array([255, 230, 90], dtype=np.float32)
-DAY_HOT = np.array([255, 190, 50], dtype=np.float32)
+DAY_GOLD = np.array([255, 90, 0], dtype=np.float32)
+DAY_GOLD_HI = np.array([255, 150, 0], dtype=np.float32)
+DAY_GOLD_SHINE = np.array([255, 245, 100], dtype=np.float32)
+DAY_HOT = np.array([255, 210, 30], dtype=np.float32)
 
 # Rorschach (Hotel Anker) — solar elevation for real daylight fade
 RORSCHACH_LAT = 47.4789
@@ -499,17 +499,23 @@ def wave_background(t: float, day_f: float = 0.0) -> np.ndarray:
 
     field = 0.48 * scallop + 0.36 * swell + 0.32 * ripple
     field = np.clip((field + 1.05) / 1.85, 0.0, 1.0)
-    field = np.power(field, 0.72)
+    # Day: harder contrast curve (deeper lows, hotter highs) for textile punch
+    field = np.power(field, 0.72 - 0.30 * day_f)
+    if day_f > 0.0:
+        lo = 0.12 * day_f
+        field = np.clip((field - lo) / max(1e-6, 1.0 - lo), 0.0, 1.0)
 
     navy = _lerp_rgb(NAVY, DAY_NAVY, day_f)
     mid = _lerp_rgb(NAVY_MID, DAY_NAVY_MID, day_f)
     hi = _lerp_rgb(NAVY_HI, DAY_NAVY_HI, day_f)
 
     f = field[..., None]
+    mid_w = 0.45 + 0.35 * day_f
+    hi_w = 0.85 + 0.55 * day_f
     rgb = (
         navy[None, None, :] * (1.0 - f)
-        + mid[None, None, :] * (0.45 * f)
-        + hi[None, None, :] * (0.85 * f * f)
+        + mid[None, None, :] * (mid_w * f)
+        + hi[None, None, :] * (hi_w * f * f)
     )
 
     # Hotel facade lines: OFF by day (they fight the countdown); night = soft whisper only
