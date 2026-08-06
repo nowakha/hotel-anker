@@ -2,6 +2,14 @@
 
 Chronik für Cross-Machine-Handoff. Erfolg **und** Misserfolg.
 
+## 2026-08-06 — Hotellinien tagsüber aus
+
+| Item | Ergebnis |
+|------|----------|
+| Feedback | Verstärkte Facade-Linien behindern Countdown-Lesbarkeit bei Tag |
+| Fix | `wave_background`: Linien nur nachts (`night_f`), soft keep/add 0.88/0.18; Tag komplett weg |
+| Deploy | PI01 restart `countdown-waves` OK |
+
 ## 2026-08-06 — Day/Night Full-Power Waves auf AnkerPI01
 
 | Item | Ergebnis |

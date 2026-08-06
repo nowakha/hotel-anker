@@ -512,14 +512,15 @@ def wave_background(t: float, day_f: float = 0.0) -> np.ndarray:
         + hi[None, None, :] * (0.85 * f * f)
     )
 
-    # White hotel lines — light support (bool mask cached)
+    # Hotel facade lines: OFF by day (they fight the countdown); night = soft whisper only
     blueprint_mask_64()
-    if _BP_LINE is not None and _BP_LINE.any():
+    night_f = 1.0 - day_f
+    if night_f > 0.01 and _BP_LINE is not None and _BP_LINE.any():
         act = rgb[:ACTIVE_H]
-        # Day: brighter facade ink so the building still reads through dense textile
-        keep = 0.5536 - 0.15 * day_f
-        add = 0.6336 + 0.25 * day_f
-        act[_BP_LINE] = act[_BP_LINE] * keep + _WHITE_F * add
+        # Soft backlight — keep most of the wave, add only a light white ink
+        keep, add = 0.88, 0.18
+        blended = act[_BP_LINE] * keep + _WHITE_F * add
+        act[_BP_LINE] = act[_BP_LINE] * (1.0 - night_f) + blended * night_f
 
     logo = logo_mask_64()
     if logo is not None:
@@ -530,8 +531,8 @@ def wave_background(t: float, day_f: float = 0.0) -> np.ndarray:
     if _BP_DEAD is not None:
         dead = rgb[ACTIVE_H:]
         dead[:] = 0
-        if _BP_DEAD.any():
-            dead[_BP_DEAD] = _WHITE_F * (0.55 + 0.35 * day_f)
+        if night_f > 0.01 and _BP_DEAD.any():
+            dead[_BP_DEAD] = _WHITE_F * (0.32 * night_f)
     else:
         rgb[ACTIVE_H:, :, :] = 0
     return np.clip(rgb, 0, 255).astype(np.uint8)
@@ -679,8 +680,10 @@ def render_frame(t: float, now: datetime | None = None) -> np.ndarray:
     if _BP_DEAD is not None:
         dead = buf[ACTIVE_H:]
         dead[:] = 0
-        if _BP_DEAD.any():
-            dead[_BP_DEAD] = (_WHITE_F * (0.55 + 0.35 * df) * chrome).astype(np.uint8)
+        # Dead-band facade ink: night whisper only (same rule as active lines)
+        night_f = 1.0 - df
+        if night_f > 0.01 and _BP_DEAD.any():
+            dead[_BP_DEAD] = (_WHITE_F * 0.32 * night_f * chrome).astype(np.uint8)
         buf[ACTIVE_H:] = dead
     else:
         buf[ACTIVE_H:, :, :] = 0

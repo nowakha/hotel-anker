@@ -298,8 +298,8 @@ Not done: fb-clock/ffprobe verify (unreachable). Do not unmask.
 - **Host:** AnkerPI01 Tailscale `100.67.4.18` (nicht PI02 für Waves).
 - **Services:** `countdown-waves.service` + `ws2812put-pi02.service` (64×64 → Teensy).
 - **Code:** `WerbeLEDbox-CountDown/scripts/countdown_waves_64.py` — Solar-Elevation Rorschach, smooth `day_factor` −6°…+10°.
-- **Tag:** weiße Ziffern, helles Cyan-Wellenmuster, helles orange Liquid Glass, Chrome 100%.
-- **Nacht:** bisheriger Look (Amber-Ziffern, Navy, Glass @25%).
+- **Tag:** weiße Ziffern, helles Cyan-Wellenmuster, helles orange Liquid Glass, Chrome 100%; **keine Hotellinien** (Lesbarkeit).
+- **Nacht:** bisheriger Look (Amber-Ziffern, Navy, Glass @25%) + Hotellinien nur leicht hinterleuchtet.
 - **Verify:** `journalctl -u countdown-waves` → `look=auto elev=… day_factor=1.000` (Nachmittag).
 - Previews: `assets/kendu-64x64/countdown-waves-day*.png` / `…-gold*.png`.
 - Force: `--look day|night` oder `COUNTDOWN_LOOK`.

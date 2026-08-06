@@ -218,6 +218,7 @@ Print is very dark by day; night look already worked. Renderer blends:
 | Waves | luminous cyan | navy |
 | Liquid glass | bright orange | gold chrome @25% |
 | Chrome gain | 100% | 25% |
+| Hotel facade lines | **off** (countdown readability) | soft whisper backlight only |
 
 - Location: Rorschach `47.4789 / 9.4902`, civil twilight fade (−6°…+10° solar elevation)
 - Default: `--look auto` (also `COUNTDOWN_LOOK=day|night|auto`)
