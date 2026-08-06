@@ -498,3 +498,26 @@ Goal: stabile 860×360 H.264-Produktion statt 4K `st24.mov` auf PI02 (Undervolta
 | Symptom | Grundmaterial wirkt voll opak / schwarz, kein LED-Durchschein |
 | Soll | Backlit + selektive Opazität laut Platte |
 
+
+## 2026-08-06 ~15:53 CEST — Richnerstutz SEG 627 828 (Watcher)
+
+| Item | Status |
+|------|--------|
+| Trigger | Zapier Gmail — **from Harald** (Outbound), Subject SEG (627 828), Thread `19fac62d97c94e3d`, Msg `19fd7598a37586fe` |
+| Filter | Hotel Anker / Flowbox / Bespannung — **relevant**; kein neuer Richner-Inbound in diesem Payload |
+| Tanja (zitiert ~15:48) | Screen vs. Leuchtkasten unsicher; Musterstück Druck morgen Mittag; asap Rückmeldung |
+| Harald (neu, vollständig) | Kendu-URL; LEDs ~4,5 cm Abstand; Grundmaterial farblos/unbedruckt + RP-Folie-Referenz; Bestellung unklar formuliert |
+| Risiko | Material-Missverständnis (opak geliefert); «unbedruckt» vs. Spec bedruckt+Blockout; Kosten/Termin Nachdruck offen |
+| Aktion Agent | Docs aktualisiert; optional Follow-up-Entwurf; **kein Mail-Versand**; wartet auf Harald-Go + Muster-Ergebnis |
+| Artefakte | `Richnerstutz-Bespannung-Paket/08-reklamation-licht/` |
+
+
+## 2026-08-06 ~15:54 CEST — Richnerstutz SEG 627 828 (Watcher, Doppeltrigger)
+
+| Item | Status |
+|------|--------|
+| Trigger | Zapier erneut — **from Harald** Outbound Msg `19fd75a4a86d4e03` (Thread gleich); ~50 s nach `19fd7598a37586fe` |
+| Delta | Explizite **Rabatt**-Frage für Nachbestellung «dieses Mal richtig» (im Body) |
+| Filter | Relevant, aber **kein neuer Richner-Inbound** — Status mergen, nicht escalieren |
+| Aktion | Docs auf Branch `cursor/hotel-anker-print-replies-4c72` nachgezogen + Rabatt notiert; **kein Mail**; STOP auf Harald-Go + Muster |
+
