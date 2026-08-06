@@ -1,6 +1,8 @@
 # Anfrage an Richnerstutz AG — Textilbespannung LightBox Hotel Anker
 
-**Status:** **Gesendet** 2026-07-23 ~17:27 CEST — von `harald.nowak@modernlight.ch` an `info@richnerstutz.ch` (Gmail Web UI), Anhang `Hotel-Anker-Richnerstutz-Bespannung.zip`.  
+**Status (Stand 2026-08-06 ~15:51 CEST):** Job **SEG (627 828)** / AG 461414 — Ware geliefert, **Material reklamiert** (kein Durchlicht). Tanja Jelk 2026-08-06: Unsicherheit Screen vs. Leuchtkasten; **Musterstück** Druck morgen Mittag. Harald outbound Klärung: Kendu-Flowbox-Link + LED-Abstand ~4.5 cm. **Warten auf Muster-Ergebnis / formelle Lösung. Kein weiteres Outbound ohne Harald-Go.**
+
+**Chronik kurz:** Anfrage gesendet 2026-07-23 → Offerte Tanja 2026-07-27 → Druckdaten/Korrekturen 2026-07-28 → Gut zum Druck Melanie 2026-07-29 → Freigabe + Produktionsstart 2026-07-29 → Lieferung + Reklamation Harald 2026-08-04 → Tanja Prüfung 2026-08-05 → Tanja Screen/Muster 2026-08-06 → Harald Kendu/Abstand 2026-08-06.
 
 **Korrektur Druckmaß (2026-07-27):** Kanonischer Master ist **2100 × 2100 mm** Spannmaß mit **300 mm** Schwarz unten (`DRUCK-Hotel-Anker-Flowbox-2100x2100.pdf`). Offerte AG 461414 („Textil 200×200 cm“) weicht ab — **Nachtrag an Richnerstutz:** bitte auf **210×210 cm** / MediaBox 2100 mm umstellen.  
 

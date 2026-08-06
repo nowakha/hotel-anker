@@ -498,3 +498,26 @@ Goal: stabile 860×360 H.264-Produktion statt 4K `st24.mov` auf PI02 (Undervolta
 | Symptom | Grundmaterial wirkt voll opak / schwarz, kein LED-Durchschein |
 | Soll | Backlit + selektive Opazität laut Platte |
 
+
+## 2026-08-05 ~14:50 CEST — Tanja Zwischenantwort (Prüfung)
+
+| Item | Detail |
+|------|--------|
+| Von | Tanja.Jelk@richnerstutz.ch |
+| Inhalt | Morgen Büro, Abstimmung mit Produktion, meldet sich morgen |
+| Lösung? | Nein — kein Material, kein Nachdruck, kein Termin/Kosten |
+| Thread | `19fac62d97c94e3d` / Job SEG (627 828) |
+
+
+## 2026-08-06 ~15:48–15:51 CEST — Tanja Screen/Kasten + Harald Klärung outbound
+
+| Item | Detail |
+|------|--------|
+| Trigger | Webhook Zapier: **from Harald** (Outbound), zitiert Tanja 15:48 |
+| Msg / Thread | `19fd7579987c316e` / `19fac62d97c94e3d` |
+| Tanja | Intern + digitale Abt.: Fotos unklar LED-Screen vs. Leuchtkasten; Stoff direkt auf Screen streut nicht; Annahme war angesteuerter Leuchtkasten; **Musterstück** intern, Druck morgen Mittag, asap Rückmeldung |
+| Harald outbound | `https://www.kendu.com/flowbox-dynamic-lightbox/` + «die leds liegen etwa 4.5cm hinter» (vermutlich Textil→LED ≈ 45 mm, Satz unvollständig) |
+| Risiko | Missverständnis Screen vs. Backlit-Rahmen; Muster kann Materialfehler bestätigen oder Technikdiskussion verzögern |
+| Offen | Material der gelieferten Ware, Nachdruck/Kosten/Termin, Muster-Ergebnis |
+| Aktion Agent | Docs + Entwurf Follow-up; **kein Mail-Versand**; STOP auf Harald-Go |
+

@@ -1,6 +1,6 @@
 # Reklamation an Richnerstutz — 2026-08-04
 
-**Status:** Gesendet durch Harald; **warten auf Antwort**.
+**Status (2026-08-06):** Reklamation gesendet; Tanja: Musterstück (Druck morgen Mittag); Harald outbound Klärung Kendu + ~4.5 cm LED-Abstand (Msg `19fd7579987c316e`). **Warten auf Muster-Ergebnis / formelle Lösung. STOP ohne Harald-Go.**
 
 **Foto:** `2026-08-04-installiert-kein-durchlicht.png` (Installiert am Hotel Anker; kein Durchleuchten sichtbar)
 
@@ -24,4 +24,6 @@ Gruss Harald Nowak
 
 ## Nächster Schritt
 
-Antwort Richnerstutz abwarten → dann Nachdruck / Materialkorrektur mit Muster-Abnahme vor Vollfläche.
+1. Musterstück-Ergebnis von Tanja abwarten (~Druck morgen Mittag / asap Rückmeldung).
+2. Optional Follow-up-Entwurf: `Mail-Entwurf-Followup-2026-08-06.md` — **nur nach Harald-Go**.
+3. Ziel: Nachdruck Backlit + Kosten/Termin klären.
