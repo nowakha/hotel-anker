@@ -2,6 +2,8 @@
 
 **Status:** **Gesendet** 2026-07-23 ~17:27 CEST — von `harald.nowak@modernlight.ch` an `info@richnerstutz.ch` (Gmail Web UI), Anhang `Hotel-Anker-Richnerstutz-Bespannung.zip`.  
 
+**Aktuell (2026-08-06):** Job **SEG (627 828)** — Ware geliefert, Material reklamiert (opak/kein Durchlicht). Tanja Jelk (digital/intern): fragt Screen vs. Leuchtkasten; **Musterstück** Druck ~morgen Mittag (2026-08-07). **Kein Outbound ohne Harald-Go.** Entwurf: `../08-reklamation-licht/Mail-Entwurf-Antwort-2026-08-06.md`.  
+
 **Korrektur Druckmaß (2026-07-27):** Kanonischer Master ist **2100 × 2100 mm** Spannmaß mit **300 mm** Schwarz unten (`DRUCK-Hotel-Anker-Flowbox-2100x2100.pdf`). Offerte AG 461414 („Textil 200×200 cm“) weicht ab — **Nachtrag an Richnerstutz:** bitte auf **210×210 cm** / MediaBox 2100 mm umstellen.  
 
 **Empfänger:** Richnerstutz AG, Nordstrasse 7, 5612 Villmergen · info@richnerstutz.ch · +41 56 616 67 67  
