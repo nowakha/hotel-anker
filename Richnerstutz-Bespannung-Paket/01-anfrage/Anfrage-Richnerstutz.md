@@ -1,6 +1,8 @@
 # Anfrage an Richnerstutz AG — Textilbespannung LightBox Hotel Anker
 
-**Status:** **Gesendet** 2026-07-23 ~17:27 CEST — von `harald.nowak@modernlight.ch` an `info@richnerstutz.ch` (Gmail Web UI), Anhang `Hotel-Anker-Richnerstutz-Bespannung.zip`.  
+**Status (2026-08-07 ~14:47 CEST):** Job **SEG (627 828)** — Tanja Jelk: **kein** Flowbox-/Beamer-geeignetes Material im Sortiment; Nachdruck gleiches Material sinnlos; Empfehlung Textil beim Hersteller; Kulanz **30 %+10 %** auf Material, Arbeit verrechnen; Rechnungsadresse angefragt. Thread `19fac62d97c94e3d` Msg `19fdc43b49050a5c`. **STOP — warten auf Harald-Go** (Entwurf Antwort in `08-reklamation-licht/`).
+
+**Anfrage gesendet** 2026-07-23 ~17:27 CEST — von `harald.nowak@modernlight.ch` an `info@richnerstutz.ch` (Gmail Web UI), Anhang `Hotel-Anker-Richnerstutz-Bespannung.zip`.  
 
 **Korrektur Druckmaß (2026-07-27):** Kanonischer Master ist **2100 × 2100 mm** Spannmaß mit **300 mm** Schwarz unten (`DRUCK-Hotel-Anker-Flowbox-2100x2100.pdf`). Offerte AG 461414 („Textil 200×200 cm“) weicht ab — **Nachtrag an Richnerstutz:** bitte auf **210×210 cm** / MediaBox 2100 mm umstellen.  
 

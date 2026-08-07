@@ -289,9 +289,27 @@ Not done: fb-clock/ffprobe verify (unreachable). Do not unmask.
 
 - Print installiert am Hotel Anker: wirkt **komplett lichtundurchlässig** (Foto in `08-reklamation-licht/`).
 - Harald hat Richnerstutz bereits reklamiert (Opera-/Rückpro-Vergleich; Nachdruck auf richtigem Untergrund).
-- **Warten auf Antwort Richnerstutz.**
 - Spec war Backlit + selektiver Blockout; Ergebnis passt nicht — Ursache offen (Material/Layer/Kommunikation/Muster übersprungen).
 - Nachfoto Abend 2026-08-04: **Nacht funktioniert grundsätzlich**, Material bleibt sehr dunkel → Tag braucht mehr LED-Power (siehe unten).
+
+## Richnerstutz Thread SEG 627 828 — Tanja + Harald Klarstellung (2026-08-06)
+
+- Job: **SEG (627 828)** / Hotel Anker Rorschach / Thread `19fac62d97c94e3d`.
+- **Tanja Jelk ~15:48:** Intern + Digital-Abteilung; unsicher ob LED-Screen (Textil ohne Abstand streut nicht) vs. angesteuerter Leuchtkasten; **Musterstück** Druck **morgen Mittag** (~07.08.); asap Rückmeldung.
+- **Harald outbound ~15:53–15:54** (Msg `19fd75a4a86d4e03`, zuvor `19fd7598a37586fe` — from Harald, kein neuer Richner-Inbound): Kendu Flowbox-URL; LEDs **~4,5 cm** hinter Bespannung; Tuchfläche hätte **farblos/unbedruckt** sein sollen; Referenz Rückprojektionsfolie grau (Rabenring); Material bei Bestellung unklar formuliert; **Rabatt** für weitere Bestellung erfragt.
+- Geometrie Repo: Textil→LED **45 mm** — passt zu Haralds 4,5 cm; **kein** Direct-View-Screen.
+- **Spannung:** Spec = bedrucktes Backlit + selektiver Blockout; Haralds Mail sagt «unbedruckt» — vermutlich transluzentes Grundmaterial gemeint, nicht Verzicht auf Sujet.
+- **Offen (Stand 06.08.):** Muster-Ergebnis, welches Material die gelieferte Ware hat, Nachdruck/Kosten/Rabatt/Termin, Totzone 300 mm.
+- **STOP:** kein weiteres Outbound ohne Harald-Go. Docs: `08-reklamation-licht/`.
+
+## Richnerstutz SEG 627 828 — Tanja Abschluss Material (2026-08-07 ~14:47 CEST)
+
+- **Inbound:** Tanja.Jelk@richnerstutz.ch · Subject AW: … SEG (627 828) · Thread `19fac62d97c94e3d` · Msg `19fdc43b49050a5c` · Date Fri, 7 Aug 2026 12:47:14 +0000.
+- **Kern:** Kein geeignetes Flowbox-Material / keine Beamer-Leinwand-Erfahrung; Produktion laut Druckdaten+GzD; Einsatz zeigt: Material ungeeignet; gleiches Material erneut = sinnlos; Textil beim Flowbox-Hersteller beziehen.
+- **Nachweis:** Video `IMG_1987.MOV` + Fotos (Adobe Acrobat URN `aaid:sc:EU:86ef1c12-08be-4d61-9000-dff8b2a2ae6e`).
+- **Kulanz:** bereits 30 % Materialrabatt; zusätzlich **+10 %** auf Materialpreis; **Arbeitsleistungen** werden verrechnet.
+- **Offen an Harald:** Rechnungsadresse bestätigen (Realia AG Industriestrasse 40b, 9400 Rorschach, z. Hd. Gottlieb Kündig — bereits in Thread); ob Kulanz akzeptieren; Plan B Material (Kendu/Hersteller); Totzone/Druckmass Nachfolger.
+- **STOP:** kein Outbound ohne Harald-Go. Entwurf `08-reklamation-licht/Mail-Entwurf-Antwort-2026-08-07.md`.
 
 ## Day/Night Full-Power Countdown (2026-08-06) — LIVE AnkerPI01
 
@@ -308,3 +326,4 @@ Not done: fb-clock/ffprobe verify (unreachable). Do not unmask.
 - **Fix:** Waves **attach-only**; Restart **putter → waves**; Unit `Requires=ws2812put-pi02`.
 - **Look:** Milch-Ghost (nie schwarz); hellere Chrome Tag+Nacht; keine Near-Black-Tröge.
 - **Verify:** gleiche SHM-Inode beider PIDs; viewer L/R ≈ gleich; `frames differ True`.
+
