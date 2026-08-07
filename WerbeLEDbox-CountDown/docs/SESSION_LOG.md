@@ -537,3 +537,66 @@ Goal: stabile 860×360 H.264-Produktion statt 4K `st24.mov` auf PI02 (Undervolta
 | Symptom | Grundmaterial wirkt voll opak / schwarz, kein LED-Durchschein |
 | Soll | Backlit + selektive Opazität laut Platte |
 
+
+## 2026-08-06 ~15:53 CEST — Richnerstutz SEG 627 828 (Watcher)
+
+| Item | Status |
+|------|--------|
+| Trigger | Zapier Gmail — **from Harald** (Outbound), Subject SEG (627 828), Thread `19fac62d97c94e3d`, Msg `19fd7598a37586fe` |
+| Filter | Hotel Anker / Flowbox / Bespannung — **relevant**; kein neuer Richner-Inbound in diesem Payload |
+| Tanja (zitiert ~15:48) | Screen vs. Leuchtkasten unsicher; Musterstück Druck morgen Mittag; asap Rückmeldung |
+| Harald (neu, vollständig) | Kendu-URL; LEDs ~4,5 cm Abstand; Grundmaterial farblos/unbedruckt + RP-Folie-Referenz; Bestellung unklar formuliert |
+| Risiko | Material-Missverständnis (opak geliefert); «unbedruckt» vs. Spec bedruckt+Blockout; Kosten/Termin Nachdruck offen |
+| Aktion Agent | Docs aktualisiert; optional Follow-up-Entwurf; **kein Mail-Versand**; wartet auf Harald-Go + Muster-Ergebnis |
+| Artefakte | `Richnerstutz-Bespannung-Paket/08-reklamation-licht/` |
+
+
+## 2026-08-06 ~15:54 CEST — Richnerstutz SEG 627 828 (Watcher, Doppeltrigger)
+
+| Item | Status |
+|------|--------|
+| Trigger | Zapier erneut — **from Harald** Outbound Msg `19fd75a4a86d4e03` (Thread gleich); ~50 s nach `19fd7598a37586fe` |
+| Delta | Explizite **Rabatt**-Frage für Nachbestellung «dieses Mal richtig» (im Body) |
+| Filter | Relevant, aber **kein neuer Richner-Inbound** — Status mergen, nicht escalieren |
+| Aktion | Docs auf Branch `cursor/hotel-anker-print-replies-4c72` nachgezogen + Rabatt notiert; **kein Mail**; STOP auf Harald-Go + Muster |
+
+
+## 2026-08-07 ~14:47 CEST — Richnerstutz SEG 627 828 (Watcher, Tanja Abschluss)
+
+| Item | Status |
+|------|--------|
+| Trigger | Zapier Gmail — **from Tanja.Jelk@richnerstutz.ch**, Subject AW: … SEG (627 828), Thread `19fac62d97c94e3d`, Msg `19fdc43b49050a5c`, Date Fri 7 Aug 2026 12:47:14 +0000 |
+| Filter | Hotel Anker / Flowbox / Bespannung — **relevant** |
+| Kern | Kein Flowbox-/Beamer-Material; Produktion laut GzD; Einsatz ungeeignet; gleiches Material erneut sinnlos; Hersteller empfehlen |
+| Kulanz | 30 % Material bereits + **weitere 10 %** Material; **Arbeit verrechnen**; Rechnungsadresse angefragt (Realia bereits im Body) |
+| Nachweis | Acrobat `IMG_1987.MOV` URN `aaid:sc:EU:86ef1c12-08be-4d61-9000-dff8b2a2ae6e` |
+| Risiken | Kein Nachdruck bei Richner; Arbeit kostenpflichtig; Plan B Material/Lieferant + Termin Countdown; Größe/Totzone nicht neu |
+| Aktion Agent | Docs + Antwortentwurf; **kein Mail-Versand**; **STOP** auf Harald-Go |
+| Artefakte | `08-reklamation-licht/Thread-2026-08-07-Tanja-Material-Nein.md`, `Mail-Entwurf-Antwort-2026-08-07.md` |
+
+
+## 2026-08-07 ~15:43 CEST — Richnerstutz SEG 627 828 (Watcher, Harald Rechnung)
+
+| Item | Status |
+|------|--------|
+| Trigger | Zapier Gmail — **from Harald** Outbound, Subject Re: … SEG (627 828), Thread `19fac62d97c94e3d`, Msg `19fdc76bfbe994bb`, Date Fri 7 Aug 2026 15:43:17 +0200 |
+| Filter | Hotel Anker / Flowbox / Bespannung — **relevant**; **kein neuer Richner-Inbound** |
+| Harald | «Realia AG als Rechnungsanschrift ist richtig…» |
+| Delta | Rechnungsadresse bestätigt; Kulanz/Arbeit im kurzen Outbound **nicht** explizit |
+| Risiken | Arbeit kostenpflichtig bleibt; Plan B Material offen; Nachfolger-Druck Totzone 300 mm |
+| Aktion Agent | Docs nachgezogen (fff9-Stand + Rechnung); optionaler Nachzieh-Entwurf; **kein Mail**; **STOP** |
+| Artefakte | `08-reklamation-licht/Thread-2026-08-07-Harald-Rechnung.md` |
+
+
+## 2026-08-07 ~15:44 CEST — Richnerstutz SEG 627 828 (Watcher, Harald Opera)
+
+| Item | Status |
+|------|--------|
+| Trigger | Zapier Gmail — **from Harald** Outbound, Subject Re: … SEG (627 828), Thread `19fac62d97c94e3d`, Msg `19fdc78284723f62`, Date Fri 7 Aug 2026 15:44:49 +0200 |
+| Filter | Hotel Anker / Flowbox / Bespannung — **relevant**; **kein neuer Richner-Inbound** (Doppeltrigger nach 15:43) |
+| Harald | Realia-Adresse bestätigt + Frage: Opera / dünnes helles (weisses) lichtdurchlässiges Material bedruckbar? |
+| Zitat Tanja | Material-Nein + Kulanz 30 %+10 % Material / Arbeit verrechnen + Acrobat-Video (bekannt) |
+| Risiken | Tanja kann Opera trotzdem ablehnen; Arbeit kostenpflichtig; Plan B Kendu; Totzone 300 mm Nachfolger |
+| Aktion Agent | Docs + Entwurf aktualisiert; **kein Mail**; **STOP** — warten auf Tanja zu Opera |
+| Artefakte | `08-reklamation-licht/Thread-2026-08-07-Harald-Opera.md`, `Mail-Entwurf-Antwort-2026-08-07.md` |
+

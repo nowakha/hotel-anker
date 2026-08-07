@@ -1,6 +1,6 @@
 # Hotel Anker â€” Learnings & Handoff
 
-Stand: **2026-07-28** — Domain-Check Rorschach (siehe unten). Zuvor: Smooth-Patch PI02-Uhr pending Deploy.
+Stand: **2026-08-07 ~15:44 CEST** — Richnerstutz SEG 627 828: Harald Opera-Frage outbound; warten auf Tanja. Zuvor: SHM-Fix Flowbox LIVE.
 Ziel: eine andere Cursor-Instanz auf einem anderen Rechner kann ohne mündlichen Kontext weiterarbeiten.
 
 **Workflow (verbindlich):** `.cursor/rules/hotel-anker-workflow.mdc` — jeden Schritt dokumentieren (Erfolg+Misserfolg), Credentials/Learnings mitziehen, commit + `git push origin HEAD`.
@@ -289,9 +289,42 @@ Not done: fb-clock/ffprobe verify (unreachable). Do not unmask.
 
 - Print installiert am Hotel Anker: wirkt **komplett lichtundurchlässig** (Foto in `08-reklamation-licht/`).
 - Harald hat Richnerstutz bereits reklamiert (Opera-/Rückpro-Vergleich; Nachdruck auf richtigem Untergrund).
-- **Warten auf Antwort Richnerstutz.**
 - Spec war Backlit + selektiver Blockout; Ergebnis passt nicht — Ursache offen (Material/Layer/Kommunikation/Muster übersprungen).
 - Nachfoto Abend 2026-08-04: **Nacht funktioniert grundsätzlich**, Material bleibt sehr dunkel → Tag braucht mehr LED-Power (siehe unten).
+
+## Richnerstutz Thread SEG 627 828 — Tanja + Harald Klarstellung (2026-08-06)
+
+- Job: **SEG (627 828)** / Hotel Anker Rorschach / Thread `19fac62d97c94e3d`.
+- **Tanja Jelk ~15:48:** Intern + Digital-Abteilung; unsicher ob LED-Screen (Textil ohne Abstand streut nicht) vs. angesteuerter Leuchtkasten; **Musterstück** Druck **morgen Mittag** (~07.08.); asap Rückmeldung.
+- **Harald outbound ~15:53–15:54** (Msg `19fd75a4a86d4e03`, zuvor `19fd7598a37586fe` — from Harald, kein neuer Richner-Inbound): Kendu Flowbox-URL; LEDs **~4,5 cm** hinter Bespannung; Tuchfläche hätte **farblos/unbedruckt** sein sollen; Referenz Rückprojektionsfolie grau (Rabenring); Material bei Bestellung unklar formuliert; **Rabatt** für weitere Bestellung erfragt.
+- Geometrie Repo: Textil→LED **45 mm** — passt zu Haralds 4,5 cm; **kein** Direct-View-Screen.
+- **Spannung:** Spec = bedrucktes Backlit + selektiver Blockout; Haralds Mail sagt «unbedruckt» — vermutlich transluzentes Grundmaterial gemeint, nicht Verzicht auf Sujet.
+- **Offen (Stand 06.08.):** Muster-Ergebnis, welches Material die gelieferte Ware hat, Nachdruck/Kosten/Rabatt/Termin, Totzone 300 mm.
+- **STOP:** kein weiteres Outbound ohne Harald-Go. Docs: `08-reklamation-licht/`.
+
+## Richnerstutz SEG 627 828 — Tanja Abschluss Material (2026-08-07 ~14:47 CEST)
+
+- **Inbound:** Tanja.Jelk@richnerstutz.ch · Subject AW: … SEG (627 828) · Thread `19fac62d97c94e3d` · Msg `19fdc43b49050a5c` · Date Fri, 7 Aug 2026 12:47:14 +0000.
+- **Kern:** Kein geeignetes Flowbox-Material / keine Beamer-Leinwand-Erfahrung; Produktion laut Druckdaten+GzD; Einsatz zeigt: Material ungeeignet; gleiches Material erneut = sinnlos; Textil beim Flowbox-Hersteller beziehen.
+- **Nachweis:** Video `IMG_1987.MOV` + Fotos (Adobe Acrobat URN `aaid:sc:EU:86ef1c12-08be-4d61-9000-dff8b2a2ae6e`).
+- **Kulanz:** bereits 30 % Materialrabatt; zusätzlich **+10 %** auf Materialpreis; **Arbeitsleistungen** werden verrechnet.
+- **STOP:** kein Agent-Outbound ohne Harald-Go. Entwurf `08-reklamation-licht/Mail-Entwurf-Antwort-2026-08-07.md`.
+
+## Richnerstutz SEG 627 828 — Harald Rechnungsadresse (2026-08-07 ~15:43 CEST)
+
+- **Trigger:** Zapier — **from Harald** Outbound (kein neuer Richner-Inbound). Subject Re: … SEG (627 828). Thread `19fac62d97c94e3d`. Msg `19fdc76bfbe994bb`. Date Fri, 7 Aug 2026 15:43:17 +0200.
+- **Harald:** «Realia AG als Rechnungsanschrift ist richtig…» — Rechnungsadresse bestätigt.
+- **Zitat Tanja (bekannt):** Material-Nein + Kulanz 30 %+10 % Material / Arbeit verrechnen + Acrobat-Video.
+- **Erledigt:** Rechnungsadresse Realia AG.
+- **Offen (bis ~15:44):** siehe nächster Eintrag.
+
+## Richnerstutz SEG 627 828 — Harald Opera-Frage (2026-08-07 ~15:44 CEST)
+
+- **Trigger:** Zapier — **from Harald** Outbound Msg `19fdc78284723f62`, Date Fri, 7 Aug 2026 15:44:49 +0200. Thread `19fac62d97c94e3d`.
+- **Harald:** Realia-Adresse bestätigt **und** «Könnt ihr keine Opera oder dünnes helles (weisses) lichtdurchlässiges Material bedrucken?»
+- **Delta vs. 15:43:** Materialfrage Opera/Transluzenz nachgeschoben — trotz Tanja «kein Flowbox-/Beamer-Material».
+- **Offen:** Antwort Richner auf Opera; Kulanz-Schriftlichkeit; Plan B Kendu/Hersteller; Totzone 300 mm / 2100 mm Nachfolger; Rechnungseingang.
+- **STOP:** kein Agent-Mail; warten auf Tanja. Docs: `08-reklamation-licht/Thread-2026-08-07-Harald-Opera.md`.
 
 ## Day/Night Full-Power Countdown (2026-08-06) — LIVE AnkerPI01
 
@@ -308,3 +341,4 @@ Not done: fb-clock/ffprobe verify (unreachable). Do not unmask.
 - **Fix:** Waves **attach-only**; Restart **putter → waves**; Unit `Requires=ws2812put-pi02`.
 - **Look:** Milch-Ghost (nie schwarz); hellere Chrome Tag+Nacht; keine Near-Black-Tröge.
 - **Verify:** gleiche SHM-Inode beider PIDs; viewer L/R ≈ gleich; `frames differ True`.
+

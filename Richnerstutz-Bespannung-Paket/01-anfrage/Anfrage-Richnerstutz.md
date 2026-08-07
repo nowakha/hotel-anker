@@ -1,6 +1,8 @@
 # Anfrage an Richnerstutz AG — Textilbespannung LightBox Hotel Anker
 
-**Status:** **Gesendet** 2026-07-23 ~17:27 CEST — von `harald.nowak@modernlight.ch` an `info@richnerstutz.ch` (Gmail Web UI), Anhang `Hotel-Anker-Richnerstutz-Bespannung.zip`.  
+**Status (2026-08-07 ~15:44 CEST):** Job **SEG (627 828)** — Tanja: kein Flowbox-/Beamer-Material; Kulanz 30 %+10 % Material, Arbeit verrechnen. Harald Outbound Msg `19fdc78284723f62`: **Realia AG Rechnungsanschrift bestätigt** + Frage **Opera / dünnes helles (weisses) lichtdurchlässiges Material**. Thread `19fac62d97c94e3d`. Offen: Antwort Richner auf Opera; Plan B (Kendu). **STOP — kein weiteres Outbound ohne Harald-Go; warten auf Tanja.**
+
+**Anfrage gesendet** 2026-07-23 ~17:27 CEST — von `harald.nowak@modernlight.ch` an `info@richnerstutz.ch` (Gmail Web UI), Anhang `Hotel-Anker-Richnerstutz-Bespannung.zip`.  
 
 **Korrektur Druckmaß (2026-07-27):** Kanonischer Master ist **2100 × 2100 mm** Spannmaß mit **300 mm** Schwarz unten (`DRUCK-Hotel-Anker-Flowbox-2100x2100.pdf`). Offerte AG 461414 („Textil 200×200 cm“) weicht ab — **Nachtrag an Richnerstutz:** bitte auf **210×210 cm** / MediaBox 2100 mm umstellen.  
 
