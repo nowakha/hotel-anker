@@ -1,24 +1,29 @@
 ﻿# NEXT AGENT — Sofortmaßnahmen
 
-Stand: **2026-08-06**. Lies `LEARNINGS.md` + `docs/SESSION_LOG.md`.
+Stand: **2026-08-07**. Lies `LEARNINGS.md` + `docs/SESSION_LOG.md`.
 
 ## LIVE jetzt
 
 - **Flowbox Countdown:** AnkerPI01 Tailscale `100.67.4.18`
-  - `countdown-waves.service` (`countdown_waves_64.py --shm --fps 25`)
-  - `ws2812put-pi02.service` → Teensy 64×64
-- **Day/Night:** Solar-Fade auto (Rorschach). Tag = full-power weiss/cyan/orange; Nacht = bisheriger Amber/Navy@25%.
-- Check: `journalctl -u countdown-waves -n 20` → `day_factor=`
+  - `ws2812put-pi02.service` erstellt `shm://ws2812`
+  - `countdown-waves.service` **attach-only** → Teensy 64×64
+- **2026-08-07 Fix:** SHM split-brain behoben; Milch-Ghost; hellerer Countdown-First Look.
 
-## Jetzt tun (optional)
+## Restart-Reihenfolge (PFLICHT)
 
-1. Optisch am Hotel prüfen: Tag heller genug? Wenn nein: Day-Palette in `countdown_waves_64.py` noch heißer (DAY_NAVY_HI / DAY_GOLD*).
-2. Dämmerung beobachten (~civil twilight): sanfter Fade Tag→Nacht.
-3. Richnerstutz-Antwort abwarten (Reklamation Material) — parallel LED-Power kompensiert.
+```bash
+sudo systemctl stop countdown-waves
+sudo systemctl restart ws2812put-pi02
+# wait until /dev/shm/ws2812 exists
+sudo systemctl start countdown-waves
+# verify: grep ws2812 /proc/$(systemctl show -p MainPID --value ws2812put-pi02)/maps
+#         and waves PID — same inode, NOT "(deleted)" with different numbers
+```
+
+**Nie** Waves allein restarten und hoffen — Producer darf SHM nie `create`n.
 
 ## Nicht tun
 
-- Waves nicht auf PI02 umziehen ohne Grund (LIVE ist PI01).
+- Kein `sa.create` im Countdown-Producer
 - Kein `cmdline.txt`-Experiment
 - Kein `ffmpeg … -f null -` auf 24h/4K
-- Clock smooth-patch PI02 nur wenn extra Auftrag

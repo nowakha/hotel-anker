@@ -298,8 +298,13 @@ Not done: fb-clock/ffprobe verify (unreachable). Do not unmask.
 - **Host:** AnkerPI01 Tailscale `100.67.4.18` (nicht PI02 für Waves).
 - **Services:** `countdown-waves.service` + `ws2812put-pi02.service` (64×64 → Teensy).
 - **Code:** `WerbeLEDbox-CountDown/scripts/countdown_waves_64.py` — Solar-Elevation Rorschach, smooth `day_factor` −6°…+10°.
-- **Tag:** weiße Ziffern, helles Cyan-Wellenmuster, helles orange Liquid Glass, Chrome 100%; **keine Hotellinien** (Lesbarkeit).
-- **Nacht:** bisheriger Look (Amber-Ziffern, Navy, Glass @25%) + Hotellinien nur leicht hinterleuchtet.
-- **Verify:** `journalctl -u countdown-waves` → `look=auto elev=… day_factor=1.000` (Nachmittag).
-- Previews: `assets/kendu-64x64/countdown-waves-day*.png` / `…-gold*.png`.
+- **Tag/Nacht:** Countdown absolute Priorität — leichtes Milch-Ghost, volle Ziffern; Waves/Glass sekundär; Hotellinien nur nachts leicht.
 - Force: `--look day|night` oder `COUNTDOWN_LOOK`.
+
+## SHM Split-Brain + Gottlieb-Feedback (2026-08-07) — FIXED
+
+- **Symptom (Gottlieb 02:33):** schlechter, zu dunkel, rechte Seite fehlt, Countdown wirkt aus.
+- **Root cause:** Producer `sa.create` nach Restart → `/dev/shm/ws2812` unlinked; Putter und Waves hielten **verschiedene deleted** Mappings → LEDs frozen/halb.
+- **Fix:** Waves **attach-only**; Restart **putter → waves**; Unit `Requires=ws2812put-pi02`.
+- **Look:** Milch-Ghost (nie schwarz); hellere Chrome Tag+Nacht; keine Near-Black-Tröge.
+- **Verify:** gleiche SHM-Inode beider PIDs; viewer L/R ≈ gleich; `frames differ True`.

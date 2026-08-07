@@ -219,15 +219,18 @@ Print is very dark by day; night look already worked. Renderer blends:
 | Liquid glass | bright orange | gold chrome @25% |
 | Chrome gain | 100% | 25% |
 | Hotel facade lines | **off** (countdown readability) | soft whisper backlight only |
+| Digit ghost | light milk | warm milk (never black) |
 
 - Location: Rorschach `47.4789 / 9.4902`, civil twilight fade (−6°…+10° solar elevation)
 - Default: `--look auto` (also `COUNTDOWN_LOOK=day|night|auto`)
-- Force day test: stop service, run with `--look day`, or set env in unit
-- Preview assets: `assets/kendu-64x64/countdown-waves-day*.png` (+ gold = night)
+- **SHM:** putter creates; waves **attach-only**. Wrong order → split-brain (`(deleted)` different inodes) → frozen/half panel (Gottlieb 2026-08-07).
 
 ```bash
-sudo systemctl status countdown-waves ws2812put-pi02
-journalctl -u countdown-waves -f   # elev=…° day_factor=…
+# safe restart
+sudo systemctl stop countdown-waves
+sudo systemctl restart ws2812put-pi02
+sudo systemctl start countdown-waves
+journalctl -u countdown-waves -f   # must say "attached shm://ws2812"
 ```
 
 ## Notes / constraints

@@ -2,6 +2,17 @@
 
 Chronik für Cross-Machine-Handoff. Erfolg **und** Misserfolg.
 
+## 2026-08-07 — Gottlieb: rechte Seite fehlt / zu dunkel — SHM split-brain FIXED
+
+| Item | Ergebnis |
+|------|----------|
+| Feedback | Gottlieb 02:33: schlechter, rechte Seite fehlt, Tag zu dunkel, Countdown wirkt aus |
+| Diagnose | `/proc/*/maps`: putter+waves je `ws2812 (deleted)` **andere Inodes**; `/dev/shm` leer |
+| Ursache | Waves-Restart 06.08 machte `sa.create` → unlink → LEDs ohne Live-Feed |
+| Fix Code | `_attach_shm_panel` attach-only; Milch-Ghost; hellere Tag/Nacht; Countdown oben |
+| Fix Ops | stop waves → restart putter → start waves; Unit Requires putter |
+| Verify | gleiche Inode 9; L/R viewer ~164/167; frames differ; day_factor=1.0 |
+
 ## 2026-08-06 — Day look max-heat
 
 | Item | Ergebnis |

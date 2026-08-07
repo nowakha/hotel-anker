@@ -54,30 +54,34 @@ from layout_countdown_view import (  # noqa: E402
 
 TARGET = datetime(2026, 10, 1, 13, 0, 0, tzinfo=TZ)
 
-# --- Night look (proven through dark print at dusk) ---
-NAVY = np.array([0, 2, 22], dtype=np.float32)
-NAVY_MID = np.array([0, 28, 140], dtype=np.float32)
-NAVY_HI = np.array([0, 90, 255], dtype=np.float32)
-NON_DIGIT_BRIGHTNESS_NIGHT = 0.25
+# --- Night look — countdown first, chrome secondary but still bright enough ---
+NAVY = np.array([0, 12, 48], dtype=np.float32)
+NAVY_MID = np.array([0, 55, 170], dtype=np.float32)
+NAVY_HI = np.array([20, 120, 255], dtype=np.float32)
+# Was 0.25 — too dark through dense textile; Gottlieb 2026-08-07
+NON_DIGIT_BRIGHTNESS_NIGHT = 0.55
 AMBER = np.array([255, 96, 0], dtype=np.uint8)
-AMBER_HI = np.array([255, 88, 0], dtype=np.uint8)
-GOLD = np.array([180, 90, 16], dtype=np.uint8)
-GOLD_HI = np.array([220, 120, 24], dtype=np.uint8)
-GOLD_SHINE = np.array([255, 170, 60], dtype=np.uint8)
+AMBER_HI = np.array([255, 140, 20], dtype=np.uint8)  # brighter lit digits at night
+GOLD = np.array([200, 110, 24], dtype=np.uint8)
+GOLD_HI = np.array([240, 140, 30], dtype=np.uint8)
+GOLD_SHINE = np.array([255, 190, 70], dtype=np.uint8)
 WHITE = np.array([255, 255, 255], dtype=np.uint8)
-DIGIT = AMBER_HI  # lit segments — night default (max orange)
-GHOST = np.array([0, 0, 0], dtype=np.uint8)  # unused 8-segments: black
+DIGIT = AMBER_HI
+# Unused 7-seg bars: light milk (never black) — readability through print
+MILK_NIGHT = np.array([110, 85, 45], dtype=np.uint8)
+GHOST = MILK_NIGHT
 
-# --- Day look (max heat — dense textile needs every LED watt for contrast) ---
-DAY_NAVY = np.array([0, 8, 28], dtype=np.float32)  # deep trough → digits pop
-DAY_NAVY_MID = np.array([0, 230, 255], dtype=np.float32)
-DAY_NAVY_HI = np.array([200, 255, 255], dtype=np.float32)  # near-white cyan peaks
+# --- Day look — bright overall; countdown absolute priority ---
+DAY_NAVY = np.array([0, 70, 120], dtype=np.float32)  # bright troughs (no near-black)
+DAY_NAVY_MID = np.array([0, 200, 240], dtype=np.float32)
+DAY_NAVY_HI = np.array([160, 255, 255], dtype=np.float32)
 NON_DIGIT_BRIGHTNESS_DAY = 1.0
-DAY_DIGIT = WHITE  # full-power white numerals
-DAY_GOLD = np.array([255, 90, 0], dtype=np.float32)
-DAY_GOLD_HI = np.array([255, 150, 0], dtype=np.float32)
-DAY_GOLD_SHINE = np.array([255, 245, 100], dtype=np.float32)
-DAY_HOT = np.array([255, 210, 30], dtype=np.float32)
+DAY_DIGIT = WHITE
+MILK_DAY = np.array([210, 220, 235], dtype=np.uint8)  # leichtes Milch
+DAY_GOLD = np.array([255, 120, 0], dtype=np.float32)
+DAY_GOLD_HI = np.array([255, 170, 20], dtype=np.float32)
+DAY_GOLD_SHINE = np.array([255, 230, 90], dtype=np.float32)
+DAY_HOT = np.array([255, 200, 40], dtype=np.float32)
 
 # Rorschach (Hotel Anker) — solar elevation for real daylight fade
 RORSCHACH_LAT = 47.4789
@@ -116,6 +120,8 @@ _GOLD_HI_F = GOLD_HI.astype(np.float32)
 _GOLD_SHINE_F = GOLD_SHINE.astype(np.float32)
 _HOT_F = np.array([255.0, 160.0, 40.0], dtype=np.float32)  # orange-hot, not cream
 _AMBER_HI_F = AMBER_HI.astype(np.float32)
+_MILK_NIGHT_F = MILK_NIGHT.astype(np.float32)
+_MILK_DAY_F = MILK_DAY.astype(np.float32)
 
 
 def _smoothstep(edge0: float, edge1: float, x: float) -> float:
@@ -351,14 +357,16 @@ def paint_digit_with_ghost(
     value: int,
     *,
     digit_color: np.ndarray | None = None,
+    milk_color: np.ndarray | None = None,
 ) -> None:
-    """DSEG7: black ghost-8 (no outline), then lit digit (night amber / day white)."""
+    """DSEG7: light-milk ghost-8, then lit digit on top (countdown priority)."""
     ghost_m = _dseg_mask("8", DW)
     lit_m = _dseg_mask(str(value), DW)
     if ghost_m is None or lit_m is None:
         return
     color = DIGIT if digit_color is None else digit_color
-    _blit_mask(buf, ox, oy, ghost_m, GHOST)
+    milk = GHOST if milk_color is None else milk_color
+    _blit_mask(buf, ox, oy, ghost_m, milk)
     _blit_mask(buf, ox, oy, lit_m, color)
 
 
@@ -369,12 +377,14 @@ def paint_colon(
     lit: bool,
     *,
     digit_color: np.ndarray | None = None,
+    milk_color: np.ndarray | None = None,
 ) -> None:
     """Two-dot colon centered in COLON_W; midpoint == vertical center of the 8s."""
     from layout_countdown_view import COLON_W
 
     base = DIGIT if digit_color is None else digit_color
-    color = base if lit else GHOST
+    milk = GHOST if milk_color is None else milk_color
+    color = base if lit else milk
     # Single LED per dot when COLON_W=2; 2×2 only if slot is wider — matches print ~6% DH
     side = 1 if COLON_W <= 2 else 2
     cx0 = ox + max(0, (COLON_W - side) // 2)
@@ -499,19 +509,16 @@ def wave_background(t: float, day_f: float = 0.0) -> np.ndarray:
 
     field = 0.48 * scallop + 0.36 * swell + 0.32 * ripple
     field = np.clip((field + 1.05) / 1.85, 0.0, 1.0)
-    # Day: harder contrast curve (deeper lows, hotter highs) for textile punch
-    field = np.power(field, 0.72 - 0.30 * day_f)
-    if day_f > 0.0:
-        lo = 0.12 * day_f
-        field = np.clip((field - lo) / max(1e-6, 1.0 - lo), 0.0, 1.0)
+    # Soft curve — keep waves bright; never crush to near-black (countdown must win)
+    field = np.power(field, 0.68)
 
     navy = _lerp_rgb(NAVY, DAY_NAVY, day_f)
     mid = _lerp_rgb(NAVY_MID, DAY_NAVY_MID, day_f)
     hi = _lerp_rgb(NAVY_HI, DAY_NAVY_HI, day_f)
 
     f = field[..., None]
-    mid_w = 0.45 + 0.35 * day_f
-    hi_w = 0.85 + 0.55 * day_f
+    mid_w = 0.50 + 0.15 * day_f
+    hi_w = 0.90 + 0.20 * day_f
     rgb = (
         navy[None, None, :] * (1.0 - f)
         + mid[None, None, :] * (mid_w * f)
@@ -662,7 +669,7 @@ def paint_liquid_glass_bars(
 
 
 def render_frame(t: float, now: datetime | None = None) -> np.ndarray:
-    """Viewer-upright: chrome dimmed by day_factor; digits undimmed (amber→white)."""
+    """Viewer-upright: chrome by day_factor; countdown digits+milk always undimmed on top."""
     if now is None:
         now = datetime.now(TZ)
     elif now.tzinfo is None:
@@ -675,9 +682,10 @@ def render_frame(t: float, now: datetime | None = None) -> np.ndarray:
     dig = np.clip(
         _lerp_rgb(_AMBER_HI_F, DAY_DIGIT.astype(np.float32), df), 0, 255
     ).astype(np.uint8)
+    milk = np.clip(_lerp_rgb(_MILK_NIGHT_F, _MILK_DAY_F, df), 0, 255).astype(np.uint8)
 
     buf = wave_background(t, day_f=df)
-    # Glass into the composition BEFORE dim — then whole chrome hits day/night level
+    # Glass BEFORE dim — secondary to countdown
     paint_liquid_glass_bars(buf, t, final=False, day_f=df)
 
     active = buf[:ACTIVE_H].astype(np.float32) * chrome
@@ -686,7 +694,6 @@ def render_frame(t: float, now: datetime | None = None) -> np.ndarray:
     if _BP_DEAD is not None:
         dead = buf[ACTIVE_H:]
         dead[:] = 0
-        # Dead-band facade ink: night whisper only (same rule as active lines)
         night_f = 1.0 - df
         if night_f > 0.01 and _BP_DEAD.any():
             dead[_BP_DEAD] = (_WHITE_F * 0.32 * night_f * chrome).astype(np.uint8)
@@ -694,18 +701,20 @@ def render_frame(t: float, now: datetime | None = None) -> np.ndarray:
     else:
         buf[ACTIVE_H:, :, :] = 0
 
-    # Digits / colons AFTER dim — full power (white by day, amber by night)
+    # Countdown AFTER dim — absolute priority: milk ghost + full-power lit segments
     days, hours, mins, secs = remaining(now)
     d_vals = [days // 100, (days // 10) % 10, days % 10]
     t_vals = [hours // 10, hours % 10, mins // 10, mins % 10, secs // 10, secs % 10]
 
     for ox, val in zip(DAYS_X, d_vals):
-        paint_digit_with_ghost(buf, ox, DAY_Y, val, digit_color=dig)
+        paint_digit_with_ghost(buf, ox, DAY_Y, val, digit_color=dig, milk_color=milk)
     for ox, val in zip(TIME_X, t_vals):
-        paint_digit_with_ghost(buf, ox, TIME_Y, val, digit_color=dig)
+        paint_digit_with_ghost(buf, ox, TIME_Y, val, digit_color=dig, milk_color=milk)
 
     for cx, cy in COLONS:
-        paint_colon(buf, cx, cy, lit=(secs % 2) == 0, digit_color=dig)
+        paint_colon(
+            buf, cx, cy, lit=(secs % 2) == 0, digit_color=dig, milk_color=milk
+        )
 
     return buf
 
@@ -750,15 +759,44 @@ def save_previews(path_dir: Path) -> None:
     )
 
 
-def run_shm(fps: float, seconds: float | None) -> None:
+def _attach_shm_panel(timeout_s: float = 90.0):
+    """Attach putter-owned SHM only — never create (create unlinks → split-brain LEDs)."""
     import SharedArray as sa
 
-    try:
-        panel = sa.attach(SHM)
-    except Exception:
-        panel = sa.create(SHM, (HEIGHT, WIDTH, 3), dtype=np.uint8)
-    if tuple(panel.shape) != (HEIGHT, WIDTH, 3):
-        raise SystemExit(f"bad shm shape {panel.shape}")
+    short = SHM.replace("shm://", "")
+    t0 = time.perf_counter()
+    last: Exception | None = None
+    while True:
+        try:
+            panel = sa.attach(SHM)
+            if tuple(panel.shape) != (HEIGHT, WIDTH, 3):
+                raise SystemExit(
+                    f"bad shm shape {panel.shape}; want {(HEIGHT, WIDTH, 3)} — "
+                    "restart ws2812put-pi02 first"
+                )
+            return panel
+        except SystemExit:
+            raise
+        except Exception as e:
+            last = e
+            waited = time.perf_counter() - t0
+            if waited >= timeout_s:
+                raise SystemExit(
+                    f"cannot attach {SHM} after {timeout_s:.0f}s — start "
+                    f"ws2812put-pi02 first (producer must never create '{short}'). "
+                    f"last={last!r}"
+                ) from last
+            if int(waited) % 5 == 0:
+                print(
+                    f"countdown_waves: waiting for putter SHM {SHM} "
+                    f"({waited:.0f}s)…",
+                    flush=True,
+                )
+            time.sleep(0.5)
+
+
+def run_shm(fps: float, seconds: float | None) -> None:
+    panel = _attach_shm_panel()
 
     # Warm caches before the paced loop (blueprint / logo / DSEG / grids)
     _ensure_grids()
@@ -777,7 +815,7 @@ def run_shm(fps: float, seconds: float | None) -> None:
     elev0 = solar_elevation_deg()
     df0 = day_factor()
     print(
-        f"countdown_waves: SHM {SHM} target_fps={fps} look={_LOOK_MODE} "
+        f"countdown_waves: attached {SHM} target_fps={fps} look={_LOOK_MODE} "
         f"elev={elev0:.1f}° day_factor={df0:.3f}",
         flush=True,
     )

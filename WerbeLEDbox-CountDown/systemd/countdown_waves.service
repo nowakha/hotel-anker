@@ -1,7 +1,7 @@
 [Unit]
-Description=Hotel Anker countdown (gold on navy waves → shm://ws2812)
+Description=Hotel Anker countdown (waves → shm://ws2812; attach-only)
 After=ws2812put-pi02.service
-Wants=ws2812put-pi02.service
+Requires=ws2812put-pi02.service
 
 [Service]
 Type=simple
@@ -9,7 +9,7 @@ User=user
 Group=user
 WorkingDirectory=/home/user/WerbeLEDbox-CountDown
 Environment=FPS=25
-Environment=ACTIVE_FIELDS=2
+# Producer MUST attach only — never create (create unlinks putter SHM → frozen/half panel)
 ExecStart=/home/user/WerbeLEDbox-CountDown/.venv/bin/python /home/user/WerbeLEDbox-CountDown/scripts/countdown_waves_64.py --shm --fps 25
 Restart=always
 RestartSec=2
