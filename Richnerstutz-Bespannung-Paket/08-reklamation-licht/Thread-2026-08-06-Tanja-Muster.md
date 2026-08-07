@@ -32,3 +32,4 @@ Kernpunkte:
 - **Relevant** für Hotel Anker / Flowbox / Bespannung.
 - Geometrie-Klarstellung adressiert Tanjas Screen-Bedenken korrekt.
 - Offene Spannung: «unbedruckt» vs. Repo-Spec (Sujet + selektiver Blockout) — in Follow-up ggf. präzisieren: transluzentes **Grundmaterial**, Druck/Blockout separat.
+- **Update 2026-08-07:** Tanja Inbound Msg `19fdc43b49050a5c` — kein geeignetes Material; siehe `Thread-2026-08-07-Tanja-Material-Nein.md`.

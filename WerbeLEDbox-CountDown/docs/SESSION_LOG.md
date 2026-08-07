@@ -560,3 +560,17 @@ Goal: stabile 860×360 H.264-Produktion statt 4K `st24.mov` auf PI02 (Undervolta
 | Filter | Relevant, aber **kein neuer Richner-Inbound** — Status mergen, nicht escalieren |
 | Aktion | Docs auf Branch `cursor/hotel-anker-print-replies-4c72` nachgezogen + Rabatt notiert; **kein Mail**; STOP auf Harald-Go + Muster |
 
+
+## 2026-08-07 ~14:47 CEST — Richnerstutz SEG 627 828 (Watcher, Tanja Abschluss)
+
+| Item | Status |
+|------|--------|
+| Trigger | Zapier Gmail — **from Tanja.Jelk@richnerstutz.ch**, Subject AW: … SEG (627 828), Thread `19fac62d97c94e3d`, Msg `19fdc43b49050a5c`, Date Fri 7 Aug 2026 12:47:14 +0000 |
+| Filter | Hotel Anker / Flowbox / Bespannung — **relevant** |
+| Kern | Kein Flowbox-/Beamer-Material; Produktion laut GzD; Einsatz ungeeignet; gleiches Material erneut sinnlos; Hersteller empfehlen |
+| Kulanz | 30 % Material bereits + **weitere 10 %** Material; **Arbeit verrechnen**; Rechnungsadresse angefragt (Realia bereits im Body) |
+| Nachweis | Acrobat `IMG_1987.MOV` URN `aaid:sc:EU:86ef1c12-08be-4d61-9000-dff8b2a2ae6e` |
+| Risiken | Kein Nachdruck bei Richner; Arbeit kostenpflichtig; Plan B Material/Lieferant + Termin Countdown; Größe/Totzone nicht neu |
+| Aktion Agent | Docs + Antwortentwurf; **kein Mail-Versand**; **STOP** auf Harald-Go |
+| Artefakte | `08-reklamation-licht/Thread-2026-08-07-Tanja-Material-Nein.md`, `Mail-Entwurf-Antwort-2026-08-07.md` |
+

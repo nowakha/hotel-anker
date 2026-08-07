@@ -1,6 +1,6 @@
 # Anfrage an Richnerstutz AG — Textilbespannung LightBox Hotel Anker
 
-**Status (2026-08-06 ~15:54):** Job **SEG (627 828)** — Ware reklamiert (kein Durchlicht). Tanja Jelk: Musterstück Druck ~**07.08. Mittag**, Unsicherheit Screen vs. Leuchtkasten. Harald hat Geometrie/Material (~15:53–15:54) geklärt (Kendu Flowbox, ~4,5 cm Abstand) und **Rabatt** für Nachbestellung erfragt. **Warten auf Muster-Ergebnis + Harald-Go** für weiteres Outbound.
+**Status (2026-08-07 ~14:47 CEST):** Job **SEG (627 828)** — Tanja Jelk: **kein** Flowbox-/Beamer-geeignetes Material im Sortiment; Nachdruck gleiches Material sinnlos; Empfehlung Textil beim Hersteller; Kulanz **30 %+10 %** auf Material, Arbeit verrechnen; Rechnungsadresse angefragt. Thread `19fac62d97c94e3d` Msg `19fdc43b49050a5c`. **STOP — warten auf Harald-Go** (Entwurf Antwort in `08-reklamation-licht/`).
 
 **Anfrage gesendet** 2026-07-23 ~17:27 CEST — von `harald.nowak@modernlight.ch` an `info@richnerstutz.ch` (Gmail Web UI), Anhang `Hotel-Anker-Richnerstutz-Bespannung.zip`.  
 

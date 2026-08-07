@@ -302,6 +302,15 @@ Not done: fb-clock/ffprobe verify (unreachable). Do not unmask.
 - **Offen (Stand 06.08.):** Muster-Ergebnis, welches Material die gelieferte Ware hat, Nachdruck/Kosten/Rabatt/Termin, Totzone 300 mm.
 - **STOP:** kein weiteres Outbound ohne Harald-Go. Docs: `08-reklamation-licht/`.
 
+## Richnerstutz SEG 627 828 — Tanja Abschluss Material (2026-08-07 ~14:47 CEST)
+
+- **Inbound:** Tanja.Jelk@richnerstutz.ch · Subject AW: … SEG (627 828) · Thread `19fac62d97c94e3d` · Msg `19fdc43b49050a5c` · Date Fri, 7 Aug 2026 12:47:14 +0000.
+- **Kern:** Kein geeignetes Flowbox-Material / keine Beamer-Leinwand-Erfahrung; Produktion laut Druckdaten+GzD; Einsatz zeigt: Material ungeeignet; gleiches Material erneut = sinnlos; Textil beim Flowbox-Hersteller beziehen.
+- **Nachweis:** Video `IMG_1987.MOV` + Fotos (Adobe Acrobat URN `aaid:sc:EU:86ef1c12-08be-4d61-9000-dff8b2a2ae6e`).
+- **Kulanz:** bereits 30 % Materialrabatt; zusätzlich **+10 %** auf Materialpreis; **Arbeitsleistungen** werden verrechnet.
+- **Offen an Harald:** Rechnungsadresse bestätigen (Realia AG Industriestrasse 40b, 9400 Rorschach, z. Hd. Gottlieb Kündig — bereits in Thread); ob Kulanz akzeptieren; Plan B Material (Kendu/Hersteller); Totzone/Druckmass Nachfolger.
+- **STOP:** kein Outbound ohne Harald-Go. Entwurf `08-reklamation-licht/Mail-Entwurf-Antwort-2026-08-07.md`.
+
 ## Day/Night Full-Power Countdown (2026-08-06) — LIVE AnkerPI01
 
 - **Host:** AnkerPI01 Tailscale `100.67.4.18` (nicht PI02 für Waves).

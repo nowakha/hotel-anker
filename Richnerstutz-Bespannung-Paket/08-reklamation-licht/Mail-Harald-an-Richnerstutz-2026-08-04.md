@@ -1,6 +1,6 @@
 # Reklamation an Richnerstutz — 2026-08-04
 
-**Status (2026-08-06 ~15:54):** Reklamation gesendet; Tanja Jelk hat geantwortet (Musterstück); Harald hat Geometrie/Material + Rabattfrage nachgelegt. **Warten auf Muster-Ergebnis (~07.08. Mittag) und Harald-Go** — kein weiteres Outbound durch Agenten.
+**Status (2026-08-07 ~14:47):** Tanja Jelk: kein Flowbox-Material; Nachdruck sinnlos; Kulanz 30 %+10 % Material, Arbeit verrechnen; Hersteller-Empfehlung. **STOP — Harald-Go** für Antwort (`Mail-Entwurf-Antwort-2026-08-07.md`).
 
 **Foto:** `2026-08-04-installiert-kein-durchlicht.png` (Installiert am Hotel Anker; kein Durchleuchten sichtbar)
 
@@ -40,8 +40,8 @@ Gruss Harald Nowak
 - Musterdruck 100×50 cm war in der Richtofferte enthalten
 - Richner: technische Abklärungen vor definitiven Preisen
 
-## Nächster Schritt
+## Nächster Schritt (Stand 2026-08-07)
 
-1. Musterstück-Ergebnis von Tanja abwarten (~07.08. Mittag).
-2. Optional Follow-up nur nach Harald-Go: `Mail-Entwurf-Followup-2026-08-06.md`
-3. Dann Nachdruck / Materialkorrektur mit Muster-Abnahme vor Vollfläche klären (Kosten, Termin, Totzone 300 mm).
+1. Harald entscheidet: Kulanz akzeptieren? Rechnung Realia bestätigen? Plan B Material (Kendu/Hersteller).
+2. Antwortentwurf nur nach Go: `Mail-Entwurf-Antwort-2026-08-07.md` (06.08.-Follow-up überholt).
+3. Parallel Ersatz-Textil beschaffen — Totzone 300 mm / Spannmaß 2100×2100 mm beibehalten.

@@ -1,7 +1,9 @@
 # Optionaler Follow-up an Tanja Jelk — NUR nach Harald-Go
 
-**Status:** Entwurf — **nicht senden**, bis Harald explizit freigibt.  
-Harald hat ~15:53–15:54 bereits Klarstellung + Rabattfrage geschickt. Dieses Mail nur nutzen, wenn Muster-Ergebnis da ist oder Material/Druck nochmals geschärft werden soll.
+**Status:** **ÜBERHOLT** seit Tanja 2026-08-07 (kein Flowbox-Material / kein Nachdruck bei Richner).  
+Aktueller Entwurf: `Mail-Entwurf-Antwort-2026-08-07.md`. Nicht senden.
+
+~~Harald hat ~15:53–15:54 bereits Klarstellung + Rabattfrage geschickt. Dieses Mail nur nutzen, wenn Muster-Ergebnis da ist oder Material/Druck nochmals geschärft werden soll.~~
 
 **An:** Tanja.Jelk@richnerstutz.ch  
 **Cc:** (optional) Melanie.Vogt@richnerstutz.ch · info@richnerstutz.ch  
