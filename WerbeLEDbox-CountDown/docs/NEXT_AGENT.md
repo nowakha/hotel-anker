@@ -8,11 +8,12 @@ Vier sine-qua-non Grundsätze gelten für **jede** Arbeit in diesem Repo (Regel 
 
 ## Domains — JETZT
 
-1. **Warten auf Remimag:** Auth-Code / Inhaberwechsel für `hotelanker.ch` (Mail 10.08. gesendet, thread `19fa8fccec8877a9`).
-2. Code da → Hostpoint-Transfer-Checkliste in `docs/DOMAINS.md` abarbeiten (Auth-Code **nicht** committen).
-3. Keine Antwort in ~5 Werktagen → höflich nachfassen (Willi + CC).
-4. Fallback: Geo-Must-Paket; Drop-Catch Reminder **20.11.** / **28.11.2026** nur wenn Transfer scheitert.
-5. `hotel-anker.ch` bleibt Remimag — nicht pushen.
+1. **Willi OOO bis 24.08.** — Eskalation an `marketing-werbung@remimag.ch` bereits gesendet (`19fed927e2d59894`).
+2. Auth-Code / Inhaberwechsel abwarten (Marketing oder Eberle/Bullakaj).
+3. Code da → Hostpoint-Transfer-Checkliste in `docs/DOMAINS.md` (Auth-Code **nicht** committen).
+4. Stille >2–3 Werktage → erneut Marketing + CC nachfassen; ab 25.08. auch Willi.
+5. Fallback: Geo-Must; Drop-Catch **20.11.** / **28.11.2026** nur wenn Transfer scheitert.
+6. `hotel-anker.ch` bleibt Remimag — nicht pushen.
 
 ## LIVE jetzt
 

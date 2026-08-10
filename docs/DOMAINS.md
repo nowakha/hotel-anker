@@ -19,6 +19,8 @@ Stand: **2026-08-10 ~23:30 CEST** — Sofort-Transfer `hotelanker.ch` bei Remima
 | Anfrage | 28.07.2026 — kostenneutrale Übertragung Kurzdomains |
 | Antwort Conny Willi | 07.08.2026 — Kündigungstermine, kein Transfer; CC Eberle + Bullakaj |
 | Folge Harald | **10.08.2026** — Dank + Bitte um **Transfercode jetzt** oder Hostpoint-Inhaberwechsel; `SENT` id `19fed91116c564f3`, thread `19fa8fccec8877a9` |
+| OOO Willi | Auto-Reply: abwesend **bis 24.08.2026**; Vertretung **`marketing-werbung@remimag.ch`** |
+| Eskalation | **10.08.2026** — Sofort-Bitte an Marketing + CC Eberle/Bullakaj/Willi; `SENT` `19fed927e2d59894` |
 | Mailbox | Zapier `harald.nowak@modernlight.ch` (connection `#3`) |
 
 ## Sofort-Weg (bevorzugt)
