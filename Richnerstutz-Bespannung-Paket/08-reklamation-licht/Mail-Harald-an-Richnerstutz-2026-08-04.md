@@ -1,6 +1,6 @@
 # Reklamation an Richnerstutz — 2026-08-04
 
-**Status:** Gesendet durch Harald; **warten auf Antwort**.
+**Status:** Gesendet durch Harald. Thread weitergeführt bis **2026-08-10**: Tanja schließt Material (kein Opera / weiss nicht zielführend). Siehe `Thread-2026-08-10-Tanja-Opera-Nein.md`.
 
 **Foto:** `2026-08-04-installiert-kein-durchlicht.png` (Installiert am Hotel Anker; kein Durchleuchten sichtbar)
 

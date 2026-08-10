@@ -289,9 +289,23 @@ Not done: fb-clock/ffprobe verify (unreachable). Do not unmask.
 
 - Print installiert am Hotel Anker: wirkt **komplett lichtundurchlässig** (Foto in `08-reklamation-licht/`).
 - Harald hat Richnerstutz bereits reklamiert (Opera-/Rückpro-Vergleich; Nachdruck auf richtigem Untergrund).
-- **Warten auf Antwort Richnerstutz.**
 - Spec war Backlit + selektiver Blockout; Ergebnis passt nicht — Ursache offen (Material/Layer/Kommunikation/Muster übersprungen).
 - Nachfoto Abend 2026-08-04: **Nacht funktioniert grundsätzlich**, Material bleibt sehr dunkel → Tag braucht mehr LED-Power (siehe unten).
+
+## Richnerstutz Thread SEG 627 828 — Kurzchronik (06.–07.08.)
+
+- Job **SEG (627 828)** / Thread `19fac62d97c94e3d` · Tanja Jelk / Melanie Vogt.
+- **06.08. Tanja:** Musterstück; unsicher LED-Screen vs. Leuchtkasten. Harald: Kendu Flowbox, LEDs ~4,5 cm, Rabatt-Frage.
+- **07.08. ~14:47 Tanja:** kein Flowbox-/Beamer-Material; Nachdruck gleiches Material sinnlos; Textil beim Hersteller; Video `IMG_1987.MOV`; Kulanz **30 % + weitere 10 %** Material, **Arbeit verrechnen**.
+- **07.08. ~15:44 Harald:** Realia AG Rechnungsanschrift bestätigt + Frage Opera / dünnes helles (weisses) lichtdurchlässiges Material.
+- Artefakte: `Richnerstutz-Bespannung-Paket/08-reklamation-licht/`.
+
+## Richnerstutz SEG 627 828 — Tanja Opera-Nein / Material geschlossen (2026-08-10)
+
+- **Inbound:** Tanja.Jelk@richnerstutz.ch · Subject AW: … SEG (627 828) · Thread `19fac62d97c94e3d` · Msg `19fea99db1247123` · Date Mon, 10 Aug 2026 07:36:09 +0000.
+- **Kern:** Weissen Stoff haben sie — Verarbeitung **nicht zielführend** (entweder nicht lichtdurchlässig **oder** streut zu stark). **Opera Folie nicht im Sortiment.** Kann zu diesem Thema nicht weiterhelfen. Danke für Rechnungsadresse.
+- **Folge:** Material-/Nachdruck-Pfad bei Richnerstutz **geschlossen**. Offen nur noch: Rechnung/Kulanz-Schriftlichkeit, Plan B (Kendu/Hersteller), Totzone 300 mm / 2100×2100 mm Nachfolger.
+- **STOP:** kein Agent-Outbound ohne Harald-Go. Entwurf `08-reklamation-licht/Mail-Entwurf-Antwort-2026-08-10.md`.
 
 ## Day/Night Full-Power Countdown (2026-08-06) — LIVE AnkerPI01
 
