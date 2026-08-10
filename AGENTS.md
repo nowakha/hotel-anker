@@ -45,6 +45,7 @@ Hotel Anker/
 ## Canonical Docs
 
 - Grundsätze: [`docs/VIER_GRUENDSAETZE.md`](./docs/VIER_GRUENDSAETZE.md)
+- Domains: [`docs/DOMAINS.md`](./docs/DOMAINS.md)
 - Root: [`README.md`](./README.md), [`LEARNINGS.md`](./LEARNINGS.md)
 - Session: [`WerbeLEDbox-CountDown/docs/SESSION_LOG.md`](./WerbeLEDbox-CountDown/docs/SESSION_LOG.md)
 - LED/Pi: [`WerbeLEDbox-CountDown/README.md`](./WerbeLEDbox-CountDown/README.md)

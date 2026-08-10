@@ -1,10 +1,16 @@
 ﻿# NEXT AGENT — Sofortmaßnahmen
 
-Stand: **2026-08-10 ~23:15**. Lies `LEARNINGS.md` + `docs/SESSION_LOG.md` + **`docs/VIER_GRUENDSAETZE.md`** (Projekt-DNA, alwaysApply).
+Stand: **2026-08-10 ~23:20**. Lies `LEARNINGS.md` + `docs/SESSION_LOG.md` + **`docs/VIER_GRUENDSAETZE.md`** + **`docs/DOMAINS.md`**.
 
 ## Projektgrundsätze
 
 Vier sine-qua-non Grundsätze gelten für **jede** Arbeit in diesem Repo (Regel `hotel-anker-grundsaetze.mdc`). Nicht ignorieren bei Print/LED/Kommunikation/Konzept.
+
+## Domains (Remimag 2026-08-07)
+
+- `hotelanker.ch` Drop nach **30.11.2026** planen; `anker-hotel.ch` nach **30.04.2027**.
+- `hotel-anker.ch` bleibt Remimag — nicht erwarten.
+- Geo-Sofort-Paket und/oder Drop-Catch: mit Harald klären (siehe `docs/DOMAINS.md`).
 
 ## LIVE jetzt
 

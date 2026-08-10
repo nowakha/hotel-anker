@@ -1,13 +1,23 @@
 # Hotel Anker â€” Learnings & Handoff
 
-Stand: **2026-08-10 ~23:15 CEST** — Vier Grundsätze (sine qua non) projektweit verinnerlicht (alwaysApply-Regel + kanonischer Doc + Scan).
+Stand: **2026-08-10 ~23:20 CEST** — Remimag Domain-Antwort verarbeitet (`hotelanker.ch` gekündigt per 30.11.26). Zuvor: Vier Grundsätze verinnerlicht.
 Ziel: eine andere Cursor-Instanz auf einem anderen Rechner kann ohne mündlichen Kontext weiterarbeiten.
 
 **Workflow (verbindlich):** `.cursor/rules/hotel-anker-workflow.mdc` — jeden Schritt dokumentieren (Erfolg+Misserfolg), Credentials/Learnings mitziehen, commit + `git push origin HEAD`.
 
 **Projektgrundsätze:** [`docs/VIER_GRUENDSAETZE.md`](./docs/VIER_GRUENDSAETZE.md) · [`.cursor/rules/hotel-anker-grundsaetze.mdc`](./.cursor/rules/hotel-anker-grundsaetze.mdc)
 
+**Domains:** [`docs/DOMAINS.md`](./docs/DOMAINS.md)
+
 Detaillierte Chronik: [`WerbeLEDbox-CountDown/docs/SESSION_LOG.md`](./WerbeLEDbox-CountDown/docs/SESSION_LOG.md).
+
+## Remimag Domain-Antwort (2026-08-07, verarbeitet 2026-08-10)
+
+- Mail Conny Willi / Remimag → Harald (Modernlight): **kein Transfer**, sondern Kündigungstermine
+- `hotelanker.ch` gekündigt per **30.11.2026** → Drop/Grab danach planen
+- `anker-hotel.ch` gekündigt per **30.04.2027**
+- `hotel-anker.ch` bleibt bei Remimag
+- Details: [`docs/DOMAINS.md`](./docs/DOMAINS.md)
 
 ## Vier Grundsätze verinnerlicht (2026-08-10)
 
@@ -18,14 +28,16 @@ Detaillierte Chronik: [`WerbeLEDbox-CountDown/docs/SESSION_LOG.md`](./WerbeLEDbo
 - Verdrahtet in `AGENTS.md`, `README.md`, Workflow-Continuity
 - Gilt für alle Unterprojekte (LED, Print, Doku, Kommunikation)
 
-## Domains Hotel Anker Rorschach (2026-07-28)
+## Domains Hotel Anker Rorschach (2026-07-28, Update 2026-08-10)
 
-- **Belegt:** `hotelanker.ch` / `hotel-anker.ch` / `anker-hotel.ch` (Hostpoint, keine Website); `hotelanker.com` Aftermarket; `hotelanker.de` + `.eu`.
-- **Sofort kaufen:** `ankerhotel.ch` + `hotelankerrorschach.ch` + `hotel-anker-rorschach.ch` + `hotelanker.swiss` ≈ **CHF 105** Jahr 1 (Hostpoint).
+- **Remimag (Luzern):** `hotelanker.ch` und `anker-hotel.ch` **gekündigt** (30.11.26 / 30.04.27); `hotel-anker.ch` **behalten**.
+- **Noch belegt bis Drop:** siehe Remimag-Abschnitt oben; Aftermarket `hotelanker.com`; `hotelanker.de` + `.eu`.
+- **Sofort kaufen (Geo):** `ankerhotel.ch` + `hotelankerrorschach.ch` + `hotel-anker-rorschach.ch` + `hotelanker.swiss` ≈ **CHF 105** Jahr 1 (Hostpoint).
 - **Empfohlen dazu:** `hotelankerrorschach.com`, `hotelanker.net`, `anker-rorschach.ch`.
 - **Warum Geo:** sonst Verwechslung mit Luzern (`hotel-restaurant-anker.ch`).
 - **.swiss:** OFCOM-Validierung; Verlängerung Markt ca. CHF 100–170.
 - Canvas-Detail: Cursor `canvases/hotel-anker-domains.canvas.tsx`.
+- Kanonisch: [`docs/DOMAINS.md`](./docs/DOMAINS.md)
 
 ## Production clock LIVE (2026-07-23)
 

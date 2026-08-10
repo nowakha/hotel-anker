@@ -548,3 +548,15 @@ Goal: stabile 860×360 H.264-Produktion statt 4K `st24.mov` auf PI02 (Undervolta
 | Verdrahtung | `AGENTS.md`, `README.md`, Workflow-Continuity — OK |
 | Scope | Projekt-DNA für LED/Print/Doku/Kommunikation; kein Pi-Code geändert |
 
+## 2026-08-10 ~23:20 CEST — Remimag Domain-Antwort verarbeitet
+
+| Item | Ergebnis |
+|------|----------|
+| Quelle | Zapier Gmail `harald.nowak@modernlight.ch` — Find Email Domain-Übertragung |
+| Mail | Conny Willi / Remimag, **07.08.2026**, CC Eberle + Bullakaj |
+| `hotelanker.ch` | **gekündigt per 30.11.2026** (kein Sofort-Transfer) |
+| `anker-hotel.ch` | **gekündigt per 30.04.2027** |
+| `hotel-anker.ch` | Remimag **behält** |
+| Doc | `docs/DOMAINS.md` neu; LEARNINGS Domain-Abschnitt aktualisiert |
+| Nächster Diskussionspunkt | Geo-Sofortkauf vs. Drop-Catch Nov 2026; ggf. Dankes-Antwort Remimag |
+
