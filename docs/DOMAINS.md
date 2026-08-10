@@ -1,48 +1,74 @@
 # Domains — Hotel Anker Rorschach
 
-Stand: **2026-08-10** (Remimag-Antwort vom 07.08.2026 eingearbeitet).
+Stand: **2026-08-10 ~23:30 CEST** — Sofort-Transfer `hotelanker.ch` bei Remimag angefragt.
 
-## Remimag-Antwort (entscheidend)
+## Status jetzt
 
-**Mail:** Conny Willi (`Conny.Willi@remimag.ch`), Remimag Gastronomie AG, 07.08.2026 14:55 UTC  
-**Thread:** Anfrage Domain-Übertragung `hotelanker.ch` (Hotel Anker Rorschach)  
-**CC:** Shayenne Eberle, Edona Bullakaj (Remimag)  
-**An:** Harald Nowak / Modernlight  
-**Quelle:** Zapier Gmail `harald.nowak@modernlight.ch` (thread `19fa8fccec8877a9`)
+| Domain | Status |
+|--------|--------|
+| `hotelanker.ch` | Remimag gekündigt per **30.11.2026**; **Sofort-Transfer angefragt** (Mail 10.08.2026) |
+| `anker-hotel.ch` | Gekündigt per **30.04.2027** — zweitrangig mitangeboten |
+| `hotel-anker.ch` | Remimag **behält** — kein Interesse von uns |
 
-| Domain | Status laut Remimag |
-|--------|---------------------|
-| `hotelanker.ch` | **bereits gekündigt**, Ende **30.11.2026** |
-| `anker-hotel.ch` | **bereits gekündigt**, Ende **30.04.2027** (Mail: „anker-hotel“) |
-| `hotel-anker.ch` | Remimag **behält** sie weiterhin |
+**Interim-Halter / Transfer-Empfänger:** Harald Nowak, Modernlight Projects AG (`Harald.Nowak@modernlight.ch`, +41 76 579 84 54).
 
-Keine unentgeltliche Sofort-Übertragung. Kurzformen für Luzern (`hotel-restaurant-anker.ch`) bleiben Remimag-Sache; `hotel-anker.ch` bleibt bei ihnen.
+## Remimag-Thread
 
-### Anfrage (28.07.2026)
+| Ereignis | Detail |
+|----------|--------|
+| Anfrage | 28.07.2026 — kostenneutrale Übertragung Kurzdomains |
+| Antwort Conny Willi | 07.08.2026 — Kündigungstermine, kein Transfer; CC Eberle + Bullakaj |
+| Folge Harald | **10.08.2026** — Dank + Bitte um **Transfercode jetzt** oder Hostpoint-Inhaberwechsel; `SENT` id `19fed91116c564f3`, thread `19fa8fccec8877a9` |
+| Mailbox | Zapier `harald.nowak@modernlight.ch` (connection `#3`) |
 
-Harald bat Remimag um kostenneutrale Übertragung von `hotelanker.ch` / `hotel-anker.ch` / `anker-hotel.ch` (Hostpoint, kaputter HTTPS-Redirect auf Luzern-Site). Remimag antwortete mit Kündigungsterminen statt Transfer.
+## Sofort-Weg (bevorzugt)
 
-## Ableitung für Rorschach
+1. Remimag sendet **Hostpoint-Transfercode** für `hotelanker.ch` **oder** startet **Inhaberwechsel**.
+2. Wir starten Transfer bei Hostpoint **vor** 30.11.2026 (.ch oft ≤ 1 Arbeitstag).
+3. Keine Ablöse — nur Transfer-/Restlaufzeit-Kosten.
 
-1. **`hotelanker.ch`** — Primärziel: nach Ablauf **30.11.2026** freigeben / droppen → **Grabbing-Fenster** planen (Registrar-Watch, ggf. Drop-Catcher). Bis dahin nicht „unser“.
-2. **`anker-hotel.ch`** — sekundär, frei ab **~01.05.2027** (nach 30.04.2027).
-3. **`hotel-anker.ch`** — **nicht verfügbar**; Remimag hält sie. Nicht weiter anfragen, außer Strategie ändert sich.
-4. **Geo-Sofort-Schutz** bleibt nötig (Verwechslung Luzern): freie Namen aus Check 2026-07-28 weiter kaufen/reservieren, unabhängig vom Drop.
+### Hostpoint — bereit für Transfer-Eingabe
+
+Checkliste für den Agenten, sobald Auth-Code da ist:
+
+- [ ] Hostpoint-Konto Modernlight / Harald (Login vorhanden; Zahlungsmittel hinterlegt)
+- [ ] Bestellung „Domain transferieren“ → Code für `hotelanker.ch` eingeben
+- [ ] Halter-Kontaktdaten: Modernlight Projects AG, Wangenstrasse 57, 3018 Bern; Harald.Nowak@modernlight.ch
+- [ ] Transfer vor Kündigungstermin abschliessen
+- [ ] Nach Erfolg: DNS/Redirect, HTTPS; optional später Transfer an Hotel/Realia-Halter
+- [ ] Auth-Code **nicht** ins öffentliche Repo committen — nur in Secrets/Handoff-Notiz ohne Code-Inhalt, oder lokal
+
+Falls kein Hostpoint-Konto: gleicher Transfer zu anderem .ch-Registrar mit Auth-Code möglich.
+
+## Fallback A — Geo-Must (Absicherung)
+
+Nur nötig / parallel sinnvoll, falls Transfer stockt oder Wochen dauert:
+
+| Priorität | Domain | Zweck |
+|-----------|--------|--------|
+| Must | `ankerhotel.ch` | Kurzform ohne Luzern-Konflikt |
+| Must | `hotelankerrorschach.ch` | Geo-Klarheit |
+| Must | `hotel-anker-rorschach.ch` | Geo-Klarheit |
+| Must | `hotelanker.swiss` | .swiss Marke (OFCOM) |
+| Nice | `anker-rorschach.ch`, `hotelankerrorschach.com` | Zusatz |
+
+Ca. **CHF 105** Jahr 1 (Hostpoint, Stand Check 2026-07-28). Noch **nicht** gekauft in diesem Schritt — Checkliste bereit, Kauf wenn Remimag verzögert oder Harald „jetzt“ sagt.
+
+## Fallback B — Drop-Catch (nur wenn Transfer scheitert)
+
+| Datum | Aktion |
+|-------|--------|
+| **20.11.2026** | Reminder: Auth-Code-Status prüfen; Hostpoint-Konto + Zahlung ready |
+| **28.11.2026** | Reminder: Drop-Fenster `hotelanker.ch` vorbereiten |
+| **ab 30.11.2026** | Domain sobald frei registrieren (SWITCH/.ch Quarantäne beachten) |
+| **ab 30.04.2027** | Optional `anker-hotel.ch` |
 
 ## Früherer Verfügbarkeits-Check (2026-07-28)
 
 | Kategorie | Domains |
 |-----------|---------|
 | Belegt (damals) | `hotelanker.ch`, `hotel-anker.ch`, `anker-hotel.ch` (Hostpoint); `hotelanker.com` Aftermarket; `hotelanker.de` / `.eu` |
-| Frei (Must-Paket) | `ankerhotel.ch`, `hotelankerrorschach.ch`, `hotel-anker-rorschach.ch`, `hotelanker.swiss` ≈ CHF 105 Jahr 1 |
-| Empfohlen dazu | `hotelankerrorschach.com`, `hotelanker.net`, `anker-rorschach.ch` |
+| Frei (Must-Paket) | siehe Fallback A |
 | Luzern-Marke | `hotel-restaurant-anker.ch` (Remimag) |
 
-## Offene Entscheidungen (Diskussion)
-
-- Sofort-Paket A kaufen (Geo) **jetzt**, Drop `hotelanker.ch` **Nov/Dez 2026** separat?
-- Antwort-Mail an Remimag (Dank / Watch-Hinweis / kein weiteres Interesse an `hotel-anker.ch`)?
-- Wer wird Halter (Hotel / Modernlight / Realia)?
-- Drop-Catch: Hostpoint-Konto + Kalendererinnerung vor 30.11.2026
-
-Siehe auch: Vier Grundsätze — öffentliche Marke / Identifikationssymbol Rorschach → klare Geo-Domain priorisieren.
+Siehe auch: Vier Grundsätze — Identifikationssymbol Rorschach → `hotelanker.ch` priorisieren.

@@ -1,6 +1,6 @@
 # Hotel Anker â€” Learnings & Handoff
 
-Stand: **2026-08-10 ~23:20 CEST** — Remimag Domain-Antwort verarbeitet (`hotelanker.ch` gekündigt per 30.11.26). Zuvor: Vier Grundsätze verinnerlicht.
+Stand: **2026-08-10 ~23:30 CEST** — Sofort-Transfer `hotelanker.ch` bei Remimag angefragt (Dank + Auth-Code-Bitte gesendet).
 Ziel: eine andere Cursor-Instanz auf einem anderen Rechner kann ohne mündlichen Kontext weiterarbeiten.
 
 **Workflow (verbindlich):** `.cursor/rules/hotel-anker-workflow.mdc` — jeden Schritt dokumentieren (Erfolg+Misserfolg), Credentials/Learnings mitziehen, commit + `git push origin HEAD`.
@@ -11,10 +11,18 @@ Ziel: eine andere Cursor-Instanz auf einem anderen Rechner kann ohne mündlichen
 
 Detaillierte Chronik: [`WerbeLEDbox-CountDown/docs/SESSION_LOG.md`](./WerbeLEDbox-CountDown/docs/SESSION_LOG.md).
 
+## Sofort-Transfer hotelanker.ch angefragt (2026-08-10)
+
+- Folge-Mail an Conny Willi (CC Eberle/Bullakaj): Dank + Bitte um **Transfercode jetzt** oder Hostpoint-Inhaberwechsel
+- Zapier `SENT` id `19fed91116c564f3`, thread `19fa8fccec8877a9`, mailbox Modernlight
+- Interim-Halter: Modernlight / Harald
+- Drop 30.11. + Geo-Must = **Fallback** nur; Checklisten in `docs/DOMAINS.md`
+- **Nächster Agent:** Auth-Code abwarten → Hostpoint-Transfer starten; bei Stille Remimag nachfassen
+
 ## Remimag Domain-Antwort (2026-08-07, verarbeitet 2026-08-10)
 
 - Mail Conny Willi / Remimag → Harald (Modernlight): **kein Transfer**, sondern Kündigungstermine
-- `hotelanker.ch` gekündigt per **30.11.2026** → Drop/Grab danach planen
+- `hotelanker.ch` gekündigt per **30.11.2026** → danach Sofort-Transfer angefragt (siehe oben)
 - `anker-hotel.ch` gekündigt per **30.04.2027**
 - `hotel-anker.ch` bleibt bei Remimag
 - Details: [`docs/DOMAINS.md`](./docs/DOMAINS.md)

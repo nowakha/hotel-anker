@@ -560,3 +560,13 @@ Goal: stabile 860×360 H.264-Produktion statt 4K `st24.mov` auf PI02 (Undervolta
 | Doc | `docs/DOMAINS.md` neu; LEARNINGS Domain-Abschnitt aktualisiert |
 | Nächster Diskussionspunkt | Geo-Sofortkauf vs. Drop-Catch Nov 2026; ggf. Dankes-Antwort Remimag |
 
+## 2026-08-10 ~23:30 CEST — Sofort-Transfer hotelanker.ch angefragt
+
+| Item | Ergebnis |
+|------|----------|
+| Mail | Reply an Conny Willi, CC Eberle + Bullakaj — Dank + Bitte Transfercode **jetzt** / Inhaberwechsel |
+| Zapier | Modernlight `#3` → `SENT` id **`19fed91116c564f3`**, thread `19fa8fccec8877a9` |
+| Halter interim | Modernlight / Harald |
+| Docs | `docs/DOMAINS.md` — Hostpoint-Checkliste, Geo-Must Fallback, Drop-Reminder 20./28.11.2026 |
+| Geo-Kauf | **noch nicht** ausgeführt (Absicherung laut Plan dokumentiert) |
+| Nächster Schritt | Auth-Code abwarten → Transfer; sonst Remimag nachfassen |
