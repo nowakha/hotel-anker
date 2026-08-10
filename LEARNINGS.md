@@ -1,6 +1,7 @@
 # Hotel Anker â€” Learnings & Handoff
 
-Stand: **2026-08-10 ~23:30 CEST** — Sofort-Transfer `hotelanker.ch` bei Remimag angefragt (Dank + Auth-Code-Bitte gesendet).
+Stand: **2026-08-10 ~23:35 CEST** — Sofort-Transfer angefragt; Willi OOO bis 24.08. → Marketing-Team eskaliert.
+
 Ziel: eine andere Cursor-Instanz auf einem anderen Rechner kann ohne mündlichen Kontext weiterarbeiten.
 
 **Workflow (verbindlich):** `.cursor/rules/hotel-anker-workflow.mdc` — jeden Schritt dokumentieren (Erfolg+Misserfolg), Credentials/Learnings mitziehen, commit + `git push origin HEAD`.
@@ -13,11 +14,12 @@ Detaillierte Chronik: [`WerbeLEDbox-CountDown/docs/SESSION_LOG.md`](./WerbeLEDbo
 
 ## Sofort-Transfer hotelanker.ch angefragt (2026-08-10)
 
-- Folge-Mail an Conny Willi (CC Eberle/Bullakaj): Dank + Bitte um **Transfercode jetzt** oder Hostpoint-Inhaberwechsel
-- Zapier `SENT` id `19fed91116c564f3`, thread `19fa8fccec8877a9`, mailbox Modernlight
+- Folge-Mail an Conny Willi (CC Eberle/Bullakaj): Dank + Bitte um **Transfercode jetzt** oder Hostpoint-Inhaberwechsel — `SENT` `19fed91116c564f3`
+- **OOO Willi bis 24.08.2026** — Auto-Reply: keine Weiterleitung; Vertretung `marketing-werbung@remimag.ch`
+- Sofort-Eskalation an Marketing + CC Eberle/Bullakaj/Willi — `SENT` `19fed927e2d59894`
 - Interim-Halter: Modernlight / Harald
 - Drop 30.11. + Geo-Must = **Fallback** nur; Checklisten in `docs/DOMAINS.md`
-- **Nächster Agent:** Auth-Code abwarten → Hostpoint-Transfer starten; bei Stille Remimag nachfassen
+- **Nächster Agent:** Auth-Code von Marketing/Remimag abwarten → Hostpoint-Transfer; ggf. Eberle/Bullakaj nachfassen
 
 ## Remimag Domain-Antwort (2026-08-07, verarbeitet 2026-08-10)
 

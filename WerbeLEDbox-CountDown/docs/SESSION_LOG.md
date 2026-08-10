@@ -570,3 +570,13 @@ Goal: stabile 860×360 H.264-Produktion statt 4K `st24.mov` auf PI02 (Undervolta
 | Docs | `docs/DOMAINS.md` — Hostpoint-Checkliste, Geo-Must Fallback, Drop-Reminder 20./28.11.2026 |
 | Geo-Kauf | **noch nicht** ausgeführt (Absicherung laut Plan dokumentiert) |
 | Nächster Schritt | Auth-Code abwarten → Transfer; sonst Remimag nachfassen |
+
+## 2026-08-10 ~23:35 CEST — Willi OOO → Marketing eskaliert
+
+| Item | Ergebnis |
+|------|----------|
+| Auto-Reply Willi | Abwesend **bis 24.08.2026**; Mails nicht weitergeleitet; Vertretung `marketing-werbung@remimag.ch` |
+| Aktion | Neue Mail an Marketing, CC Eberle + Bullakaj + Willi — Sofort-Transfercode `hotelanker.ch` |
+| Zapier | `SENT` id **`19fed927e2d59894`** |
+| Hostpoint-Transfer | **BLOCKED** — kein Auth-Code vorhanden |
+| Docs | DOMAINS / LEARNINGS / NEXT_AGENT aktualisiert |
