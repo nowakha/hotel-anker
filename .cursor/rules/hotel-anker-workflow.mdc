@@ -34,6 +34,6 @@ alwaysApply: true
 
 ## Continuity-Quellen
 
-- Root: `LEARNINGS.md`, `AGENTS.md`, `docs/SESSION_LOG.md` (falls vorhanden) / `WerbeLEDbox-CountDown/docs/SESSION_LOG.md`
-- Regeln: `.cursor/rules/*.mdc`
+- Root: `LEARNINGS.md`, `AGENTS.md`, `docs/VIER_GRUENDSAETZE.md`, `docs/SESSION_LOG.md` (falls vorhanden) / `WerbeLEDbox-CountDown/docs/SESSION_LOG.md`
+- Regeln: `.cursor/rules/*.mdc` — Grundsätze: `hotel-anker-grundsaetze.mdc` (alwaysApply)
 - Kontakt Harald: `.cursor/rules/harald-nowak-modernlight.mdc`

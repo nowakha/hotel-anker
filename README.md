@@ -2,6 +2,8 @@
 
 Projektmappe für Hotel Anker (Modernlight / Realia).
 
+**Vier Grundsätze** (sine qua non, Rorschach 01.08.2026): [`docs/VIER_GRUENDSAETZE.md`](./docs/VIER_GRUENDSAETZE.md) — Gastro+Hotel, öffentlich zugänglich, Treffpunkt, Glamour.
+
 **Handoff:** [`LEARNINGS.md`](./LEARNINGS.md) · Agent-Hinweise: [`AGENTS.md`](./AGENTS.md)
 
 ## Unterprojekte
@@ -25,5 +27,6 @@ Credentials und Cursor-Regeln liegen bewusst im Repo (privater Handoff). Repo **
 
 | Pfad | Inhalt |
 |------|--------|
+| [`.cursor/rules/hotel-anker-grundsaetze.mdc`](./.cursor/rules/hotel-anker-grundsaetze.mdc) | Vier sine-qua-non Grundsätze (alwaysApply) |
 | [`.cursor/rules/harald-nowak-modernlight.mdc`](./.cursor/rules/harald-nowak-modernlight.mdc) | Harald-Kontakt Modernlight |
 | [`.cursor/rules/hotel-anker-workflow.mdc`](./.cursor/rules/hotel-anker-workflow.mdc) | Dokumentieren + nach jedem Schritt pushen |

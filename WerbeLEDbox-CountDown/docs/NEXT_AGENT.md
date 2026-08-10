@@ -1,6 +1,10 @@
 ﻿# NEXT AGENT — Sofortmaßnahmen
 
-Stand: **2026-08-07**. Lies `LEARNINGS.md` + `docs/SESSION_LOG.md`.
+Stand: **2026-08-10 ~23:15**. Lies `LEARNINGS.md` + `docs/SESSION_LOG.md` + **`docs/VIER_GRUENDSAETZE.md`** (Projekt-DNA, alwaysApply).
+
+## Projektgrundsätze
+
+Vier sine-qua-non Grundsätze gelten für **jede** Arbeit in diesem Repo (Regel `hotel-anker-grundsaetze.mdc`). Nicht ignorieren bei Print/LED/Kommunikation/Konzept.
 
 ## LIVE jetzt
 
@@ -27,3 +31,4 @@ sudo systemctl start countdown-waves
 - Kein `sa.create` im Countdown-Producer
 - Kein `cmdline.txt`-Experiment
 - Kein `ffmpeg … -f null -` auf 24h/4K
+- Keine Inhalte, die den vier Grundsätzen widersprechen (reines Lodging-Framing, etc.)

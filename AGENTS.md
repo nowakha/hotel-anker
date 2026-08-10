@@ -2,6 +2,17 @@
 
 Root-Repository für Hotel-Anker-Unterprojekte.
 
+## Projektgrundsätze (sine qua non)
+
+Vier verbindliche Grundsätze für Sanierung und gesamte Projektarbeit (LED, Print, Doku, Kommunikation):
+
+1. **Gastro- und Hotelliegenschaft** — Identifikationssymbol Rorschach; kein reines Wohn-/Lodging-Framing
+2. **Öffentlich zugänglich** — ≥2 Etagen ohne Zutrittssysteme; Sicht Hafen/Kornhaus
+3. **Treffpunkt- und Sammelfunktion** — Saal, Sääli, Gastroküche, Events
+4. **Hochstehendes Hotellerieangebot (Glamour)** — variables Zimmerangebot; historischen Glamour erhalten; nicht zur reinen Unterkunft downgraden
+
+Volltext: [`docs/VIER_GRUENDSAETZE.md`](./docs/VIER_GRUENDSAETZE.md) · Regel: [`.cursor/rules/hotel-anker-grundsaetze.mdc`](./.cursor/rules/hotel-anker-grundsaetze.mdc) · Scan: [`assets/grundsaetze/`](./assets/grundsaetze/)
+
 ## Struktur
 
 ```
@@ -33,6 +44,7 @@ Hotel Anker/
 
 ## Canonical Docs
 
+- Grundsätze: [`docs/VIER_GRUENDSAETZE.md`](./docs/VIER_GRUENDSAETZE.md)
 - Root: [`README.md`](./README.md), [`LEARNINGS.md`](./LEARNINGS.md)
 - Session: [`WerbeLEDbox-CountDown/docs/SESSION_LOG.md`](./WerbeLEDbox-CountDown/docs/SESSION_LOG.md)
 - LED/Pi: [`WerbeLEDbox-CountDown/README.md`](./WerbeLEDbox-CountDown/README.md)

@@ -1,11 +1,22 @@
 # Hotel Anker â€” Learnings & Handoff
 
-Stand: **2026-07-28** — Domain-Check Rorschach (siehe unten). Zuvor: Smooth-Patch PI02-Uhr pending Deploy.
+Stand: **2026-08-10 ~23:15 CEST** — Vier Grundsätze (sine qua non) projektweit verinnerlicht (alwaysApply-Regel + kanonischer Doc + Scan).
 Ziel: eine andere Cursor-Instanz auf einem anderen Rechner kann ohne mündlichen Kontext weiterarbeiten.
 
 **Workflow (verbindlich):** `.cursor/rules/hotel-anker-workflow.mdc` — jeden Schritt dokumentieren (Erfolg+Misserfolg), Credentials/Learnings mitziehen, commit + `git push origin HEAD`.
 
+**Projektgrundsätze:** [`docs/VIER_GRUENDSAETZE.md`](./docs/VIER_GRUENDSAETZE.md) · [`.cursor/rules/hotel-anker-grundsaetze.mdc`](./.cursor/rules/hotel-anker-grundsaetze.mdc)
+
 Detaillierte Chronik: [`WerbeLEDbox-CountDown/docs/SESSION_LOG.md`](./WerbeLEDbox-CountDown/docs/SESSION_LOG.md).
+
+## Vier Grundsätze verinnerlicht (2026-08-10)
+
+- Quelle: Papierdok. Rorschach **01.08.2026** (WhatsApp-Scan)
+- AlwaysApply-Regel: `.cursor/rules/hotel-anker-grundsaetze.mdc`
+- Volltext + Agent-Checkliste: `docs/VIER_GRUENDSAETZE.md`
+- Scan: `assets/grundsaetze/vier-grundsaetze-2026-08-01.png` (~236 KiB)
+- Verdrahtet in `AGENTS.md`, `README.md`, Workflow-Continuity
+- Gilt für alle Unterprojekte (LED, Print, Doku, Kommunikation)
 
 ## Domains Hotel Anker Rorschach (2026-07-28)
 

@@ -537,3 +537,14 @@ Goal: stabile 860×360 H.264-Produktion statt 4K `st24.mov` auf PI02 (Undervolta
 | Symptom | Grundmaterial wirkt voll opak / schwarz, kein LED-Durchschein |
 | Soll | Backlit + selektive Opazität laut Platte |
 
+## 2026-08-10 ~23:15 CEST — Vier Grundsätze projektweit verinnerlicht
+
+| Ereignis | Ergebnis |
+|----------|----------|
+| Quelle | WhatsApp-Scan Papierdok. Rorschach **01.08.2026** (sine qua non Sanierung) |
+| Regel | `.cursor/rules/hotel-anker-grundsaetze.mdc` **alwaysApply** — OK |
+| Volltext | `docs/VIER_GRUENDSAETZE.md` + Agent-Checkliste — OK |
+| Scan-Kopie | `assets/grundsaetze/vier-grundsaetze-2026-08-01.png` (~236 KiB) — OK (Cursor-Virtuellpfad unbrauchbar; echte Datei unter `workspaceStorage/empty-window/images/`) |
+| Verdrahtung | `AGENTS.md`, `README.md`, Workflow-Continuity — OK |
+| Scope | Projekt-DNA für LED/Print/Doku/Kommunikation; kein Pi-Code geändert |
+
