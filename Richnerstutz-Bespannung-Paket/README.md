@@ -39,4 +39,4 @@ Optional: Massblatt-Overlays in `04-vorlagen-massblatt/`, Vorschauen in `05-vors
 Richnerstutz AG · Nordstrasse 7 · 5612 Villmergen  
 info@richnerstutz.ch · +41 56 616 67 67 · https://richnerstutz.ch/kontakt
 
-| `08-reklamation-licht/` | Install-Foto + Reklamation 2026-08-04 (kein Durchlicht) |
+| `08-reklamation-licht/` | Install-Foto + Reklamation 2026-08-04; Thread bis **2026-08-10** (Tanja: Opera/Weiss Nein, Material geschlossen) |

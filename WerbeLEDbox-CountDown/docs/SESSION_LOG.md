@@ -537,3 +537,17 @@ Goal: stabile 860×360 H.264-Produktion statt 4K `st24.mov` auf PI02 (Undervolta
 | Symptom | Grundmaterial wirkt voll opak / schwarz, kein LED-Durchschein |
 | Soll | Backlit + selektive Opazität laut Platte |
 
+
+## 2026-08-10 ~09:36 CEST — Richnerstutz SEG 627 828 (Watcher, Tanja Opera-Nein)
+
+| Item | Status |
+|------|--------|
+| Trigger | Zapier Gmail — **from Tanja.Jelk@richnerstutz.ch**, Subject AW: … SEG (627 828), Thread `19fac62d97c94e3d`, Msg `19fea99db1247123`, Date Mon 10 Aug 2026 07:36:09 +0000 |
+| Filter | Hotel Anker / Flowbox / Bespannung — **relevant** |
+| Bezug | Antwort auf Harald Opera-/Weiss-Material-Frage (~07.08. 15:44) |
+| Kern | Weisser Stoff vorhanden, Verarbeitung nicht zielführend (opak **oder** zu stark streuend); **Opera Folie nicht im Sortiment**; Thema Material bei Richnerstutz beendet |
+| Danke | Rechnungsadresse zur Kenntnis genommen |
+| Risiken | Kein Nachdruck/Opera bei Richner; Arbeit kostenpflichtig (Kulanz 30 %+10 % Material steht); Plan B Kendu/Hersteller + Termin Countdown; Größe/Totzone 300 mm nicht neu |
+| Aktion Agent | Docs + Antwortentwurf; **kein Mail-Versand**; **STOP** auf Harald-Go |
+| Artefakte | `08-reklamation-licht/Thread-2026-08-10-Tanja-Opera-Nein.md`, `Mail-Entwurf-Antwort-2026-08-10.md` |
+
