@@ -40,7 +40,8 @@ Hotel Anker/
 2. Danach **commit + push** (Secrets absichtlich im Repo für privaten Handoff).
 3. Keine absoluten Windows-Pfade hardcoden — immer repo-relativ.
 4. Harald-Kontakt nur aus `.cursor/rules/harald-nowak-modernlight.mdc`.
-5. **AnkerPI02:** SD nicht entnehmbar → Boot nicht riskieren; nie volle 24h-4K mit `ffmpeg -f null` proben.
+5. Sprachregel: nicht gendern — `.cursor/rules/harald-language-style.mdc` (global auch `~/.cursor/rules/harald-language-style.mdc`).
+6. **AnkerPI02:** SD nicht entnehmbar → Boot nicht riskieren; nie volle 24h-4K mit `ffmpeg -f null` proben.
 
 ## Canonical Docs
 

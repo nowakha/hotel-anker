@@ -1,0 +1,23 @@
+---
+description: Harald Nowak Sprachregel fuer alle Cursor-Instanzen, alle Repos, alle Maschinen
+alwaysApply: true
+---
+
+# Harald Sprachregel (global)
+
+Diese Regel gilt fuer alle Projekte, Repos und Aufgaben unter Haralds Cursor-Nutzung — lokal, Cloud und auf jeder Maschine.
+
+## Verbindlich
+
+- In Harald- und Modernlight-Kommunikation nicht gendern.
+- Keine Genderzeichen, keine Doppelformen, keine Softgender-Formulierungen, keine Pronomen-Hinweise.
+- Stattdessen klares, klassisches Deutsch in normaler Geschaefts- und Projektsprache verwenden.
+
+## Geltungsbereich
+
+- E-Mails
+- Briefe
+- Offerten
+- Antworten an Kunden, Lieferanten und Partner
+- interne Notizen, wenn sie als Formulierungsvorlage dienen
+- generierte Texte in allen Repos und Projekten
